@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USFITB2B - Avaliação Nutricional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        usfit: {
+                            dark: '#111827',
+                            cyan: '#22d3ee',
+                            blue: '#3b82f6',
+                            text: '#374151',
+                            gray: '#F3F4F6'
+                        }
+                    },
+                    backgroundImage: {
+                        'usfit-gradient': 'linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        .usfit-input {
+            width: 100%; border: 1px solid #E5E7EB; border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem; font-size: 0.875rem; color: #374151; outline: none; transition: border-color 0.2s;
+            background-color: #F9FAFB;
+        }
+        .usfit-input:focus { border-color: #22d3ee; background-color: white; box-shadow: 0 0 0 1px #22d3ee; }
+
+        .btn-primary {
+            background-image: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
+            color: white; border-radius: 9999px; padding: 0.5rem 1.5rem;
+            font-weight: 500; font-size: 0.875rem; box-shadow: 0 4px 6px -1px rgba(34, 211, 238, 0.2);
+            transition: opacity 0.2s; display: flex; align-items: center; gap: 0.5rem; text-decoration: none;
+        }
+        .btn-primary:hover { opacity: 0.9; }
+
+        .btn-secondary {
+            background: white; border: 1px solid #E5E7EB; color: #4B5563; border-radius: 9999px;
+            padding: 0.5rem 1.5rem; font-weight: 500; font-size: 0.875rem; transition: all 0.2s; text-decoration: none;
+        }
+        .btn-secondary:hover { border-color: #22d3ee; color: #0ea5e9; }
+
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    </style>
+</head>
+<body class="bg-usfit-gray text-usfit-text h-screen flex overflow-hidden">
+
+    <aside class="w-64 bg-usfit-dark text-white flex flex-col hidden md:flex flex-shrink-0 relative">
+        <div class="h-20 flex items-center justify-center border-b border-gray-800 bg-[#0f1523]">
+            <a href="dashboard.html" class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-usfit-gradient flex items-center justify-center font-bold text-white italic">US</div>
+                <span class="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-usfit-gradient">USFITB2B</span>
+            </a>
+        </div>
+
+        <nav class="flex-1 px-3 py-6 space-y-2 overflow-y-auto">
+            <a href="dashboard.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="layout-dashboard" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Visão Geral</span>
+            </a>
+            
+            <div class="relative">
+                <a href="students-list.html" class="flex items-center px-4 py-3 text-white bg-gray-800 rounded-xl shadow-lg shadow-cyan-900/20">
+                    <div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-usfit-gradient rounded-r-full"></div>
+                    <i data-lucide="users" class="w-5 h-5 mr-3 text-usfit-cyan"></i>
+                    <span class="font-medium">Alunos</span>
+                </a>
+            </div>
+
+            <a href="diets-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="utensils" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Nutrição</span>
+            </a>
+
+            <a href="workouts-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="dumbbell" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Treinos</span>
+            </a>
+        </nav>
+
+        <div class="p-4 bg-[#0f1523] border-t border-gray-800">
+             <div class="flex items-center justify-between">
+                 <a href="settings.html" class="flex items-center gap-3 group hover:opacity-80 transition-opacity">
+                    <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center border-2 border-gray-600 group-hover:border-usfit-cyan">
+                        <span class="font-bold text-sm">DS</span>
+                    </div>
+                    <div class="text-sm">
+                        <p class="font-semibold text-white">Dr. Silva</p>
+                        <p class="text-xs text-usfit-cyan">Plano PRO</p>
+                    </div>
+                </a>
+                <a href="login.html" class="p-2 text-gray-400 hover:text-white hover:bg-red-500/20 rounded-lg transition-colors" title="Sair">
+                    <i data-lucide="log-out" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <div class="flex-1 flex flex-col h-full min-w-0 bg-usfit-gray">
+        
+        <header class="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-8 flex-shrink-0 z-20 shadow-sm">
+            
+            <div class="flex items-center gap-4 w-1/3">
+                <a href="students-list.html" class="md:hidden text-gray-500"><i data-lucide="arrow-left" class="w-6 h-6"></i></a>
+                <div>
+                    <div class="flex items-center text-xs text-gray-500 mb-1">
+                        <a href="students-list.html" class="hover:text-usfit-blue">Meus Alunos</a>
+                        <i data-lucide="chevron-right" class="w-3 h-3 mx-1"></i>
+                        <span>Avaliação</span>
+                    </div>
+                    <h1 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                        Nova Avaliação Nutricional
+                    </h1>
+                </div>
+            </div>
+
+            <div class="hidden md:flex flex-1 justify-center w-1/3">
+                <div class="flex items-center px-4 py-2 bg-gray-50 rounded-full border border-gray-100 shadow-sm">
+                    <div class="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 mr-3">
+                        <i data-lucide="user" class="w-3 h-3"></i>
+                    </div>
+                    <div class="flex flex-col md:flex-row md:items-center md:gap-2">
+                        <span class="text-xs text-gray-400 font-medium uppercase tracking-wide">Aluno</span>
+                        <span class="text-sm font-bold text-gray-800">Ana Beatriz Silva</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex items-center justify-end gap-3 w-1/3">
+                <a href="students-list.html" class="btn-secondary">Cancelar</a>
+                <button class="btn-primary">
+                    <i data-lucide="save" class="w-4 h-4"></i> Salvar Avaliação
+                </button>
+                <div class="h-8 w-px bg-gray-200 mx-1"></div>
+                <button class="p-2 text-gray-400 hover:bg-gray-100 rounded-full relative">
+                    <i data-lucide="bell" class="w-5 h-5"></i>
+                    <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1 overflow-y-auto p-8">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="w-1 h-6 bg-usfit-gradient rounded-full"></div>
+                            <h2 class="text-lg font-bold text-gray-800">Antropometria</h2>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-1.5 ml-1">Peso Atual (kg) *</label>
+                                <input type="number" value="72.5" class="usfit-input" placeholder="0.0">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-1.5 ml-1">Altura (cm) *</label>
+                                <input type="number" value="168" class="usfit-input" placeholder="0">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-1.5 ml-1">% Gordura (Opcional)</label>
+                                <input type="number" class="usfit-input" placeholder="%">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="w-1 h-6 bg-usfit-gradient rounded-full"></div>
+                            <h2 class="text-lg font-bold text-gray-800">Nível de Atividade</h2>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-2 ml-1">Fator de Atividade (FA)</label>
+                                <select class="usfit-input bg-white">
+                                    <option value="1.2">Sedentário (Pouco ou nenhum exercício)</option>
+                                    <option value="1.375" selected>Levemente Ativo (1-3 dias/semana)</option>
+                                    <option value="1.55">Moderadamente Ativo (3-5 dias/semana)</option>
+                                    <option value="1.725">Muito Ativo (6-7 dias/semana)</option>
+                                    <option value="1.9">Extremamente Ativo (Atleta/Trabalho físico)</option>
+                                </select>
+                            </div>
+                            <div class="pt-2">
+                                <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Protocolo de Cálculo</span>
+                                <div class="flex gap-4 mt-2">
+                                    <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+                                        <input type="radio" name="formula" checked class="text-usfit-cyan focus:ring-usfit-cyan">
+                                        Harris-Benedict (1984)
+                                    </label>
+                                    <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+                                        <input type="radio" name="formula" class="text-usfit-cyan focus:ring-usfit-cyan">
+                                        Mifflin-St Jeor
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="w-1 h-6 bg-usfit-gradient rounded-full"></div>
+                            <h2 class="text-lg font-bold text-gray-800">Dados Clínicos</h2>
+                        </div>
+                        <div class="grid grid-cols-1 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-1.5 ml-1">Alergias ou Intolerâncias</label>
+                                <textarea rows="2" class="usfit-input" placeholder="Ex: Intolerância a lactose, alergia a amendoim..."></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-1.5 ml-1">Preferências Alimentares</label>
+                                <textarea rows="2" class="usfit-input" placeholder="Ex: Não gosta de peixe, prefere frutas cítricas..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-1">
+                    <div class="sticky top-6 space-y-6">
+                        <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-lg shadow-gray-200/50">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="font-bold text-gray-800">Resultados Estimados</h3>
+                                <i data-lucide="calculator" class="w-5 h-5 text-usfit-cyan"></i>
+                            </div>
+                            <div class="mb-6 p-4 bg-gray-50 rounded-xl border border-gray-200 text-center">
+                                <span class="text-xs text-gray-500 font-medium uppercase tracking-wider">IMC (Índice de Massa Corporal)</span>
+                                <div class="text-3xl font-bold text-gray-800 mt-1 mb-1">25.7</div>
+                                <span class="inline-flex px-2 py-0.5 rounded text-xs font-bold bg-yellow-100 text-yellow-700">
+                                    Sobrepeso
+                                </span>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-600">TMB (Basal)</p>
+                                        <p class="text-xs text-gray-400">Gasto em repouso</p>
+                                    </div>
+                                    <span class="text-lg font-bold text-gray-800">1.520 kcal</span>
+                                </div>
+                                <div class="flex justify-between items-center py-2">
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-600">GET (Total)</p>
+                                        <p class="text-xs text-gray-400">Com atividade (FA 1.375)</p>
+                                    </div>
+                                    <span class="text-xl font-bold text-usfit-blue">2.090 kcal</span>
+                                </div>
+                            </div>
+                            <div class="mt-6 pt-6 border-t border-gray-100">
+                                <button class="btn-primary w-full justify-center" onclick="window.location.href='diet-create.html'">
+                                    Criar Dieta com estes Dados
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

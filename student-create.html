@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USFITB2B - Novo Aluno</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        usfit: {
+                            dark: '#111827',
+                            cyan: '#22d3ee',
+                            blue: '#3b82f6',
+                            text: '#374151',
+                            gray: '#F3F4F6'
+                        }
+                    },
+                    backgroundImage: {
+                        'usfit-gradient': 'linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Input Estilizado USFIT */
+        .usfit-input {
+            width: 100%; border: 1px solid #E5E7EB; border-radius: 0.75rem; /* rounded-xl */
+            padding: 0.625rem 1rem; font-size: 0.875rem; color: #111827; outline: none; transition: all 0.2s;
+            background-color: #F9FAFB;
+        }
+        .usfit-input:focus { 
+            border-color: #22d3ee; 
+            background-color: #FFFFFF;
+            box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.1); 
+        }
+
+        /* Labels */
+        .usfit-label {
+            display: block; font-size: 0.875rem; font-weight: 500; color: #4B5563; margin-bottom: 0.375rem; margin-left: 0.25rem;
+        }
+
+        /* Botão Primário */
+        .btn-primary {
+            background-image: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
+            color: white; border-radius: 9999px; padding: 0.625rem 1.5rem;
+            font-weight: 600; font-size: 0.875rem; display: flex; align-items: center; gap: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(34, 211, 238, 0.3); transition: opacity 0.2s;
+        }
+        .btn-primary:hover { opacity: 0.95; transform: translateY(-1px); }
+
+        /* Botão Secundário */
+        .btn-secondary {
+            background: white; border: 1px solid #E5E7EB; color: #4B5563; border-radius: 9999px;
+            padding: 0.625rem 1.5rem; font-weight: 500; font-size: 0.875rem; transition: all 0.2s;
+        }
+        .btn-secondary:hover { border-color: #22d3ee; color: #0ea5e9; background-color: #F0F9FF; }
+    </style>
+</head>
+<body class="bg-usfit-gray text-usfit-text h-screen flex overflow-hidden">
+
+    <aside class="w-64 bg-usfit-dark text-white flex flex-col hidden md:flex flex-shrink-0 relative">
+        <div class="h-20 flex items-center justify-center border-b border-gray-800 bg-[#0f1523]">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-usfit-gradient flex items-center justify-center font-bold text-white italic">US</div>
+                <span class="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-usfit-gradient">USFITB2B</span>
+            </div>
+        </div>
+
+        <nav class="flex-1 px-3 py-6 space-y-2 overflow-y-auto">
+            <a href="dashboard.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="layout-dashboard" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Visão Geral</span>
+            </a>
+            
+            <div class="relative">
+                <a href="student-create.html" class="flex items-center px-4 py-3 text-white bg-gray-800 rounded-xl shadow-lg shadow-cyan-900/20">
+                    <div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-usfit-gradient rounded-r-full"></div>
+                    <i data-lucide="users" class="w-5 h-5 mr-3 text-usfit-cyan"></i>
+                    <span class="font-medium">Alunos</span>
+                </a>
+            </div>
+
+            <a href="diet-create.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="utensils" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Nutrição</span>
+            </a>
+            <a href="workout-create.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="dumbbell" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Treinos</span>
+            </a>
+        </nav>
+
+        <div class="p-4 bg-[#0f1523] border-t border-gray-800">
+             <div class="flex items-center justify-between">
+                 <a href="settings.html" class="flex items-center gap-3 group hover:opacity-80 transition-opacity">
+                    <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center border-2 border-gray-600 group-hover:border-usfit-cyan">
+                        <span class="font-bold text-sm">DS</span>
+                    </div>
+                    <div class="text-sm">
+                        <p class="font-semibold text-white">Dr. Silva</p>
+                        <p class="text-xs text-usfit-cyan">Plano PRO</p>
+                    </div>
+                </a>
+                <a href="login.html" class="p-2 text-gray-400 hover:text-white hover:bg-red-500/20 rounded-lg transition-colors" title="Sair">
+                    <i data-lucide="log-out" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <div class="flex-1 flex flex-col h-full min-w-0 bg-usfit-gray">
+        
+        <header class="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-8 flex-shrink-0 z-20 shadow-sm">
+            <div class="flex items-center gap-4">
+                <button class="md:hidden text-gray-500"><i data-lucide="arrow-left" class="w-6 h-6"></i></button>
+                <div>
+                    <div class="flex items-center gap-2 text-sm text-gray-400 mb-1">
+                        <span>Alunos</span>
+                        <i data-lucide="chevron-right" class="w-3 h-3"></i>
+                        <span class="text-usfit-cyan font-medium">Cadastro</span>
+                    </div>
+                    <h1 class="text-xl font-bold text-gray-800">Novo Aluno</h1>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <button class="btn-secondary">Cancelar</button>
+                <button class="btn-primary">
+                    <i data-lucide="save" class="w-4 h-4"></i> Salvar Aluno
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1 overflow-y-auto p-8">
+            <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <div class="lg:col-span-2 space-y-6">
+                    
+                    <div class="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm">
+                        <div class="flex items-center gap-3 mb-6 pb-4 border-b border-gray-50">
+                            <div class="w-10 h-10 rounded-full bg-blue-50 text-usfit-blue flex items-center justify-center">
+                                <i data-lucide="user" class="w-5 h-5"></i>
+                            </div>
+                            <h2 class="text-lg font-bold text-gray-800">Dados Pessoais</h2>
+                        </div>
+
+                        <div class="flex items-center gap-6 mb-8">
+                            <div class="w-20 h-20 rounded-full bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400 hover:border-usfit-cyan hover:text-usfit-cyan hover:bg-cyan-50 transition-all cursor-pointer">
+                                <i data-lucide="camera" class="w-8 h-8"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-700">Foto de Perfil</p>
+                                <p class="text-xs text-gray-400 mt-1">Recomendado: 400x400px</p>
+                                <button class="text-sm text-usfit-cyan font-semibold mt-2 hover:underline">Carregar imagem</button>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="md:col-span-2">
+                                <label class="usfit-label">Nome Completo <span class="text-red-500">*</span></label>
+                                <input type="text" placeholder="Ex: Ana Beatriz Silva" class="usfit-input">
+                            </div>
+
+                            <div>
+                                <label class="usfit-label">E-mail <span class="text-red-500">*</span></label>
+                                <div class="relative">
+                                    <i data-lucide="mail" class="absolute left-3.5 top-3 w-4 h-4 text-gray-400"></i>
+                                    <input type="email" placeholder="cliente@email.com" class="usfit-input pl-10">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="usfit-label">Celular <span class="text-red-500">*</span></label>
+                                <div class="relative">
+                                    <i data-lucide="smartphone" class="absolute left-3.5 top-3 w-4 h-4 text-gray-400"></i>
+                                    <input type="tel" placeholder="(11) 99999-9999" class="usfit-input pl-10">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="usfit-label">Data de Nascimento <span class="text-red-500">*</span></label>
+                                <input type="date" class="usfit-input text-gray-500">
+                            </div>
+
+                            <div>
+                                <label class="usfit-label">Sexo Biológico <span class="text-red-500">*</span></label>
+                                <div class="relative">
+                                    <select class="usfit-input appearance-none">
+                                        <option value="" disabled selected>Selecione...</option>
+                                        <option value="male">Masculino</option>
+                                        <option value="female">Feminino</option>
+                                    </select>
+                                    <i data-lucide="chevron-down" class="absolute right-3.5 top-3.5 w-4 h-4 text-gray-400 pointer-events-none"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm opacity-50 hover:opacity-100 transition-opacity">
+                        <div class="flex items-center justify-between cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-gray-50 text-gray-500 flex items-center justify-center">
+                                    <i data-lucide="map-pin" class="w-5 h-5"></i>
+                                </div>
+                                <h2 class="text-lg font-bold text-gray-800">Endereço (Opcional)</h2>
+                            </div>
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400"></i>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="lg:col-span-1 space-y-6">
+                    
+                    <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                        <div class="flex items-center gap-2 mb-6">
+                            <div class="w-1 h-6 bg-usfit-gradient rounded-full"></div>
+                            <h2 class="text-lg font-bold text-gray-800">Contrato e Acesso</h2>
+                        </div>
+
+                        <div class="space-y-5">
+                            <div>
+                                <label class="usfit-label">Status da Conta</label>
+                                <select class="usfit-input border-green-200 bg-green-50 text-green-700 font-medium focus:ring-green-200">
+                                    <option value="active">Ativo</option>
+                                    <option value="inactive">Inativo</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="usfit-label">Início do Acompanhamento</label>
+                                <input type="date" class="usfit-input" value="2025-07-26">
+                            </div>
+
+                            <div>
+                                <label class="usfit-label">Data de Expiração (Opcional)</label>
+                                <input type="date" class="usfit-input">
+                                <div class="flex items-center gap-2 mt-2">
+                                    <input type="checkbox" id="no-expire" class="rounded border-gray-300 text-usfit-cyan focus:ring-usfit-cyan">
+                                    <label for="no-expire" class="text-xs text-gray-500">Sem data de expiração (Recorrente)</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 pt-6 border-t border-gray-100">
+                            <div class="flex items-start gap-3 bg-cyan-50 p-4 rounded-xl border border-cyan-100">
+                                <input type="checkbox" checked id="send-invite" class="mt-1 rounded border-cyan-300 text-usfit-cyan focus:ring-usfit-cyan">
+                                <div>
+                                    <label for="send-invite" class="text-sm font-semibold text-gray-800 block">Enviar convite de acesso</label>
+                                    <p class="text-xs text-gray-500 mt-1">O aluno receberá um e-mail com instruções para baixar o App e criar a senha.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                        <h2 class="text-base font-bold text-gray-800 mb-4">Foco Principal</h2>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button class="px-3 py-2 rounded-lg border border-usfit-cyan bg-cyan-50 text-usfit-cyan text-sm font-medium transition-colors">
+                                Hipertrofia
+                            </button>
+                            <button class="px-3 py-2 rounded-lg border border-gray-200 text-gray-500 text-sm hover:border-gray-300 hover:bg-gray-50 transition-colors">
+                                Emagrecimento
+                            </button>
+                            <button class="px-3 py-2 rounded-lg border border-gray-200 text-gray-500 text-sm hover:border-gray-300 hover:bg-gray-50 transition-colors">
+                                Saúde
+                            </button>
+                            <button class="px-3 py-2 rounded-lg border border-gray-200 text-gray-500 text-sm hover:border-gray-300 hover:bg-gray-50 transition-colors">
+                                Performance
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </main>
+    </div>
+    <script> lucide.createIcons(); </script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USFITB2B - Visão Geral</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        usfit: {
+                            dark: '#111827',
+                            cyan: '#22d3ee',
+                            blue: '#3b82f6',
+                            text: '#374151',
+                            gray: '#F3F4F6'
+                        }
+                    },
+                    backgroundImage: {
+                        'usfit-gradient': 'linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .btn-primary {
+            background-image: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
+            color: white; border-radius: 9999px; padding: 0.625rem 1.5rem;
+            font-weight: 600; font-size: 0.875rem; display: flex; align-items: center; gap: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(34, 211, 238, 0.3); transition: opacity 0.2s;
+            text-decoration: none;
+        }
+        .btn-primary:hover { opacity: 0.95; transform: translateY(-1px); }
+    </style>
+</head>
+<body class="bg-usfit-gray text-usfit-text h-screen flex overflow-hidden">
+
+    <aside class="w-64 bg-usfit-dark text-white flex flex-col hidden md:flex flex-shrink-0 relative">
+        <div class="h-20 flex items-center justify-center border-b border-gray-800 bg-[#0f1523]">
+            <a href="dashboard.html" class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-usfit-gradient flex items-center justify-center font-bold text-white italic">US</div>
+                <span class="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-usfit-gradient">USFITB2B</span>
+            </a>
+        </div>
+
+        <nav class="flex-1 px-3 py-6 space-y-2 overflow-y-auto">
+            
+            <div class="relative">
+                <a href="dashboard.html" class="flex items-center px-4 py-3 text-white bg-gray-800 rounded-xl shadow-lg shadow-cyan-900/20">
+                    <div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-usfit-gradient rounded-r-full"></div>
+                    <i data-lucide="layout-dashboard" class="w-5 h-5 mr-3 text-usfit-cyan"></i>
+                    <span class="font-medium">Visão Geral</span>
+                </a>
+            </div>
+            
+            <a href="students-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="users" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Alunos</span>
+            </a>
+
+            <a href="diets-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="utensils" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Nutrição</span>
+            </a>
+
+            <a href="workouts-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="dumbbell" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Treinos</span>
+            </a>
+        </nav>
+
+        <div class="p-4 bg-[#0f1523] border-t border-gray-800">
+             <div class="flex items-center justify-between">
+                 <a href="settings.html" class="flex items-center gap-3 group hover:opacity-80 transition-opacity">
+                    <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center border-2 border-gray-600 group-hover:border-usfit-cyan">
+                        <span class="font-bold text-sm">DS</span>
+                    </div>
+                    <div class="text-sm">
+                        <p class="font-semibold text-white">Dr. Silva</p>
+                        <p class="text-xs text-usfit-cyan">Plano PRO</p>
+                    </div>
+                </a>
+                <a href="login.html" class="p-2 text-gray-400 hover:text-white hover:bg-red-500/20 rounded-lg transition-colors" title="Sair">
+                    <i data-lucide="log-out" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <div class="flex-1 flex flex-col h-full min-w-0 bg-usfit-gray">
+        
+        <header class="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-8 flex-shrink-0 z-20 shadow-sm">
+            <div>
+                <h1 class="text-xl font-bold text-gray-800">Bom dia, Dr. Silva! 👋</h1>
+                <p class="text-xs text-gray-500">Aqui está o resumo da sua consultoria hoje.</p>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <div class="h-8 w-px bg-gray-200 mx-1"></div>
+                <button class="p-2 text-gray-400 hover:bg-gray-100 rounded-full relative">
+                    <i data-lucide="bell" class="w-5 h-5"></i>
+                    <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1 overflow-y-auto p-8">
+            <div class="max-w-7xl mx-auto space-y-8">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-50 text-usfit-cyan flex items-center justify-center">
+                            <i data-lucide="users" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 font-medium">Alunos Ativos</p>
+                            <h3 class="text-2xl font-bold text-gray-800">42</h3>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-usfit-blue flex items-center justify-center">
+                            <i data-lucide="dumbbell" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 font-medium">Treinos Vencendo</p>
+                            <h3 class="text-2xl font-bold text-gray-800">5</h3>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-orange-50 text-orange-500 flex items-center justify-center">
+                            <i data-lucide="utensils" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 font-medium">Dietas Pendentes</p>
+                            <h3 class="text-2xl font-bold text-gray-800">3</h3>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-500 flex items-center justify-center">
+                            <i data-lucide="trending-up" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 font-medium">Check-ins Hoje</p>
+                            <h3 class="text-2xl font-bold text-gray-800">18</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    
+                    <div class="lg:col-span-2 bg-white rounded-2xl border border-gray-100 shadow-sm flex flex-col">
+                        <div class="p-6 border-b border-gray-50 flex justify-between items-center">
+                            <h2 class="font-bold text-gray-800">Atividades Recentes</h2>
+                            <a href="#" class="text-sm text-usfit-cyan hover:underline">Ver tudo</a>
+                        </div>
+                        <div class="flex-1 p-2">
+                            <table class="w-full text-left text-sm text-gray-600">
+                                <tbody class="divide-y divide-gray-50">
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="px-4 py-3">
+                                            <div class="flex items-center gap-3">
+                                                <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-500">CJ</div>
+                                                <span class="font-medium text-gray-800">Carlos Júnior</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3">Completou <span class="text-gray-900 font-medium">Treino A</span></td>
+                                        <td class="px-4 py-3 text-right text-xs text-gray-400">Há 20 min</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="px-4 py-3">
+                                            <div class="flex items-center gap-3">
+                                                <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-500">AB</div>
+                                                <span class="font-medium text-gray-800">Ana Beatriz</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3">Atualizou o peso para <span class="text-gray-900 font-medium">71.5 kg</span></td>
+                                        <td class="px-4 py-3 text-right text-xs text-gray-400">Há 2 horas</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="px-4 py-3">
+                                            <div class="flex items-center gap-3">
+                                                <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-500">MS</div>
+                                                <span class="font-medium text-gray-800">Mariana Souza</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3">Aceitou o convite de acesso</td>
+                                        <td class="px-4 py-3 text-right text-xs text-gray-400">Ontem</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-1 space-y-6">
+                        
+                        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                            <h2 class="font-bold text-gray-800 mb-4">Acesso Rápido</h2>
+                            <div class="space-y-3">
+                                <a href="diet-create.html" class="flex items-center p-3 rounded-xl border border-gray-100 hover:border-usfit-cyan hover:bg-cyan-50 transition-colors group">
+                                    <div class="w-10 h-10 rounded-lg bg-orange-50 text-orange-500 flex items-center justify-center mr-3 group-hover:bg-white">
+                                        <i data-lucide="utensils" class="w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <span class="block font-semibold text-gray-800 text-sm">Criar Dieta</span>
+                                        <span class="block text-xs text-gray-400">Prescrição nutricional</span>
+                                    </div>
+                                </a>
+                                <a href="workout-create.html" class="flex items-center p-3 rounded-xl border border-gray-100 hover:border-usfit-cyan hover:bg-cyan-50 transition-colors group">
+                                    <div class="w-10 h-10 rounded-lg bg-blue-50 text-usfit-blue flex items-center justify-center mr-3 group-hover:bg-white">
+                                        <i data-lucide="dumbbell" class="w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <span class="block font-semibold text-gray-800 text-sm">Criar Treino</span>
+                                        <span class="block text-xs text-gray-400">Montar ficha de exercícios</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden">
+                            <div class="relative z-10">
+                                <h3 class="font-bold text-lg mb-2">Atenção Necessária</h3>
+                                <p class="text-sm text-gray-300 mb-4">3 contratos expiram nos próximos 7 dias.</p>
+                                <button class="w-full py-2 bg-white text-gray-900 rounded-lg text-sm font-bold hover:bg-gray-100 transition-colors">Ver Contratos</button>
+                            </div>
+                            <div class="absolute right-[-20px] bottom-[-20px] w-24 h-24 bg-usfit-cyan rounded-full mix-blend-overlay filter blur-xl opacity-30"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

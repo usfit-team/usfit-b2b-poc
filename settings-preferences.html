@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USFITB2B - Preferências</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        usfit: {
+                            dark: '#111827',
+                            cyan: '#22d3ee',
+                            blue: '#3b82f6',
+                            text: '#374151',
+                            gray: '#F3F4F6'
+                        }
+                    },
+                    backgroundImage: {
+                        'usfit-gradient': 'linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .btn-primary {
+            background-image: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
+            color: white; border-radius: 9999px; padding: 0.5rem 1.5rem;
+            font-weight: 500; font-size: 0.875rem; display: flex; align-items: center; gap: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(34, 211, 238, 0.2); transition: opacity 0.2s;
+        }
+        .btn-primary:hover { opacity: 0.95; }
+        
+        .settings-tab {
+            padding-bottom: 0.75rem; color: #6B7280; font-weight: 500; font-size: 0.875rem; border-bottom: 2px solid transparent; transition: all 0.2s; text-decoration: none;
+        }
+        .settings-tab.active { color: #22d3ee; border-bottom-color: #22d3ee; }
+        .settings-tab:hover:not(.active) { color: #111827; }
+
+        /* Toggle Switch Customizado */
+        .toggle-checkbox:checked { right: 0; border-color: #22d3ee; }
+        .toggle-checkbox:checked + .toggle-label { background-color: #22d3ee; }
+    </style>
+</head>
+<body class="bg-usfit-gray text-usfit-text h-screen flex overflow-hidden">
+
+    <aside class="w-64 bg-usfit-dark text-white flex flex-col hidden md:flex flex-shrink-0 relative">
+        <div class="h-20 flex items-center justify-center border-b border-gray-800 bg-[#0f1523]">
+            <a href="dashboard.html" class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-usfit-gradient flex items-center justify-center font-bold text-white italic">US</div>
+                <span class="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-usfit-gradient">USFITB2B</span>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-6 space-y-2 overflow-y-auto">
+            <a href="dashboard.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="layout-dashboard" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Visão Geral</span>
+            </a>
+            <a href="students-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="users" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Alunos</span>
+            </a>
+            <a href="diets-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="utensils" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Nutrição</span>
+            </a>
+            <a href="workouts-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="dumbbell" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Treinos</span>
+            </a>
+        </nav>
+        <div class="p-4 bg-[#0f1523] border-t border-gray-800">
+             <div class="flex items-center justify-between">
+                 <a href="settings.html" class="flex items-center gap-3 group hover:opacity-80 transition-opacity">
+                    <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center border-2 border-gray-600 group-hover:border-usfit-cyan">
+                        <span class="font-bold text-sm">DS</span>
+                    </div>
+                    <div class="text-sm">
+                        <p class="font-semibold text-white">Dr. Silva</p>
+                        <p class="text-xs text-usfit-cyan">Plano PRO</p>
+                    </div>
+                </a>
+                <a href="login.html" class="p-2 text-gray-400 hover:text-white hover:bg-red-500/20 rounded-lg transition-colors">
+                    <i data-lucide="log-out" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <div class="flex-1 flex flex-col h-full min-w-0 bg-usfit-gray">
+        <header class="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-8 flex-shrink-0 z-20 shadow-sm">
+            <h1 class="text-xl font-bold text-gray-800">Minha Conta & Configurações</h1>
+            <div class="flex items-center justify-end gap-3 w-1/3">
+                <button class="btn-primary">
+                    <i data-lucide="save" class="w-4 h-4"></i> Salvar Preferências
+                </button>
+                <div class="h-8 w-px bg-gray-200 mx-1"></div>
+                <button class="p-2 text-gray-400 hover:bg-gray-100 rounded-full relative">
+                    <i data-lucide="bell" class="w-5 h-5"></i>
+                    <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1 overflow-y-auto p-8">
+            <div class="max-w-4xl mx-auto">
+                
+                <div class="flex items-center gap-8 border-b border-gray-200 mb-8">
+                    <a href="settings.html" class="settings-tab">Perfil Profissional</a>
+                    <a href="settings-preferences.html" class="settings-tab active">Preferências do Sistema</a>
+                    <a href="settings-billing.html" class="settings-tab">Assinatura e Planos</a>
+                    <a href="settings-security.html" class="settings-tab">Segurança</a>
+                </div>
+
+                <div class="space-y-8">
+                    
+                    <section class="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm">
+                        <div class="flex items-center gap-2 mb-6">
+                            <div class="w-1 h-6 bg-usfit-gradient rounded-full"></div>
+                            <h2 class="text-lg font-bold text-gray-800">Padrões de Avaliação</h2>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <h3 class="text-sm font-semibold text-gray-900 mb-3">Unidades de Medida</h3>
+                                <div class="space-y-3">
+                                    <label class="flex items-center justify-between p-3 border border-usfit-cyan bg-cyan-50/30 rounded-xl cursor-pointer transition-colors">
+                                        <span class="text-sm text-gray-900 font-medium">Sistema Métrico (kg, cm)</span>
+                                        <input type="radio" name="units" checked class="text-usfit-cyan focus:ring-usfit-cyan">
+                                    </label>
+                                    <label class="flex items-center justify-between p-3 border border-gray-200 rounded-xl cursor-pointer hover:bg-gray-50 transition-colors">
+                                        <span class="text-sm text-gray-600">Sistema Imperial (lbs, ft)</span>
+                                        <input type="radio" name="units" class="text-usfit-cyan focus:ring-usfit-cyan">
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h3 class="text-sm font-semibold text-gray-900 mb-3">Fórmula Padrão (TMB)</h3>
+                                <div class="space-y-3">
+                                    <label class="flex items-center justify-between p-3 border border-usfit-cyan bg-cyan-50/30 rounded-xl cursor-pointer transition-colors">
+                                        <div>
+                                            <span class="block text-sm font-medium text-gray-900">Harris-Benedict</span>
+                                            <span class="block text-xs text-gray-500">Padrão para população geral.</span>
+                                        </div>
+                                        <input type="radio" name="formula_default" checked class="text-usfit-cyan focus:ring-usfit-cyan">
+                                    </label>
+                                    <label class="flex items-center justify-between p-3 border border-gray-200 rounded-xl cursor-pointer hover:bg-gray-50 transition-colors">
+                                        <div>
+                                            <span class="block text-sm font-medium text-gray-900">Mifflin-St Jeor</span>
+                                            <span class="block text-xs text-gray-500">Mais preciso para sobrepeso.</span>
+                                        </div>
+                                        <input type="radio" name="formula_default" class="text-usfit-cyan focus:ring-usfit-cyan">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm">
+                        <div class="flex items-center gap-2 mb-6">
+                            <div class="w-1 h-6 bg-usfit-gradient rounded-full"></div>
+                            <h2 class="text-lg font-bold text-gray-800">Notificações</h2>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between py-3 border-b border-gray-50">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-900">Novos Alunos</p>
+                                    <p class="text-xs text-gray-500">Receber e-mail quando um convite for aceito.</p>
+                                </div>
+                                <div class="relative inline-block w-10 h-6 align-middle select-none transition duration-200 ease-in">
+                                    <input type="checkbox" name="toggle" id="toggle1" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer checked:right-0 checked:border-usfit-cyan"/>
+                                    <label for="toggle1" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer checked:bg-usfit-cyan"></label>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between py-3 border-b border-gray-50">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-900">Alertas de Vencimento</p>
+                                    <p class="text-xs text-gray-500">Avisar 7 dias antes do plano de um aluno expirar.</p>
+                                </div>
+                                <div class="relative inline-block w-10 h-6 align-middle select-none transition duration-200 ease-in">
+                                    <input type="checkbox" name="toggle" id="toggle2" checked class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                                    <label for="toggle2" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer bg-usfit-cyan"></label>
+                                </div>
+                            </div>
+
+                             <div class="flex items-center justify-between py-3">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-900">Resumo Semanal</p>
+                                    <p class="text-xs text-gray-500">Relatório de performance enviado toda segunda-feira.</p>
+                                </div>
+                                <div class="relative inline-block w-10 h-6 align-middle select-none transition duration-200 ease-in">
+                                    <input type="checkbox" name="toggle" id="toggle3" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                                    <label for="toggle3" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

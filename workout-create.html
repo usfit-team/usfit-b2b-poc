@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USFITB2B - Criar Treino</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        usfit: {
+                            dark: '#111827',
+                            cyan: '#22d3ee',
+                            blue: '#3b82f6',
+                            text: '#374151',
+                            gray: '#F3F4F6'
+                        }
+                    },
+                    backgroundImage: {
+                        'usfit-gradient': 'linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .cursor-grab { cursor: grab; }
+        
+        /* Inputs USFIT */
+        .usfit-input {
+            width: 100%; border: 1px solid #E5E7EB; border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem; font-size: 0.875rem; color: #374151; outline: none; transition: border-color 0.2s;
+            background-color: #F9FAFB;
+        }
+        .usfit-input:focus { border-color: #22d3ee; background-color: white; box-shadow: 0 0 0 1px #22d3ee; }
+
+        /* Botões */
+        .btn-primary {
+            background-image: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
+            color: white; border-radius: 9999px; padding: 0.5rem 1.5rem;
+            font-weight: 500; font-size: 0.875rem; box-shadow: 0 4px 6px -1px rgba(34, 211, 238, 0.2);
+            transition: opacity 0.2s; display: flex; align-items: center; gap: 0.5rem; text-decoration: none;
+        }
+        .btn-primary:hover { opacity: 0.9; }
+
+        .btn-secondary {
+            background: white; border: 1px solid #E5E7EB; color: #4B5563; border-radius: 9999px;
+            padding: 0.5rem 1.5rem; font-weight: 500; font-size: 0.875rem; transition: all 0.2s; text-decoration: none;
+        }
+        .btn-secondary:hover { border-color: #22d3ee; color: #0ea5e9; }
+
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    </style>
+</head>
+<body class="bg-usfit-gray text-usfit-text h-screen flex overflow-hidden">
+
+    <aside class="w-64 bg-usfit-dark text-white flex flex-col hidden md:flex flex-shrink-0 relative">
+        <div class="h-20 flex items-center justify-center border-b border-gray-800 bg-[#0f1523]">
+            <a href="dashboard.html" class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-usfit-gradient flex items-center justify-center font-bold text-white italic">US</div>
+                <span class="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-usfit-gradient">USFITB2B</span>
+            </a>
+        </div>
+
+        <nav class="flex-1 px-3 py-6 space-y-2 overflow-y-auto">
+            <a href="dashboard.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="layout-dashboard" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Visão Geral</span>
+            </a>
+            
+            <a href="students-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="users" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Alunos</span>
+            </a>
+
+            <a href="diets-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="utensils" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Nutrição</span>
+            </a>
+
+            <div class="relative">
+                <a href="workouts-list.html" class="relative flex items-center px-4 py-3 text-white bg-gray-800 rounded-xl shadow-lg shadow-cyan-900/20">
+                    <div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-usfit-gradient rounded-r-full"></div>
+                    <i data-lucide="dumbbell" class="w-5 h-5 mr-3 text-usfit-cyan"></i>
+                    <span class="font-medium">Treinos</span>
+                </a>
+                
+                <div class="ml-12 mt-1 space-y-1">
+                    <a href="workouts-list.html" class="block text-sm text-gray-400 hover:text-white py-1">Fichas</a>
+                    <a href="exercises-list.html" class="block text-sm text-usfit-cyan font-medium py-1">Banco de Exercícios</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="p-4 bg-[#0f1523] border-t border-gray-800">
+             <div class="flex items-center justify-between">
+                 <a href="settings.html" class="flex items-center gap-3 group hover:opacity-80 transition-opacity">
+                    <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center border-2 border-gray-600 group-hover:border-usfit-cyan">
+                        <span class="font-bold text-sm">DS</span>
+                    </div>
+                    <div class="text-sm">
+                        <p class="font-semibold text-white">Dr. Silva</p>
+                        <p class="text-xs text-usfit-cyan">Plano PRO</p>
+                    </div>
+                </a>
+                <a href="login.html" class="p-2 text-gray-400 hover:text-white hover:bg-red-500/20 rounded-lg transition-colors" title="Sair">
+                    <i data-lucide="log-out" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <div class="flex-1 flex flex-col h-full min-w-0 bg-usfit-gray">
+        
+        <header class="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-8 flex-shrink-0 z-20 shadow-sm">
+            <div class="flex items-center gap-4">
+                <a href="workouts-list.html" class="md:hidden text-gray-500"><i data-lucide="arrow-left" class="w-6 h-6"></i></a>
+                <div>
+                    <h1 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                        Nova Ficha de Treino
+                        <span class="px-2 py-0.5 rounded-full bg-cyan-50 text-cyan-700 text-xs font-bold uppercase tracking-wide border border-cyan-100">Rascunho</span>
+                    </h1>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <a href="workouts-list.html" class="btn-secondary">Cancelar</a>
+                <a href="workouts-list.html" class="btn-primary">
+                    <i data-lucide="check" class="w-4 h-4"></i> Finalizar Ficha
+                </a>
+            </div>
+        </header>
+
+        <main class="flex-1 overflow-y-auto p-8">
+            <div class="max-w-7xl mx-auto space-y-6">
+                
+                <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-1 h-6 bg-usfit-gradient rounded-full"></div>
+                        <h2 class="text-lg font-bold text-gray-800">Informações Básicas</h2>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="md:col-span-1">
+                            <label class="block text-sm font-medium text-gray-600 mb-1.5 ml-1">Nome da Ficha</label>
+                            <input type="text" value="Hipertrofia Intermediário" class="usfit-input" placeholder="Ex: Treino de Força A">
+                        </div>
+                        <div class="md:col-span-1">
+                            <label class="block text-sm font-medium text-gray-600 mb-1.5 ml-1">Objetivo</label>
+                            <select class="usfit-input bg-white">
+                                <option>Hipertrofia</option>
+                                <option>Emagrecimento</option>
+                                <option>Condicionamento</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-1">
+                            <label class="block text-sm font-medium text-gray-600 mb-1.5 ml-1">Duração (Semanas)</label>
+                            <input type="number" value="8" class="usfit-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    
+                    <div class="lg:col-span-2 space-y-4">
+                        
+                        <div class="flex items-center gap-2 overflow-x-auto pb-1">
+                            <button class="px-6 py-2.5 bg-usfit-gradient text-white rounded-full font-medium text-sm shadow-md shadow-cyan-500/30 flex-shrink-0 transition-transform hover:scale-105">
+                                Treino A (Peito/Tríceps)
+                            </button>
+                            <button class="px-6 py-2.5 bg-white text-gray-500 border border-gray-200 rounded-full font-medium text-sm hover:bg-gray-50 hover:border-cyan-200 hover:text-cyan-600 flex-shrink-0 transition-all">
+                                Treino B (Costas/Bíceps)
+                            </button>
+                            <button class="px-6 py-2.5 bg-white text-gray-500 border border-gray-200 rounded-full font-medium text-sm hover:bg-gray-50 flex-shrink-0 transition-all">
+                                Treino C (Pernas)
+                            </button>
+                            <button class="w-10 h-10 flex items-center justify-center rounded-full bg-white border border-gray-200 text-gray-400 hover:text-usfit-cyan hover:border-usfit-cyan transition-all shadow-sm ml-2">
+                                <i data-lucide="plus" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+
+                        <div class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden">
+                            <div class="absolute left-0 top-0 bottom-0 w-1 bg-gray-200 group-hover:bg-usfit-gradient transition-colors"></div>
+                            
+                            <div class="absolute right-4 top-4 cursor-grab text-gray-300 hover:text-gray-500">
+                                <i data-lucide="grip-horizontal" class="w-5 h-5"></i>
+                            </div>
+
+                            <div class="p-5 pl-7">
+                                <div class="flex items-start justify-between mb-4 pr-8">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center text-gray-400 border border-gray-100">
+                                            <i data-lucide="image" class="w-6 h-6"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-bold text-gray-800 text-base">Supino Reto com Barra</h3>
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-cyan-50 text-cyan-700 mt-1">
+                                                Peitoral Maior
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-4 gap-4 mb-4">
+                                    <div>
+                                        <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1 text-center">Séries</label>
+                                        <input type="number" value="4" class="usfit-input text-center font-semibold focus:bg-white">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1 text-center">Reps</label>
+                                        <input type="text" value="8-12" class="usfit-input text-center font-semibold focus:bg-white">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1 text-center">Carga (kg)</label>
+                                        <input type="number" placeholder="-" class="usfit-input text-center focus:bg-white">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1 text-center">Descanso</label>
+                                        <div class="relative">
+                                            <input type="number" value="60" class="usfit-input text-center focus:bg-white">
+                                            <span class="absolute right-2 top-2 text-[10px] text-gray-400 font-bold">s</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center gap-3">
+                                    <div class="flex-1 relative">
+                                        <i data-lucide="message-square" class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
+                                        <input type="text" placeholder="Observações para o aluno..." class="usfit-input pl-9 text-xs">
+                                    </div>
+                                    <button class="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors" title="Remover">
+                                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden">
+                            <div class="absolute left-0 top-0 bottom-0 w-1 bg-gray-200 group-hover:bg-usfit-gradient transition-colors"></div>
+                            
+                            <div class="absolute right-4 top-4 cursor-grab text-gray-300 hover:text-gray-500">
+                                <i data-lucide="grip-horizontal" class="w-5 h-5"></i>
+                            </div>
+
+                            <div class="p-5 pl-7">
+                                <div class="flex items-start justify-between mb-4 pr-8">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center text-gray-400 border border-gray-100">
+                                            <i data-lucide="image" class="w-6 h-6"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-bold text-gray-800 text-base">Crucifixo Inclinado</h3>
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-cyan-50 text-cyan-700 mt-1">
+                                                Peitoral
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-4 gap-4 mb-4">
+                                    <div>
+                                        <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1 text-center">Séries</label>
+                                        <input type="number" value="3" class="usfit-input text-center font-semibold focus:bg-white">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1 text-center">Reps</label>
+                                        <input type="text" value="12-15" class="usfit-input text-center font-semibold focus:bg-white">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1 text-center">Carga</label>
+                                        <input type="number" placeholder="-" class="usfit-input text-center focus:bg-white">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1 text-center">Descanso</label>
+                                        <div class="relative">
+                                            <input type="number" value="45" class="usfit-input text-center focus:bg-white">
+                                            <span class="absolute right-2 top-2 text-[10px] text-gray-400 font-bold">s</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="flex-1 relative">
+                                        <i data-lucide="message-square" class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
+                                        <input type="text" placeholder="Observações..." class="usfit-input pl-9 text-xs">
+                                    </div>
+                                    <button class="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors">
+                                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="w-full py-5 border-2 border-dashed border-gray-300 rounded-2xl flex flex-col items-center justify-center gap-2 text-gray-500 hover:border-usfit-cyan hover:text-usfit-cyan hover:bg-cyan-50/30 transition-all group">
+                            <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-cyan-100 transition-colors">
+                                <i data-lucide="plus" class="w-6 h-6"></i>
+                            </div>
+                            <span class="font-medium">Adicionar Exercício</span>
+                        </button>
+
+                    </div>
+
+                    <div class="lg:col-span-1">
+                        <div class="sticky top-6 space-y-6">
+                            
+                            <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-lg shadow-gray-200/50">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="font-bold text-gray-800">Resumo: Treino A</h3>
+                                    <i data-lucide="bar-chart-2" class="w-5 h-5 text-usfit-cyan"></i>
+                                </div>
+                                
+                                <div class="space-y-4">
+                                    <div>
+                                        <div class="flex justify-between text-xs mb-1.5 font-medium">
+                                            <span class="text-gray-500">Intensidade Estimada</span>
+                                            <span class="text-usfit-cyan">Alta</span>
+                                        </div>
+                                        <div class="w-full bg-gray-100 rounded-full h-2">
+                                            <div class="bg-usfit-gradient h-2 rounded-full" style="width: 80%"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="pt-4 border-t border-gray-50 space-y-3">
+                                        <div class="flex justify-between text-sm">
+                                            <span class="text-gray-500">Exercícios</span>
+                                            <span class="font-bold text-gray-800">6</span>
+                                        </div>
+                                        <div class="flex justify-between text-sm">
+                                            <span class="text-gray-500">Volume (Séries)</span>
+                                            <span class="font-bold text-gray-800">22</span>
+                                        </div>
+                                        <div class="flex justify-between text-sm">
+                                            <span class="text-gray-500">Tempo Estimado</span>
+                                            <span class="font-bold text-gray-800 flex items-center gap-1">
+                                                55 min
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-6">
+                                    <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Foco Muscular</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="px-3 py-1.5 bg-gray-50 text-gray-600 text-xs font-medium rounded-lg border border-gray-200">Peito</span>
+                                        <span class="px-3 py-1.5 bg-gray-50 text-gray-600 text-xs font-medium rounded-lg border border-gray-200">Tríceps</span>
+                                        <span class="px-3 py-1.5 bg-gray-50 text-gray-600 text-xs font-medium rounded-lg border border-gray-200">Ombros</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-3">
+                                <button class="btn-secondary w-full justify-center">
+                                    <i data-lucide="copy" class="w-4 h-4 mr-2"></i> Duplicar para Treino B
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

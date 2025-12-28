@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USFITB2B - Cadastro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        usfit: {
+                            dark: '#111827',
+                            cyan: '#22d3ee',
+                            blue: '#3b82f6',
+                            text: '#374151',
+                            gray: '#F3F4F6'
+                        }
+                    },
+                    backgroundImage: {
+                        'usfit-gradient': 'linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        .usfit-input {
+            width: 100%; border: 1px solid #E5E7EB; border-radius: 0.75rem;
+            padding: 0.75rem 1rem; font-size: 0.875rem; color: #111827; outline: none; transition: all 0.2s;
+            background-color: #F9FAFB;
+        }
+        .usfit-input:focus { 
+            border-color: #22d3ee; background-color: #FFFFFF;
+            box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.1); 
+        }
+
+        .btn-primary {
+            width: 100%;
+            background-image: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
+            color: white; border-radius: 9999px; padding: 0.75rem 1.5rem;
+            font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(34, 211, 238, 0.3); transition: all 0.2s;
+        }
+        .btn-primary:hover { opacity: 0.95; transform: translateY(-1px); box-shadow: 0 15px 20px -3px rgba(34, 211, 238, 0.4); }
+
+        /* Estilo para Radio Cards */
+        .radio-card-input:checked + .radio-card {
+            border-color: #22d3ee;
+            background-color: #ecfeff; /* cyan-50 */
+            box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.3);
+        }
+        .radio-card-input:checked + .radio-card .icon-wrapper {
+            background-image: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
+            color: white;
+            border-color: transparent;
+        }
+    </style>
+</head>
+<body class="h-screen flex overflow-hidden bg-white">
+
+    <div class="hidden md:flex md:w-1/2 lg:w-5/12 bg-[#0f1523] relative flex-col justify-between p-12 overflow-hidden h-full">
+        <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-usfit-blue rounded-full mix-blend-multiply filter blur-[120px] opacity-20 -translate-y-1/2 translate-x-1/2 animate-pulse"></div>
+        
+        <div class="relative z-10 flex items-center gap-3">
+             <div class="w-10 h-10 rounded-full bg-usfit-gradient flex items-center justify-center font-bold text-white italic text-lg shadow-lg shadow-cyan-500/30">US</div>
+             <span class="text-2xl font-bold tracking-tight text-white">USFITB2B</span>
+        </div>
+
+        <div class="relative z-10 max-w-md">
+            <h2 class="text-3xl font-bold text-white mb-4 leading-tight">Comece sua jornada.</h2>
+            <ul class="space-y-4 text-gray-400">
+                <li class="flex items-center gap-3">
+                    <div class="p-1 rounded-full bg-usfit-gradient"><i data-lucide="check" class="w-3 h-3 text-white"></i></div>
+                    <span>Prescrição ilimitada de treinos e dietas</span>
+                </li>
+                <li class="flex items-center gap-3">
+                    <div class="p-1 rounded-full bg-usfit-gradient"><i data-lucide="check" class="w-3 h-3 text-white"></i></div>
+                    <span>App exclusivo para seus alunos</span>
+                </li>
+                <li class="flex items-center gap-3">
+                    <div class="p-1 rounded-full bg-usfit-gradient"><i data-lucide="check" class="w-3 h-3 text-white"></i></div>
+                    <span>Gestão financeira e anamnese</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="relative z-10 text-sm text-gray-500">
+            © 2025 USFIT Tecnologia.
+        </div>
+    </div>
+
+    <div class="w-full md:w-1/2 lg:w-7/12 h-full bg-white overflow-y-auto relative">
+        <div class="min-h-full flex items-center justify-center p-8 py-12">
+            <div class="w-full max-w-md space-y-6">
+                
+                <div class="text-center md:text-left">
+                    <h1 class="text-3xl font-bold text-gray-900 tracking-tight">Crie sua conta</h1>
+                    <p class="text-gray-500 mt-2">Escolha seu perfil e preencha seus dados.</p>
+                </div>
+
+                <form action="#" class="space-y-5">
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2 ml-1">Como você atua?</label>
+                        <div class="grid grid-cols-2 gap-4">
+                            <label class="cursor-pointer group">
+                                <input type="radio" name="account_type" value="professional" class="radio-card-input hidden" checked>
+                                <div class="radio-card border border-gray-200 rounded-2xl p-4 transition-all hover:border-usfit-cyan hover:bg-gray-50 h-full">
+                                    <div class="icon-wrapper w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 mb-3 transition-colors group-hover:border-usfit-cyan group-hover:text-usfit-cyan">
+                                        <i data-lucide="user" class="w-5 h-5"></i>
+                                    </div>
+                                    <span class="block font-semibold text-gray-900">Profissional</span>
+                                    <span class="text-xs text-gray-500">Para Personal ou Nutri que atua sozinho.</span>
+                                </div>
+                            </label>
+
+                            <label class="cursor-pointer group">
+                                <input type="radio" name="account_type" value="consultancy" class="radio-card-input hidden">
+                                <div class="radio-card border border-gray-200 rounded-2xl p-4 transition-all hover:border-usfit-cyan hover:bg-gray-50 h-full">
+                                    <div class="icon-wrapper w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 mb-3 transition-colors group-hover:border-usfit-cyan group-hover:text-usfit-cyan">
+                                        <i data-lucide="building-2" class="w-5 h-5"></i>
+                                    </div>
+                                    <span class="block font-semibold text-gray-900">Consultoria</span>
+                                    <span class="text-xs text-gray-500">Gestão de equipe e múltiplos profissionais.</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1.5 ml-1">Nome Completo</label>
+                        <input type="text" placeholder="Seu nome" class="usfit-input" required>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1.5 ml-1">E-mail Profissional</label>
+                        <input type="email" placeholder="seu@email.com" class="usfit-input" required>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1.5 ml-1">Senha</label>
+                        <input type="password" placeholder="Mínimo 8 caracteres" class="usfit-input" required>
+                    </div>
+
+                    <div class="flex items-center gap-2 ml-1">
+                        <input type="checkbox" id="terms" class="rounded border-gray-300 text-usfit-cyan focus:ring-usfit-cyan">
+                        <label for="terms" class="text-sm text-gray-500">Li e aceito os <a href="#" class="text-usfit-blue hover:underline">Termos de Uso</a>.</label>
+                    </div>
+
+                    <a href="setup-profile.html" type="button" class="btn-primary">
+                        Continuar para Setup <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                    </a>
+                </form>
+
+                <p class="text-center text-sm text-gray-600">
+                    Já tem uma conta? 
+                    <a href="#" class="font-semibold text-usfit-blue hover:text-usfit-cyan hover:underline transition-colors">Fazer login</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

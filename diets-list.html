@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USFITB2B - Dietas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        usfit: {
+                            dark: '#111827',
+                            cyan: '#22d3ee',
+                            blue: '#3b82f6',
+                            text: '#374151',
+                            gray: '#F3F4F6'
+                        }
+                    },
+                    backgroundImage: {
+                        'usfit-gradient': 'linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        .usfit-input-search {
+            width: 100%; border: 1px solid #E5E7EB; border-radius: 9999px;
+            padding: 0.5rem 1rem 0.5rem 2.5rem; font-size: 0.875rem; color: #111827; outline: none; transition: all 0.2s;
+            background-color: white;
+        }
+        .usfit-input-search:focus { 
+            border-color: #22d3ee; box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.1); 
+        }
+
+        .btn-primary {
+            background-image: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
+            color: white; border-radius: 9999px; padding: 0.625rem 1.5rem;
+            font-weight: 600; font-size: 0.875rem; display: flex; align-items: center; gap: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(34, 211, 238, 0.3); transition: opacity 0.2s;
+            text-decoration: none;
+        }
+        .btn-primary:hover { opacity: 0.95; transform: translateY(-1px); }
+
+        .status-badge {
+            display: inline-flex; align-items: center; padding: 0.125rem 0.625rem; 
+            border-radius: 9999px; font-size: 0.75rem; font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-usfit-gray text-usfit-text h-screen flex overflow-hidden">
+
+    <aside class="w-64 bg-usfit-dark text-white flex flex-col hidden md:flex flex-shrink-0 relative">
+        <div class="h-20 flex items-center justify-center border-b border-gray-800 bg-[#0f1523]">
+            <a href="dashboard.html" class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-usfit-gradient flex items-center justify-center font-bold text-white italic">US</div>
+                <span class="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-usfit-gradient">USFITB2B</span>
+            </a>
+        </div>
+
+        <nav class="flex-1 px-3 py-6 space-y-2 overflow-y-auto">
+            <a href="dashboard.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="layout-dashboard" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Visão Geral</span>
+            </a>
+            
+            <a href="students-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="users" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Alunos</span>
+            </a>
+
+            <div class="relative">
+                <a href="diets-list.html" class="flex items-center px-4 py-3 text-white bg-gray-800 rounded-xl shadow-lg shadow-cyan-900/20">
+                    <div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-usfit-gradient rounded-r-full"></div>
+                    <i data-lucide="utensils" class="w-5 h-5 mr-3 text-usfit-cyan"></i>
+                    <span class="font-medium">Nutrição</span>
+                </a>
+            </div>
+
+            <a href="workouts-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="dumbbell" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Treinos</span>
+            </a>
+        </nav>
+
+        <div class="p-4 bg-[#0f1523] border-t border-gray-800">
+             <div class="flex items-center justify-between">
+                 <a href="settings.html" class="flex items-center gap-3 group hover:opacity-80 transition-opacity">
+                    <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center border-2 border-gray-600 group-hover:border-usfit-cyan">
+                        <span class="font-bold text-sm">DS</span>
+                    </div>
+                    <div class="text-sm">
+                        <p class="font-semibold text-white">Dr. Silva</p>
+                        <p class="text-xs text-usfit-cyan">Plano PRO</p>
+                    </div>
+                </a>
+                <a href="login.html" class="p-2 text-gray-400 hover:text-white hover:bg-red-500/20 rounded-lg transition-colors" title="Sair">
+                    <i data-lucide="log-out" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <div class="flex-1 flex flex-col h-full min-w-0 bg-usfit-gray">
+        
+        <header class="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-8 flex-shrink-0 z-20 shadow-sm">
+            <h1 class="text-xl font-bold text-gray-800">Gestão de Dietas</h1>
+            <div class="flex items-center gap-3">
+                <a href="diet-create.html" class="btn-primary">
+                    <i data-lucide="plus" class="w-4 h-4"></i> Nova Dieta
+                </a>
+                <div class="h-8 w-px bg-gray-200 mx-1"></div>
+                <button class="p-2 text-gray-400 hover:bg-gray-100 rounded-full relative">
+                    <i data-lucide="bell" class="w-5 h-5"></i>
+                    <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1 overflow-y-auto p-8">
+            
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                <div class="flex items-center gap-2">
+                    <button class="px-4 py-2 bg-white text-usfit-cyan border border-usfit-cyan rounded-full text-sm font-semibold shadow-sm">Todas</button>
+                    <button class="px-4 py-2 bg-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full text-sm font-medium transition-colors">Ativas</button>
+                    <button class="px-4 py-2 bg-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full text-sm font-medium transition-colors">Rascunhos</button>
+                    <button class="px-4 py-2 bg-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full text-sm font-medium transition-colors">Arquivadas</button>
+                </div>
+
+                <div class="relative w-full md:w-72">
+                    <i data-lucide="search" class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
+                    <input type="text" placeholder="Buscar dieta ou aluno..." class="usfit-input-search shadow-sm">
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                <table class="w-full text-left text-sm text-gray-600">
+                    <thead class="bg-gray-50 border-b border-gray-100">
+                        <tr>
+                            <th class="px-6 py-4 font-semibold text-gray-500 uppercase text-xs tracking-wider">Nome da Dieta</th>
+                            <th class="px-6 py-4 font-semibold text-gray-500 uppercase text-xs tracking-wider">Aluno</th>
+                            <th class="px-6 py-4 font-semibold text-gray-500 uppercase text-xs tracking-wider">Status</th>
+                            <th class="px-6 py-4 font-semibold text-gray-500 uppercase text-xs tracking-wider">Calorias (Meta)</th>
+                            <th class="px-6 py-4 font-semibold text-gray-500 uppercase text-xs tracking-wider">Última Edição</th>
+                            <th class="px-6 py-4 font-semibold text-gray-500 uppercase text-xs tracking-wider text-right">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-50">
+                        <tr class="hover:bg-gray-50/80 transition-colors group cursor-pointer" onclick="window.location.href='diet-create.html'">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-lg bg-orange-50 text-orange-500 flex items-center justify-center group-hover:bg-orange-100 transition-colors">
+                                        <i data-lucide="file-text" class="w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-900">Hipertrofia - Fase 1</div>
+                                        <div class="text-xs text-gray-400">Objetivo: Ganho de Massa</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center text-xs font-bold text-gray-600">AB</div>
+                                    <span class="text-gray-700">Ana Beatriz</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="status-badge bg-emerald-50 text-emerald-600 border border-emerald-100">Ativa</span>
+                            </td>
+                            <td class="px-6 py-4 text-gray-700 font-medium">2.200 kcal</td>
+                            <td class="px-6 py-4 text-gray-500">Ontem</td>
+                            <td class="px-6 py-4 text-right">
+                                <button class="p-2 text-gray-400 hover:text-usfit-cyan hover:bg-cyan-50 rounded-full transition-colors">
+                                    <i data-lucide="edit-3" class="w-4 h-4"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50/80 transition-colors group cursor-pointer" onclick="window.location.href='diet-create.html'">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-lg bg-gray-50 text-gray-400 flex items-center justify-center group-hover:bg-gray-100 transition-colors">
+                                        <i data-lucide="file-edit" class="w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-900">Emagrecimento Agressivo</div>
+                                        <div class="text-xs text-gray-400">Objetivo: Perda de Peso</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center text-xs font-bold text-gray-600">MS</div>
+                                    <span class="text-gray-700">Mariana Souza</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="status-badge bg-yellow-50 text-yellow-600 border border-yellow-100">Rascunho</span>
+                            </td>
+                            <td class="px-6 py-4 text-gray-700 font-medium">1.500 kcal</td>
+                            <td class="px-6 py-4 text-gray-500">Hoje, 10:00</td>
+                            <td class="px-6 py-4 text-right">
+                                <button class="p-2 text-gray-400 hover:text-usfit-cyan hover:bg-cyan-50 rounded-full transition-colors">
+                                    <i data-lucide="edit-3" class="w-4 h-4"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="flex items-center justify-between mt-6">
+                <span class="text-sm text-gray-500">Mostrando 1-3 de 45 dietas</span>
+                <div class="flex gap-2">
+                    <button class="px-3 py-1 text-sm border border-gray-200 rounded-md text-gray-600 hover:bg-gray-50 disabled:opacity-50" disabled>Anterior</button>
+                    <button class="px-3 py-1 text-sm border border-gray-200 rounded-md text-gray-600 hover:bg-gray-50">Próximo</button>
+                </div>
+            </div>
+            
+        </main>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

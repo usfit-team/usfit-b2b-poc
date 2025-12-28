@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USFITB2B - Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        usfit: {
+                            dark: '#111827',
+                            cyan: '#22d3ee',
+                            blue: '#3b82f6',
+                            text: '#374151',
+                            gray: '#F3F4F6'
+                        }
+                    },
+                    backgroundImage: {
+                        'usfit-gradient': 'linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Inputs estilizados */
+        .usfit-input {
+            width: 100%; border: 1px solid #E5E7EB; border-radius: 0.75rem;
+            padding: 0.75rem 1rem; font-size: 0.875rem; color: #111827; outline: none; transition: all 0.2s;
+            background-color: #F9FAFB;
+        }
+        .usfit-input:focus { 
+            border-color: #22d3ee; background-color: #FFFFFF;
+            box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.1); 
+        }
+
+        /* Botão Primário (Gradiente) */
+        .btn-primary {
+            width: 100%;
+            background-image: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
+            color: white; border-radius: 9999px; padding: 0.75rem 1.5rem;
+            font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(34, 211, 238, 0.3); transition: all 0.2s;
+        }
+        .btn-primary:hover { opacity: 0.95; transform: translateY(-1px); box-shadow: 0 15px 20px -3px rgba(34, 211, 238, 0.4); }
+    </style>
+</head>
+<body class="h-screen flex overflow-hidden bg-white">
+
+    <div class="hidden md:flex md:w-1/2 lg:w-5/12 bg-[#0f1523] relative flex-col justify-between p-12 overflow-hidden">
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-usfit-cyan rounded-full mix-blend-multiply filter blur-[120px] opacity-20 -translate-y-1/2 translate-x-1/2 animate-pulse"></div>
+        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-usfit-blue rounded-full mix-blend-multiply filter blur-[120px] opacity-20 translate-y-1/2 -translate-x-1/2"></div>
+
+        <div class="relative z-10 flex items-center gap-3">
+             <div class="w-10 h-10 rounded-full bg-usfit-gradient flex items-center justify-center font-bold text-white italic text-lg shadow-lg shadow-cyan-500/30">US</div>
+             <span class="text-2xl font-bold tracking-tight text-white">USFITB2B</span>
+        </div>
+
+        <div class="relative z-10 max-w-md">
+            <h2 class="text-4xl font-bold text-white mb-6 leading-tight">Potencialize sua consultoria de saúde.</h2>
+            <p class="text-gray-400 text-lg leading-relaxed">
+                A plataforma completa para Nutricionistas e Personal Trainers. Gerencie alunos, dietas e treinos em um único lugar com inteligência e eficiência.
+            </p>
+        </div>
+
+        <div class="relative z-10 text-sm text-gray-500">
+            © 2025 USFIT Tecnologia. Todos os direitos reservados.
+        </div>
+    </div>
+
+    <div class="w-full md:w-1/2 lg:w-7/12 flex items-center justify-center p-8 bg-white relative">
+        <div class="w-full max-w-sm space-y-8">
+            
+            <div class="md:hidden flex flex-col items-center mb-8">
+                 <div class="w-12 h-12 rounded-full bg-usfit-gradient flex items-center justify-center font-bold text-white italic text-xl mb-3">US</div>
+                 <span class="text-xl font-bold text-gray-900">USFITB2B</span>
+            </div>
+
+            <div class="text-center md:text-left">
+                <h1 class="text-3xl font-bold text-gray-900 tracking-tight">Bem-vindo de volta</h1>
+                <p class="text-gray-500 mt-2">Digite suas credenciais para acessar o painel.</p>
+            </div>
+
+            <form action="#" class="space-y-6">
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1.5 ml-1">E-mail</label>
+                    <div class="relative">
+                        <i data-lucide="mail" class="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400"></i>
+                        <input type="email" id="email" placeholder="seu@email.com" class="usfit-input pl-11" required>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex items-center justify-between mb-1.5 ml-1">
+                        <label for="password" class="block text-sm font-medium text-gray-700">Senha</label>
+                        <a href="#" class="text-sm font-medium text-usfit-blue hover:text-usfit-cyan hover:underline transition-colors">Esqueceu a senha?</a>
+                    </div>
+                    <div class="relative">
+                        <i data-lucide="lock" class="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400"></i>
+                        <input type="password" id="password" placeholder="••••••••" class="usfit-input pl-11" required>
+                    </div>
+                </div>
+
+                <a href="dashboard.html" type="button" class="btn-primary">
+                    Acessar Plataforma <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                </a>
+            </form>
+
+            <p class="text-center text-sm text-gray-600">
+                Ainda não tem uma conta? 
+                <a href="sign-up.html" class="font-semibold text-usfit-blue hover:text-usfit-cyan hover:underline transition-colors">Cadastre-se gratuitamente</a>
+            </p>
+
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
