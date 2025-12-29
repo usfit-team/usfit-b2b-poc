@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USFIT - Performance e Gestão</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        usfit: {
+                            dark: '#0f172a',
+                            cyan: '#22d3ee',
+                            blue: '#3b82f6',
+                            text: '#334155'
+                        }
+                    },
+                    backgroundImage: {
+                        'usfit-gradient': 'linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        
+        /* Animações de Fade para troca de conteúdo */
+        .fade-enter { opacity: 0; transform: translateY(10px); transition: opacity 0.3s ease-out, transform 0.3s ease-out; }
+        .fade-enter-active { opacity: 1; transform: translateY(0); }
+        
+        .hidden-audience { display: none; }
+        
+        /* Efeito Glow */
+        .glow-effect {
+            box-shadow: 0 0 40px -10px rgba(34, 211, 238, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 overflow-x-hidden">
+
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-usfit-gradient flex items-center justify-center font-bold text-white italic">US</div>
+                <span class="text-xl font-bold tracking-tight text-gray-900">USFIT</span>
+            </div>
+
+            <div class="flex items-center gap-6">
+                <a href="#features" class="hidden md:block text-sm font-medium text-gray-600 hover:text-usfit-blue">Recursos</a>
+                <a href="#pricing" class="hidden md:block text-sm font-medium text-gray-600 hover:text-usfit-blue">Planos</a>
+                <a href="#" class="text-sm font-bold text-gray-900 hover:text-usfit-blue" id="login-link">Entrar</a>
+                <a href="#pricing" class="px-5 py-2.5 rounded-full bg-gray-900 text-white text-sm font-bold hover:bg-gray-800 transition-colors shadow-lg shadow-gray-900/20">
+                    Começar Agora
+                </a>
+            </div>
+
+            <div class="hidden md:flex bg-gray-100 p-1 rounded-full border border-gray-200 relative">
+                <div id="toggle-bg" class="absolute top-1 left-1 w-[140px] h-[34px] bg-white rounded-full shadow-sm border border-gray-200 transition-all duration-300 ease-in-out"></div>
+                
+                <button onclick="switchAudience('b2c')" class="relative z-10 w-[140px] py-1.5 text-sm font-semibold text-center transition-colors duration-300 text-gray-900" id="btn-b2c">
+                    Para mim
+                </button>
+                <button onclick="switchAudience('b2b')" class="relative z-10 w-[140px] py-1.5 text-sm font-semibold text-center transition-colors duration-300 text-gray-500" id="btn-b2b">
+                    Para empresas
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="pt-32 pb-20 overflow-hidden relative">
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-[600px] h-[600px] bg-cyan-100/40 rounded-full blur-3xl opacity-50 z-0"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
+            <div id="hero-text" class="fade-enter-active">
+                <div data-audience="b2c">
+                    <span class="px-3 py-1 rounded-full bg-cyan-50 text-usfit-cyan text-xs font-bold uppercase tracking-wider border border-cyan-100 mb-4 inline-block">
+                        App #1 em Performance
+                    </span>
+                    <h1 class="text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-6">
+                        Seu treino e dieta,<br>
+                        <span class="text-transparent bg-clip-text bg-usfit-gradient">na palma da mão.</span>
+                    </h1>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed max-w-lg">
+                        Conecte-se ao seu nutricionista e personal, ou use nossa IA para gerar planos personalizados. Evolua com dados, não com "achismos".
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <button class="px-8 py-4 rounded-full bg-usfit-gradient text-white font-bold text-lg shadow-xl shadow-cyan-500/30 hover:opacity-90 transition-opacity">
+                            Baixar App Grátis
+                        </button>
+                        <button class="flex items-center gap-2 px-6 py-4 rounded-full bg-white border border-gray-200 text-gray-700 font-semibold hover:bg-gray-50 transition-colors">
+                            <i data-lucide="play-circle" class="w-5 h-5"></i> Ver Vídeo
+                        </button>
+                    </div>
+                </div>
+
+                <div data-audience="b2b" class="hidden-audience">
+                    <span class="px-3 py-1 rounded-full bg-blue-50 text-usfit-blue text-xs font-bold uppercase tracking-wider border border-blue-100 mb-4 inline-block">
+                        Plataforma para Profissionais
+                    </span>
+                    <h1 class="text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-6">
+                        Escale sua consultoria<br>
+                        <span class="text-transparent bg-clip-text bg-usfit-gradient">sem perder qualidade.</span>
+                    </h1>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed max-w-lg">
+                        Gerencie alunos, prescrições de treino e dieta em um único lugar. Automatize a burocracia e foque no resultado do seu cliente.
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <button class="px-8 py-4 rounded-full bg-usfit-gradient text-white font-bold text-lg shadow-xl shadow-blue-500/30 hover:opacity-90 transition-opacity">
+                            Testar 14 Dias Grátis
+                        </button>
+                        <button class="flex items-center gap-2 px-6 py-4 rounded-full bg-white border border-gray-200 text-gray-700 font-semibold hover:bg-gray-50 transition-colors">
+                            <i data-lucide="calendar" class="w-5 h-5"></i> Agendar Demo
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative flex justify-center lg:justify-end">
+                <div data-audience="b2c" class="relative w-[280px] h-[580px] bg-gray-900 rounded-[3rem] border-8 border-gray-800 shadow-2xl glow-effect overflow-hidden transform rotate-[-5deg] hover:rotate-0 transition-transform duration-500">
+                    <div class="w-full h-full bg-white relative">
+                        <div class="h-24 bg-usfit-gradient p-6 pt-10 flex justify-between items-center text-white">
+                            <div>
+                                <div class="text-xs opacity-80">Hoje</div>
+                                <div class="font-bold">Treino de Peito</div>
+                            </div>
+                            <div class="w-8 h-8 bg-white/20 rounded-full"></div>
+                        </div>
+                        <div class="p-4 space-y-3">
+                            <div class="h-20 bg-gray-50 rounded-xl border border-gray-100 p-3 flex gap-3">
+                                <div class="w-14 h-14 bg-gray-200 rounded-lg"></div>
+                                <div class="flex-1 space-y-2">
+                                    <div class="h-3 w-24 bg-gray-200 rounded"></div>
+                                    <div class="h-2 w-16 bg-gray-100 rounded"></div>
+                                </div>
+                            </div>
+                            <div class="h-20 bg-gray-50 rounded-xl border border-gray-100 p-3 flex gap-3">
+                                <div class="w-14 h-14 bg-gray-200 rounded-lg"></div>
+                                <div class="flex-1 space-y-2">
+                                    <div class="h-3 w-20 bg-gray-200 rounded"></div>
+                                    <div class="h-2 w-12 bg-gray-100 rounded"></div>
+                                </div>
+                            </div>
+                            <div class="h-32 bg-cyan-50 rounded-xl border border-cyan-100 p-4 mt-4">
+                                <div class="text-usfit-cyan font-bold text-sm mb-2">Refeição Pré-Treino</div>
+                                <div class="h-2 w-full bg-cyan-100 rounded mb-2"></div>
+                                <div class="h-2 w-2/3 bg-cyan-100 rounded"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div data-audience="b2b" class="hidden-audience relative w-[600px] h-[400px] bg-white rounded-xl border border-gray-200 shadow-2xl glow-effect overflow-hidden transform translate-x-10 hover:translate-x-0 transition-transform duration-500">
+                    <div class="absolute left-0 top-0 bottom-0 w-16 bg-gray-900 flex flex-col items-center py-4 gap-4">
+                        <div class="w-8 h-8 rounded bg-usfit-gradient"></div>
+                        <div class="w-6 h-6 rounded bg-gray-700 mt-4"></div>
+                        <div class="w-6 h-6 rounded bg-gray-700"></div>
+                        <div class="w-6 h-6 rounded bg-gray-700"></div>
+                    </div>
+                    <div class="absolute left-16 right-0 top-0 h-14 bg-white border-b border-gray-100 flex items-center px-6">
+                        <div class="h-3 w-32 bg-gray-100 rounded"></div>
+                    </div>
+                    <div class="absolute left-16 right-0 top-14 bottom-0 bg-gray-50 p-6 grid grid-cols-3 gap-4">
+                        <div class="col-span-1 bg-white h-24 rounded-lg shadow-sm border border-gray-100 p-4">
+                            <div class="h-2 w-12 bg-gray-100 rounded mb-2"></div>
+                            <div class="h-6 w-8 bg-usfit-cyan rounded"></div>
+                        </div>
+                        <div class="col-span-1 bg-white h-24 rounded-lg shadow-sm border border-gray-100 p-4">
+                            <div class="h-2 w-12 bg-gray-100 rounded mb-2"></div>
+                            <div class="h-6 w-8 bg-usfit-blue rounded"></div>
+                        </div>
+                        <div class="col-span-1 bg-white h-24 rounded-lg shadow-sm border border-gray-100 p-4">
+                            <div class="h-2 w-12 bg-gray-100 rounded mb-2"></div>
+                            <div class="h-6 w-8 bg-orange-400 rounded"></div>
+                        </div>
+                        <div class="col-span-3 bg-white h-40 rounded-lg shadow-sm border border-gray-100 mt-2 p-4">
+                             <div class="h-3 w-24 bg-gray-100 rounded mb-4"></div>
+                             <div class="space-y-2">
+                                <div class="w-full h-8 bg-gray-50 rounded"></div>
+                                <div class="w-full h-8 bg-gray-50 rounded"></div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Tudo o que você precisa</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto">Tecnologia de ponta para entregar resultados reais, seja para o seu corpo ou para o seu negócio.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div data-audience="b2c" class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-cyan-50 rounded-lg flex items-center justify-center text-usfit-cyan mb-6">
+                        <i data-lucide="smartphone" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Treino Guiado</h3>
+                    <p class="text-gray-500 leading-relaxed">Vídeos de execução, timer de descanso e registro de cargas. Seu celular vira seu personal.</p>
+                </div>
+                <div data-audience="b2c" class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center text-green-500 mb-6">
+                        <i data-lucide="utensils" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Dieta Flexível</h3>
+                    <p class="text-gray-500 leading-relaxed">Substitua alimentos com base nos macros. Nunca mais coma o que não gosta.</p>
+                </div>
+                <div data-audience="b2c" class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-purple-50 rounded-lg flex items-center justify-center text-purple-500 mb-6">
+                        <i data-lucide="bar-chart-2" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Evolução em Gráficos</h3>
+                    <p class="text-gray-500 leading-relaxed">Acompanhe seu peso, medidas e fotos de progresso em uma linha do tempo motivadora.</p>
+                </div>
+
+                <div data-audience="b2b" class="hidden-audience bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center text-usfit-blue mb-6">
+                        <i data-lucide="users" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Gestão de Alunos</h3>
+                    <p class="text-gray-500 leading-relaxed">Centralize anamneses, contratos e pagamentos. Saiba quem está treinando e quem precisa de atenção.</p>
+                </div>
+                <div data-audience="b2b" class="hidden-audience bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-orange-50 rounded-lg flex items-center justify-center text-orange-500 mb-6">
+                        <i data-lucide="zap" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Prescrição Rápida</h3>
+                    <p class="text-gray-500 leading-relaxed">Crie treinos e dietas em minutos usando nossa biblioteca com +500 exercícios ou crie a sua.</p>
+                </div>
+                <div data-audience="b2b" class="hidden-audience bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-500 mb-6">
+                        <i data-lucide="line-chart" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Análise de Progresso</h3>
+                    <p class="text-gray-500 leading-relaxed">Acompanhe o progresso dos seus alunos com gráficos inteligentes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Planos Simples e Transparentes</h2>
+                <p class="text-gray-500" data-audience="b2c">Comece grátis e evolua conforme seu ritmo.</p>
+                <p class="text-gray-500 hidden-audience" data-audience="b2b">ROI garantido: um aluno paga a ferramenta.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <div data-audience="b2c" class="border border-gray-200 rounded-2xl p-8 hover:border-cyan-300 transition-colors">
+                    <h3 class="font-bold text-lg mb-2">Free</h3>
+                    <div class="text-4xl font-extrabold mb-6">R$ 0<span class="text-sm font-normal text-gray-400">/mês</span></div>
+                    <ul class="space-y-4 mb-8 text-sm text-gray-600">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Registro de Treinos</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Contador de Macros Básico</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Acesso à Comunidade</li>
+                    </ul>
+                    <a href="checkout.html?plan=b2c_free" class="block w-full py-3 text-center border border-gray-200 rounded-xl font-bold hover:bg-gray-50 transition-colors">Criar Conta</a>
+                </div>
+
+                <div data-audience="b2c" class="border-2 border-usfit-cyan rounded-2xl p-8 relative shadow-xl shadow-cyan-100">
+                    <div class="absolute top-0 right-0 bg-usfit-cyan text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">POPULAR</div>
+                    <h3 class="font-bold text-lg mb-2">Pro</h3>
+                    <div class="text-4xl font-extrabold mb-6">R$ 29,90<span class="text-sm font-normal text-gray-400">/mês</span></div>
+                    <ul class="space-y-4 mb-8 text-sm text-gray-600">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-usfit-cyan"></i> <strong>Treinos Ilimitados</strong></li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-usfit-cyan"></i> IA Generativa de Dieta</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-usfit-cyan"></i> Sem Anúncios</li>
+                    </ul>
+                    <a href="checkout.html?plan=b2c_pro" class="block w-full py-3 text-center bg-usfit-gradient text-white rounded-xl font-bold hover:opacity-90 transition-opacity">Assinar Agora</a>
+                </div>
+
+                <div data-audience="b2c" class="border border-gray-200 rounded-2xl p-8 hover:border-purple-300 transition-colors">
+                    <h3 class="font-bold text-lg mb-2">Coach Connect</h3>
+                    <div class="text-sm font-medium text-gray-500 mb-6 mt-1">Contrate um Profissional</div>
+                    <p class="text-sm text-gray-600 mb-8 leading-relaxed">
+                        Encontre um nutricionista ou personal certificado na plataforma e tenha acompanhamento humano.
+                    </p>
+                    <a href="#" class="block w-full py-3 text-center border border-gray-200 rounded-xl font-bold hover:bg-gray-50 transition-colors">Buscar Profissional</a>
+                </div>
+
+                <div data-audience="b2b" class="hidden-audience border border-gray-200 rounded-2xl p-8 hover:border-blue-300 transition-colors">
+                    <h3 class="font-bold text-lg mb-2">Starter</h3>
+                    <div class="text-4xl font-extrabold mb-6">R$ 49,90<span class="text-sm font-normal text-gray-400">/mês</span></div>
+                    <ul class="space-y-4 mb-8 text-sm text-gray-600">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Até 10 Alunos</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> App do Aluno incluso</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Anamneses Padrão</li>
+                    </ul>
+                    <a href="checkout.html?plan=b2b_starter" class="block w-full py-3 text-center border border-gray-200 rounded-xl font-bold hover:bg-gray-50 transition-colors">Testar Grátis</a>
+                </div>
+
+                <div data-audience="b2b" class="hidden-audience border-2 border-usfit-blue rounded-2xl p-8 relative shadow-xl shadow-blue-100">
+                    <div class="absolute top-0 right-0 bg-usfit-blue text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">RECOMENDADO</div>
+                    <h3 class="font-bold text-lg mb-2">Pro</h3>
+                    <div class="text-4xl font-extrabold mb-6">R$ 99,90<span class="text-sm font-normal text-gray-400">/mês</span></div>
+                    <ul class="space-y-4 mb-8 text-sm text-gray-600">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-usfit-blue"></i> <strong>Até 50 Alunos</strong></li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-usfit-blue"></i> Avaliação Física & Nutricional</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-usfit-blue"></i> Financeiro Integrado</li>
+                    </ul>
+                    <a href="checkout.html?plan=b2b_pro" class="block w-full py-3 text-center bg-usfit-blue text-white rounded-xl font-bold hover:bg-blue-600 transition-colors">Assinar Agora</a>
+                </div>
+
+                <div data-audience="b2b" class="hidden-audience border border-gray-200 rounded-2xl p-8 hover:border-gray-400 transition-colors">
+                    <h3 class="font-bold text-lg mb-2">Business</h3>
+                    <div class="text-4xl font-extrabold mb-6">Sob Consulta</div>
+                    <ul class="space-y-4 mb-8 text-sm text-gray-600">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gray-800"></i> Alunos Ilimitados</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gray-800"></i> Múltiplos Profissionais</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gray-800"></i> App White Label (Sua marca)</li>
+                    </ul>
+                    <a href="#" class="block w-full py-3 text-center border border-gray-200 rounded-xl font-bold hover:bg-gray-50 transition-colors">Falar com Vendas</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+            <div class="col-span-2 md:col-span-1">
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-6 h-6 rounded bg-usfit-gradient flex items-center justify-center font-bold text-white text-xs italic">US</div>
+                    <span class="text-lg font-bold text-white">USFIT</span>
+                </div>
+                <p class="text-sm">Tecnologia para performance humana.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Produto</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-white">Para Alunos</a></li>
+                    <li><a href="#" class="hover:text-white">Para Profissionais</a></li>
+                    <li><a href="#" class="hover:text-white">Preços</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Legal</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-white">Termos de Uso</a></li>
+                    <li><a href="#" class="hover:text-white">Privacidade</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Social</h4>
+                <div class="flex gap-4">
+                    <i data-lucide="instagram" class="w-5 h-5 cursor-pointer hover:text-white"></i>
+                    <i data-lucide="linkedin" class="w-5 h-5 cursor-pointer hover:text-white"></i>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-gray-800 text-xs text-center">
+            &copy; 2025 USFIT Tecnologia Ltda. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        function switchAudience(audience) {
+            const b2cElements = document.querySelectorAll('[data-audience="b2c"]');
+            const b2bElements = document.querySelectorAll('[data-audience="b2b"]');
+            const toggleBg = document.getElementById('toggle-bg');
+            const btnB2c = document.getElementById('btn-b2c');
+            const btnB2b = document.getElementById('btn-b2b');
+            const loginLink = document.getElementById('login-link');
+
+            if (audience === 'b2c') {
+                // Show B2C, Hide B2B
+                b2cElements.forEach(el => {
+                    el.classList.remove('hidden-audience');
+                    el.classList.add('fade-enter-active');
+                });
+                b2bElements.forEach(el => {
+                    el.classList.add('hidden-audience');
+                    el.classList.remove('fade-enter-active');
+                });
+
+                // Style Toggle
+                toggleBg.style.transform = 'translateX(0)';
+                btnB2c.classList.remove('text-gray-500');
+                btnB2c.classList.add('text-gray-900');
+                btnB2b.classList.remove('text-gray-900');
+                btnB2b.classList.add('text-gray-500');
+
+                // Update Login Link (Simulado)
+                loginLink.href = "#"; // App Login (Futuro)
+            } else {
+                // Show B2B, Hide B2C
+                b2bElements.forEach(el => {
+                    el.classList.remove('hidden-audience');
+                    el.classList.add('fade-enter-active');
+                });
+                b2cElements.forEach(el => {
+                    el.classList.add('hidden-audience');
+                    el.classList.remove('fade-enter-active');
+                });
+
+                // Style Toggle
+                toggleBg.style.transform = 'translateX(100%)';
+                btnB2b.classList.remove('text-gray-500');
+                btnB2b.classList.add('text-gray-900');
+                btnB2c.classList.remove('text-gray-900');
+                btnB2c.classList.add('text-gray-500');
+
+                // Update Login Link
+                loginLink.href = "login.html"; // Web System Login
+            }
+        }
+
+        // Init
+        switchAudience('b2c');
+    </script>
+</body>
+</html>

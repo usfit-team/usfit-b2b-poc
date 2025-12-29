@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USFIT - Checkout Seguro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        usfit: {
+                            cyan: '#22d3ee',
+                            blue: '#3b82f6',
+                        }
+                    },
+                    backgroundImage: {
+                        'usfit-gradient': 'linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>body { font-family: 'Inter', sans-serif; }</style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+
+    <header class="bg-white border-b border-gray-200 py-4">
+        <div class="max-w-5xl mx-auto px-6 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2">
+                <div class="w-6 h-6 rounded bg-usfit-gradient flex items-center justify-center font-bold text-white text-xs italic">US</div>
+                <span class="font-bold text-gray-900">USFIT Checkout</span>
+            </a>
+            <div class="flex items-center gap-1 text-xs text-gray-500">
+                <i data-lucide="lock" class="w-3 h-3 text-green-500"></i> Ambiente Seguro
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 py-12">
+        <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8">
+            
+            <div class="md:col-span-5 order-2 md:order-1">
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200">
+                    <h3 class="font-bold text-gray-800 mb-4">Resumo do Pedido</h3>
+                    
+                    <div class="flex items-start gap-4 py-4 border-b border-gray-100">
+                        <div id="plan-icon" class="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center text-gray-500">
+                            <i data-lucide="box" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 id="plan-name" class="font-bold text-gray-900">Plano Selecionado</h4>
+                            <p id="plan-desc" class="text-sm text-gray-500">Assinatura Mensal</p>
+                        </div>
+                        <div class="ml-auto font-bold text-gray-900" id="plan-price">R$ --</div>
+                    </div>
+
+                    <div class="flex justify-between py-4 text-sm">
+                        <span class="text-gray-500">Subtotal</span>
+                        <span class="font-medium" id="subtotal">R$ --</span>
+                    </div>
+                    <div class="flex justify-between pb-4 text-sm border-b border-gray-100">
+                        <span class="text-gray-500">Impostos</span>
+                        <span class="font-medium">R$ 0,00</span>
+                    </div>
+                    
+                    <div class="flex justify-between py-4 text-lg font-bold text-gray-900">
+                        <span>Total</span>
+                        <span id="total">R$ --</span>
+                    </div>
+
+                    <div class="mt-4 bg-gray-50 p-4 rounded-xl text-xs text-gray-500 leading-relaxed">
+                        Ao confirmar, você concorda com nossos Termos de Serviço. A renovação é automática e você pode cancelar a qualquer momento.
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-7 order-1 md:order-2">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900">Finalizar Compra</h2>
+                    <p class="text-gray-500">Preencha seus dados para liberar o acesso.</p>
+                </div>
+
+                <form class="space-y-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
+                        <h3 class="font-bold text-gray-800 mb-4">Dados da Conta</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">E-mail</label>
+                                <input type="email" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:border-usfit-cyan outline-none" placeholder="seu@email.com">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Nome</label>
+                                <input type="text" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:border-usfit-cyan outline-none" placeholder="João">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Sobrenome</label>
+                                <input type="text" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:border-usfit-cyan outline-none" placeholder="Silva">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
+                        <h3 class="font-bold text-gray-800 mb-4">Pagamento</h3>
+                        
+                        <div class="flex gap-4 mb-4">
+                            <button type="button" class="flex-1 py-2 border-2 border-usfit-cyan text-usfit-cyan font-bold rounded-lg text-sm bg-cyan-50">Cartão de Crédito</button>
+                            <button type="button" class="flex-1 py-2 border border-gray-200 text-gray-500 font-medium rounded-lg text-sm hover:bg-gray-50">PIX</button>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Número do Cartão</label>
+                                <div class="relative">
+                                    <input type="text" class="w-full p-3 pl-10 bg-gray-50 border border-gray-200 rounded-lg focus:border-usfit-cyan outline-none" placeholder="0000 0000 0000 0000">
+                                    <i data-lucide="credit-card" class="absolute left-3 top-3.5 w-5 h-5 text-gray-400"></i>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Validade</label>
+                                    <input type="text" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:border-usfit-cyan outline-none" placeholder="MM/AA">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">CVC</label>
+                                    <input type="text" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:border-usfit-cyan outline-none" placeholder="123">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" onclick="alert('Checkout simulado com sucesso! Redirecionando...')" class="w-full py-4 rounded-xl bg-usfit-gradient text-white font-bold text-lg shadow-lg hover:opacity-95 transition-opacity">
+                        Pagar e Acessar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        // Lógica simples para pegar o plano da URL
+        const params = new URLSearchParams(window.location.search);
+        const plan = params.get('plan');
+        
+        const planNameEl = document.getElementById('plan-name');
+        const planPriceEl = document.getElementById('plan-price');
+        const totalEl = document.getElementById('total');
+        const subtotalEl = document.getElementById('subtotal');
+        const iconContainer = document.getElementById('plan-icon');
+
+        let price = "R$ 0,00";
+        let name = "Plano Desconhecido";
+        let colorClass = "text-gray-500 bg-gray-100";
+
+        if (plan === 'b2c_pro') {
+            name = "USFIT App - Pro";
+            price = "R$ 29,90";
+            colorClass = "text-usfit-cyan bg-cyan-50";
+        } else if (plan === 'b2b_starter') {
+            name = "USFIT B2B - Starter";
+            price = "R$ 49,90";
+            colorClass = "text-blue-600 bg-blue-50";
+        } else if (plan === 'b2b_pro') {
+            name = "USFIT B2B - Professional";
+            price = "R$ 99,90";
+            colorClass = "text-blue-600 bg-blue-50";
+        } else if (plan === 'b2c_free') {
+            name = "USFIT App - Free";
+            price = "Grátis";
+        }
+
+        planNameEl.innerText = name;
+        planPriceEl.innerText = price;
+        subtotalEl.innerText = price;
+        totalEl.innerText = price;
+        
+        // Ajustar cor do ícone
+        iconContainer.className = `w-12 h-12 rounded-lg flex items-center justify-center ${colorClass}`;
+    </script>
+</body>
+</html>
