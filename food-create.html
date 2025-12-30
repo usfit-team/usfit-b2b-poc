@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USFITB2B - Novo Alimento</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        usfit: {
+                            dark: '#111827',
+                            cyan: '#22d3ee',
+                            blue: '#3b82f6',
+                            text: '#374151',
+                            gray: '#F3F4F6'
+                        }
+                    },
+                    backgroundImage: {
+                        'usfit-gradient': 'linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        .usfit-input {
+            width: 100%; border: 1px solid #E5E7EB; border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem; font-size: 0.875rem; color: #374151; outline: none; transition: border-color 0.2s;
+            background-color: #F9FAFB;
+        }
+        .usfit-input:focus { border-color: #22d3ee; background-color: white; box-shadow: 0 0 0 1px #22d3ee; }
+
+        .btn-primary {
+            background-image: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
+            color: white; border-radius: 9999px; padding: 0.5rem 1.5rem;
+            font-weight: 500; font-size: 0.875rem; display: flex; align-items: center; gap: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(34, 211, 238, 0.2); transition: opacity 0.2s;
+            text-decoration: none; justify-content: center;
+        }
+        .btn-primary:hover { opacity: 0.95; }
+
+        .btn-secondary {
+            background: white; border: 1px solid #E5E7EB; color: #4B5563; border-radius: 9999px;
+            padding: 0.5rem 1.5rem; font-weight: 500; font-size: 0.875rem; transition: all 0.2s; text-decoration: none;
+        }
+        .btn-secondary:hover { border-color: #22d3ee; color: #0ea5e9; }
+    </style>
+</head>
+<body class="bg-usfit-gray text-usfit-text h-screen flex overflow-hidden">
+
+    <aside class="w-64 bg-usfit-dark text-white flex flex-col hidden md:flex flex-shrink-0 relative">
+        <div class="h-20 flex items-center justify-center border-b border-gray-800 bg-[#0f1523]">
+            <a href="dashboard.html" class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-usfit-gradient flex items-center justify-center font-bold text-white italic">US</div>
+                <span class="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-usfit-gradient">USFITB2B</span>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-6 space-y-2 overflow-y-auto">
+            <a href="dashboard.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="layout-dashboard" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Visão Geral</span>
+            </a>
+            <a href="students-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="users" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Alunos</span>
+            </a>
+            <div>
+                <a href="diets-list.html" class="relative flex items-center px-4 py-3 text-white bg-gray-800 rounded-xl shadow-lg shadow-cyan-900/20">
+                    <div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-usfit-gradient rounded-r-full"></div>
+                    <i data-lucide="utensils" class="w-5 h-5 mr-3 text-usfit-cyan"></i>
+                    <span class="font-medium">Nutrição</span>
+                </a>
+                <div class="ml-12 mt-1 space-y-1">
+                    <a href="diets-list.html" class="block text-sm text-gray-400 hover:text-white py-1">Fichas dos Alunos</a>
+                    <a href="diet-templates-list.html" class="block text-sm text-gray-400 hover:text-white py-1">Meus Modelos</a>
+                    <a href="foods-list.html" class="block text-sm text-usfit-cyan font-medium py-1">Banco de Alimentos</a>
+                </div>
+            </div>
+            <a href="workouts-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="dumbbell" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Treinos</span>
+            </a>
+        </nav>
+        <div class="p-4 bg-[#0f1523] border-t border-gray-800">
+             <div class="flex items-center justify-between">
+                 <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center border-2 border-gray-600">
+                        <span class="font-bold text-sm">DS</span>
+                    </div>
+                    <div class="text-sm">
+                        <p class="font-semibold text-white">Dr. Silva</p>
+                        <p class="text-xs text-usfit-cyan">Plano PRO</p>
+                    </div>
+                </div>
+                <a href="login.html" class="p-2 text-gray-400 hover:text-white hover:bg-red-500/20 rounded-lg transition-colors" title="Sair">
+                    <i data-lucide="log-out" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <div class="flex-1 flex flex-col h-full min-w-0 bg-usfit-gray">
+        
+        <header class="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-8 flex-shrink-0 z-20 shadow-sm">
+            <div class="flex items-center gap-4">
+                <a href="foods-list.html" class="text-gray-500 hover:text-usfit-cyan"><i data-lucide="arrow-left" class="w-6 h-6"></i></a>
+                <h1 class="text-xl font-bold text-gray-800">Novo Alimento</h1>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <a href="foods-list.html" class="btn-secondary">Cancelar</a>
+                <div class="h-8 w-px bg-gray-200 mx-1"></div>
+                <button class="btn-primary">
+                    <i data-lucide="save" class="w-4 h-4"></i> Salvar Alimento
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1 overflow-y-auto p-8">
+            <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <div class="space-y-6">
+                    <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="w-1 h-6 bg-usfit-gradient rounded-full"></div>
+                            <h2 class="text-lg font-bold text-gray-800">Identificação</h2>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-1.5">Nome do Alimento *</label>
+                                <input type="text" placeholder="Ex: Whey Protein Concentrado" class="usfit-input">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-1.5">Marca / Fabricante (Opcional)</label>
+                                <input type="text" placeholder="Ex: Growth Supplements" class="usfit-input">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-1.5">Categoria</label>
+                                <select class="usfit-input bg-white">
+                                    <option>Proteínas</option>
+                                    <option>Carboidratos</option>
+                                    <option>Gorduras</option>
+                                    <option>Vegetais</option>
+                                    <option selected>Suplementos</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="w-1 h-6 bg-usfit-gradient rounded-full"></div>
+                            <h2 class="text-lg font-bold text-gray-800">Medidas Caseiras</h2>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-1.5">Tamanho da Porção</label>
+                                <div class="relative">
+                                    <input type="number" placeholder="30" class="usfit-input pr-10">
+                                    <span class="absolute right-3 top-2.5 text-xs text-gray-400 font-bold">g / ml</span>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-1.5">Nome da Medida</label>
+                                <input type="text" placeholder="Ex: 1 Scoop, 1 Colher..." class="usfit-input">
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-2">Isso ajuda o aluno a saber quanto consumir sem pesar.</p>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-2">
+                                <div class="w-1 h-6 bg-usfit-gradient rounded-full"></div>
+                                <h2 class="text-lg font-bold text-gray-800">Tabela Nutricional</h2>
+                            </div>
+                            <div class="text-xs bg-gray-100 px-2 py-1 rounded text-gray-500">
+                                Base: <strong>Porção (30g)</strong>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="p-4 bg-gray-50 rounded-xl border border-gray-100">
+                                <label class="block text-sm font-bold text-gray-800 mb-1.5">Valor Energético (Kcal)</label>
+                                <div class="relative">
+                                    <i data-lucide="flame" class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
+                                    <input type="number" placeholder="120" class="usfit-input pl-10">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-3 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-green-600 uppercase mb-1.5">Carboidratos</label>
+                                    <input type="number" placeholder="4g" class="usfit-input border-green-100 focus:border-green-400 focus:ring-green-100">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-blue-600 uppercase mb-1.5">Proteínas</label>
+                                    <input type="number" placeholder="23g" class="usfit-input border-blue-100 focus:border-blue-400 focus:ring-blue-100">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-orange-600 uppercase mb-1.5">Gorduras</label>
+                                    <input type="number" placeholder="1.5g" class="usfit-input border-orange-100 focus:border-orange-400 focus:ring-orange-100">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4 pt-4 border-t border-gray-100">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600 mb-1.5">Fibras (g)</label>
+                                    <input type="number" placeholder="0" class="usfit-input">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600 mb-1.5">Sódio (mg)</label>
+                                    <input type="number" placeholder="50" class="usfit-input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
