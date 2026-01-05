@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USFITB2B - Dashboard do Aluno</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        usfit: {
+                            dark: '#111827',
+                            cyan: '#22d3ee',
+                            blue: '#3b82f6',
+                            text: '#374151',
+                            gray: '#F3F4F6'
+                        }
+                    },
+                    backgroundImage: {
+                        'usfit-gradient': 'linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .btn-primary {
+            background-image: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
+            color: white; border-radius: 9999px; padding: 0.5rem 1.5rem;
+            font-weight: 500; font-size: 0.875rem; display: flex; align-items: center; gap: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(34, 211, 238, 0.2); transition: opacity 0.2s;
+        }
+        .btn-primary:hover { opacity: 0.95; }
+        
+        .tab-link {
+            padding-bottom: 0.75rem; color: #6B7280; font-weight: 500; font-size: 0.875rem; border-bottom: 2px solid transparent; transition: all 0.2s;
+        }
+        .tab-link.active { color: #3b82f6; border-bottom-color: #3b82f6; }
+        .tab-link:hover:not(.active) { color: #111827; }
+
+        /* Simulação do Calendário de Calor */
+        .heat-box { width: 12px; height: 12px; border-radius: 2px; }
+        .heat-green { background-color: #10B981; } /* Fez tudo */
+        .heat-yellow { background-color: #FBBF24; } /* Parcial */
+        .heat-red { background-color: #EF4444; }    /* Não fez */
+        .heat-gray { background-color: #E5E7EB; }   /* Futuro/Vazio */
+    </style>
+</head>
+<body class="bg-usfit-gray text-usfit-text h-screen flex overflow-hidden">
+
+    <aside class="w-64 bg-usfit-dark text-white flex flex-col hidden md:flex flex-shrink-0 relative">
+        <div class="h-20 flex items-center justify-center border-b border-gray-800 bg-[#0f1523]">
+            <a href="dashboard.html" class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-usfit-gradient flex items-center justify-center font-bold text-white italic">US</div>
+                <span class="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-usfit-gradient">USFITB2B</span>
+            </a>
+        </div>
+
+        <nav class="flex-1 px-3 py-6 space-y-2 overflow-y-auto">
+            <a href="dashboard.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="layout-dashboard" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Visão Geral</span>
+            </a>
+            
+            <a href="students-list.html" class="relative flex items-center px-4 py-3 text-white bg-gray-800 rounded-xl shadow-lg shadow-cyan-900/20">
+                <div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-usfit-gradient rounded-r-full"></div>
+                <i data-lucide="users" class="w-5 h-5 mr-3 text-usfit-cyan"></i>
+                <span class="font-medium">Alunos</span>
+            </a>
+
+            <a href="diets-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="utensils" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Nutrição</span>
+            </a>
+
+            <a href="workouts-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="dumbbell" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Treinos</span>
+            </a>
+        </nav>
+        
+        <div class="p-4 bg-[#0f1523] border-t border-gray-800">
+             <div class="flex items-center justify-between">
+                 <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center border-2 border-gray-600">
+                        <span class="font-bold text-sm">DS</span>
+                    </div>
+                    <div class="text-sm">
+                        <p class="font-semibold text-white">Dr. Silva</p>
+                        <p class="text-xs text-usfit-cyan">Plano PRO</p>
+                    </div>
+                </div>
+                <a href="login.html" class="p-2 text-gray-400 hover:text-white hover:bg-red-500/20 rounded-lg transition-colors">
+                    <i data-lucide="log-out" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <div class="flex-1 flex flex-col h-full min-w-0 bg-usfit-gray">
+        
+        <header class="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-8 flex-shrink-0 z-20 shadow-sm">
+            <div class="flex items-center gap-4">
+                <a href="students-list.html" class="text-gray-500 hover:text-usfit-cyan"><i data-lucide="arrow-left" class="w-6 h-6"></i></a>
+                <h1 class="text-xl font-bold text-gray-800">Visão Geral do Aluno</h1>
+            </div>
+
+            <div class="hidden md:flex flex-1 justify-center w-1/3">
+                <div class="flex items-center px-4 py-2 bg-gray-50 rounded-full border border-gray-100 shadow-sm">
+                    <div class="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 mr-3">
+                        <i data-lucide="user" class="w-3 h-3"></i>
+                    </div>
+                    <div class="flex flex-col md:flex-row md:items-center md:gap-2">
+                        <span class="text-xs text-gray-400 font-medium uppercase tracking-wide">Aluno</span>
+                        <span class="text-sm font-bold text-gray-800">Ana Beatriz Silva</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <a href="student-create.html" class="flex-1 md:flex-none btn-primary justify-center text-white no-underline">
+                    <i data-lucide="settings" class="w-4 h-4"></i> Configurar
+                </a>
+                <div class="h-8 w-px bg-gray-200 mx-1"></div>
+                <button class="p-2 text-gray-400 hover:bg-gray-100 rounded-full relative">
+                    <i data-lucide="bell" class="w-5 h-5"></i>
+                    <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1 overflow-y-auto p-8">
+            <div class="max-w-6xl mx-auto space-y-8">
+
+                <div class="flex items-center gap-8 border-b border-gray-200 mb-6">
+                    <a href="student-dashboard.html" class="pb-3 text-usfit-blue font-bold border-b-2 border-usfit-blue">
+                        Visão Geral
+                    </a>
+                    
+                    <a href="student-dashboard-nutrition.html" class="pb-3 text-gray-500 hover:text-gray-800 font-medium border-b-2 border-transparent transition-colors no-underline">
+                        Nutrição
+                    </a>
+                    <a href="student-dashboard-performance.html" class="pb-3 text-gray-500 hover:text-gray-800 font-medium border-b-2 border-transparent transition-colors no-underline">
+                        Performance de Treino
+                    </a>
+                    <a href="student-dashboard-biometrics.html" class="pb-3 text-gray-500 hover:text-gray-800 font-medium border-b-2 border-transparent transition-colors no-underline">
+                        Biometria & Fotos
+                    </a>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                        <div class="flex items-center gap-5">
+                            <div class="relative">
+                                <div class="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center text-xl font-bold text-gray-500">AB</div>
+                                <div class="absolute bottom-0 right-0 w-5 h-5 bg-green-500 border-2 border-white rounded-full" title="Online no App"></div>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-gray-900">Ana Beatriz Silva</h2>
+                                <div class="flex items-center gap-3 mt-1 text-sm text-gray-500">
+                                    <span class="flex items-center gap-1"><i data-lucide="target" class="w-4 h-4"></i> Hipertrofia</span>
+                                    <span>•</span>
+                                    <span class="flex items-center gap-1"><i data-lucide="scale" class="w-4 h-4"></i> Peso Atual: <strong>71.5 kg</strong></span>
+                                </div>
+                                <div class="mt-2 text-xs text-gray-400 flex items-center gap-1">
+                                    <i data-lucide="smartphone" class="w-3 h-3"></i> Última sincronização: Hoje, 09:30
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 w-full md:w-auto">
+                            
+                            <a href="https://wa.me/5547999999999" target="_blank" class="flex-1 md:flex-none px-4 py-2 border border-green-200 bg-green-50 text-green-700 rounded-full font-bold hover:bg-green-100 transition-colors flex items-center justify-center gap-2 no-underline">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592z"/>
+                                </svg>
+                                WhatsApp
+                            </a>
+                            
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 pt-6 border-t border-gray-100">
+                        
+                        <div class="text-center md:text-left border-r border-gray-100 last:border-0">
+                            <div class="flex items-center justify-center md:justify-start gap-1.5 mb-1">
+                                <i data-lucide="utensils" class="w-3.5 h-3.5 text-gray-400"></i>
+                                <p class="text-xs text-gray-400 uppercase font-bold tracking-wider">Aderência Dieta</p>
+                            </div>
+                            <div class="text-2xl font-bold text-green-500">92%</div>
+                            <p class="text-xs text-gray-400">Últimos 30 dias</p>
+                        </div>
+
+                        <div class="text-center md:text-left border-r border-gray-100 last:border-0">
+                            <div class="flex items-center justify-center md:justify-start gap-1.5 mb-1">
+                                <i data-lucide="dumbbell" class="w-3.5 h-3.5 text-gray-400"></i>
+                                <p class="text-xs text-gray-400 uppercase font-bold tracking-wider">Aderência Treino</p>
+                            </div>
+                            <div class="text-2xl font-bold text-yellow-500">75%</div>
+                            <p class="text-xs text-gray-400">Últimos 30 dias</p>
+                        </div>
+
+                        <div class="text-center md:text-left border-r border-gray-100 last:border-0">
+                            <div class="flex items-center justify-center md:justify-start gap-1.5 mb-1">
+                                <i data-lucide="scale" class="w-3.5 h-3.5 text-gray-400"></i>
+                                <p class="text-xs text-gray-400 uppercase font-bold tracking-wider">Variação Peso</p>
+                            </div>
+                            <div class="text-2xl font-bold text-usfit-cyan">-2.5 kg</div>
+                            <p class="text-xs text-gray-400">Desde o início</p>
+                        </div>
+
+                        <div class="text-center md:text-left">
+                            <div class="flex items-center justify-center md:justify-start gap-1.5 mb-1">
+                                <i data-lucide="droplet" class="w-3.5 h-3.5 text-gray-400"></i>
+                                <p class="text-xs text-gray-400 uppercase font-bold tracking-wider">Água (Média)</p>
+                            </div>
+                            <div class="text-2xl font-bold text-blue-500">2.1 L</div>
+                            <p class="text-xs text-gray-400">Meta: 2.5 L</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    
+                    <div class="lg:col-span-2 space-y-8">
+                        
+                        <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="font-bold text-gray-800">Evolução de Peso Corporal</h3>
+                                <select class="text-xs bg-gray-50 border border-gray-200 rounded px-2 py-1 outline-none text-gray-600">
+                                    <option>Últimos 3 meses</option>
+                                    <option>Últimos 6 meses</option>
+                                </select>
+                            </div>
+                            <div class="h-64 w-full">
+                                <canvas id="weightChart"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-bold text-gray-800">Consistência (Janeiro)</h3>
+                                <div class="flex items-center gap-3 text-xs text-gray-500">
+                                    <div class="flex items-center gap-1"><div class="w-3 h-3 bg-green-500 rounded-sm"></div> Perfeito</div>
+                                    <div class="flex items-center gap-1"><div class="w-3 h-3 bg-yellow-400 rounded-sm"></div> Parcial</div>
+                                    <div class="flex items-center gap-1"><div class="w-3 h-3 bg-red-500 rounded-sm"></div> Falta</div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-1">
+                                <div class="heat-box heat-green" title="01 Jan"></div>
+                                <div class="heat-box heat-green" title="02 Jan"></div>
+                                <div class="heat-box heat-green" title="03 Jan"></div>
+                                <div class="heat-box heat-yellow" title="04 Jan (Parcial)"></div>
+                                <div class="heat-box heat-green" title="05 Jan"></div>
+                                <div class="heat-box heat-red" title="06 Jan (Falta)"></div>
+                                <div class="heat-box heat-green" title="07 Jan"></div>
+                                <div class="heat-box heat-green" title="08 Jan"></div>
+                                <div class="heat-box heat-green" title="09 Jan"></div>
+                                <div class="heat-box heat-yellow" title="10 Jan"></div>
+                                <div class="heat-box heat-green" title="11 Jan"></div>
+                                <div class="heat-box heat-green" title="12 Jan"></div>
+                                <div class="heat-box heat-green" title="13 Jan"></div>
+                                <div class="heat-box heat-green" title="14 Jan"></div>
+                                <div class="heat-box heat-green" title="15 Jan"></div>
+                                <div class="heat-box heat-gray"></div>
+                                <div class="heat-box heat-gray"></div>
+                                </div>
+                            <p class="text-xs text-gray-400 mt-2">Cada quadrado representa um dia. Dias perfeitos significam 100% da dieta e treino planejado.</p>
+                        </div>
+
+                    </div>
+
+                    <div class="lg:col-span-1 space-y-8">
+                        
+                        <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                            <h3 class="font-bold text-gray-800 mb-4">Ingestão Média (Semanal)</h3>
+                            <div class="relative h-48 w-full flex justify-center">
+                                <canvas id="macroChart"></canvas>
+                                <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                                    <span class="text-2xl font-bold text-gray-800">1950</span>
+                                    <span class="text-xs text-gray-500">kcal/dia</span>
+                                </div>
+                            </div>
+                            <div class="mt-4 space-y-2">
+                                <div class="flex justify-between text-xs text-gray-600">
+                                    <span class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-blue-500"></div> Proteína</span>
+                                    <span class="font-bold">145g (98%)</span>
+                                </div>
+                                <div class="flex justify-between text-xs text-gray-600">
+                                    <span class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-green-500"></div> Carbo</span>
+                                    <span class="font-bold">180g (90%)</span>
+                                </div>
+                                <div class="flex justify-between text-xs text-gray-600">
+                                    <span class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-orange-500"></div> Gordura</span>
+                                    <span class="font-bold">55g (105%)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                            <h3 class="font-bold text-gray-800 mb-4">Hoje</h3>
+                            <div class="space-y-4 relative">
+                                <div class="absolute left-2.5 top-2 bottom-2 w-px bg-gray-100"></div>
+
+                                <div class="flex gap-4 relative">
+                                    <div class="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center z-10 border-2 border-white">
+                                        <i data-lucide="check" class="w-3 h-3"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900">Café da Manhã</p>
+                                        <p class="text-xs text-gray-500">08:15 • 450 kcal</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex gap-4 relative">
+                                    <div class="w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center z-10 border-2 border-white">
+                                        <i data-lucide="dumbbell" class="w-3 h-3"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900">Treino A (Peito)</p>
+                                        <p class="text-xs text-gray-500">10:30 • Duração: 55min</p>
+                                        <span class="inline-block px-1.5 py-0.5 bg-gray-100 text-gray-500 text-[10px] rounded mt-1">Concluído</span>
+                                    </div>
+                                </div>
+
+                                <div class="flex gap-4 relative">
+                                    <div class="w-5 h-5 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center z-10 border-2 border-white">
+                                        <i data-lucide="alert-circle" class="w-3 h-3"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900">Almoço (Parcial)</p>
+                                        <p class="text-xs text-gray-500">13:00 • Não comeu a salada</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // 1. Gráfico de Evolução de Peso (Line Chart)
+        const ctxWeight = document.getElementById('weightChart').getContext('2d');
+        new Chart(ctxWeight, {
+            type: 'line',
+            data: {
+                labels: ['Out', 'Nov', 'Dez', 'Jan', 'Fev', 'Mar'],
+                datasets: [{
+                    label: 'Peso (kg)',
+                    data: [76, 75.2, 74.0, 72.8, 71.5, null], // Null para futuro
+                    borderColor: '#22d3ee', // USFIT Cyan
+                    backgroundColor: 'rgba(34, 211, 238, 0.1)',
+                    tension: 0.4,
+                    fill: true,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: '#22d3ee',
+                    pointBorderWidth: 2
+                },
+                {
+                    label: 'Meta',
+                    data: [76, 75, 74, 73, 72, 70],
+                    borderColor: '#E5E7EB', // Gray
+                    borderDash: [5, 5],
+                    tension: 0.4,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { grid: { display: true, borderDash: [2, 2] }, min: 68 },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // 2. Gráfico de Macros (Doughnut)
+        const ctxMacro = document.getElementById('macroChart').getContext('2d');
+        new Chart(ctxMacro, {
+            type: 'doughnut',
+            data: {
+                labels: ['Proteína', 'Carbo', 'Gordura'],
+                datasets: [{
+                    data: [145, 180, 55], // Gramas
+                    backgroundColor: [
+                        '#3b82f6', // Blue
+                        '#10B981', // Green
+                        '#F97316'  // Orange
+                    ],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '75%', // Espessura do anel
+                plugins: { legend: { display: false } }
+            }
+        });
+    </script>
+</body>
+</html>
