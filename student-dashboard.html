@@ -44,8 +44,6 @@
         }
         .tab-link.active { color: #3b82f6; border-bottom-color: #3b82f6; }
         .tab-link:hover:not(.active) { color: #111827; }
-
-        /* Simulação do Calendário de Calor */
         .heat-box { width: 12px; height: 12px; border-radius: 2px; }
         .heat-green { background-color: #10B981; } /* Fez tudo */
         .heat-yellow { background-color: #FBBF24; } /* Parcial */
@@ -147,11 +145,11 @@
                     <a href="student-dashboard-nutrition.html" class="pb-3 text-gray-500 hover:text-gray-800 font-medium border-b-2 border-transparent transition-colors no-underline">
                         Nutrição
                     </a>
-                    <a href="student-dashboard-performance.html" class="pb-3 text-gray-500 hover:text-gray-800 font-medium border-b-2 border-transparent transition-colors no-underline">
-                        Performance de Treino
+                    <a href="student-dashboard-workout.html" class="pb-3 text-gray-500 hover:text-gray-800 font-medium border-b-2 border-transparent transition-colors no-underline">
+                        Treino
                     </a>
                     <a href="student-dashboard-biometrics.html" class="pb-3 text-gray-500 hover:text-gray-800 font-medium border-b-2 border-transparent transition-colors no-underline">
-                        Biometria & Fotos
+                        Biometria
                     </a>
                 </div>
                 
@@ -217,131 +215,180 @@
 
                         <div class="text-center md:text-left">
                             <div class="flex items-center justify-center md:justify-start gap-1.5 mb-1">
-                                <i data-lucide="droplet" class="w-3.5 h-3.5 text-gray-400"></i>
-                                <p class="text-xs text-gray-400 uppercase font-bold tracking-wider">Água (Média)</p>
+                                <i data-lucide="layers" class="w-3.5 h-3.5 text-gray-400"></i>
+                                <p class="text-xs text-gray-400 uppercase font-bold tracking-wider">Volume (Tonage)</p>
                             </div>
-                            <div class="text-2xl font-bold text-blue-500">2.1 L</div>
-                            <p class="text-xs text-gray-400">Meta: 2.5 L</p>
+                            <div class="text-2xl font-bold text-blue-600">48.5 ton</div>
+                            <div class="flex items-center justify-center md:justify-start gap-1 text-xs text-green-500 font-medium">
+                                <i data-lucide="trending-up" class="w-3 h-3"></i> +3% vs Mês ant.
+                            </div>
                         </div>
 
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    
-                    <div class="lg:col-span-2 space-y-8">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            
+                    <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
                         
-                        <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-                            <div class="flex items-center justify-between mb-6">
-                                <h3 class="font-bold text-gray-800">Evolução de Peso Corporal</h3>
-                                <select class="text-xs bg-gray-50 border border-gray-200 rounded px-2 py-1 outline-none text-gray-600">
-                                    <option>Últimos 3 meses</option>
-                                    <option>Últimos 6 meses</option>
-                                </select>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 border-b border-gray-100 pb-4">
+                            <div class="flex items-center gap-2">
+                                <div class="p-1.5 rounded-lg text-blue-600">
+                                    <i data-lucide="dumbbell" class="w-4 h-4"></i>
+                                </div>
+                                <h3 class="font-bold text-gray-800 text-sm">Treinos (Mensal)</h3>
                             </div>
-                            <div class="h-64 w-full">
-                                <canvas id="weightChart"></canvas>
-                            </div>
+                            
+                            <div class="flex items-center gap-3">
+                                        <div class="flex items-center gap-1.5">
+                                            <div class="w-3 h-3 rounded bg-green-500"></div>
+                                            <span class="text-xs text-gray-500 font-medium">Feito</span>
+                                        </div>
+                                        <div class="flex items-center gap-1.5">
+                                            <div class="w-3 h-3 rounded bg-gray-200"></div>
+                                            <span class="text-xs text-gray-500 font-medium">Descanso</span>
+                                        </div>
+                                        <div class="flex items-center gap-1.5">
+                                            <div class="w-3 h-3 rounded bg-red-500"></div>
+                                            <span class="text-xs text-gray-500 font-medium">Falta</span>
+                                        </div>
+                                    </div>
                         </div>
 
-                        <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-                            <div class="flex items-center justify-between mb-4">
-                                <h3 class="font-bold text-gray-800">Consistência (Janeiro)</h3>
-                                <div class="flex items-center gap-3 text-xs text-gray-500">
-                                    <div class="flex items-center gap-1"><div class="w-3 h-3 bg-green-500 rounded-sm"></div> Perfeito</div>
-                                    <div class="flex items-center gap-1"><div class="w-3 h-3 bg-yellow-400 rounded-sm"></div> Parcial</div>
-                                    <div class="flex items-center gap-1"><div class="w-3 h-3 bg-red-500 rounded-sm"></div> Falta</div>
+                        <div class="grid grid-cols-7 gap-y-3 text-center">
+                            <div class="text-[10px] text-gray-400 font-bold uppercase pb-1">D</div>
+                            <div class="text-[10px] text-gray-400 font-bold uppercase pb-1">S</div>
+                            <div class="text-[10px] text-gray-400 font-bold uppercase pb-1">T</div>
+                            <div class="text-[10px] text-gray-400 font-bold uppercase pb-1">Q</div>
+                            <div class="text-[10px] text-gray-400 font-bold uppercase pb-1">Q</div>
+                            <div class="text-[10px] text-gray-400 font-bold uppercase pb-1">S</div>
+                            <div class="text-[10px] text-gray-400 font-bold uppercase pb-1">S</div>
+
+                            <div class="col-span-4"></div> <div class="flex flex-col items-center gap-1 group">
+                                <span class="text-[10px] text-gray-500 font-medium">01</span>
+                                <div class="w-8 h-8 rounded bg-green-500 shadow-sm group-hover:scale-110 transition-transform flex items-center justify-center">
+                                    <i data-lucide="check" class="w-4 h-4 text-white/50"></i>
                                 </div>
                             </div>
-                            <div class="flex flex-wrap gap-1">
-                                <div class="heat-box heat-green" title="01 Jan"></div>
-                                <div class="heat-box heat-green" title="02 Jan"></div>
-                                <div class="heat-box heat-green" title="03 Jan"></div>
-                                <div class="heat-box heat-yellow" title="04 Jan (Parcial)"></div>
-                                <div class="heat-box heat-green" title="05 Jan"></div>
-                                <div class="heat-box heat-red" title="06 Jan (Falta)"></div>
-                                <div class="heat-box heat-green" title="07 Jan"></div>
-                                <div class="heat-box heat-green" title="08 Jan"></div>
-                                <div class="heat-box heat-green" title="09 Jan"></div>
-                                <div class="heat-box heat-yellow" title="10 Jan"></div>
-                                <div class="heat-box heat-green" title="11 Jan"></div>
-                                <div class="heat-box heat-green" title="12 Jan"></div>
-                                <div class="heat-box heat-green" title="13 Jan"></div>
-                                <div class="heat-box heat-green" title="14 Jan"></div>
-                                <div class="heat-box heat-green" title="15 Jan"></div>
-                                <div class="heat-box heat-gray"></div>
-                                <div class="heat-box heat-gray"></div>
+                            <div class="flex flex-col items-center gap-1 group">
+                                <span class="text-[10px] text-gray-500 font-medium">02</span>
+                                <div class="w-8 h-8 rounded bg-green-500 shadow-sm group-hover:scale-110 transition-transform flex items-center justify-center">
+                                    <i data-lucide="check" class="w-4 h-4 text-white/50"></i>
                                 </div>
-                            <p class="text-xs text-gray-400 mt-2">Cada quadrado representa um dia. Dias perfeitos significam 100% da dieta e treino planejado.</p>
-                        </div>
+                            </div>
+                            <div class="flex flex-col items-center gap-1 group">
+                                <span class="text-[10px] text-gray-500 font-medium">03</span>
+                                <div class="w-8 h-8 rounded bg-gray-100 border border-gray-100"></div>
+                            </div>
+                            
+                            <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">04</span><div class="w-8 h-8 rounded bg-gray-100 border border-gray-100"></div></div>
+                            <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">05</span><div class="w-8 h-8 rounded bg-green-500 shadow-sm"></div></div>
+                            <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">06</span><div class="w-8 h-8 rounded bg-red-500 shadow-sm flex items-center justify-center"><i data-lucide="x" class="w-4 h-4 text-white/50"></i></div></div>
+                            <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">07</span><div class="w-8 h-8 rounded bg-green-500 shadow-sm"></div></div>
+                            <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">08</span><div class="w-8 h-8 rounded bg-green-500 shadow-sm"></div></div>
+                            <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">09</span><div class="w-8 h-8 rounded bg-green-500 shadow-sm"></div></div>
+                            <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">10</span><div class="w-8 h-8 rounded bg-gray-100 border border-gray-100 items-center justify-center"><i data-lucide="—" class="w-4 h-4 text-white/50"></i></div></div>
 
+                            <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">11</span><div class="w-8 h-8 rounded bg-gray-100 border border-gray-100 items-center justify-center"><i data-lucide="—" class="w-4 h-4 text-white/50"></i></div></div>
+                            <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">12</span><div class="w-8 h-8 rounded bg-green-500 shadow-sm"></div></div>
+                            <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">13</span><div class="w-8 h-8 rounded bg-green-500 shadow-sm"></div></div>
+                            <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">06</span><div class="w-8 h-8 rounded bg-red-500 shadow-sm flex items-center justify-center"><i data-lucide="x" class="w-4 h-4 text-white/50"></i></div></div>
+                            <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-300">15</span><div class="w-8 h-8 rounded bg-white border border-dashed border-gray-200"></div></div>
+                        </div>
                     </div>
 
-                    <div class="lg:col-span-1 space-y-8">
+                    <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
                         
-                        <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-                            <h3 class="font-bold text-gray-800 mb-4">Ingestão Média (Semanal)</h3>
-                            <div class="relative h-48 w-full flex justify-center">
-                                <canvas id="macroChart"></canvas>
-                                <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                                    <span class="text-2xl font-bold text-gray-800">1950</span>
-                                    <span class="text-xs text-gray-500">kcal/dia</span>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 border-b border-gray-100 pb-4">
+                            <div class="flex items-center gap-2">
+                                <div class="p-1.5 rounded-lg text-green-600">
+                                    <i data-lucide="utensils" class="w-4 h-4"></i>
                                 </div>
+                                <h3 class="font-bold text-gray-800 text-sm">Dieta (Mensal)</h3>
                             </div>
-                            <div class="mt-4 space-y-2">
-                                <div class="flex justify-between text-xs text-gray-600">
-                                    <span class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-blue-500"></div> Proteína</span>
-                                    <span class="font-bold">145g (98%)</span>
+                            
+                            <div class="flex items-center gap-3">
+                                <div class="flex items-center gap-1.5">
+                                    <div class="w-3 h-3 rounded bg-green-500"></div>
+                                    <span class="text-xs text-gray-500 font-medium">Completa</span>
                                 </div>
-                                <div class="flex justify-between text-xs text-gray-600">
-                                    <span class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-green-500"></div> Carbo</span>
-                                    <span class="font-bold">180g (90%)</span>
+                                <div class="flex items-center gap-1.5">
+                                    <div class="w-3 h-3 rounded bg-yellow-400"></div>
+                                    <span class="text-xs text-gray-500 font-medium">Parcial</span>
                                 </div>
-                                <div class="flex justify-between text-xs text-gray-600">
-                                    <span class="flex items-center gap-1"><div class="w-2 h-2 rounded-full bg-orange-500"></div> Gordura</span>
-                                    <span class="font-bold">55g (105%)</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-                            <h3 class="font-bold text-gray-800 mb-4">Hoje</h3>
-                            <div class="space-y-4 relative">
-                                <div class="absolute left-2.5 top-2 bottom-2 w-px bg-gray-100"></div>
-
-                                <div class="flex gap-4 relative">
-                                    <div class="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center z-10 border-2 border-white">
-                                        <i data-lucide="check" class="w-3 h-3"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-sm font-medium text-gray-900">Café da Manhã</p>
-                                        <p class="text-xs text-gray-500">08:15 • 450 kcal</p>
-                                    </div>
-                                </div>
-
-                                <div class="flex gap-4 relative">
-                                    <div class="w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center z-10 border-2 border-white">
-                                        <i data-lucide="dumbbell" class="w-3 h-3"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-sm font-medium text-gray-900">Treino A (Peito)</p>
-                                        <p class="text-xs text-gray-500">10:30 • Duração: 55min</p>
-                                        <span class="inline-block px-1.5 py-0.5 bg-gray-100 text-gray-500 text-[10px] rounded mt-1">Concluído</span>
-                                    </div>
-                                </div>
-
-                                <div class="flex gap-4 relative">
-                                    <div class="w-5 h-5 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center z-10 border-2 border-white">
-                                        <i data-lucide="alert-circle" class="w-3 h-3"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-sm font-medium text-gray-900">Almoço (Parcial)</p>
-                                        <p class="text-xs text-gray-500">13:00 • Não comeu a salada</p>
-                                    </div>
+                                <div class="flex items-center gap-1.5">
+                                    <div class="w-3 h-3 rounded bg-red-500"></div>
+                                    <span class="text-xs text-gray-500 font-medium">Falha</span>
                                 </div>
                             </div>
                         </div>
 
+                        <div class="grid grid-cols-7 gap-y-3 text-center">
+                            <div class="text-[10px] text-gray-400 font-bold uppercase pb-1">D</div>
+                            <div class="text-[10px] text-gray-400 font-bold uppercase pb-1">S</div>
+                            <div class="text-[10px] text-gray-400 font-bold uppercase pb-1">T</div>
+                            <div class="text-[10px] text-gray-400 font-bold uppercase pb-1">Q</div>
+                            <div class="text-[10px] text-gray-400 font-bold uppercase pb-1">Q</div>
+                            <div class="text-[10px] text-gray-400 font-bold uppercase pb-1">S</div>
+                            <div class="text-[10px] text-gray-400 font-bold uppercase pb-1">S</div>
+
+                            <div class="col-span-4"></div>
+                            
+                            <div class="flex flex-col items-center gap-1 group">
+                                <span class="text-[10px] text-gray-500 font-medium">01</span>
+                                <div class="w-8 h-8 rounded bg-yellow-400 shadow-sm group-hover:scale-110 transition-transform"></div>
+                            </div>
+                            <div class="flex flex-col items-center gap-1 group">
+                                <span class="text-[10px] text-gray-500 font-medium">02</span>
+                                <div class="w-8 h-8 rounded bg-green-500 shadow-sm group-hover:scale-110 transition-transform"></div>
+                            </div>
+                            <div class="flex flex-col items-center gap-1 group">
+                                <span class="text-[10px] text-gray-500 font-medium">03</span>
+                                <div class="w-8 h-8 rounded bg-green-500 shadow-sm"></div>
+                            </div>
+                            
+                            <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">04</span><div class="w-8 h-8 rounded bg-green-500 shadow-sm"></div></div>
+                            <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">05</span><div class="w-8 h-8 rounded bg-green-500 shadow-sm"></div></div>
+                            <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">06</span><div class="w-8 h-8 rounded bg-green-500 shadow-sm"></div></div>
+                            <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">07</span><div class="w-8 h-8 rounded bg-yellow-400 shadow-sm"></div></div>
+                            <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">08</span><div class="w-8 h-8 rounded bg-green-500 shadow-sm"></div></div>
+                            <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">09</span><div class="w-8 h-8 rounded bg-green-500 shadow-sm"></div></div>
+                            <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">10</span><div class="w-8 h-8 rounded bg-red-500 shadow-sm"></div></div>
+
+                            <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">11</span><div class="w-8 h-8 rounded bg-green-500 shadow-sm"></div></div>
+                            <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">12</span><div class="w-8 h-8 rounded bg-green-500 shadow-sm"></div></div>
+                            <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">13</span><div class="w-8 h-8 rounded bg-green-500 shadow-sm"></div></div>
+                            <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">14</span><div class="w-8 h-8 rounded bg-green-500 shadow-sm"></div></div>
+                            <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-300">15</span><div class="w-8 h-8 rounded bg-white border border-dashed border-gray-200"></div></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    
+                    <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                        <div class="flex items-center gap-2">
+                            <div class="p-1.5 rounded-lg text-green-600">
+                                <i data-lucide="scale" class="w-4 h-4"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-800">Evolução de Peso Corporal</h3>
+                        </div>
+                        <div class="h-64 w-full">
+                            <canvas id="weightChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                        <div class="flex items-center gap-2">
+                            <div class="p-1.5 rounded-lg text-blue-600">
+                                <i data-lucide="layers" class="w-4 h-4"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-800">Progressão de Carga</h3>
+                        </div>
+                        <div class="h-64 w-full">
+                            <canvas id="volumeChart"></canvas>
+                        </div>
                     </div>
 
                 </div>
@@ -353,7 +400,7 @@
     <script>
         lucide.createIcons();
 
-        // 1. Gráfico de Evolução de Peso (Line Chart)
+        // 1. Gráfico de Evolução de Peso (Semestral)
         const ctxWeight = document.getElementById('weightChart').getContext('2d');
         new Chart(ctxWeight, {
             type: 'line',
@@ -369,20 +416,21 @@
                     pointBackgroundColor: '#fff',
                     pointBorderColor: '#22d3ee',
                     pointBorderWidth: 2
-                },
-                {
-                    label: 'Meta',
-                    data: [76, 75, 74, 73, 72, 70],
-                    borderColor: '#E5E7EB', // Gray
-                    borderDash: [5, 5],
-                    tension: 0.4,
-                    pointRadius: 0
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
+                plugins: { 
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.y + ' kg';
+                            }
+                        }
+                    }
+                },
                 scales: {
                     y: { grid: { display: true, borderDash: [2, 2] }, min: 68 },
                     x: { grid: { display: false } }
@@ -390,28 +438,52 @@
             }
         });
 
-        // 2. Gráfico de Macros (Doughnut)
-        const ctxMacro = document.getElementById('macroChart').getContext('2d');
-        new Chart(ctxMacro, {
-            type: 'doughnut',
+        // 2. Gráfico de Progressão de Carga (Semestral)
+        // Alterado para corresponder ao período do gráfico de peso
+        const ctxVolume = document.getElementById('volumeChart').getContext('2d');
+        new Chart(ctxVolume, {
+            type: 'line',
             data: {
-                labels: ['Proteína', 'Carbo', 'Gordura'],
+                labels: ['Out', 'Nov', 'Dez', 'Jan', 'Fev', 'Mar'],
                 datasets: [{
-                    data: [145, 180, 55], // Gramas
-                    backgroundColor: [
-                        '#3b82f6', // Blue
-                        '#10B981', // Green
-                        '#F97316'  // Orange
-                    ],
-                    borderWidth: 0,
-                    hoverOffset: 4
+                    label: 'Volume Total (kg)',
+                    // Dados simulando progressão mensal (Ex: ~45-50 toneladas/mês)
+                    data: [42500, 44000, 43200, 46500, 48000, null], 
+                    borderColor: '#3b82f6', // USFIT Blue
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: '#3b82f6',
+                    pointBorderWidth: 2
                 }]
             },
-            options: {
-                responsive: true,
+            options: { 
+                responsive: true, 
                 maintainAspectRatio: false,
-                cutout: '75%', // Espessura do anel
-                plugins: { legend: { display: false } }
+                plugins: { 
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                // Formata para exibir como "45.000 kg"
+                                return context.parsed.y.toLocaleString('pt-BR') + ' kg';
+                            }
+                        }
+                    }
+                },
+                scales: { 
+                    y: { 
+                        grid: { borderDash: [2, 2] },
+                        // Oculta os números do eixo Y para limpar o visual, já que o tooltip mostra o valor
+                        ticks: {
+                            callback: function(value) {
+                                return (value / 1000) + 'k'; // Exibe 40k, 50k
+                            }
+                        }
+                    },
+                    x: { grid: { display: false } }
+                }
             }
         });
     </script>

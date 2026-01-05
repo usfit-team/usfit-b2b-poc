@@ -30,7 +30,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        body { font-family: 'Inter', sans-serif; }        
+        body { font-family: 'Inter', sans-serif; }
         .btn-primary {
             background-image: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
             color: white; border-radius: 9999px; padding: 0.5rem 1.5rem;
@@ -38,11 +38,13 @@
             box-shadow: 0 4px 6px -1px rgba(34, 211, 238, 0.2); transition: opacity 0.2s;
         }
         .btn-primary:hover { opacity: 0.95; }
+        
         .tab-link {
             padding-bottom: 0.75rem; color: #6B7280; font-weight: 500; font-size: 0.875rem; border-bottom: 2px solid transparent; transition: all 0.2s;
         }
         .tab-link.active { color: #3b82f6; border-bottom-color: #3b82f6; }
         .tab-link:hover:not(.active) { color: #111827; }
+
     </style>
 </head>
 <body class="bg-gray-50 text-gray-700 h-screen flex overflow-hidden">
@@ -97,9 +99,9 @@
     </aside>
 
     <div class="flex-1 flex flex-col min-w-0">
-        <header class="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-8 flex-shrink-0 z-20 shadow-sm">
+<header class="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-8 flex-shrink-0 z-20 shadow-sm">
             <div class="flex items-center gap-4">
-                <a href="student-dashboard.html" class="text-gray-500 hover:text-usfit-cyan"><i data-lucide="arrow-left" class="w-6 h-6"></i></a>
+                <a href="students-list.html" class="text-gray-500 hover:text-usfit-cyan"><i data-lucide="arrow-left" class="w-6 h-6"></i></a>
                 <h1 class="text-xl font-bold text-gray-800">Visão Geral do Aluno</h1>
             </div>
 
@@ -131,131 +133,220 @@
             <div class="max-w-6xl mx-auto space-y-6">
 
                 <div class="flex items-center gap-8 border-b border-gray-200 mb-6">
-                    <a href="student-dashboard.html" class="pb-3 text-gray-500 hover:text-gray-800 font-medium border-b-2 border-transparent">Visão Geral</a>
-                    <a href="student-dashboard-nutrition.html" class="pb-3 text-[#3b82f6] font-bold border-b-2 border-[#3b82f6]">Nutrição</a>
-                    <a href="student-dashboard-performance.html" class="pb-3 text-gray-500 hover:text-gray-800 font-medium border-b-2 border-transparent">Performance</a>
-                    <a href="student-dashboard-biometrics.html" class="pb-3 text-gray-500 hover:text-gray-800 font-medium border-b-2 border-transparent">Biometria & Fotos</a>
+                    <a href="student-dashboard.html" class="pb-3 text-gray-500 hover:text-gray-800 font-medium border-b-2 border-transparent transition-colors no-underline">Visão Geral</a>
+                    <a href="student-dashboard-nutrition.html" class="pb-3 text-usfit-blue font-bold border-b-2 border-usfit-blue">Nutrição</a>
+                    <a href="student-dashboard-workout.html" class="pb-3 text-gray-500 hover:text-gray-800 font-medium border-b-2 border-transparent transition-colors no-underline">Treino</a>
+                    <a href="student-dashboard-biometrics.html" class="pb-3 text-gray-500 hover:text-gray-800 font-medium border-b-2 border-transparent transition-colors no-underline">Biometria</a>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     
-                    <div class="lg:col-span-2 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-                        <div class="flex justify-between items-center mb-6">
-                            <h3 class="font-bold text-gray-800">Consumo Calórico (Últimos 7 dias)</h3>
-                            <div class="flex gap-4 text-xs">
-                                <span class="flex items-center gap-1"><div class="w-3 h-3 bg-gray-200 rounded"></div> Meta</span>
-                                <span class="flex items-center gap-1"><div class="w-3 h-3 bg-green-500 rounded"></div> Ingerido</span>
-                            </div>
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <p class="text-xs text-gray-400 uppercase font-bold tracking-wider mb-2 flex items-center gap-2">
+                                <i data-lucide="droplet" class="w-4 h-4 text-cyan-500"></i> Hidratação (Hoje)
+                            </p>
+                            <div class="text-3xl font-bold text-gray-900">2.1 L</div>
+                            <p class="text-xs text-gray-400 mt-1">Meta: 2.5 L</p>
                         </div>
-                        <div class="h-64">
-                            <canvas id="caloriesChart"></canvas>
+                        <div class="w-full bg-cyan-100 rounded-full h-2 mt-4">
+                            <div class="bg-cyan-500 h-2 rounded-full" style="width: 84%"></div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <p class="text-xs text-gray-400 uppercase font-bold tracking-wider mb-2 flex items-center gap-2">
+                                <i data-lucide="flame" class="w-4 h-4 text-red-500"></i> Calorias (Hoje)
+                            </p>
+                            <div class="text-3xl font-bold text-gray-900">1.450 kcal</div>
+                            <p class="text-xs text-gray-400 mt-1">Meta: 1.800 kcal</p>
+                        </div>
+                        <div class="w-full bg-red-100 rounded-full h-2 mt-4">
+                            <div class="bg-red-500 h-2 rounded-full" style="width: 80%"></div>
                         </div>
                     </div>
 
                     <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-                        <h3 class="font-bold text-gray-800 mb-4">Hoje</h3>
-                        <div class="space-y-4">
-                            <div class="p-4 bg-blue-50 rounded-xl border border-blue-100">
-                                <div class="flex justify-between mb-2">
-                                    <span class="text-sm font-bold text-blue-700 flex items-center gap-2"><i data-lucide="droplet" class="w-4 h-4"></i> Água</span>
-                                    <span class="text-sm font-bold text-blue-700">2.1 / 2.5 L</span>
+                        <p class="text-xs text-gray-400 uppercase font-bold tracking-wider mb-4 flex items-center gap-2">
+                            <i data-lucide="pie-chart" class="w-4 h-4 text-usfit-blue"></i> Macros (Hoje)
+                        </p>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span class="font-semibold text-gray-600">Proteína</span>
+                                    <span class="font-bold text-gray-800">145g / 180g</span>
                                 </div>
-                                <div class="w-full bg-blue-200 rounded-full h-2">
-                                    <div class="bg-blue-500 h-2 rounded-full" style="width: 84%"></div>
+                                <div class="w-full bg-gray-100 rounded-full h-1.5">
+                                    <div class="bg-blue-500 h-1.5 rounded-full" style="width: 80%"></div>
                                 </div>
                             </div>
-
-                            <div class="p-4 bg-orange-50 rounded-xl border border-orange-100">
-                                <div class="flex justify-between mb-2">
-                                    <span class="text-sm font-bold text-orange-700 flex items-center gap-2"><i data-lucide="flame" class="w-4 h-4"></i> Calorias</span>
-                                    <span class="text-sm font-bold text-orange-700">1450 / 1800</span>
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span class="font-semibold text-gray-600">Carbo</span>
+                                    <span class="font-bold text-gray-800">180g / 200g</span>
                                 </div>
-                                <div class="w-full bg-orange-200 rounded-full h-2">
-                                    <div class="bg-orange-500 h-2 rounded-full" style="width: 80%"></div>
+                                <div class="w-full bg-gray-100 rounded-full h-1.5">
+                                    <div class="bg-green-500 h-1.5 rounded-full" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span class="font-semibold text-gray-600">Gordura</span>
+                                    <span class="font-bold text-gray-800">55g / 60g</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-1.5">
+                                    <div class="bg-orange-500 h-1.5 rounded-full" style="width: 92%"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="lg:col-span-3 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-                            <div class="flex items-center gap-2">
-                                <h3 class="font-bold text-gray-800">Diário Alimentar</h3>
-                            </div>
-
-                            <div class="flex items-center gap-2 bg-white p-1 rounded-xl border border-gray-200 shadow-sm">
-                                <button class="p-2 hover:bg-gray-50 text-gray-500 rounded-lg transition-colors" title="Dia Anterior">
-                                    <i data-lucide="chevron-left" class="w-4 h-4"></i>
-                                </button>
-                                
-                                <div class="relative group">
-                                    <i data-lucide="calendar" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-hover:text-usfit-cyan transition-colors"></i>
-                                    <input type="date" value="2026-01-04" class="pl-9 pr-2 py-1.5 border-0 text-sm font-bold text-gray-700 outline-none focus:ring-0 cursor-pointer bg-transparent w-36">
-                                </div>
-
-                                <button class="p-2 hover:bg-gray-50 text-gray-500 rounded-lg transition-colors" title="Próximo Dia">
-                                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="space-y-4">
-                            
-                            <div class="flex items-start gap-4 p-4 rounded-xl border border-gray-100 hover:bg-gray-50 transition-colors">
-                                <div class="w-10 h-10 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0">
-                                    <i data-lucide="check" class="w-5 h-5"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <div class="flex justify-between items-start">
-                                        <div>
-                                            <h4 class="font-bold text-gray-900">Café da Manhã</h4>
-                                            <p class="text-xs text-gray-500">08:00 • Ovos mexidos com pão</p>
-                                        </div>
-                                        <div class="text-right">
-                                            <span class="block font-bold text-gray-800">350 kcal</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="flex items-start gap-4 p-4 rounded-xl border border-l-4 border-l-yellow-400 border-gray-100 bg-yellow-50/10">
-                                <div class="w-10 h-10 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center flex-shrink-0">
-                                    <i data-lucide="alert-circle" class="w-5 h-5"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <div class="flex justify-between items-start">
-                                        <div>
-                                            <h4 class="font-bold text-gray-900">Almoço (Parcial)</h4>
-                                            <p class="text-xs text-gray-500">12:30 • Arroz, Feijão e Frango</p>
-                                            <p class="text-xs text-red-500 mt-1 font-medium">Obs: "Não consegui comer a salada hoje."</p>
-                                        </div>
-                                        <div class="text-right">
-                                            <span class="block font-bold text-gray-800">520 kcal</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="flex items-start gap-4 p-4 rounded-xl border border-gray-100 opacity-60">
-                                <div class="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center flex-shrink-0">
-                                    <i data-lucide="x" class="w-5 h-5"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <div class="flex justify-between items-start">
-                                        <div>
-                                            <h4 class="font-bold text-gray-900 line-through">Lanche da Tarde</h4>
-                                            <p class="text-xs text-gray-500">Planejado para 16:00</p>
-                                        </div>
-                                        <div class="text-right">
-                                            <span class="block font-bold text-gray-400">0 kcal</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
                 </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-bold text-gray-800">Tendência Calórica (7 dias)</h3>
+                        <div class="flex gap-4 text-xs">
+                            <span class="flex items-center gap-1"><div class="w-3 h-3 bg-gray-200 rounded"></div> Meta</span>
+                            <span class="flex items-center gap-1"><div class="w-3 h-3 bg-green-500 rounded"></div> Ingerido</span>
+                        </div>
+                    </div>
+                    <div class="h-64">
+                        <canvas id="caloriesChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 border-b border-gray-100 pb-4">
+                        <div class="flex items-center gap-2">
+                            <div class="p-1.5 bg-green-50 rounded-lg text-green-600">
+                                <i data-lucide="calendar" class="w-4 h-4"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-800 text-sm">Aderência Mensal (Janeiro)</h3>
+                        </div>
+                        
+                        <div class="flex items-center gap-3">
+                            <div class="flex items-center gap-1.5">
+                                <div class="w-3 h-3 rounded bg-green-500"></div>
+                                <span class="text-xs text-gray-500 font-medium">100%</span>
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                                <div class="w-3 h-3 rounded bg-yellow-400"></div>
+                                <span class="text-xs text-gray-500 font-medium">Parcial</span>
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                                <div class="w-3 h-3 rounded bg-red-500"></div>
+                                <span class="text-xs text-gray-500 font-medium">Off</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-7 gap-y-3 gap-x-2 text-center">
+                        <div class="text-[10px] text-gray-400 font-bold uppercase pb-1">D</div>
+                        <div class="text-[10px] text-gray-400 font-bold uppercase pb-1">S</div>
+                        <div class="text-[10px] text-gray-400 font-bold uppercase pb-1">T</div>
+                        <div class="text-[10px] text-gray-400 font-bold uppercase pb-1">Q</div>
+                        <div class="text-[10px] text-gray-400 font-bold uppercase pb-1">Q</div>
+                        <div class="text-[10px] text-gray-400 font-bold uppercase pb-1">S</div>
+                        <div class="text-[10px] text-gray-400 font-bold uppercase pb-1">S</div>
+
+                        <div class="col-span-4"></div> <div class="flex flex-col items-center gap-1 group"><span class="text-[10px] text-gray-500 font-medium">01</span><div class="w-full h-8 rounded bg-yellow-400 shadow-sm"></div></div>
+                        <div class="flex flex-col items-center gap-1 group"><span class="text-[10px] text-gray-500 font-medium">02</span><div class="w-full h-8 rounded bg-green-500 shadow-sm"></div></div>
+                        <div class="flex flex-col items-center gap-1 group"><span class="text-[10px] text-gray-500 font-medium">03</span><div class="w-full h-8 rounded bg-green-500 shadow-sm"></div></div>
+                        
+                        <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">04</span><div class="w-full h-8 rounded bg-green-500 shadow-sm"></div></div>
+                        <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">05</span><div class="w-full h-8 rounded bg-green-500 shadow-sm"></div></div>
+                        <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">06</span><div class="w-full h-8 rounded bg-green-500 shadow-sm"></div></div>
+                        <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">07</span><div class="w-full h-8 rounded bg-yellow-400 shadow-sm"></div></div>
+                        <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">08</span><div class="w-full h-8 rounded bg-green-500 shadow-sm"></div></div>
+                        <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">09</span><div class="w-full h-8 rounded bg-green-500 shadow-sm"></div></div>
+                        <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">10</span><div class="w-full h-8 rounded bg-red-500 shadow-sm"></div></div>
+
+                        <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">11</span><div class="w-full h-8 rounded bg-green-500 shadow-sm"></div></div>
+                        <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">12</span><div class="w-full h-8 rounded bg-green-500 shadow-sm"></div></div>
+                        <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">13</span><div class="w-full h-8 rounded bg-green-500 shadow-sm"></div></div>
+                        <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-500">14</span><div class="w-full h-8 rounded bg-green-500 shadow-sm"></div></div>
+                        <div class="flex flex-col items-center gap-1"><span class="text-[10px] text-gray-300">15</span><div class="w-full h-8 rounded bg-white border border-dashed border-gray-200"></div></div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                    
+                    <div class="px-6 py-4 border-b border-gray-100 bg-gray-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                            <i data-lucide="book-open" class="w-4 h-4 text-gray-400"></i> Registro de Refeições
+                        </h3>
+
+                        <div class="flex items-center gap-2 bg-white p-1 rounded-xl border border-gray-200 shadow-sm">
+                            <button class="p-1.5 hover:bg-gray-50 text-gray-500 rounded-lg transition-colors" title="Dia Anterior">
+                                <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                            </button>
+                            <div class="relative group">
+                                <i data-lucide="calendar" class="absolute left-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400 group-hover:text-usfit-cyan transition-colors"></i>
+                                <input type="date" value="2026-01-04" class="pl-7 pr-2 py-1 border-0 text-sm font-bold text-gray-700 outline-none focus:ring-0 cursor-pointer bg-transparent w-32">
+                            </div>
+                            <button class="p-1.5 hover:bg-gray-50 text-gray-500 rounded-lg transition-colors" title="Próximo Dia">
+                                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="p-6 space-y-4">
+                        
+                        <div class="flex items-start gap-4 p-4 rounded-xl border border-gray-100 hover:bg-gray-50 transition-colors group">
+                            <div class="w-10 h-10 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                <i data-lucide="check" class="w-5 h-5"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h4 class="font-bold text-gray-900">Café da Manhã</h4>
+                                        <p class="text-xs text-gray-500">08:00 • Ovos mexidos com pão e café preto</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="block font-bold text-gray-800">350 kcal</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-xl border-l-4 border-l-yellow-400 border-gray-100 bg-yellow-50/10">
+                            <div class="w-10 h-10 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="alert-circle" class="w-5 h-5"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h4 class="font-bold text-gray-900">Almoço (Parcial)</h4>
+                                        <p class="text-xs text-gray-500">12:30 • Arroz, Feijão e Frango</p>
+                                        <p class="text-xs text-red-500 mt-1 font-medium bg-red-50 inline-block px-2 py-0.5 rounded">Obs: "Não consegui comer a salada hoje."</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="block font-bold text-gray-800">520 kcal</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-xl border border-gray-100 opacity-60">
+                            <div class="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="x" class="w-5 h-5"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 line-through">Lanche da Tarde</h4>
+                                        <p class="text-xs text-gray-500">Planejado para 16:00</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="block font-bold text-gray-400">0 kcal</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
         </main>
     </div>
@@ -263,21 +354,61 @@
     <script>
         lucide.createIcons();
         
-        // Gráfico de Barras Agrupadas (Meta vs Realizado)
+        // 1. Gráfico de Barras Agrupadas (Meta vs Realizado)
         const ctx = document.getElementById('caloriesChart').getContext('2d');
         new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'],
                 datasets: [
-                    { label: 'Ingerido', data: [1750, 1820, 1600, 1800, 1900, 1500, 1450], backgroundColor: '#10B981', borderRadius: 4 },
-                    { label: 'Meta', data: [1800, 1800, 1800, 1800, 1800, 1800, 1800], backgroundColor: '#E5E7EB', borderRadius: 4, barThickness: 10 }
+                    { 
+                        label: 'Ingerido', 
+                        data: [1750, 1820, 1600, 1800, 1900, 1500, 1450], 
+                        backgroundColor: '#10B981', 
+                        borderRadius: 4
+                    },
+                    { 
+                        label: 'Meta', 
+                        data: [1800, 1800, 1800, 1800, 1800, 1800, 1800], 
+                        backgroundColor: '#E5E7EB', 
+                        borderRadius: 4
+                    }
                 ]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                scales: { y: { beginAtZero: true } },
+                scales: { 
+                    y: { beginAtZero: true, grid: { borderDash: [2, 2] } },
+                    x: { grid: { display: false } }
+                },
+                plugins: { legend: { display: false } },
+                barPercentage: 0.7,
+                categoryPercentage: 0.8
+            }
+        });
+
+         // 2. Gráfico de Macros (Doughnut)
+        const ctxMacro = document.getElementById('macroChart').getContext('2d');
+        new Chart(ctxMacro, {
+            type: 'doughnut',
+            data: {
+                labels: ['Proteína', 'Carbo', 'Gordura'],
+                datasets: [{
+                    data: [145, 180, 55], // Gramas
+                    backgroundColor: [
+                        '#3b82f6', // Blue
+                        '#10B981', // Green
+                        '#F97316'  // Orange
+                    ],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '75%', // Espessura do anel
                 plugins: { legend: { display: false } }
             }
         });
