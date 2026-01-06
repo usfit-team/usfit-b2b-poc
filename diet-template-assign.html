@@ -5,62 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>USFITB2B - Atribuir Modelo</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: {
-                        usfit: {
-                            dark: '#111827',
-                            cyan: '#22d3ee',
-                            blue: '#3b82f6',
-                            text: '#374151',
-                            gray: '#F3F4F6'
-                        }
-                    },
-                    backgroundImage: {
-                        'usfit-gradient': 'linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%)',
-                    }
-                }
-            }
-        }
-    </script>
+    <script src="assets/js/tailwind-config.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        
-        .usfit-input {
-            width: 100%; border: 1px solid #E5E7EB; border-radius: 0.5rem;
-            padding: 0.5rem 0.75rem; font-size: 0.875rem; color: #374151; outline: none; transition: border-color 0.2s;
-            background-color: #F9FAFB;
-        }
-        .usfit-input:focus { border-color: #22d3ee; background-color: white; box-shadow: 0 0 0 1px #22d3ee; }
-
-        .btn-primary {
-            background-image: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
-            color: white; border-radius: 9999px; padding: 0.5rem 1.5rem;
-            font-weight: 500; font-size: 0.875rem; display: flex; align-items: center; gap: 0.5rem;
-            box-shadow: 0 4px 6px -1px rgba(34, 211, 238, 0.2); transition: opacity 0.2s;
-            text-decoration: none; justify-content: center;
-        }
-        .btn-primary:hover { opacity: 0.95; }
-
-        .btn-secondary {
-            background: white; border: 1px solid #E5E7EB; color: #4B5563; border-radius: 9999px;
-            padding: 0.5rem 1.5rem; font-weight: 500; font-size: 0.875rem; transition: all 0.2s; text-decoration: none;
-        }
-        .btn-secondary:hover { border-color: #22d3ee; color: #0ea5e9; }
-    </style>
 </head>
 <body class="bg-usfit-gray text-usfit-text h-screen flex overflow-hidden">
 
     <aside class="w-64 bg-usfit-dark text-white flex flex-col hidden md:flex flex-shrink-0 relative">
         <div class="h-20 flex items-center justify-center border-b border-gray-800 bg-[#0f1523]">
             <a href="dashboard.html" class="flex items-center gap-2">
-                <div class="w-8 h-8"><img src="images/logo.png"></div>
-                <span class="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-usfit-gradient">USFITB2B</span>
+                <div class="w-8 h-8"><img src="assets/images/logo.png"></div>
+                <span class="font-semibold tracking-tight bg-clip-text text-transparent bg-usfit-gradient"><b class="text-white text-xl font-bold">USFIT</b>B2B</span>
             </a>
         </div>
 
@@ -84,8 +40,8 @@
                 
                 <div class="ml-12 mt-1 space-y-1">
                     <a href="diets-list.html" class="block text-sm text-gray-400 hover:text-white py-1">Fichas dos Alunos</a>
-                    <a href="diet-templates-list.html" class="block text-sm text-gray-400 hover:text-white py-1">Meus Modelos</a>
-                    <a href="foods-list.html" class="block text-sm text-usfit-cyan font-medium py-1">Banco de Alimentos</a>
+                    <a href="diet-templates-list.html" class="block text-sm text-usfit-cyan font-medium py-1">Meus Modelos</a>
+                    <a href="foods-list.html" class="block text-sm text-gray-400 hover:text-white py-1">Banco de Alimentos</a>
                 </div>
             </div>
 
@@ -98,7 +54,25 @@
                 <span class="font-medium">Contratos</span>
             </a>
         </nav>
-
+        <div class="mt-auto pt-6 px-4 pb-4">
+            <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-4 relative border border-gray-700 overflow-hidden group cursor-pointer hover:border-usfit-cyan transition-colors" onclick="toggleChat()">
+                <div class="absolute top-0 right-0 -mr-4 -mt-4 w-20 h-20 bg-usfit-cyan blur-3xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                
+                <div class="relative z-10 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 mb-3 relative">
+                        <img src="assets/images/avatar.png" alt="Mascote USFIT" class="w-full h-full object-contain drop-shadow-lg transform group-hover:scale-110 transition-transform duration-300">
+                        <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-gray-800 rounded-full"></span>
+                    </div>
+                    
+                    <h4 class="text-white font-bold text-sm mb-1">Precisa de algo?</h4>
+                    <p class="text-xs text-gray-400 mb-3">Peça ao <span class="text-usfit-cyan font-bold">FitBot</span> agora!</p>
+                    
+                    <button class="w-full py-1.5 bg-usfit-cyan text-usfit-dark rounded-lg text-xs font-bold hover:bg-white transition-colors shadow-lg shadow-cyan-900/50">
+                        Iniciar Chat
+                    </button>
+                </div>
+            </div>
+        </div>
         <div class="p-4 bg-[#0f1523] border-t border-gray-800">
              <div class="flex items-center justify-between">
                  <div class="flex items-center gap-3">
@@ -142,8 +116,7 @@
                     <h2 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-4">Modelo Selecionado</h2>
                     
                     <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm relative overflow-hidden">
-                        <div class="absolute top-0 right-0 w-24 h-24 bg-orange-50 rounded-bl-full -mr-4 -mt-4 z-0"></div>
-                        
+
                         <div class="relative z-10">
                             <div class="flex items-start justify-between mb-6">
                                 <div>
@@ -268,8 +241,6 @@
         </main>
     </div>
 
-    <script>
-        lucide.createIcons();
-    </script>
+    <script src="assets/js/functions.js"></script>
 </body>
 </html>

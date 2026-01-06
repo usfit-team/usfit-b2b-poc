@@ -5,62 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>USFITB2B - Novo Alimento</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: {
-                        usfit: {
-                            dark: '#111827',
-                            cyan: '#22d3ee',
-                            blue: '#3b82f6',
-                            text: '#374151',
-                            gray: '#F3F4F6'
-                        }
-                    },
-                    backgroundImage: {
-                        'usfit-gradient': 'linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%)',
-                    }
-                }
-            }
-        }
-    </script>
+    <script src="assets/js/tailwind-config.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        
-        .usfit-input {
-            width: 100%; border: 1px solid #E5E7EB; border-radius: 0.5rem;
-            padding: 0.5rem 0.75rem; font-size: 0.875rem; color: #374151; outline: none; transition: border-color 0.2s;
-            background-color: #F9FAFB;
-        }
-        .usfit-input:focus { border-color: #22d3ee; background-color: white; box-shadow: 0 0 0 1px #22d3ee; }
-
-        .btn-primary {
-            background-image: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
-            color: white; border-radius: 9999px; padding: 0.5rem 1.5rem;
-            font-weight: 500; font-size: 0.875rem; display: flex; align-items: center; gap: 0.5rem;
-            box-shadow: 0 4px 6px -1px rgba(34, 211, 238, 0.2); transition: opacity 0.2s;
-            text-decoration: none; justify-content: center;
-        }
-        .btn-primary:hover { opacity: 0.95; }
-
-        .btn-secondary {
-            background: white; border: 1px solid #E5E7EB; color: #4B5563; border-radius: 9999px;
-            padding: 0.5rem 1.5rem; font-weight: 500; font-size: 0.875rem; transition: all 0.2s; text-decoration: none;
-        }
-        .btn-secondary:hover { border-color: #22d3ee; color: #0ea5e9; }
-    </style>
 </head>
 <body class="bg-usfit-gray text-usfit-text h-screen flex overflow-hidden">
 
     <aside class="w-64 bg-usfit-dark text-white flex flex-col hidden md:flex flex-shrink-0 relative">
         <div class="h-20 flex items-center justify-center border-b border-gray-800 bg-[#0f1523]">
             <a href="dashboard.html" class="flex items-center gap-2">
-                <div class="w-8 h-8"><img src="images/logo.png"></div>
-                <span class="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-usfit-gradient">USFITB2B</span>
+                <div class="w-8 h-8"><img src="assets/images/logo.png"></div>
+                <span class="font-semibold tracking-tight bg-clip-text text-transparent bg-usfit-gradient"><b class="text-white text-xl font-bold">USFIT</b>B2B</span>
             </a>
         </div>
         <nav class="flex-1 px-3 py-6 space-y-2 overflow-y-auto">
@@ -118,12 +74,15 @@
                 <a href="foods-list.html" class="text-gray-500 hover:text-usfit-cyan"><i data-lucide="arrow-left" class="w-6 h-6"></i></a>
                 <h1 class="text-xl font-bold text-gray-800">Novo Alimento</h1>
             </div>
-            
             <div class="flex items-center gap-3">
                 <a href="foods-list.html" class="btn-secondary">Cancelar</a>
-                <div class="h-8 w-px bg-gray-200 mx-1"></div>
-                <button class="btn-primary">
+                <a href="foods-list.html" class="btn-primary">
                     <i data-lucide="save" class="w-4 h-4"></i> Salvar Alimento
+                </a>
+                <div class="h-8 w-px bg-gray-200 mx-1"></div>
+                <button class="p-2 text-gray-400 hover:bg-gray-100 rounded-full relative">
+                    <i data-lucide="bell" class="w-5 h-5"></i>
+                    <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
                 </button>
             </div>
         </header>
@@ -237,8 +196,6 @@
         </main>
     </div>
 
-    <script>
-        lucide.createIcons();
-    </script>
+    <script src="assets/js/functions.js"></script>
 </body>
 </html>
