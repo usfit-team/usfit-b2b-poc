@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USFITB2B - Avaliação Física</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="assets/js/tailwind-config.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-usfit-gray text-usfit-text h-screen flex overflow-hidden">
+
+    <aside class="w-64 bg-usfit-dark text-white flex flex-col hidden md:flex flex-shrink-0 relative">
+        <div class="h-20 flex items-center justify-center border-b border-gray-800 bg-[#0f1523]">
+            <a href="dashboard.html" class="flex items-center gap-2">
+                <div class="w-8 h-8"><img src="assets/images/logo.png"></div>
+                <span class="font-semibold tracking-tight bg-clip-text text-transparent bg-usfit-gradient"><b class="text-white text-xl font-bold">USFIT</b>B2B</span>
+            </a>
+        </div>
+
+        <nav class="flex-1 px-3 py-6 space-y-2 overflow-y-auto">
+            <a href="dashboard.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="layout-dashboard" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Visão Geral</span>
+            </a>
+            
+            <div class="relative">
+                <a href="students-list.html" class="flex items-center px-4 py-3 text-white bg-gray-800 rounded-xl shadow-lg shadow-cyan-900/20">
+                    <div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-usfit-gradient rounded-r-full"></div>
+                    <i data-lucide="users" class="w-5 h-5 mr-3 text-usfit-cyan"></i>
+                    <span class="font-medium">Alunos</span>
+                </a>
+            </div>
+
+            <a href="diets-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="utensils" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Nutrição</span>
+            </a>
+
+            <a href="workouts-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="dumbbell" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Treinos</span>
+            </a>
+            <a href="contracts-dashboard.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="file-text" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
+                <span class="font-medium">Contratos</span>
+            </a>
+        
+
+            <a href="team-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="briefcase" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i><span class="font-medium">Profissionais</span>
+            </a>
+        </nav>
+
+        <div class="mt-auto pt-6 px-4 pb-4">
+            <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-4 relative border border-gray-700 overflow-hidden group cursor-pointer hover:border-usfit-cyan transition-colors" onclick="toggleChat()">
+                <div class="absolute top-0 right-0 -mr-4 -mt-4 w-20 h-20 bg-usfit-cyan blur-3xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                
+                <div class="relative z-10 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 mb-3 relative">
+                        <img src="assets/images/avatar.png" alt="Mascote USFIT" class="w-full h-full object-contain drop-shadow-lg transform group-hover:scale-110 transition-transform duration-300">
+                        <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-gray-800 rounded-full"></span>
+                    </div>
+                    
+                    <h4 class="text-white font-bold text-sm mb-1">Precisa de algo?</h4>
+                    <p class="text-xs text-gray-400 mb-3">Peça ao <span class="text-usfit-cyan font-bold">FitBot</span> agora!</p>
+                    
+                    <button class="w-full py-1.5 bg-usfit-cyan text-usfit-dark rounded-lg text-xs font-bold hover:bg-white transition-colors shadow-lg shadow-cyan-900/50">
+                        Iniciar Chat
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-4 bg-[#0f1523] border-t border-gray-800">
+             <div class="flex items-center justify-between">
+                 <a href="settings.html" class="flex items-center gap-3 group hover:opacity-80 transition-opacity">
+                    <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center border-2 border-gray-600 group-hover:border-usfit-cyan">
+                        <span class="font-bold text-sm">DS</span>
+                    </div>
+                    <div class="text-sm">
+                        <p class="font-semibold text-white">Dr. Silva</p>
+                        <p class="text-xs text-usfit-cyan">Plano PRO</p>
+                    </div>
+                </a>
+                <a href="login.html" class="p-2 text-gray-400 hover:text-white hover:bg-red-500/20 rounded-lg transition-colors" title="Sair">
+                    <i data-lucide="log-out" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <div class="flex-1 flex flex-col h-full min-w-0 bg-usfit-gray">
+        
+        <header class="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-8 flex-shrink-0 z-20 shadow-sm">
+            
+            <div class="flex items-center gap-4 w-1/3">
+                <a href="students-list.html" class="md:hidden text-gray-500"><i data-lucide="arrow-left" class="w-6 h-6"></i></a>
+                <div>
+                    <div class="flex items-center text-xs text-gray-500 mb-1">
+                        <a href="students-list.html" class="hover:text-usfit-blue">Meus Alunos</a>
+                        <i data-lucide="chevron-right" class="w-3 h-3 mx-1"></i>
+                        <span>Avaliação</span>
+                    </div>
+                    <h1 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                        Nova Avaliação Física
+                    </h1>
+                </div>
+            </div>
+
+            <div class="hidden md:flex flex-1 justify-center w-1/3">
+                <div class="flex items-center px-4 py-2 bg-gray-50 rounded-full border border-gray-100 shadow-sm">
+                    <div class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-3">
+                        <i data-lucide="user" class="w-3 h-3"></i>
+                    </div>
+                    <div class="flex flex-col md:flex-row md:items-center md:gap-2">
+                        <span class="text-xs text-gray-400 font-medium uppercase tracking-wide">Aluno</span>
+                        <span class="text-sm font-bold text-gray-800">Carlos Júnior</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex items-center justify-end gap-3 w-1/3">
+                <a href="students-list.html" class="btn-secondary">Cancelar</a>
+                <button class="btn-primary">
+                    <i data-lucide="save" class="w-4 h-4"></i> Salvar Avaliação
+                </button>
+                <div class="h-8 w-px bg-gray-200 mx-1"></div>
+                <button class="p-2 text-gray-400 hover:bg-gray-100 rounded-full relative">
+                    <i data-lucide="bell" class="w-5 h-5"></i>
+                    <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1 overflow-y-auto p-8">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="w-1 h-6 bg-usfit-gradient rounded-full"></div>
+                            <h2 class="text-lg font-bold text-gray-800">Dados Corporais</h2>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-1.5 ml-1">Peso Atual (kg) *</label>
+                                <input type="number" value="88.5" class="usfit-input" placeholder="0.0">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-1.5 ml-1">Altura (cm) *</label>
+                                <input type="number" value="182" class="usfit-input" placeholder="0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="w-1 h-6 bg-usfit-gradient rounded-full"></div>
+                            <h2 class="text-lg font-bold text-gray-800">Planejamento e Restrições</h2>
+                        </div>
+                        <div class="space-y-5">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-2 ml-1">Objetivo Principal *</label>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="objective" value="hypertrophy" class="peer hidden" checked>
+                                        <div class="text-center px-3 py-2 rounded-lg border border-gray-200 text-sm text-gray-500 peer-checked:border-usfit-cyan peer-checked:bg-cyan-50 peer-checked:text-usfit-cyan font-medium transition-all">
+                                            Hipertrofia
+                                        </div>
+                                    </label>
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="objective" value="weight_loss" class="peer hidden">
+                                        <div class="text-center px-3 py-2 rounded-lg border border-gray-200 text-sm text-gray-500 peer-checked:border-usfit-cyan peer-checked:bg-cyan-50 peer-checked:text-usfit-cyan font-medium transition-all">
+                                            Emagrecimento
+                                        </div>
+                                    </label>
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="objective" value="conditioning" class="peer hidden">
+                                        <div class="text-center px-3 py-2 rounded-lg border border-gray-200 text-sm text-gray-500 peer-checked:border-usfit-cyan peer-checked:bg-cyan-50 peer-checked:text-usfit-cyan font-medium transition-all">
+                                            Condicionamento
+                                        </div>
+                                    </label>
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="objective" value="rehab" class="peer hidden">
+                                        <div class="text-center px-3 py-2 rounded-lg border border-gray-200 text-sm text-gray-500 peer-checked:border-usfit-cyan peer-checked:bg-cyan-50 peer-checked:text-usfit-cyan font-medium transition-all">
+                                            Reabilitação
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-1.5 ml-1">Lesões ou Restrições</label>
+                                <textarea rows="3" class="usfit-input" placeholder="Ex: Condromalácia patelar grau 1 no joelho direito. Evitar impacto..."></textarea>
+                                <p class="text-xs text-gray-400 mt-1 ml-1">Essas informações aparecerão como alerta ao criar o treino.</p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-1.5 ml-1">Observações Gerais</label>
+                                <textarea rows="2" class="usfit-input" placeholder="Ex: Disponibilidade de 4 dias por semana..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-1">
+                    <div class="sticky top-6 space-y-6">
+                        <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-lg shadow-gray-200/50">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="font-bold text-gray-800">Status Atual</h3>
+                                <i data-lucide="activity" class="w-5 h-5 text-usfit-cyan"></i>
+                            </div>
+                            <div class="mb-6 p-4 bg-gray-50 rounded-xl border border-gray-200 text-center">
+                                <span class="text-xs text-gray-500 font-medium uppercase tracking-wider">IMC Estimado</span>
+                                <div class="text-3xl font-bold text-gray-800 mt-1 mb-1">26.7</div>
+                                <span class="inline-flex px-2 py-0.5 rounded text-xs font-bold bg-yellow-100 text-yellow-700">
+                                    Sobrepeso
+                                </span>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="p-3 rounded-lg bg-blue-50 border border-blue-100">
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <i data-lucide="target" class="w-4 h-4 text-usfit-blue"></i>
+                                        <span class="text-sm font-bold text-usfit-blue">Foco: Hipertrofia</span>
+                                    </div>
+                                    <p class="text-xs text-gray-600 leading-relaxed">
+                                        Priorizar exercícios multiarticulares e volume de treino moderado a alto.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="mt-6 pt-6 border-t border-gray-100">
+                                <button class="btn-primary w-full justify-center" onclick="window.location.href='workout-create.html'">
+                                    Criar Treino Baseado Nisso
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="assets/js/functions.js"></script>
+</body>
+</html>

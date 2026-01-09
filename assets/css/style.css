@@ -267,3 +267,19 @@ input[type=number]::-webkit-outer-spin-button {
 .macro-footer {
     box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
 }
+
+/* Animação para o Accordion de Substituição */
+.substitution-panel {
+    max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;
+}
+.substitution-panel.open {
+    max-height: 500px; transition: max-height 0.5s ease-in;
+}
+        
+/* Estilos para campos desabilitados/habilitados */
+.input-disabled { background-color: #F9FAFB; color: #9CA3AF; cursor: not-allowed; border-color: #F3F4F6; }
+.input-active { border-color: #3b82f6; background-color: #eff6ff; font-weight: 600; }
+.input-active:focus { border-color: #22d3ee; }
+
+/* Highlight para o campo de resultado automático */
+.input-result { background-color: #ecfeff; color: #0e7490; font-weight: 700; border-color: #22d3ee; }

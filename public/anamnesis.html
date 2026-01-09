@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USFIT - Pré-Consulta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/js/tailwind-config.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-50 text-gray-700 font-sans min-h-screen">
+
+    <header class="bg-[#0f1523] border-b border-gray-800 py-4 px-6 text-center sticky top-0 z-10">
+        <div class="h-20 flex items-center justify-center">
+            <a href="dashboard.html" class="flex items-center gap-2">
+                <div class="w-8 h-8"><img src="../assets/images/logo.png"></div>
+                <span class="font-semibold tracking-tight bg-clip-text text-transparent bg-usfit-gradient"><b class="text-white text-xl font-bold">USFIT</b>B2B</span>
+            </a>
+        </div>
+        <p class="text-xs text-white mt-1">Formulário de Pré-Consulta</p>
+    </header>
+
+    <main class="max-w-2xl mx-auto p-6 pb-20">
+        
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+            <h1 class="text-xl font-bold text-gray-900 mb-2">Olá! 👋</h1>
+            <p class="text-sm text-gray-600 leading-relaxed">
+                Para que sua consulta com <strong>Dr. Silva</strong> seja a mais produtiva possível, por favor, responda às perguntas abaixo com sinceridade. Suas informações são confidenciais.
+            </p>
+        </div>
+
+        <form class="space-y-6">
+            
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-gray-50 px-6 py-4 border-b border-gray-100">
+                    <h2 class="font-bold text-gray-800 flex items-center gap-2">
+                        <i data-lucide="clock" class="w-5 h-5 text-usfit-blue"></i> Rotina & Sono
+                    </h2>
+                </div>
+                <div class="p-6 space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Que horas você costuma acordar?</label>
+                        <input type="time" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-usfit-cyan focus:border-usfit-cyan outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Que horas costuma dormir?</label>
+                        <input type="time" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-usfit-cyan focus:border-usfit-cyan outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Qualidade do sono (0 a 10)</label>
+                        <input type="range" min="0" max="10" class="w-full accent-usfit-blue">
+                        <div class="flex justify-between text-xs text-gray-400 mt-1">
+                            <span>Péssimo</span>
+                            <span>Excelente</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-gray-50 px-6 py-4 border-b border-gray-100">
+                    <h2 class="font-bold text-gray-800 flex items-center gap-2">
+                        <i data-lucide="utensils" class="w-5 h-5 text-usfit-blue"></i> Preferências Alimentares
+                    </h2>
+                </div>
+                <div class="p-6 space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Alimentos que você NÃO gosta ou tem alergia</label>
+                        <textarea rows="3" placeholder="Ex: Não gosto de berinjela, sou alérgico a camarão..." class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-usfit-cyan focus:border-usfit-cyan outline-none"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Alimentos preferidos (que não podem faltar)</label>
+                        <textarea rows="2" placeholder="Ex: Café, chocolate, pão..." class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-usfit-cyan focus:border-usfit-cyan outline-none"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Consumo de água diário (copos)</label>
+                        <select class="w-full border border-gray-300 rounded-lg px-4 py-2 bg-white">
+                            <option>Menos de 1 litro</option>
+                            <option>1 a 2 litros</option>
+                            <option>Mais de 2 litros</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-gray-50 px-6 py-4 border-b border-gray-100">
+                    <h2 class="font-bold text-gray-800 flex items-center gap-2">
+                        <i data-lucide="activity" class="w-5 h-5 text-usfit-blue"></i> Histórico Clínico
+                    </h2>
+                </div>
+                <div class="p-6 space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Possui alguma lesão ou dificuldade que impeça exercícios?</label>
+                        <textarea rows="2" placeholder="Ex: Dor no joelho ao agachar, cirurgia no ombro direito..." class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-usfit-cyan focus:border-usfit-cyan outline-none"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Faz uso contínuo de algum medicamento?</label>
+                        <input type="text" placeholder="Se sim, quais?" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-usfit-cyan focus:border-usfit-cyan outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Histórico de doenças ou cirurgias recentes</label>
+                        <textarea rows="2" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-usfit-cyan focus:border-usfit-cyan outline-none"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Funcionamento do Intestino</label>
+                        <div class="flex gap-4">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="intestine" class="text-usfit-cyan focus:ring-usfit-cyan"> <span>Regular</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="intestine" class="text-usfit-cyan focus:ring-usfit-cyan"> <span>Irregular</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" onclick="alert('Dados enviados com sucesso!')" class="w-full py-4 bg-usfit-gradient text-white rounded-xl font-bold text-lg shadow-lg shadow-cyan-500/30 active:scale-95 transition-transform flex items-center justify-center gap-2">
+                Enviar Informações <i data-lucide="send" class="w-5 h-5"></i>
+            </button>
+
+        </form>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
