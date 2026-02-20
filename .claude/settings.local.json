@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(python3:*)",
+      "Bash(pwsh -Command \"Get-Command node, python, python3 -ErrorAction SilentlyContinue | Select-Object Name, Source\")"
     ]
   }
 }

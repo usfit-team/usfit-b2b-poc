@@ -26,7 +26,7 @@ function copyAnamnesisLink() {
 }
 
 // ===================================
-// Antropometria Visual e Comparativa (usado na physical-assessment)
+// AVALIAÇÃO FÍSICA
 // ===================================
 
 function updateProtocolInputs() {
@@ -155,9 +155,10 @@ function calculateBodyComp() {
 window.onload = updateProtocolInputs;
 
 // ===================================
-// CALCULADORA DE METABOLISMO (usado na diet-create)
+// CRIAÇÃO DE PLANO NUTRICIONAL
 // ===================================
 
+// --- LÓGICA DE CALCULADORA METABÓLICA ---
 function calculateMetabolism() {
     // 1. Pegar valores
     const weight = parseFloat(document.getElementById('inputWeight').value) || 0;
@@ -274,7 +275,7 @@ function updateMacros() {
     }
 }
 
-// Toggle Accordion Substituição
+// --- LÓGICA DE SUBSTITUIÇÃO (TOGGLE) ---
 function toggleSubs(btn) {
     // Encontra o painel dentro do grupo pai
     const panel = btn.closest('.group').querySelector('.substitution-panel');
