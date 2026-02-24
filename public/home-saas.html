@@ -1,0 +1,979 @@
+<!doctype html>
+<html lang="pt-BR" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>USFit — Treino e Dieta com IA</title>
+    <meta
+      name="description"
+      content="USFit é um app de treino e dieta impulsionado por IA. Planos personalizados, ajustes inteligentes e evolução com dados."
+    />
+
+    <!-- Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      :root {
+        --brand-cyan: #22d3ee;
+        --brand-blue: #3b82f6;
+      }
+      html,
+      body {
+        font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      }
+      @keyframes floaty {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      .floaty {
+        animation: floaty 6s ease-in-out infinite;
+      }
+      .floaty-delayed {
+        animation: floaty 6s ease-in-out infinite;
+        animation-delay: 0.8s;
+      }
+      .floaty-delayed-2 {
+        animation: floaty 6s ease-in-out infinite;
+        animation-delay: 1.6s;
+      }
+    </style>
+  </head>
+
+  <body class="bg-white text-slate-900">
+    <!-- NAVBAR -->
+    <header class="sticky top-0 z-50 border-b border-slate-200/70 bg-white/70 backdrop-blur">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+        <!-- Brand -->
+        <a href="#" class="flex items-center gap-3">
+          <img
+            src="../assets/images/logo.png"
+            alt="USFit"
+            class="h-[50px] w-[50px] rounded-xl"
+          />
+          <span class="text-lg font-extrabold tracking-tight">USFit</span>
+        </a>
+
+        <!-- Desktop nav -->
+        <nav class="hidden items-center gap-6 md:flex">
+          <a href="#recursos" class="text-sm font-medium text-slate-600 hover:text-slate-900">Recursos</a>
+          <a href="#diferenciais" class="text-sm font-medium text-slate-600 hover:text-slate-900">Diferenciais</a>
+          <a href="#planos" class="text-sm font-medium text-slate-600 hover:text-slate-900">Planos</a>
+          <a href="#depoimentos" class="text-sm font-medium text-slate-600 hover:text-slate-900">Depoimentos</a>
+          <a href="#faq" class="text-sm font-medium text-slate-600 hover:text-slate-900">FAQ</a>
+
+          <a
+            href="#planos"
+            class="ml-2 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-blue-500/20 hover:opacity-95 active:opacity-90"
+          >
+            Começar agora
+          </a>
+        </nav>
+
+        <!-- Mobile button -->
+        <button
+          id="menuBtn"
+          class="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50 md:hidden"
+          aria-expanded="false"
+          aria-controls="mobileMenu"
+          type="button"
+        >
+          Menu
+          <svg class="ml-2 h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile menu -->
+      <div id="mobileMenu" class="hidden border-t border-slate-200/70 bg-white md:hidden">
+        <div class="mx-auto max-w-6xl px-4 py-3">
+          <div class="flex flex-col gap-2">
+            <a href="#recursos" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">Recursos</a>
+            <a href="#diferenciais" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">Diferenciais</a>
+            <a href="#planos" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">Planos</a>
+            <a href="#depoimentos" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">Depoimentos</a>
+            <a href="#faq" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">FAQ</a>
+
+            <a
+              href="#planos"
+              class="mt-1 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-blue-500/20 hover:opacity-95 active:opacity-90"
+            >
+              Começar agora
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="relative overflow-hidden">
+      <!-- background glow blobs -->
+      <div class="pointer-events-none absolute -top-24 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-cyan-200/50 blur-3xl"></div>
+      <div class="pointer-events-none absolute -right-20 top-24 h-96 w-96 rounded-full bg-blue-200/50 blur-3xl"></div>
+      <div class="pointer-events-none absolute -left-24 top-44 h-72 w-72 rounded-full bg-cyan-200/40 blur-3xl"></div>
+
+      <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 md:grid-cols-2 md:py-20">
+        <!-- Copy -->
+        <div>
+          <div class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/70 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm">
+            <span class="inline-block h-2 w-2 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500"></span>
+            App #1 em Performance
+          </div>
+
+          <h1 class="mt-5 text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
+            Seu treino e dieta, na palma da mão.
+          </h1>
+
+          <p class="mt-4 text-base leading-relaxed text-slate-600 md:text-lg">
+            O USFit usa IA para montar treinos e dietas sob medida — e ajustar tudo com base no seu progresso, rotina e metas.
+          </p>
+
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              href="#"
+              class="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 px-6 py-3 text-sm font-semibold text-white shadow-sm shadow-blue-500/20 hover:opacity-95 active:opacity-90"
+            >
+              Baixar
+            </a>
+            <a
+              href="#planos"
+              class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-800 shadow-sm hover:bg-slate-50 active:bg-slate-100"
+            >
+              Conheça nossos planos
+            </a>
+          </div>
+
+          <div class="mt-8 flex flex-wrap items-center gap-6 text-sm text-slate-600">
+            <div class="flex items-center gap-2">
+              <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-cyan-50 text-cyan-700">✓</span>
+              Ajustes inteligentes semanais
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-blue-50 text-blue-700">✓</span>
+              Treino + Dieta integrados
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-slate-50 text-slate-700">✓</span>
+              Progresso com insights
+            </div>
+          </div>
+        </div>
+
+        <!-- Mockups -->
+        <div class="relative">
+          <div class="absolute -inset-4 rounded-3xl bg-gradient-to-r from-cyan-100/70 to-blue-100/70 blur-2xl"></div>
+
+          <div class="relative grid grid-cols-12 gap-4">
+            <!-- Tall mockup -->
+            <div class="col-span-7">
+              <div class="floaty relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl shadow-slate-200/60">
+                <div class="h-12 border-b border-slate-100 bg-slate-50/50 px-5 py-3">
+                  <div class="flex items-center justify-between">
+                    <div class="h-2.5 w-24 rounded-full bg-slate-200"></div>
+                    <div class="flex gap-1.5">
+                      <span class="h-2.5 w-2.5 rounded-full bg-slate-200"></span>
+                      <span class="h-2.5 w-2.5 rounded-full bg-slate-200"></span>
+                      <span class="h-2.5 w-2.5 rounded-full bg-slate-200"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-5">
+                  <div class="flex items-center gap-3">
+                    <div class="h-10 w-10 rounded-2xl bg-gradient-to-r from-cyan-400 to-blue-500"></div>
+                    <div class="flex-1">
+                      <div class="h-3 w-28 rounded-full bg-slate-200"></div>
+                      <div class="mt-2 h-2.5 w-40 rounded-full bg-slate-100"></div>
+                    </div>
+                  </div>
+
+                  <div class="mt-5 grid gap-3">
+                    <div class="rounded-2xl border border-slate-100 bg-slate-50 p-4">
+                      <div class="flex items-center justify-between">
+                        <div class="h-3 w-28 rounded-full bg-slate-200"></div>
+                        <div class="h-6 w-16 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 opacity-80"></div>
+                      </div>
+                      <div class="mt-3 h-2.5 w-52 rounded-full bg-slate-200/80"></div>
+                      <div class="mt-2 h-2.5 w-44 rounded-full bg-slate-200/60"></div>
+                    </div>
+
+                    <div class="rounded-2xl border border-slate-100 bg-slate-50 p-4">
+                      <div class="h-3 w-36 rounded-full bg-slate-200"></div>
+                      <div class="mt-3 grid grid-cols-3 gap-2">
+                        <div class="h-16 rounded-2xl bg-slate-200/60"></div>
+                        <div class="h-16 rounded-2xl bg-slate-200/40"></div>
+                        <div class="h-16 rounded-2xl bg-slate-200/30"></div>
+                      </div>
+                    </div>
+
+                    <div class="rounded-2xl border border-slate-100 bg-slate-50 p-4">
+                      <div class="flex items-center justify-between">
+                        <div class="h-3 w-24 rounded-full bg-slate-200"></div>
+                        <div class="h-3 w-10 rounded-full bg-slate-200/70"></div>
+                      </div>
+                      <div class="mt-3 h-24 rounded-2xl bg-gradient-to-r from-cyan-100 to-blue-100"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Side mockups -->
+            <div class="col-span-5 flex flex-col gap-4">
+              <div class="floaty-delayed rounded-3xl border border-slate-200 bg-white p-5 shadow-lg shadow-slate-200/60 transition hover:-translate-y-1">
+                <div class="flex items-center justify-between">
+                  <div class="h-3 w-24 rounded-full bg-slate-200"></div>
+                  <div class="h-6 w-12 rounded-full bg-cyan-50"></div>
+                </div>
+                <div class="mt-4 grid gap-2">
+                  <div class="h-2.5 w-40 rounded-full bg-slate-200/80"></div>
+                  <div class="h-2.5 w-32 rounded-full bg-slate-200/60"></div>
+                </div>
+                <div class="mt-4 grid grid-cols-2 gap-2">
+                  <div class="h-16 rounded-2xl bg-slate-200/40"></div>
+                  <div class="h-16 rounded-2xl bg-gradient-to-r from-cyan-100 to-blue-100"></div>
+                </div>
+              </div>
+
+              <div class="floaty-delayed-2 rounded-3xl border border-slate-200 bg-white p-5 shadow-lg shadow-slate-200/60 transition hover:-translate-y-1">
+                <div class="flex items-center justify-between">
+                  <div class="h-3 w-20 rounded-full bg-slate-200"></div>
+                  <div class="h-6 w-16 rounded-full bg-blue-50"></div>
+                </div>
+                <div class="mt-4 h-24 rounded-2xl bg-slate-100"></div>
+                <div class="mt-3 flex items-center gap-2">
+                  <span class="h-2.5 w-2.5 rounded-full bg-cyan-400"></span>
+                  <div class="h-2.5 w-32 rounded-full bg-slate-200/70"></div>
+                </div>
+                <div class="mt-2 flex items-center gap-2">
+                  <span class="h-2.5 w-2.5 rounded-full bg-blue-500"></span>
+                  <div class="h-2.5 w-28 rounded-full bg-slate-200/60"></div>
+                </div>
+              </div>
+
+              <div class="rounded-3xl border border-slate-200 bg-gradient-to-r from-cyan-400 to-blue-500 p-5 text-white shadow-lg shadow-blue-500/20">
+                <div class="text-sm font-semibold">Pronto para evoluir?</div>
+                <div class="mt-1 text-xs text-white/90">Planos com Dieta, Treino ou Combo.</div>
+                <a
+                  href="#planos"
+                  class="mt-4 inline-flex w-full items-center justify-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-900 hover:bg-white/95 active:bg-white/90"
+                >
+                  Ver planos
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECURSOS -->
+    <section id="recursos" class="border-t border-slate-100 bg-slate-50/50">
+        <div class="mx-auto max-w-6xl px-4 py-16">
+            <div class="max-w-2xl">
+            <h2 class="text-3xl font-extrabold tracking-tight">Recursos</h2>
+            <p class="mt-3 text-slate-600">
+                Tudo o que você precisa para planejar, executar e evoluir — com IA, dados e simplicidade.
+            </p>
+            </div>
+
+            <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
+            <!-- Treino guiado -->
+            <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md">
+                <div class="flex items-center gap-4">
+                <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-cyan-50">
+                    <svg viewBox="0 0 24 24" fill="none" class="h-6 w-6">
+                    <path d="M3 10h3m12 0h3M6 7v6m12-6v6M9 12h6" stroke="#06b6d4" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold">Treino guiado</h3>
+                </div>
+                <p class="mt-3 text-sm text-slate-600">
+                Timer, registro de carga/reps e execução com foco no que importa.
+                </p>
+            </div>
+
+            <!-- Dieta por macros -->
+            <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md">
+                <div class="flex items-center gap-4">
+                <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-cyan-50">
+                    <svg viewBox="0 0 24 24" fill="none" class="h-6 w-6">
+                    <path d="M12 3c3 3 6 6 6 10a6 6 0 11-12 0c0-4 3-7 6-10z" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9 13c1.5 1 4.5 1 6 0" stroke="#06b6d4" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold">Dieta por macros</h3>
+                </div>
+                <p class="mt-3 text-sm text-slate-600">
+                Calorias e macros personalizados com flexibilidade e substituições.
+                </p>
+            </div>
+
+            <!-- Evolução em gráficos -->
+            <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md">
+                <div class="flex items-center gap-4">
+                <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-cyan-50">
+                    <svg viewBox="0 0 24 24" fill="none" class="h-6 w-6">
+                    <path d="M4 19V5m6 14V9m6 10v-4m4 4H2" stroke="#06b6d4" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold">Evolução em gráficos</h3>
+                </div>
+                <p class="mt-3 text-sm text-slate-600">
+                Acompanhe peso, medidas e consistência com clareza.
+                </p>
+            </div>
+
+            <!-- IA de periodização -->
+            <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md">
+                <div class="flex items-center gap-4">
+                <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-cyan-50">
+                    <svg viewBox="0 0 24 24" fill="none" class="h-6 w-6">
+                    <path d="M12 3v4m0 10v4M4.9 4.9l2.8 2.8m8.6 8.6l2.8 2.8M3 12h4m10 0h4M4.9 19.1l2.8-2.8m8.6-8.6l2.8-2.8"
+                        stroke="#06b6d4" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold">IA de periodização</h3>
+                </div>
+                <p class="mt-3 text-sm text-slate-600">
+                Progressão e ajustes inteligentes (deload, volume e intensidade).
+                </p>
+            </div>
+
+            <!-- Rotina sob medida -->
+            <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md">
+                <div class="flex items-center gap-4">
+                <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-cyan-50">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#06b6d4" class="h-6 w-6">
+                    <rect x="3" y="5" width="18" height="16" rx="3" stroke="#3b82f6" stroke-width="2"/>
+                    <path d="M8 3v4M16 3v4M3 10h18" stroke="#06b6d4" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold">Rotina sob medida</h3>
+                </div>
+                <p class="mt-3 text-sm text-slate-600">
+                Treinos por disponibilidade: 3 a 6x/sem, casa ou academia.
+                </p>
+            </div>
+
+            <!-- Check-ins inteligentes -->
+            <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md">
+                <div class="flex items-center gap-4">
+                <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-cyan-50">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#06b6d4" class="h-6 w-6">
+                    <path d="M5 13l4 4L19 7" stroke="#06b6d4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold">Check-ins inteligentes</h3>
+                </div>
+                <p class="mt-3 text-sm text-slate-600">
+                Ajustes a qualquer momento com base no seu feedback e resultados.
+                </p>
+            </div>
+
+            </div>
+        </div>
+        </section>
+
+        <section class="bg-slate-50/50">
+        <!-- RECURSOS PRINCIPAIS -->
+        <div class="mx-auto max-w-6xl px-4 py-4">
+          <div class="mt-10 space-y-10">
+            <!-- 1) Workout IA -->
+            <div class="grid items-center gap-6 lg:grid-cols-2">
+              <div>
+                <div class="inline-flex items-center rounded-full bg-cyan-50 px-3 py-1 text-xs font-semibold text-cyan-700">
+                  Workout
+                </div>
+                <h4 class="mt-3 text-2xl font-extrabold">Treinos gerados por IA</h4>
+                <p class="mt-3 text-slate-600">
+                  Rotinas personalizadas por objetivo, nível e equipamentos disponíveis. Progressão pensada para consistência.
+                </p>
+                <ul class="mt-5 space-y-2 text-sm text-slate-600">
+                  <li class="flex gap-2"><span class="text-cyan-600">✓</span> Sugestão de exercícios + alternativas</li>
+                  <li class="flex gap-2"><span class="text-cyan-600">✓</span> Progressão de carga/reps</li>
+                  <li class="flex gap-2"><span class="text-cyan-600">✓</span> Ajustes por tempo e frequência</li>
+                </ul>
+              </div>
+
+              <div class="relative grid grid-cols-12 gap-4">
+                <div class="col-span-7 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+                  <div class="h-3 w-28 rounded-full bg-slate-200"></div>
+                  <div class="mt-4 h-40 rounded-2xl bg-gradient-to-r from-cyan-100 to-blue-100"></div>
+                  <div class="mt-4 grid gap-2">
+                    <div class="h-2.5 w-40 rounded-full bg-slate-200/80"></div>
+                    <div class="h-2.5 w-32 rounded-full bg-slate-200/60"></div>
+                  </div>
+                </div>
+                <div class="col-span-5 space-y-4">
+                  <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+                    <div class="h-3 w-24 rounded-full bg-slate-200"></div>
+                    <div class="mt-4 h-24 rounded-2xl bg-slate-100"></div>
+                  </div>
+                  <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+                    <div class="h-3 w-20 rounded-full bg-slate-200"></div>
+                    <div class="mt-4 grid grid-cols-2 gap-2">
+                      <div class="h-16 rounded-2xl bg-slate-200/40"></div>
+                      <div class="h-16 rounded-2xl bg-slate-200/30"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2) Dieta IA (layout invertido) -->
+            <div class="grid items-center gap-6 lg:grid-cols-2">
+              <div class="order-2 lg:order-1 relative grid grid-cols-12 gap-4">
+                <div class="col-span-5 space-y-4">
+                  <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+                    <div class="h-3 w-24 rounded-full bg-slate-200"></div>
+                    <div class="mt-4 h-24 rounded-2xl bg-gradient-to-r from-cyan-100 to-blue-100"></div>
+                  </div>
+                  <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+                    <div class="h-3 w-20 rounded-full bg-slate-200"></div>
+                    <div class="mt-4 h-24 rounded-2xl bg-slate-100"></div>
+                  </div>
+                </div>
+
+                <div class="col-span-7 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+                  <div class="h-3 w-28 rounded-full bg-slate-200"></div>
+                  <div class="mt-4 grid grid-cols-3 gap-2">
+                    <div class="h-20 rounded-2xl bg-slate-200/40"></div>
+                    <div class="h-20 rounded-2xl bg-slate-200/30"></div>
+                    <div class="h-20 rounded-2xl bg-slate-200/20"></div>
+                  </div>
+                  <div class="mt-4 h-2.5 w-44 rounded-full bg-slate-200/70"></div>
+                  <div class="mt-2 h-2.5 w-36 rounded-full bg-slate-200/50"></div>
+                </div>
+              </div>
+
+              <div class="order-1 lg:order-2">
+                <div class="inline-flex items-center rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
+                  Dieta
+                </div>
+                <h4 class="mt-3 text-2xl font-extrabold">Dieta flexível por macros</h4>
+                <p class="mt-3 text-slate-600">
+                  Planejamento de refeições com substituições, preferências e ajustes sem “engessar” sua rotina.
+                </p>
+                <ul class="mt-5 space-y-2 text-sm text-slate-600">
+                  <li class="flex gap-2"><span class="text-blue-600">✓</span> Macros/calorias personalizados</li>
+                  <li class="flex gap-2"><span class="text-blue-600">✓</span> Substituições inteligentes</li>
+                  <li class="flex gap-2"><span class="text-blue-600">✓</span> Ajustes a qualquer momento</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- 3) Progresso -->
+            <div class="grid items-center gap-6 lg:grid-cols-2">
+              <div>
+                <div class="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
+                  Progresso
+                </div>
+                <h4 class="mt-3 text-2xl font-extrabold">Insights e evolução com dados</h4>
+                <p class="mt-3 text-slate-600">
+                  Visualize sua consistência, tendências e pontos de ajuste. Menos achismo, mais direção.
+                </p>
+                <ul class="mt-5 space-y-2 text-sm text-slate-600">
+                  <li class="flex gap-2"><span class="text-slate-700">✓</span> Gráficos de evolução</li>
+                  <li class="flex gap-2"><span class="text-slate-700">✓</span> Check-ins semanais</li>
+                  <li class="flex gap-2"><span class="text-slate-700">✓</span> Recomendações automáticas</li>
+                </ul>
+              </div>
+
+              <div class="relative grid grid-cols-12 gap-4">
+                <div class="col-span-7 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+                  <div class="h-3 w-28 rounded-full bg-slate-200"></div>
+                  <div class="mt-4 h-40 rounded-2xl bg-slate-100"></div>
+                  <div class="mt-4 flex items-center gap-2">
+                    <span class="h-2.5 w-2.5 rounded-full bg-cyan-400"></span>
+                    <div class="h-2.5 w-36 rounded-full bg-slate-200/70"></div>
+                  </div>
+                  <div class="mt-2 flex items-center gap-2">
+                    <span class="h-2.5 w-2.5 rounded-full bg-blue-500"></span>
+                    <div class="h-2.5 w-28 rounded-full bg-slate-200/50"></div>
+                  </div>
+                </div>
+
+                <div class="col-span-5 space-y-4">
+                  <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+                    <div class="h-3 w-20 rounded-full bg-slate-200"></div>
+                    <div class="mt-4 h-24 rounded-2xl bg-gradient-to-r from-cyan-100 to-blue-100"></div>
+                  </div>
+                  <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+                    <div class="h-3 w-24 rounded-full bg-slate-200"></div>
+                    <div class="mt-4 h-24 rounded-2xl bg-slate-100"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIFERENCIAIS -->
+    <section id="diferenciais" class="bg-white">
+      <div class="mx-auto max-w-6xl px-4 py-16">
+        <div class="max-w-2xl">
+          <h2 class="text-3xl font-extrabold tracking-tight">Diferenciais</h2>
+          <p class="mt-3 text-slate-600">
+            Compare rapidamente o que o USFit entrega e o que os apps comuns deixam de fora.
+          </p>
+        </div>
+
+        <div class="mt-10 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+          <div class="overflow-x-auto">
+            <table class="w-full min-w-[840px] text-left">
+              <thead class="bg-slate-50">
+                <tr>
+                  <th class="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">Funcionalidade</th>
+                  <th class="px-5 py-4">
+                    <div class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 px-3 py-1 text-xs font-bold text-white">
+                      USFit
+                    </div>
+                  </th>
+                  <th class="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">Concorrente</th>
+                </tr>
+              </thead>
+
+              <tbody class="divide-y divide-slate-100">
+                <tr class="hover:bg-slate-50/60">
+                  <td class="px-5 py-4 text-sm font-medium text-slate-800">IA gera treino por objetivo + equipamento</td>
+                  <td class="px-5 py-4"><span class="inline-flex rounded-full bg-cyan-50 px-3 py-1 text-xs font-semibold text-cyan-700">✓</span></td>
+                  <td class="px-5 py-4 text-slate-400">—</td>
+                </tr>
+
+                <tr class="hover:bg-slate-50/60">
+                  <td class="px-5 py-4 text-sm font-medium text-slate-800">IA ajusta dieta com substituições</td>
+                  <td class="px-5 py-4"><span class="inline-flex rounded-full bg-cyan-50 px-3 py-1 text-xs font-semibold text-cyan-700">✓</span></td>
+                  <td class="px-5 py-4 text-slate-400">—</td>
+                </tr>
+
+                <tr class="hover:bg-slate-50/60">
+                  <td class="px-5 py-4 text-sm font-medium text-slate-800">Periodização inteligente (deload/progressão)</td>
+                  <td class="px-5 py-4"><span class="inline-flex rounded-full bg-cyan-50 px-3 py-1 text-xs font-semibold text-cyan-700">✓</span></td>
+                  <td class="px-5 py-4 text-slate-400">—</td>
+                </tr>
+
+                <tr class="hover:bg-slate-50/60">
+                  <td class="px-5 py-4 text-sm font-medium text-slate-800">Check-in semanal com ajustes automáticos</td>
+                  <td class="px-5 py-4"><span class="inline-flex rounded-full bg-cyan-50 px-3 py-1 text-xs font-semibold text-cyan-700">✓</span></td>
+                  <td class="px-5 py-4 text-slate-400">—</td>
+                </tr>
+
+                <tr class="hover:bg-slate-50/60">
+                  <td class="px-5 py-4 text-sm font-medium text-slate-800">Integração Treino + Dieta (recomendação cruzada)</td>
+                  <td class="px-5 py-4"><span class="inline-flex rounded-full bg-cyan-50 px-3 py-1 text-xs font-semibold text-cyan-700">✓</span></td>
+                  <td class="px-5 py-4 text-slate-400">—</td>
+                </tr>
+
+                <tr class="hover:bg-slate-50/60">
+                  <td class="px-5 py-4 text-sm font-medium text-slate-800">Dashboard com insights de evolução</td>
+                  <td class="px-5 py-4"><span class="inline-flex rounded-full bg-cyan-50 px-3 py-1 text-xs font-semibold text-cyan-700">✓</span></td>
+                  <td class="px-5 py-4 text-slate-400">—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANOS -->
+    <section id="planos" class="border-t border-slate-100 bg-slate-50/50">
+      <div class="mx-auto max-w-6xl px-4 py-16">
+        <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div class="max-w-2xl">
+            <h2 class="text-3xl font-extrabold tracking-tight">Escolha seu Plano</h2>
+            <p class="mt-3 text-slate-600">Selecione o plano que melhor se adequa às suas necessidades</p>
+          </div>
+
+          <!-- Toggle (UI only) -->
+          <div class="mt-4 inline-flex rounded-full border border-slate-200 bg-white p-1 shadow-sm md:mt-0">
+            <button class="rounded-full px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-50 active:bg-slate-100" type="button">
+              Mensal
+            </button>
+            <button class="rounded-full px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-50 active:bg-slate-100" type="button">
+              Trimestral
+            </button>
+            <button class="rounded-full px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-50 active:bg-slate-100" type="button">
+              Semestral
+            </button>
+            <button
+              class="rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 px-4 py-2 text-xs font-bold text-white shadow-sm"
+              type="button"
+            >
+              Anual
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-10 grid gap-6 lg:grid-cols-3">
+          <!-- Dieta -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md">
+            <div class="flex items-start justify-between">
+              <div>
+                <div class="text-sm font-semibold text-slate-500">Dieta</div>
+                <h3 class="mt-1 text-xl font-extrabold">Plano Anual - Dieta</h3>
+                <p class="mt-2 text-sm text-slate-600">Acesso completo ao módulo de dieta por 1 ano</p>
+              </div>
+            </div>
+
+            <div class="mt-6">
+              <div class="flex items-end gap-2">
+                <div class="text-3xl font-extrabold">R$ 23,92</div>
+                <div class="pb-1 text-sm font-semibold text-slate-500">/mês</div>
+              </div>
+
+              <div class="mt-2 text-xs text-slate-500">
+                Cobrança única: <span class="font-semibold text-slate-600">R$ 287,04</span> /ano
+              </div>
+
+              <div class="mt-3 flex flex-wrap gap-2 text-xs text-slate-600">
+                <span class="rounded-full bg-slate-50 px-3 py-1">1 ano</span>
+                <span class="rounded-full bg-slate-50 px-3 py-1">3 planos dieta</span>
+              </div>
+            </div>
+
+            <div class="mt-6 text-sm font-semibold text-slate-700">Inclui:</div>
+            <ul class="mt-3 space-y-2 text-sm text-slate-600">
+              <li class="flex gap-2"><span class="text-cyan-600">✓</span> Macros e calorias personalizados</li>
+              <li class="flex gap-2"><span class="text-cyan-600">✓</span> Planejamento de refeições</li>
+              <li class="flex gap-2"><span class="text-cyan-600">✓</span> Ajustes a qualquer momento</li>
+            </ul>
+
+            <a
+              href="#"
+              class="mt-7 inline-flex w-full items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-900 shadow-sm hover:bg-slate-50 active:bg-slate-100"
+            >
+              Assinar agora
+            </a>
+          </div>
+
+          <!-- Workout -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md">
+            <div class="flex items-start justify-between">
+              <div>
+                <div class="text-sm font-semibold text-slate-500">Workout</div>
+                <h3 class="mt-1 text-xl font-extrabold">Plano Anual - Workout</h3>
+                <p class="mt-2 text-sm text-slate-600">Acesso completo ao módulo de treinos por 1 ano</p>
+              </div>
+            </div>
+
+            <div class="mt-6">
+              <div class="flex items-end gap-2">
+                <div class="text-3xl font-extrabold">R$ 23,92</div>
+                <div class="pb-1 text-sm font-semibold text-slate-500">/mês</div>
+              </div>
+
+              <div class="mt-2 text-xs text-slate-500">
+                Cobrança única: <span class="font-semibold text-slate-600">R$ 287,04</span> /ano
+              </div>
+
+              <div class="mt-3 flex flex-wrap gap-2 text-xs text-slate-600">
+                <span class="rounded-full bg-slate-50 px-3 py-1">1 ano</span>
+                <span class="rounded-full bg-slate-50 px-3 py-1">6 treinos/sem</span>
+              </div>
+            </div>
+
+            <div class="mt-6 text-sm font-semibold text-slate-700">Inclui:</div>
+            <ul class="mt-3 space-y-2 text-sm text-slate-600">
+              <li class="flex gap-2"><span class="text-blue-600">✓</span> Rotinas personalizadas</li>
+              <li class="flex gap-2"><span class="text-blue-600">✓</span> Vídeos demonstrativos</li>
+              <li class="flex gap-2"><span class="text-blue-600">✓</span> Acompanhamento de progresso</li>
+            </ul>
+
+            <a
+              href="#"
+              class="mt-7 inline-flex w-full items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-900 shadow-sm hover:bg-slate-50 active:bg-slate-100"
+            >
+              Assinar agora
+            </a>
+          </div>
+
+          <!-- Combo -->
+          <div class="relative rounded-2xl border border-blue-200 bg-white p-6 shadow-sm transition hover:shadow-md">
+            <div class="absolute -top-3 right-6 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 px-3 py-1 text-xs font-bold text-white shadow-sm shadow-blue-500/20">
+              ⭐ Recomendado
+            </div>
+
+            <div class="flex items-start justify-between">
+              <div>
+                <div class="text-sm font-semibold text-slate-500">Dieta + Workout</div>
+                <h3 class="mt-1 text-xl font-extrabold">Plano Anual - Dieta + Workout</h3>
+                <p class="mt-2 text-sm text-slate-600">Acesso completo aos módulos de dieta e treinos por 1 ano</p>
+              </div>
+            </div>
+
+            <div class="mt-6">
+              <div class="flex items-end gap-2">
+                <div class="text-3xl font-extrabold">R$ 39,84</div>
+                <div class="pb-1 text-sm font-semibold text-slate-500">/mês</div>
+              </div>
+
+              <div class="mt-2 text-xs text-slate-500">
+                Cobrança única: <span class="font-semibold text-slate-600">R$ 478,08</span> /ano
+              </div>
+
+              <div class="mt-3 flex flex-wrap gap-2 text-xs text-slate-600">
+                <span class="rounded-full bg-slate-50 px-3 py-1">1 ano</span>
+                <span class="rounded-full bg-slate-50 px-3 py-1">6 treinos/sem</span>
+                <span class="rounded-full bg-slate-50 px-3 py-1">3 planos dieta</span>
+              </div>
+            </div>
+
+            <div class="mt-6 text-sm font-semibold text-slate-700">Inclui:</div>
+            <ul class="mt-3 space-y-2 text-sm text-slate-600">
+              <li class="flex gap-2"><span class="text-cyan-600">✓</span> Tudo do plano Dieta</li>
+              <li class="flex gap-2"><span class="text-blue-600">✓</span> Tudo do plano Workout</li>
+              <li class="flex gap-2"><span class="text-slate-700">✓</span> Mais economia no combo</li>
+              <li class="flex gap-2"><span class="text-slate-700">✓</span> Experiência completa de fitness</li>
+            </ul>
+
+            <a
+              href="#"
+              class="mt-7 inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-blue-500/20 hover:opacity-95 active:opacity-90"
+            >
+              Assinar agora
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+    <section id="depoimentos" class="bg-white">
+      <div class="mx-auto max-w-6xl px-4 py-16">
+        <div class="max-w-2xl">
+          <h2 class="text-3xl font-extrabold tracking-tight">Depoimentos</h2>
+          <p class="mt-3 text-slate-600">Quem usa, sente a diferença — consistência, clareza e resultados.</p>
+        </div>
+
+        <div class="mt-10 grid gap-6 md:grid-cols-3">
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-cyan-50 text-cyan-700 font-bold">
+                  MS
+                </div>
+                <div>
+                  <div class="text-sm font-bold">Marina S.</div>
+                  <div class="text-xs text-slate-500">Treino + Dieta</div>
+                </div>
+              </div>
+              <div class="text-amber-500 text-sm" aria-label="5 estrelas">★★★★★</div>
+            </div>
+            <p class="mt-4 text-sm text-slate-600">
+              “Finalmente parei de ficar mudando de planilha. O USFit ajusta tudo e eu só executo. Simples e eficiente.”
+            </p>
+          </div>
+
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-50 text-blue-700 font-bold">
+                  RL
+                </div>
+                <div>
+                  <div class="text-sm font-bold">Rafael L.</div>
+                  <div class="text-xs text-slate-500">Workout</div>
+                </div>
+              </div>
+              <div class="text-amber-500 text-sm" aria-label="5 estrelas">★★★★★</div>
+            </div>
+            <p class="mt-4 text-sm text-slate-600">
+              “O treino encaixa na minha rotina. As progressões fazem sentido e eu consigo ver evolução semana a semana.”
+            </p>
+          </div>
+
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-50 text-slate-700 font-bold">
+                  AC
+                </div>
+                <div>
+                  <div class="text-sm font-bold">Ana C.</div>
+                  <div class="text-xs text-slate-500">Dieta</div>
+                </div>
+              </div>
+              <div class="text-amber-500 text-sm" aria-label="4 estrelas">★★★★☆</div>
+            </div>
+            <p class="mt-4 text-sm text-slate-600">
+              “As substituições de refeições salvaram meu dia a dia. Mantive os macros sem passar sufoco.”
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="border-t border-slate-100 bg-slate-50/50">
+      <div class="mx-auto max-w-6xl px-4 py-16">
+        <div class="max-w-2xl">
+          <h2 class="text-3xl font-extrabold tracking-tight">FAQ</h2>
+          <p class="mt-3 text-slate-600">Respostas rápidas para as dúvidas mais comuns.</p>
+        </div>
+
+        <div class="mt-10 grid gap-4 md:grid-cols-2">
+          <details class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <summary class="cursor-pointer list-none font-semibold text-slate-800 flex items-center justify-between">
+              O USFit serve para iniciantes?
+              <span class="ml-4 text-slate-400 group-open:rotate-180 transition">▾</span>
+            </summary>
+            <p class="mt-3 text-sm text-slate-600">
+              Sim. A IA ajusta volume, intensidade e escolhas de exercícios conforme seu nível e disponibilidade.
+            </p>
+          </details>
+
+          <details class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <summary class="cursor-pointer list-none font-semibold text-slate-800 flex items-center justify-between">
+              A IA substitui nutricionista/personal?
+              <span class="ml-4 text-slate-400 group-open:rotate-180 transition">▾</span>
+            </summary>
+            <p class="mt-3 text-sm text-slate-600">
+              O USFit é um app de apoio e organização. Para casos clínicos, profissionais de saúde continuam sendo essenciais.
+            </p>
+          </details>
+
+          <details class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <summary class="cursor-pointer list-none font-semibold text-slate-800 flex items-center justify-between">
+              Posso trocar alimentos que não gosto?
+              <span class="ml-4 text-slate-400 group-open:rotate-180 transition">▾</span>
+            </summary>
+            <p class="mt-3 text-sm text-slate-600">
+              Sim. Você pode substituir refeições mantendo macros e calorias dentro do seu plano.
+            </p>
+          </details>
+
+          <details class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <summary class="cursor-pointer list-none font-semibold text-slate-800 flex items-center justify-between">
+              Como funcionam os ajustes automáticos?
+              <span class="ml-4 text-slate-400 group-open:rotate-180 transition">▾</span>
+            </summary>
+            <p class="mt-3 text-sm text-slate-600">
+              Com base nos seus registros e check-ins, o app sugere ajustes de treino/dieta para manter consistência e evolução.
+            </p>
+          </details>
+
+          <details class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <summary class="cursor-pointer list-none font-semibold text-slate-800 flex items-center justify-between">
+              Posso treinar em casa e na academia?
+              <span class="ml-4 text-slate-400 group-open:rotate-180 transition">▾</span>
+            </summary>
+            <p class="mt-3 text-sm text-slate-600">
+              Sim. O plano pode ser adaptado para os equipamentos disponíveis em cada cenário.
+            </p>
+          </details>
+
+          <details class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <summary class="cursor-pointer list-none font-semibold text-slate-800 flex items-center justify-between">
+              Como funciona o cancelamento?
+              <span class="ml-4 text-slate-400 group-open:rotate-180 transition">▾</span>
+            </summary>
+            <p class="mt-3 text-sm text-slate-600">
+              Você poderá cancelar a qualquer momento nas configurações da conta.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-gray-800 bg-gray-900">
+      <div class="mx-auto max-w-6xl px-4 py-12">
+        <div class="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
+          <div class="max-w-sm">
+            <div class="flex items-center gap-3">
+              <img
+                src="../assets/images/logo.png"
+                alt="USFit"
+                class="h-[50px] w-[50px] rounded-xl"
+              />
+              <div>
+                <div class="text-lg font-extrabold tracking-tight text-white">USFit</div>
+                <div class="text-sm text-gray-300">Tecnologia para performance humana.</div>
+              </div>
+            </div>
+            <p class="mt-4 text-sm text-gray-300">
+              Treino e dieta impulsionados por IA para você manter consistência e evoluir com clareza.
+            </p>
+          </div>
+
+          <div class="grid gap-8 sm:grid-cols-3">
+            <div>
+              <div class="text-sm font-bold text-white">Produto</div>
+              <div class="mt-3 flex flex-col gap-2 text-sm">
+                <a href="#recursos" class="text-gray-300 hover:text-white active:text-gray-200">Recursos</a>
+                <a href="#diferenciais" class="text-gray-300 hover:text-white active:text-gray-200">Diferenciais</a>
+                <a href="#planos" class="text-gray-300 hover:text-white active:text-gray-200">Planos</a>
+              </div>
+            </div>
+
+            <div>
+              <div class="text-sm font-bold text-white">Suporte</div>
+              <div class="mt-3 flex flex-col gap-2 text-sm">
+                <a href="#faq" class="text-gray-300 hover:text-white active:text-gray-200">FAQ</a>
+                <a href="#" class="text-gray-300 hover:text-white active:text-gray-200">Contato</a>
+                <a href="#" class="text-gray-300 hover:text-white active:text-gray-200">Status</a>
+              </div>
+            </div>
+
+            <div>
+              <div class="text-sm font-bold text-white">Social</div>
+              <div class="mt-3 flex flex-col gap-2 text-sm">
+                <a href="#" class="text-gray-300 hover:text-white active:text-gray-200">Instagram</a>
+                <a href="#" class="text-gray-300 hover:text-white active:text-gray-200">LinkedIn</a>
+                <a href="#" class="text-gray-300 hover:text-white active:text-gray-200">YouTube</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-10 flex flex-col gap-3 border-t border-gray-800 pt-6 text-sm text-gray-400 md:flex-row md:items-center md:justify-between">
+          <div>© <span id="year"></span> USFit. Todos os direitos reservados.</div>
+          <div class="flex gap-4">
+            <a href="#" class="hover:text-white active:text-gray-200">Termos</a>
+            <a href="#" class="hover:text-white active:text-gray-200">Privacidade</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      const menuBtn = document.getElementById("menuBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+
+      menuBtn.addEventListener("click", () => {
+        const isOpen = mobileMenu.classList.toggle("hidden") === false;
+        menuBtn.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      // Close mobile menu on link click
+      mobileMenu.querySelectorAll("a[href^='#']").forEach((a) => {
+        a.addEventListener("click", () => {
+          mobileMenu.classList.add("hidden");
+          menuBtn.setAttribute("aria-expanded", "false");
+        });
+      });
+
+      // Footer year
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
