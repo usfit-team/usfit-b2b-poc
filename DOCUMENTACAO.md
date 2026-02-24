@@ -118,11 +118,9 @@ usfit-b2b-poc/
 ├── settings-billing.html              # Assinatura e faturamento
 ├── settings-security.html             # Segurança
 │
-├── lp/
-│   ├── home.html                       # Landing page de marketing
-│   └── checkout.html                   # Checkout de planos
-│
 ├── public/
+│   ├── home-saas.html                       # Landing page de divulgação do SaaS
+│   └── checkout-saas.html                   # Checkout de planos do SaaS
 │   ├── anamnesis.html                  # Formulário público de anamnese
 │   └── checkout.html                   # Checkout de contrato do aluno
 │
@@ -1130,7 +1128,7 @@ Densidade = 1.097 − (0.00046971 × Soma) + (0.00000056 × Soma²) − (0.00012
 
 ### 5.11 Landing Page e Páginas Públicas
 
-#### 5.11.1 Landing Page — `lp/home.html`
+#### 5.11.1 Landing Page — `public/home-saas.html`
 
 **Propósito:** Página de marketing para captação de novos clientes (profissionais de saúde).
 
@@ -1144,13 +1142,13 @@ Densidade = 1.097 − (0.00046971 × Soma) + (0.00000056 × Soma²) − (0.00012
 
 ---
 
-#### 5.11.2 Checkout de Plano — `lp/checkout.html`
+#### 5.11.2 Checkout de Plano — `public/checkout-saas.html`
 
 **Propósito:** Página de compra do plano da plataforma USFIT B2B pelo profissional.
 
 ---
 
-#### 5.11.3 Checkout Público do Aluno — `public/checkout.html`
+#### 5.11.3 Checkout Público do Aluno — `public/checkout-student.html`
 
 **Propósito:** Página onde o aluno realiza o pagamento do contrato de serviços.
 
