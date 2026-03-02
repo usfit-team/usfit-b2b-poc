@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>USFITB2B - Novo Plano Nutricional</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="assets/js/tailwind-config.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -35,9 +37,9 @@
             <a href="workouts-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
                 <i data-lucide="dumbbell" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i><span class="font-medium">Treinos</span>
             </a>
-            <a href="contracts-dashboard.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+          <!--  <a href="contracts-dashboard.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
                 <i data-lucide="file-text" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i><span class="font-medium">Contratos</span>
-            </a>
+            </a> -->
             <a href="team-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
                 <i data-lucide="briefcase" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i><span class="font-medium">Profissionais</span>
             </a>
@@ -135,20 +137,32 @@
                                 <h3 class="text-xs font-bold text-gray-400 uppercase mb-3">Antropometria Atual</h3>
                                 <div class="grid grid-cols-4 gap-4">
                                     <div>
-                                        <label class="block text-xs font-semibold text-gray-500 mb-1">Peso (kg)</label>
-                                        <input type="number" id="inputWeight" value="78" class="form-input font-bold" oninput="calculateMetabolism()">
+                                        <label class="block text-xs font-semibold text-gray-500 mb-1">Peso</label>
+                                        <div class="relative">
+                                            <input type="number" id="inputWeight" value="78" class="form-input font-bold pr-8" oninput="calculateMetabolism()">
+                                            <span class="absolute right-3 top-2.5 text-xs text-gray-400 font-bold">kg</span>
+                                        </div>
                                     </div>
                                     <div>
-                                        <label class="block text-xs font-semibold text-gray-500 mb-1">Altura (cm)</label>
-                                        <input type="number" id="inputHeight" value="178" class="form-input" oninput="calculateMetabolism()">
+                                        <label class="block text-xs font-semibold text-gray-500 mb-1">Altura</label>
+                                        <div class="relative">
+                                            <input type="number" id="inputHeight" value="178" class="form-input pr-8" oninput="calculateMetabolism()">
+                                            <span class="absolute right-3 top-2.5 text-xs text-gray-400 font-bold">cm</span>
+                                        </div>
                                     </div>
                                     <div>
                                         <label class="block text-xs font-semibold text-gray-500 mb-1">Idade</label>
-                                        <input type="number" id="inputAge" value="28" class="form-input" oninput="calculateMetabolism()">
+                                        <div class="relative">
+                                            <input type="number" id="inputAge" value="28" class="form-input pr-12" oninput="calculateMetabolism()">
+                                            <span class="absolute right-3 top-2.5 text-xs text-gray-400 font-bold">anos</span>
+                                        </div>
                                     </div>
                                     <div>
-                                        <label class="block text-xs font-semibold text-gray-500 mb-1">% Gordura</label>
-                                        <input type="number" id="inputBF" value="15" class="form-input" oninput="calculateMetabolism()">
+                                        <label class="block text-xs font-semibold text-gray-500 mb-1">Gordura</label>
+                                        <div class="relative">
+                                            <input type="number" id="inputBF" value="15" class="form-input pr-6" oninput="calculateMetabolism()">
+                                            <span class="absolute right-3 top-2.5 text-xs text-gray-400 font-bold">%</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -178,26 +192,6 @@
                                 </div>
                             </div>
 
-                            <div>
-                                <h3 class="text-xs font-bold text-gray-400 uppercase mb-3">Meta do Plano</h3>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <div>
-                                        <label class="block text-xs font-semibold text-gray-500 mb-1">Estratégia</label>
-                                        <select id="selectGoal" class="form-input border-blue-200 bg-blue-50 text-usfit-blue font-bold" onchange="calculateMetabolism()">
-                                            <option value="maintenance">Manutenção</option>
-                                            <option value="deficit">Deficit (Perda)</option>
-                                            <option value="surplus" selected>Superávit (Ganho)</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label class="block text-xs font-semibold text-gray-500 mb-1">Variação (kcal)</label>
-                                        <div class="relative">
-                                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-green-600 font-bold" id="gapSign">+</span>
-                                            <input type="number" id="inputGap" value="300" class="form-input pl-6 text-green-600 font-bold" oninput="calculateMetabolism()">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
                         </div>
 
@@ -221,16 +215,15 @@
 
                                         <div class="flex justify-between items-center border-b border-gray-200 pb-2">
                                             <span class="text-xs font-bold text-gray-500 uppercase" title="Gasto Energético Total">GET (Total)</span>
-                                            <span id="resultGET" class="text-lg font-bold text-usfit-blue">3035 kcal</span>
+                                            <span id="resultGET" class="text-lg font-bold text-gray-700">3035 kcal</span>
+                                        </div>
+
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-xs font-bold text-gray-500 uppercase" title="Meta Diária">Meta Diária (VET)</span>
+                                            <span id="displayFinalVET" class="text-lg font-bold text-usfit-blue">3035 kcal</span>
+                                            <input type="hidden" id="resultFinalVET" value="3335">
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="mt-4 mb-2 pt-2 text-center">
-                                    <p class="text-xs text-gray-400 uppercase font-bold mb-1">Meta Diária (VET)</p>
-                                    <p id="displayFinalVET" class="text-4xl font-extrabold text-gray-900 tracking-tight">3335</p>
-                                    <p class="text-xs text-gray-400 font-medium">kcal/dia</p>
-                                    <input type="hidden" id="resultFinalVET" value="3335">
                                 </div>
                             </div>
                         </div>
@@ -239,15 +232,15 @@
 
                     <div class="mt-8 pt-6 border-t border-gray-100">
                         <div class="flex justify-between items-center mb-4">
-                            <p class="text-xs font-bold text-gray-500 uppercase">Distribuição de Macronutrientes (g/kg)</p>
+                            <p class="text-xs font-bold text-gray-500 uppercase">Objetivo de Macronutrientes (g/kg)</p>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div class="bg-gray-50 p-3 rounded-lg border border-gray-100">
                                 <div class="flex justify-between text-xs mb-2">
-                                    <span class="font-bold text-green-600">Proteína</span>
+                                    <span class="font-bold text-blue-600">Proteína</span>
                                     <span class="font-bold text-gray-700"><span id="valProt">2.2</span> g/kg</span>
                                 </div>
-                                <input type="range" id="rangeProt" class="w-full h-1.5 bg-green-200 rounded-lg appearance-none cursor-pointer accent-green-600" min="1" max="4" step="0.1" value="2.2" oninput="updateMacros()">
+                                <input type="range" id="rangeProt" class="w-full h-1.5 bg-blue-200 rounded-lg appearance-none cursor-pointer accent-blue-600" min="1" max="4" step="0.1" value="2.2" oninput="updateMacros()">
                                 <p class="text-xs text-right text-gray-400 mt-1"><span id="totalProtG">171g</span> (<span id="totalProtKcal">684</span> kcal)</p>
                             </div>
                             <div class="bg-gray-50 p-3 rounded-lg border border-gray-100">
@@ -278,156 +271,134 @@
                         </h2>
                     </div>
 
-                    <div class="border border-gray-200 rounded-xl overflow-hidden mb-4">
+                    <div id="meals-container">
+                    <div class="border border-gray-200 rounded-xl overflow-hidden mb-4 meal-card">
                         <div class="bg-gray-50 px-4 py-3 flex items-center justify-between border-b border-gray-200">
-                            <div class="flex items-center gap-3">
-                                <h3 class="font-bold text-gray-800">Café da Manhã</h3>
-                                <span class="bg-white border border-gray-200 text-gray-500 px-2 py-0.5 rounded text-xs font-mono">07:30</span>
+                            <div class="flex items-center gap-2">
+                                <div class="flex flex-col gap-0.5">
+                                    <button onclick="moveMealUp(this)" class="text-gray-300 hover:text-gray-500 leading-none" title="Mover para cima"><i data-lucide="chevron-up" class="w-3.5 h-3.5"></i></button>
+                                    <button onclick="moveMealDown(this)" class="text-gray-300 hover:text-gray-500 leading-none" title="Mover para baixo"><i data-lucide="chevron-down" class="w-3.5 h-3.5"></i></button>
+                                </div>
+                                <input type="text" value="Nome da Refeição" class="font-bold text-gray-800 bg-transparent border-none outline-none focus:bg-white focus:border focus:border-gray-200 rounded px-1 py-0.5 text-sm w-40 cursor-text">
+                                <input type="time" value="00:00" class="bg-white border border-gray-200 text-gray-500 px-2 py-0.5 rounded text-xs font-mono">
                             </div>
-                            <div class="flex items-center gap-4 text-xs text-gray-500">
-                                <span><strong class="text-blue-600">P:</strong> 30g</span>
-                                <span><strong class="text-orange-600">C:</strong> 45g</span>
-                                <span><strong class="text-yellow-600">G:</strong> 10g</span>
-                                <span class="font-bold text-gray-700">420 kcal</span>
-                                <button class="text-gray-400 hover:text-red-500 ml-2"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                            <div class="flex items-center gap-2 text-xs text-gray-500">
+                                <div class="meal-totals flex items-center gap-2 tabular-nums text-xs border-r border-gray-200 pr-3 mr-1">
+                                    <span class="meal-prot-total"><strong class="text-blue-600">P:</strong> 0g</span>
+                                    <span class="meal-carb-total"><strong class="text-orange-600">C:</strong> 0g</span>
+                                    <span class="meal-fat-total"><strong class="text-yellow-600">G:</strong> 0g</span>
+                                    <span class="meal-fiber-total"><strong class="text-green-600">F:</strong> 0g</span>
+                                    <span class="meal-kcal-total font-semibold text-gray-600">0 kcal</span>
+                                </div>
+                                <label class="flex items-center gap-1.5 cursor-pointer" title="Incluir no cálculo total">
+                                    <input type="checkbox" checked class="meal-include-toggle" onchange="updateMealCalc(this)">
+                                </label>
+                                <button onclick="saveMealTemplate(this)" title="Salvar refeição" class="text-gray-400 hover:text-amber-500 transition-colors"><i data-lucide="bookmark" class="w-3.5 h-3.5"></i></button>
+                                <button onclick="duplicateMeal(this)" title="Duplicar refeição" class="text-gray-400 hover:text-usfit-blue transition-colors"><i data-lucide="copy" class="w-3.5 h-3.5"></i></button>
+                                <button class="text-gray-400 hover:text-red-500" onclick="removeMeal(this)"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
                             </div>
                         </div>
 
                         <div class="p-4 bg-white">
-                            <div class="space-y-3 mb-4">
-                                <div class="group">
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center gap-3 flex-1">
-                                            <i data-lucide="grip-vertical" class="w-4 h-4 text-gray-300 cursor-move"></i>
-                                            <div>
-                                                <p class="text-sm font-medium text-gray-800">Ovo de Galinha (Cozido)</p>
-                                                <p class="text-xs text-gray-400">3 unidades médias (aprox. 150g)</p>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center gap-6">
-                                            <div class="flex items-center gap-1">
-                                                <input type="number" value="3" class="w-12 text-center border border-gray-200 rounded text-sm py-1">
-                                                <span class="text-xs text-gray-500">und</span>
-                                            </div>
-                                            
-                                            <button onclick="toggleSubs(this)" class="text-xs font-bold text-usfit-blue bg-blue-50 hover:bg-blue-100 px-2 py-1 rounded flex items-center gap-1 transition-colors">
-                                                <i data-lucide="refresh-cw" class="w-3 h-3"></i> 2 substituições
-                                            </button>
-                                            
-                                            <button class="opacity-0 group-hover:opacity-100 text-gray-400 hover:text-red-500 transition-opacity">
-                                                <i data-lucide="x" class="w-4 h-4"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="substitution-panel bg-gray-50 mt-2 rounded-lg border border-dashed border-gray-300 hidden"> <div class="p-3 space-y-2">
-                                            <p class="text-[10px] uppercase font-bold text-gray-400 mb-2">Opções Equivalentes</p>
-                                            
-                                            <div class="flex items-center justify-between bg-white p-2 rounded border border-gray-100">
-                                                <div class="flex items-center gap-2">
-                                                    <div class="w-1 h-8 bg-green-400 rounded-full"></div>
-                                                    <div>
-                                                        <p class="text-xs font-bold text-gray-700">Ovo Mexido</p>
-                                                        <p class="text-[10px] text-gray-400">3 unidades (150g)</p>
-                                                    </div>
-                                                </div>
-                                                <div class="flex items-center gap-3">
-                                                    <span class="text-xs text-green-600 font-bold">100% Match</span>
-                                                    <button class="text-gray-300 hover:text-red-500"><i data-lucide="trash-2" class="w-3 h-3"></i></button>
-                                                </div>
-                                            </div>
-
-                                                <div class="flex items-center justify-between bg-white p-2 rounded border border-gray-100">
-                                                <div class="flex items-center gap-2">
-                                                    <div class="w-1 h-8 bg-yellow-400 rounded-full"></div>
-                                                    <div>
-                                                        <p class="text-xs font-bold text-gray-700">Queijo Minas</p>
-                                                        <p class="text-[10px] text-gray-400">4 fatias (120g)</p>
-                                                    </div>
-                                                </div>
-                                                <div class="flex items-center gap-3">
-                                                    <span class="text-xs text-yellow-600 font-bold">90% Match</span>
-                                                    <button class="text-gray-300 hover:text-red-500"><i data-lucide="trash-2" class="w-3 h-3"></i></button>
-                                                </div>
-                                            </div>
-
-                                            <button class="btn-outline w-full mt-2 py-2 border border-dashed border-gray-300 rounded text-xs text-gray-500 font-medium hover:text-usfit-blue hover:border-usfit-blue hover:bg-white transition-all flex items-center justify-center gap-1">
-                                                <i data-lucide="plus" class="w-3 h-3"></i> Adicionar opção de substituição
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="border-b border-gray-50"></div>
-
-                                <div class="flex items-center justify-between group">
-                                    <div class="flex items-center gap-3 flex-1">
-                                        <i data-lucide="grip-vertical" class="w-4 h-4 text-gray-300 cursor-move"></i>
-                                        <div>
-                                            <p class="text-sm font-medium text-gray-800">Mamão Papaia</p>
-                                            <p class="text-xs text-gray-400">1/2 unidade média (150g)</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center gap-6">
-                                        <div class="flex items-center gap-1">
-                                            <input type="number" value="150" class="w-12 text-center border border-gray-200 rounded text-sm py-1">
-                                            <span class="text-xs text-gray-500">g</span>
-                                        </div>
-                                        <button class="text-xs font-bold text-gray-400 hover:text-usfit-blue hover:bg-gray-50 px-2 py-1 rounded flex items-center gap-1 transition-colors border border-dashed border-gray-300">
-                                            <i data-lucide="plus" class="w-3 h-3"></i> Add substituição
-                                        </button>
-                                        <button class="opacity-0 group-hover:opacity-100 text-gray-400 hover:text-red-500 transition-opacity">
-                                            <i data-lucide="x" class="w-4 h-4"></i>
-                                        </button>
-                                    </div>
-                                </div>
+                            <div class="ing-list space-y-0 mb-4 divide-y divide-gray-100">
                             </div>
 
-                            <button class="btn-outline w-full justify-center border-dashed text-gray-500">
-                                <i data-lucide="plus-circle" class="w-5 h-5"></i> Adicionar Prato
+                            <div class="flex justify-center">
+                                <button class="btn-outline border-dashed border-usfit-blue text-usfit-blue hover:bg-blue-50" onclick="openIngredientModal(this)">
+                                    <i data-lucide="plus-circle" class="w-5 h-5"></i> Adicionar Ingrediente
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="flex gap-2 justify-center">
+                        <button class="btn-primary px-5 py-2.5 bg-usfit-gradient text-white rounded-full font-medium text-sm shadow-md shadow-cyan-500/30 flex-shrink-0 transition-transform hover:scale-105 flex items-center gap-1.5" onclick="createBlankMeal()"><i data-lucide="plus" class="w-3.5 h-3.5"></i> Refeição do zero</button>
+                        <button class="px-5 py-2.5 bg-white border border-gray-200 text-gray-600 rounded-full font-medium text-sm hover:bg-gray-50 hover:border-gray-300 flex-shrink-0 transition-colors flex items-center gap-1.5" onclick="openMealTemplatesModal()"><i data-lucide="bookmark" class="w-3.5 h-3.5"></i> Refeição pronta</button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                    <div class="flex items-center justify-left mb-4">
+                        <h2 class="font-bold text-gray-800 flex items-center gap-2 mr-1">
+                            <span class="w-6 h-6 rounded-full bg-blue-100 text-usfit-blue flex items-center justify-center text-xs">3</span>
+                            Suplementação & Manipulados
+                        </h2>(Opcional)
+                    </div>
+                    
+                    <div class="grid grid-cols-[1fr_7rem_1fr_2rem] gap-x-2 gap-y-1 mb-2 px-1">
+                        <span class="text-xs font-semibold text-gray-400 uppercase tracking-wide">Suplemento</span>
+                        <span class="text-xs font-semibold text-gray-400 uppercase tracking-wide">Dose</span>
+                        <span class="text-xs font-semibold text-gray-400 uppercase tracking-wide">Posologia</span>
+                        <span></span>
+                    </div>
+
+                    <div id="supplements-container" class="space-y-2">
+                        <div class="supp-item grid grid-cols-[1fr_7rem_1fr_2rem] items-center gap-2">
+                            <input type="text" placeholder="Ex: Creatina" class="form-input">
+                            <input type="text" placeholder="Ex: 5g" class="form-input">
+                            <input type="text" placeholder="Ex: Pós-treino" class="form-input">
+                            <button onclick="this.closest('.supp-item').remove()" class="text-gray-300 hover:text-red-500 transition-colors p-1 flex-shrink-0">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
                             </button>
                         </div>
                     </div>
 
-                    <div class="flex gap-2 justify-center">
-                        <button class="btn-primary py-1.5 px-3 text-xs"><i data-lucide="plus" class="w-3 h-3"></i> Nova Refeição</button>
+                    <div class="flex justify-center mt-3">
+                        <button onclick="addSupplement()" class="btn-outline border-dashed border-usfit-blue text-usfit-blue hover:bg-blue-50">
+                            <i data-lucide="plus-circle" class="w-4 h-4"></i> Adicionar Item
+                        </button>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mb-20">
-                    <div class="flex items-center justify-between mb-4">
+                <!-- Seção 4: Metas -->
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                    <div class="flex items-center gap-2 mb-5">
                         <h2 class="font-bold text-gray-800 flex items-center gap-2">
-                            <span class="w-6 h-6 rounded-full bg-blue-100 text-usfit-blue flex items-center justify-center text-xs">3</span>
-                            Suplementação & Manipulados
+                            <span class="w-6 h-6 rounded-full bg-blue-100 text-usfit-blue flex items-center justify-center text-xs">4</span>
+                            Metas
                         </h2>
                     </div>
-                    
-                    <div class="bg-gray-50 rounded-xl p-4 border border-gray-200">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-500 mb-2">Ingestão de Água</label>
                             <div class="relative">
-                                <input list="supplements-list" id="suppName" type="text" placeholder="Suplemento (ex: Creatina)" class="form-input">
-                                <datalist id="supplements-list">
-                                    <option value="Creatina Monohidratada">
-                                    <option value="Whey Protein Concentrado">
-                                    <option value="Whey Protein Isolado">
-                                    <option value="Beta-Alanina">
-                                    <option value="Cafeína (Caffeine)">
-                                    <option value="Multivitamínico">
-                                    <option value="Omega 3 (Óleo de Peixe)">
-                                    <option value="Vitamina D3">
-                                    <option value="Magnésio Dimalato">
-                                </datalist>
+                                <input type="number" placeholder="2" min="0" step="0.1" class="usfit-input w-full pr-14">
+                                <span class="absolute right-3 top-2.5 text-xs text-gray-400 font-bold">L/dia</span>
                             </div>
-                            <input id="suppDose" type="text" placeholder="Dose (ex: 5g)" class="form-input">
-                            <input id="suppFreq" type="text" placeholder="Posologia (ex: Pós-treino)" class="form-input">
                         </div>
-                        <button onclick="addSupplement()" class="btn-outline w-full justify-center border-dashed text-gray-500 hover:text-usfit-blue hover:border-usfit-blue">
-                            <i data-lucide="plus-circle" class="w-4 h-4"></i> Adicionar Item à Receita
-                        </button>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-500 mb-2">Refeição(s) Livre(s)</label>
+                            <div class="relative">
+                                <input type="number" placeholder="1" min="0" class="usfit-input w-full pr-20">
+                                <span class="absolute right-3 top-2.5 text-xs text-gray-400 font-bold">x/semana</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-500 mb-2">Cárdio</label>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="relative">
+                                    <input type="number" placeholder="30" min="0" class="usfit-input w-full pr-12">
+                                    <span class="absolute right-3 top-2.5 text-xs text-gray-400 font-bold">min</span>
+                                </div>
+                                <div class="relative">
+                                    <input type="number" placeholder="3" min="0" class="usfit-input w-full pr-12">
+                                    <span class="absolute right-3 top-2.5 text-xs text-gray-400 font-bold">x/sem</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
 
-                    <div id="supplements-container" class="mt-4 space-y-2">
-                        </div>
+                <!-- Seção 5: Observações Gerais -->
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mb-20">
+                    <div class="flex items-center gap-2 mb-5">
+                        <h2 class="font-bold text-gray-800 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-full bg-blue-100 text-usfit-blue flex items-center justify-center text-xs">5</span>
+                            Observações Gerais
+                        </h2>
+                    </div>
+                    <textarea rows="4" placeholder="Observações adicionais sobre o plano alimentar..." class="usfit-input w-full"></textarea>
                 </div>
 
             </div>
@@ -451,7 +422,7 @@
                 <div class="flex gap-6 text-sm">
                     <div class="text-center">
                         <span class="block text-xs text-gray-400 uppercase font-bold">Proteína</span>
-                        <span class="font-bold text-green-600" id="footerProt">0g</span>
+                        <span class="font-bold text-blue-600" id="footerProt">0g</span>
                     </div>
                     <div class="text-center">
                         <span class="block text-xs text-gray-400 uppercase font-bold">Carbo</span>
@@ -460,6 +431,10 @@
                     <div class="text-center">
                         <span class="block text-xs text-gray-400 uppercase font-bold">Gordura</span>
                         <span class="font-bold text-yellow-600" id="footerFat">0g</span>
+                    </div>
+                    <div class="text-center">
+                        <span class="block text-xs text-gray-400 uppercase font-bold">Fibras</span>
+                        <span class="font-bold text-green-600" id="footerFiber">0g</span>
                     </div>
                 </div>
 
@@ -472,10 +447,1069 @@
         </div>
 
     </div>
+    <!-- Modal: Nova Refeição -->
+    <div id="new-meal-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm mx-4 p-6">
+            <h3 class="font-bold text-gray-800 mb-4 flex items-center gap-2">
+                <i data-lucide="bookmark" class="w-4 h-4 text-usfit-cyan"></i> Refeições Prontas
+            </h3>
+            <div class="relative mb-3">
+                <i data-lucide="search" class="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400 pointer-events-none"></i>
+                <input id="meal-template-search" type="text" placeholder="Buscar refeição salva..."
+                       class="usfit-input-search text-xs py-1.5"
+                       oninput="_renderMealTemplatesList(this.value)">
+            </div>
+            <div id="meal-templates-list" class="space-y-2 max-h-60 overflow-y-auto"></div>
+            <button onclick="closeNewMealModal()" class="mt-4 w-full text-xs text-gray-400 hover:text-gray-600 py-1">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- Modal: Salvar com nome -->
+    <div id="save-name-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm mx-4 p-6">
+            <h3 id="save-name-modal-title" class="font-bold text-gray-800 mb-4 flex items-center gap-2">
+                <i data-lucide="bookmark" class="w-4 h-4 text-usfit-cyan"></i> Salvar
+            </h3>
+            <div class="mb-4">
+                <label class="text-xs font-medium text-gray-500 mb-1.5 block">Nome</label>
+                <input id="save-name-input" type="text" class="usfit-input w-full text-sm" placeholder="Digite um nome..."
+                       onkeydown="if(event.key==='Enter') _confirmSaveName()">
+            </div>
+            <div class="flex gap-2">
+                <button onclick="_closeSaveNameModal()" class="flex-1 py-2 text-sm text-gray-500 bg-gray-100 hover:bg-gray-200 rounded-xl font-medium transition-colors">Cancelar</button>
+                <button onclick="_confirmSaveName()" class="flex-1 py-2 text-sm text-white rounded-xl font-medium transition-colors" style="background: linear-gradient(135deg,#0ea5e9,#06b6d4)">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Confirmação de exclusão -->
+    <div id="confirm-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm mx-4 p-6">
+            <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="trash-2" class="w-5 h-5 text-red-500"></i>
+                </div>
+                <h3 id="confirm-modal-title" class="font-bold text-gray-800 text-sm leading-snug"></h3>
+            </div>
+            <p id="confirm-modal-body" class="text-xs text-gray-400 mb-5 pl-13"></p>
+            <div class="flex gap-2">
+                <button onclick="_confirmModalResolve(false)" class="flex-1 py-2 text-sm text-gray-500 bg-gray-100 hover:bg-gray-200 rounded-xl font-medium transition-colors">Cancelar</button>
+                <button onclick="_confirmModalResolve(true)" class="flex-1 py-2 text-sm text-white bg-red-500 hover:bg-red-600 rounded-xl font-medium transition-colors">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Substituições Prontas -->
+    <div id="sub-source-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm mx-4 p-6">
+            <h3 class="font-bold text-gray-800 mb-4 flex items-center gap-2">
+                <i data-lucide="bookmark" class="w-4 h-4 text-usfit-cyan"></i> Substituições Prontas
+            </h3>
+            <div class="relative mb-3">
+                <i data-lucide="search" class="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400 pointer-events-none"></i>
+                <input id="sub-group-search" type="text" placeholder="Buscar lista salva..."
+                       class="usfit-input-search text-xs py-1.5"
+                       oninput="_renderSubGroupsList(this.value)">
+            </div>
+            <div id="sub-groups-list" class="space-y-2 max-h-60 overflow-y-auto"></div>
+            <button onclick="closeSubSourceModal()" class="mt-4 w-full text-xs text-gray-400 hover:text-gray-600 py-1">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- Modal: Buscar Ingrediente -->
+    <div id="ingredient-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl mx-4 overflow-hidden flex flex-col" style="max-height: 90vh;">
+            <!-- Header -->
+            <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100 flex-shrink-0">
+                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                    <i data-lucide="salad" class="w-4 h-4 text-usfit-cyan"></i> <span id="modal-ing-title">Buscar Ingrediente</span>
+                </h3>
+                <button onclick="closeIngredientModal()" class="p-1.5 text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+            <!-- Substitution info banner -->
+            <div id="sub-info-banner" class="hidden mx-6 mt-4 mb-1 p-3 bg-blue-50 rounded-xl border border-blue-100 flex-shrink-0">
+                <p class="text-[10px] uppercase font-bold text-blue-400 mb-1.5 tracking-wide">Buscando substituição para</p>
+                <div class="flex items-start justify-between gap-4">
+                    <p id="sub-banner-name" class="text-sm font-bold text-gray-800"></p>
+                    <div class="flex items-center gap-3 text-[11px] flex-shrink-0">
+                        <span><strong class="text-blue-600">P:</strong> <span id="sub-banner-prot"></span>g</span>
+                        <span><strong class="text-yellow-600">G:</strong> <span id="sub-banner-fat"></span>g</span>
+                        <span><strong class="text-orange-600">C:</strong> <span id="sub-banner-carbs"></span>g</span>
+                        <span><strong class="text-gray-500">F:</strong> <span id="sub-banner-fiber"></span>g</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Search -->
+            <div class="px-6 pt-4 pb-3 flex-shrink-0">
+                <div class="relative">
+                    <i data-lucide="search" class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
+                    <input id="ingredient-search-input" type="text" placeholder="Buscar ingrediente..."
+                        class="usfit-input pl-9" oninput="filterIngredients(this.value)" autocomplete="off">
+                </div>
+            </div>
+            <!-- Origin filter -->
+            <div class="px-6 pb-3 flex items-center gap-2 flex-shrink-0">
+                <button id="filter-btn-all" onclick="setIngredientOriginFilter('all')"
+                    class="px-3 py-1 rounded-full text-xs font-semibold transition-colors bg-usfit-cyan text-white">Todos</button>
+                <button id="filter-btn-taco" onclick="setIngredientOriginFilter('TACO')"
+                    class="px-3 py-1 rounded-full text-xs font-semibold transition-colors bg-gray-100 text-gray-500 hover:bg-teal-50 hover:text-teal-700">Tabela TACO</button>
+                <button id="filter-btn-mine" onclick="setIngredientOriginFilter('mine')"
+                    class="px-3 py-1 rounded-full text-xs font-semibold transition-colors bg-gray-100 text-gray-500 hover:bg-blue-50 hover:text-blue-700">Meus Ingredientes</button>
+            </div>
+            <!-- Column headers -->
+            <div class="px-6 pb-2 grid grid-cols-[1fr_auto_auto_auto_auto_auto] gap-x-4 items-center border-b border-gray-100 flex-shrink-0">
+                <span class="text-[10px] font-bold uppercase text-gray-400 tracking-wide">Nome</span>
+                <span class="text-[10px] font-bold uppercase text-gray-400 tracking-wide w-28 text-center">Origem</span>
+                <span class="text-[10px] font-bold uppercase text-gray-400 tracking-wide w-12 text-right">Prot</span>
+                <span class="text-[10px] font-bold uppercase text-gray-400 tracking-wide w-12 text-right">Gord</span>
+                <span class="text-[10px] font-bold uppercase text-gray-400 tracking-wide w-12 text-right">Carbo</span>
+                <span class="text-[10px] font-bold uppercase text-gray-400 tracking-wide w-12 text-right">Fibras</span>
+            </div>
+            <!-- Results -->
+            <ul id="ingredient-results" class="px-4 py-2 overflow-y-auto flex-1"></ul>
+        </div>
+    </div>
+
     <script src="assets/js/functions.js"></script>
     <script>
+        lucide.createIcons();
         // Init
         window.onload = calculateMetabolism;
     </script>
+    <script>
+        const INGREDIENTS = [
+            { name: 'Ovo de Galinha Inteiro Cozido',  origin: 'TACO', protein: 13.3, fat: 8.6,  carbs: 0.6,  fiber: 0.0, kcal: 146, usualMeasure: '1 unidade média (50g)' },
+            { name: 'Peito de Frango Grelhado',        origin: 'TACO', protein: 32.0, fat: 1.6,  carbs: 0.0,  fiber: 0.0, kcal: 163, usualMeasure: '1 filé médio (100g)' },
+            { name: 'Arroz Branco Cozido',             origin: 'TACO', protein: 2.5,  fat: 0.2,  carbs: 28.1, fiber: 1.6, kcal: 128, usualMeasure: '4 colheres de sopa (100g)' },
+            { name: 'Feijão Carioca Cozido',           origin: 'TACO', protein: 8.7,  fat: 0.5,  carbs: 16.4, fiber: 8.7, kcal: 97,  usualMeasure: '1 concha média (86g)' },
+            { name: 'Batata Doce Cozida',              origin: 'TACO', protein: 1.4,  fat: 0.1,  carbs: 24.4, fiber: 2.2, kcal: 77,  usualMeasure: '1 unidade média (130g)' },
+            { name: 'Banana Prata',                    origin: 'TACO', protein: 1.4,  fat: 0.1,  carbs: 26.0, fiber: 2.0, kcal: 98,  usualMeasure: '1 unidade média (90g)' },
+            { name: 'Mamão Papaia',                    origin: 'TACO', protein: 0.5,  fat: 0.1,  carbs: 11.0, fiber: 1.8, kcal: 40,  usualMeasure: '1/2 unidade média (150g)' },
+            { name: 'Aveia em Flocos',                 origin: 'TACO', protein: 13.9, fat: 8.5,  carbs: 66.6, fiber: 9.1, kcal: 394, usualMeasure: '3 colheres de sopa (40g)' },
+            { name: 'Leite Integral',                  origin: 'TACO', protein: 2.9,  fat: 3.2,  carbs: 4.7,  fiber: 0.0, kcal: 61,  usualMeasure: '1 copo (200ml)' },
+            { name: 'Iogurte Grego Natural',           origin: 'TACO', protein: 9.0,  fat: 0.7,  carbs: 3.6,  fiber: 0.0, kcal: 56,  usualMeasure: '1 pote (170g)' },
+            { name: 'Salmão Grelhado',                 origin: 'TACO', protein: 25.4, fat: 13.6, carbs: 0.0,  fiber: 0.0, kcal: 208, usualMeasure: '1 filé médio (120g)' },
+            { name: 'Azeite de Oliva Extra Virgem',    origin: 'TACO', protein: 0.0,  fat: 100.0, carbs: 0.0, fiber: 0.0, kcal: 884, usualMeasure: '1 colher de sopa (13g)' },
+            { name: 'Whey Protein Concentrado 80%',    origin: 'Meus Ingredientes', protein: 80.0, fat: 4.0,  carbs: 8.0,  fiber: 0.5, kcal: 390, usualMeasure: '1 scoop (30g)' },
+            { name: 'Mix de Castanhas Premium',        origin: 'Meus Ingredientes', protein: 15.0, fat: 55.0, carbs: 18.0, fiber: 6.0, kcal: 620, usualMeasure: '1 punhado (30g)' },
+            { name: 'Pasta de Amendoim Integral',      origin: 'Meus Ingredientes', protein: 25.3, fat: 50.4, carbs: 20.3, fiber: 5.9, kcal: 596, usualMeasure: '1 colher de sopa (32g)' },
+        ];
+
+        function _extractUnit(measure) {
+            return measure.replace(/^[\d\/\.]+\s+/, '').replace(/\s*\(.*\)$/, '').trim();
+        }
+
+        function _abbrevUnit(label) {
+            const map = {
+                'unidade média':    'un.',
+                'unidades médias':  'un.',
+                'filé médio':       'filé',
+                'filés médios':     'filé',
+                'colher de sopa':   'col. sopa',
+                'colheres de sopa': 'col. sopa',
+                'concha média':     'concha',
+                'conchas médias':   'concha',
+                'punhado':          'pun.',
+                'punhados':         'pun.',
+            };
+            return map[label.toLowerCase()] ?? label;
+        }
+
+        let _activeIngredientBtn = null;
+        let _activeSubBtn       = null;
+        let _modalMode          = 'ingredient'; // 'ingredient' | 'substitution'
+        let _ingredientOriginFilter = 'all';
+        let _origMacros         = null; // { prot, fat, carbs } for similarity scoring
+
+        function openIngredientModal(btn) {
+            _activeIngredientBtn = btn;
+            _activeSubBtn = null;
+            _modalMode = 'ingredient';
+            _ingredientOriginFilter = 'all';
+            document.getElementById('modal-ing-title').textContent = 'Buscar Ingrediente';
+            document.getElementById('sub-info-banner').classList.add('hidden');
+            document.getElementById('ingredient-search-input').value = '';
+            _updateFilterButtons();
+            renderIngredientList(INGREDIENTS);
+            document.getElementById('ingredient-modal').classList.remove('hidden');
+            setTimeout(() => document.getElementById('ingredient-search-input').focus(), 50);
+        }
+
+        function openSubstitutionModal(btn) {
+            _activeSubBtn = btn;
+            _activeIngredientBtn = null;
+            _modalMode = 'substitution';
+            const group = btn.closest('.group');
+            const name  = (group.dataset.ingName || group.querySelector('.text-sm.font-medium.text-gray-800')?.textContent || '').trim();
+            _origMacros = {
+                prot:  parseFloat(group.dataset.ingProt)  || 0,
+                fat:   parseFloat(group.dataset.ingFat)   || 0,
+                carbs: parseFloat(group.dataset.ingCarbs) || 0
+            };
+            document.getElementById('modal-ing-title').textContent = 'Buscar Substituição';
+            document.getElementById('sub-banner-name').textContent  = name;
+            document.getElementById('sub-banner-prot').textContent  = group.dataset.ingProt  || '—';
+            document.getElementById('sub-banner-fat').textContent   = group.dataset.ingFat   || '—';
+            document.getElementById('sub-banner-carbs').textContent = group.dataset.ingCarbs || '—';
+            document.getElementById('sub-banner-fiber').textContent = group.dataset.ingFiber || '—';
+            document.getElementById('sub-info-banner').classList.remove('hidden');
+            _ingredientOriginFilter = 'all';
+            document.getElementById('ingredient-search-input').value = '';
+            _updateFilterButtons();
+            renderIngredientList(INGREDIENTS);
+            document.getElementById('ingredient-modal').classList.remove('hidden');
+            setTimeout(() => document.getElementById('ingredient-search-input').focus(), 50);
+        }
+
+        function closeIngredientModal() {
+            document.getElementById('ingredient-modal').classList.add('hidden');
+            _activeIngredientBtn = null;
+            _activeSubBtn = null;
+            _modalMode = 'ingredient';
+        }
+
+        function filterIngredients(query) {
+            const q = query.toLowerCase().trim();
+            const filtered = INGREDIENTS.filter(ing => {
+                const matchesName   = ing.name.toLowerCase().includes(q);
+                const matchesOrigin = _ingredientOriginFilter === 'all'
+                    || (_ingredientOriginFilter === 'TACO' && ing.origin === 'TACO')
+                    || (_ingredientOriginFilter === 'mine' && ing.origin === 'Meus Ingredientes');
+                return matchesName && matchesOrigin;
+            });
+            renderIngredientList(filtered);
+        }
+
+        function setIngredientOriginFilter(filter) {
+            _ingredientOriginFilter = filter;
+            _updateFilterButtons();
+            filterIngredients(document.getElementById('ingredient-search-input').value);
+        }
+
+        function _updateFilterButtons() {
+            const active      = 'bg-usfit-cyan text-white';
+            const inactive    = 'bg-gray-100 text-gray-500 hover:bg-teal-50 hover:text-teal-700';
+            const inactiveMine = 'bg-gray-100 text-gray-500 hover:bg-blue-50 hover:text-blue-700';
+            document.getElementById('filter-btn-all').className  = 'px-3 py-1 rounded-full text-xs font-semibold transition-colors ' + (_ingredientOriginFilter === 'all'  ? active : inactive);
+            document.getElementById('filter-btn-taco').className = 'px-3 py-1 rounded-full text-xs font-semibold transition-colors ' + (_ingredientOriginFilter === 'TACO' ? 'bg-teal-600 text-white' : inactive);
+            document.getElementById('filter-btn-mine').className = 'px-3 py-1 rounded-full text-xs font-semibold transition-colors ' + (_ingredientOriginFilter === 'mine' ? 'bg-blue-600 text-white' : inactiveMine);
+        }
+
+        function _calcSimilarity(orig, cand) {
+            const total = orig.prot + orig.carbs + orig.fat;
+            if (total === 0) return 50;
+            const diff = Math.abs(orig.prot - cand.protein) + Math.abs(orig.carbs - cand.carbs) + Math.abs(orig.fat - cand.fat);
+            return Math.max(0, Math.round(100 - (diff / total) * 100));
+        }
+
+        function renderIngredientList(list) {
+            const ul = document.getElementById('ingredient-results');
+            if (!list.length) {
+                ul.innerHTML = '<li class="text-sm text-gray-400 text-center py-8">Nenhum ingrediente encontrado.</li>';
+                return;
+            }
+            const clickFn = _modalMode === 'substitution' ? 'selectSubstitution' : 'selectIngredient';
+            let displayList = list.map(ing => ({ ing, idx: INGREDIENTS.indexOf(ing) }));
+            if (_modalMode === 'substitution' && _origMacros) {
+                displayList = displayList
+                    .map(item => ({ ...item, score: _calcSimilarity(_origMacros, item.ing) }))
+                    .sort((a, b) => b.score - a.score);
+            }
+            ul.innerHTML = displayList.map(({ ing, idx, score }) => {
+                const originBadge = ing.origin === 'TACO'
+                    ? '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-teal-100 text-teal-700 whitespace-nowrap">Tabela TACO</span>'
+                    : '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-blue-700 whitespace-nowrap">Meus Ingredientes</span>';
+                let scoreBadge = '';
+                if (_modalMode === 'substitution' && score !== undefined) {
+                    const color = score >= 80 ? 'bg-green-100 text-green-700' : score >= 50 ? 'bg-yellow-100 text-yellow-700' : 'bg-red-100 text-red-600';
+                    scoreBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold ${color} whitespace-nowrap">${score}% similar</span>`;
+                }
+                return `
+                <li>
+                    <button onclick="${clickFn}(${idx})"
+                        class="w-full text-left px-2 py-2.5 rounded-xl hover:bg-cyan-50 transition-colors grid grid-cols-[1fr_auto_auto_auto_auto_auto_auto] gap-x-3 items-center group/item border border-transparent hover:border-cyan-100">
+                        <div class="min-w-0">
+                            <p class="font-semibold text-gray-800 text-sm group-hover/item:text-usfit-cyan transition-colors truncate">${ing.name}</p>
+                            <p class="text-xs text-gray-400 truncate">${ing.usualMeasure}</p>
+                        </div>
+                        <div class="w-28 flex justify-center">${originBadge}</div>
+                        ${_modalMode === 'substitution' ? `<div class="w-20 flex justify-center">${scoreBadge}</div>` : ''}
+                        <span class="text-xs font-bold text-blue-600  w-12 text-right">${ing.protein}g</span>
+                        <span class="text-xs font-bold text-yellow-600 w-12 text-right">${ing.fat}g</span>
+                        <span class="text-xs font-bold text-orange-600 w-12 text-right">${ing.carbs}g</span>
+                        <span class="text-xs font-bold text-gray-500  w-12 text-right">${ing.fiber}g</span>
+                    </button>
+                </li>`;
+            }).join('');
+            lucide.createIcons();
+        }
+
+        function _parsePortionG(usualMeasure) {
+            const match = usualMeasure.match(/\((\d+(?:\.\d+)?)\s*(?:g|ml)\)/);
+            return match ? parseFloat(match[1]) : 100;
+        }
+
+        function recalcIngredient(el) {
+            const group = el.closest('.group');
+            if (!group) return;
+            const qtyInput = group.querySelector('input[type=number]');
+            const unitSel  = group.querySelector('select.unit-select');
+            const qty = parseFloat(qtyInput?.value) || 1;
+            const portionG = parseFloat(group.dataset.portionG) || 100;
+            const unitVal  = unitSel ? unitSel.value : 'usual';
+            const gramsPerUnit = unitVal === 'g' ? 1 : unitVal === 'kg' ? 1000 : portionG;
+            const totalG = qty * gramsPerUnit;
+            const prot100  = parseFloat(group.dataset.ingProt)  || 0;
+            const carbs100 = parseFloat(group.dataset.ingCarbs) || 0;
+            const fat100   = parseFloat(group.dataset.ingFat)   || 0;
+            const fiber100 = parseFloat(group.dataset.ingFiber) || 0;
+            const kcal100  = parseFloat(group.dataset.ingKcal)  || 0;
+            const r = v => Math.round(v * 10) / 10;
+            const prot  = r(prot100  * totalG / 100);
+            const carbs = r(carbs100 * totalG / 100);
+            const fat   = r(fat100   * totalG / 100);
+            const fiber = r(fiber100 * totalG / 100);
+            const kcal  = Math.round(kcal100  * totalG / 100);
+            const ps = group.querySelector('[data-meal-prot]');  if (ps)  { ps.dataset.mealProt  = prot;  ps.innerHTML  = `<strong class="text-blue-600">P:</strong> ${prot}g`; }
+            const cs = group.querySelector('[data-meal-carb]');  if (cs)  { cs.dataset.mealCarb  = carbs; cs.innerHTML  = `<strong class="text-orange-600">C:</strong> ${carbs}g`; }
+            const fs = group.querySelector('[data-meal-fat]');   if (fs)  { fs.dataset.mealFat   = fat;   fs.innerHTML  = `<strong class="text-yellow-600">G:</strong> ${fat}g`; }
+            const fbs = group.querySelector('[data-meal-fiber]'); if (fbs) { fbs.dataset.mealFiber = fiber; fbs.innerHTML = `<strong class="text-green-600">F:</strong> ${fiber}g`; }
+            const ks = group.querySelector('[data-meal-kcal]');  if (ks)  { ks.dataset.mealKcal  = kcal;  ks.textContent = `${kcal} kcal`; }
+            if (typeof sumMealStats === 'function') sumMealStats();
+        }
+
+        function selectIngredient(idx) {
+            if (!_activeIngredientBtn) return;
+            const ing = INGREDIENTS[idx];
+            const portionG = _parsePortionG(ing.usualMeasure);
+            const unit = _abbrevUnit(_extractUnit(ing.usualMeasure));
+            const r = v => Math.round(v * 10) / 10;
+            const initProt  = r(ing.protein * portionG / 100);
+            const initCarbs = r(ing.carbs   * portionG / 100);
+            const initFat   = r(ing.fat     * portionG / 100);
+            const initFiber = r(ing.fiber   * portionG / 100);
+            const initKcal  = Math.round(ing.kcal * portionG / 100);
+            const mealCard  = _activeIngredientBtn.closest('.meal-card');
+            const container = mealCard.querySelector('.ing-list');
+            const rowHTML = `
+                <div class="group"
+                    data-ing-name="${ing.name}" data-ing-prot="${ing.protein}" data-ing-fat="${ing.fat}"
+                    data-ing-carbs="${ing.carbs}" data-ing-fiber="${ing.fiber}" data-ing-kcal="${ing.kcal}"
+                    data-portion-g="${portionG}">
+                    <div class="flex items-center gap-2 py-1.5">
+                        <i data-lucide="grip-vertical" class="w-4 h-4 text-gray-300 cursor-move flex-shrink-0"></i>
+                        <div class="flex-1 min-w-0 mr-1">
+                            <p class="text-sm font-medium text-gray-800 truncate">${ing.name}</p>
+                            <p class="text-xs text-gray-400 truncate">${ing.usualMeasure}</p>
+                        </div>
+                        <span data-meal-prot="${initProt}"  class="w-14 text-right text-xs flex-shrink-0 tabular-nums"><strong class="text-blue-600">P:</strong> ${initProt}g</span>
+                        <span data-meal-carb="${initCarbs}" class="w-14 text-right text-xs flex-shrink-0 tabular-nums"><strong class="text-orange-600">C:</strong> ${initCarbs}g</span>
+                        <span data-meal-fat="${initFat}"    class="w-12 text-right text-xs flex-shrink-0 tabular-nums"><strong class="text-yellow-600">G:</strong> ${initFat}g</span>
+                        <span data-meal-fiber="${initFiber}" class="w-12 text-right text-xs flex-shrink-0 tabular-nums"><strong class="text-green-600">F:</strong> ${initFiber}g</span>
+                        <span data-meal-kcal="${initKcal}"  class="w-[72px] text-right text-xs font-bold text-gray-700 flex-shrink-0 tabular-nums">${initKcal} kcal</span>
+                        <input type="number" value="1" min="0" step="0.5" class="w-11 text-center border border-gray-200 rounded text-xs py-1 flex-shrink-0" oninput="recalcIngredient(this)">
+                        <select class="unit-select text-xs text-gray-500 border border-gray-200 rounded px-1 py-0.5 bg-white flex-shrink-0 w-20" onchange="recalcIngredient(this)">
+                            <option value="usual">${unit}</option>
+                            <option value="g">g</option>
+                        </select>
+                        <button class="sub-add-btn text-xs font-bold text-gray-400 hover:text-usfit-blue hover:bg-gray-50 px-2 py-1 rounded flex items-center gap-1 transition-colors border border-dashed border-gray-300 flex-shrink-0 w-[136px] justify-center" onclick="_toggleSubPanel(this)">
+                            <i data-lucide="plus" class="w-3 h-3"></i> Substituições
+                        </button>
+                        <button class="text-gray-400 hover:text-red-500 flex-shrink-0" onclick="_removeIngredient(this)">
+                            <i data-lucide="x" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                    <div class="substitution-panel bg-gray-50 mt-2 rounded-lg border border-dashed border-gray-300 hidden">
+                        <div class="p-3">
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="text-[10px] uppercase font-bold text-gray-400">Lista de Substituições</p>
+                                <div class="flex items-center gap-1.5">
+                                    <button onclick="saveSubstitutionSet(this)" title="Salvar conjunto de substituições" class="text-gray-300 hover:text-amber-500 transition-colors">
+                                        <i data-lucide="bookmark" class="w-3.5 h-3.5"></i>
+                                    </button>
+                                    <button onclick="clearSubstitutionSet(this)" title="Excluir todas as substituições" class="text-gray-300 hover:text-red-500 transition-colors">
+                                        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="space-y-2 mb-1"></div>
+                            <div class="flex justify-center gap-2 mt-2">
+                                <button onclick="openSubstitutionModal(this)" class="text-xs font-semibold text-usfit-blue border border-dashed border-usfit-blue px-3 py-1.5 rounded-full flex items-center gap-1.5 hover:bg-blue-50 transition-colors">
+                                    <i data-lucide="plus" class="w-3 h-3"></i> Substituições do zero
+                                </button>
+                                <button onclick="openSubSourceModal(this)" class="text-xs font-semibold text-gray-500 border border-dashed border-gray-300 px-3 py-1.5 rounded-full flex items-center gap-1.5 hover:bg-gray-50 transition-colors">
+                                    <i data-lucide="bookmark" class="w-3 h-3"></i> Substituições prontas
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            container.insertAdjacentHTML('beforeend', rowHTML);
+            lucide.createIcons();
+            if (typeof sumMealStats === 'function') sumMealStats();
+            _notify('Ingrediente adicionado');
+            closeIngredientModal();
+        }
+
+        function selectSubstitution(idx) {
+            if (!_activeSubBtn) return;
+            const ing   = INGREDIENTS[idx];
+            const group = _activeSubBtn.closest('.group');
+            const panel = group.querySelector('.substitution-panel');
+            const spacer = panel.querySelector('.space-y-2');
+            // :scope > button seleciona apenas o botão direto do spacer (evita pegar botões dentro de sub-items)
+            const addBtn = spacer.querySelector(':scope > button');
+            const subHTML = `
+                <div class="sub-item flex items-center justify-between bg-white p-2 rounded border border-gray-100 gap-3"
+                    data-sub-name="${ing.name}" data-sub-prot="${ing.protein}" data-sub-fat="${ing.fat}"
+                    data-sub-carbs="${ing.carbs}" data-sub-fiber="${ing.fiber}" data-sub-kcal="${ing.kcal}"
+                    data-sub-measure="${ing.usualMeasure}">
+                    <div class="flex items-center gap-2 flex-shrink-0">
+                        <div class="w-1 h-8 bg-cyan-400 rounded-full"></div>
+                        <div>
+                            <p class="text-xs font-bold text-gray-700">${ing.name}</p>
+                            <p class="text-[10px] text-gray-400">${ing.usualMeasure}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs">
+                        <span><strong class="text-blue-600">P:</strong> ${ing.protein}g</span>
+                        <span><strong class="text-orange-600">C:</strong> ${ing.carbs}g</span>
+                        <span><strong class="text-yellow-600">G:</strong> ${ing.fat}g</span>
+                        <span><strong class="text-green-600">F:</strong> ${ing.fiber}g</span>
+                        <span class="font-bold text-gray-700">${ing.kcal} kcal</span>
+                        <input type="number" value="1" class="w-12 text-center border border-gray-200 rounded text-xs py-0.5">
+                        <select class="unit-select text-xs text-gray-500 border border-gray-200 rounded px-1 py-0.5 bg-white flex-shrink-0 w-20">
+                            <option value="usual">${_abbrevUnit(_extractUnit(ing.usualMeasure))}</option>
+                            <option value="g">g</option>
+                        </select>
+                        <button onclick="swapWithMain(this)" title="Tornar ingrediente principal" class="text-gray-300 hover:text-blue-500 flex-shrink-0 transition-colors">
+                            <i data-lucide="arrow-left-right" class="w-3 h-3"></i>
+                        </button>
+                        <button onclick="_removeSubItem(this)" class="text-gray-300 hover:text-red-500 flex-shrink-0 transition-colors">
+                            <i data-lucide="trash-2" class="w-3 h-3"></i>
+                        </button>
+                    </div>
+                </div>`;
+            if (addBtn) {
+                addBtn.insertAdjacentHTML('beforebegin', subHTML);
+            } else {
+                spacer.insertAdjacentHTML('beforeend', subHTML);
+            }
+            panel.classList.remove('hidden');
+            panel.style.maxHeight = 'none';
+            _updateSubToggleBtn(group);
+            lucide.createIcons();
+            _notify('Substituição adicionada');
+            closeIngredientModal();
+        }
+
+        function _toggleSubPanel(btn) {
+            const panel = btn.closest('.group').querySelector('.substitution-panel');
+            const isHidden = panel.classList.contains('hidden');
+            if (isHidden) {
+                panel.classList.remove('hidden');
+                panel.style.maxHeight = 'none';
+                btn.innerHTML = '<i data-lucide="minus" class="w-3 h-3"></i> Substituições';
+            } else {
+                panel.classList.add('hidden');
+                panel.style.maxHeight = '';
+                btn.innerHTML = '<i data-lucide="plus" class="w-3 h-3"></i> Substituições';
+            }
+            lucide.createIcons({ nodes: [btn] });
+        }
+
+        function _updateSubToggleBtn(group) {
+            const count     = group.querySelectorAll('.sub-item').length;
+            const addBtn    = group.querySelector('.sub-add-btn');
+            const toggleBtn = group.querySelector('.sub-toggle-btn');
+            const label     = `${count} substituiç${count === 1 ? 'ão' : 'ões'}`;
+            if (count > 0 && !toggleBtn && addBtn) {
+                addBtn.insertAdjacentHTML('afterend', `<button class="sub-toggle-btn text-xs font-bold text-usfit-blue bg-blue-50 hover:bg-blue-100 px-2 py-1 rounded flex items-center gap-1 transition-colors flex-shrink-0 w-[136px] justify-center" onclick="toggleSubs(this)"><i data-lucide="refresh-cw" class="w-3 h-3"></i> ${label}</button>`);
+                addBtn.classList.add('hidden');
+            } else if (count > 0 && toggleBtn) {
+                toggleBtn.innerHTML = `<i data-lucide="refresh-cw" class="w-3 h-3"></i> ${label}`;
+                if (addBtn) addBtn.classList.add('hidden');
+            } else if (count === 0 && toggleBtn) {
+                toggleBtn.remove();
+                if (addBtn) addBtn.classList.remove('hidden');
+            }
+            lucide.createIcons();
+        }
+
+        // Override toggleSubs from functions.js to use dynamic count
+        function toggleSubs(btn) {
+            const panel = btn.closest('.group').querySelector('.substitution-panel');
+            const isClosed = panel.classList.contains('hidden') || panel.style.maxHeight === '0px';
+            if (isClosed) {
+                panel.classList.remove('hidden');
+                panel.style.maxHeight = 'none';
+                btn.innerHTML = `<i data-lucide="chevron-up" class="w-3 h-3"></i> Ocultar`;
+                btn.classList.add('bg-blue-100', 'text-usfit-blue');
+            } else {
+                panel.style.maxHeight = '0px';
+                setTimeout(() => panel.classList.add('hidden'), 300);
+                const count = btn.closest('.group').querySelectorAll('.sub-item').length;
+                btn.innerHTML = `<i data-lucide="refresh-cw" class="w-3 h-3"></i> ${count} substituiç${count === 1 ? 'ão' : 'ões'}`;
+                btn.classList.remove('bg-blue-100');
+            }
+            lucide.createIcons();
+        }
+
+        document.getElementById('ingredient-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeIngredientModal();
+        });
+
+        const MEAL_CARD_HTML = (name = '') => `
+            <div class="border border-gray-200 rounded-xl overflow-hidden mb-4 meal-card">
+                <div class="bg-gray-50 px-4 py-3 flex items-center justify-between border-b border-gray-200">
+                    <div class="flex items-center gap-2">
+                        <div class="flex flex-col gap-0.5">
+                            <button onclick="moveMealUp(this)" class="text-gray-300 hover:text-gray-500 leading-none" title="Mover para cima"><i data-lucide="chevron-up" class="w-3.5 h-3.5"></i></button>
+                            <button onclick="moveMealDown(this)" class="text-gray-300 hover:text-gray-500 leading-none" title="Mover para baixo"><i data-lucide="chevron-down" class="w-3.5 h-3.5"></i></button>
+                        </div>
+                        <input type="text" value="${name}" placeholder="Nome da Refeição" class="font-bold text-gray-800 bg-transparent border-none outline-none focus:bg-white focus:border focus:border-gray-200 rounded px-1 py-0.5 text-sm w-44 cursor-text" required
+                               onkeydown="if(event.key==='Enter'||event.key==='Escape'){event.preventDefault();this.closest('.flex').querySelector('input[type=time]').focus();}">
+                        <input type="time" value="" class="bg-white border border-gray-200 text-gray-500 px-2 py-0.5 rounded text-xs font-mono" required>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs text-gray-500">
+                        <div class="meal-totals flex items-center gap-2 tabular-nums text-xs border-r border-gray-200 pr-3 mr-1">
+                            <span class="meal-prot-total"><strong class="text-blue-600">P:</strong> 0g</span>
+                            <span class="meal-carb-total"><strong class="text-orange-600">C:</strong> 0g</span>
+                            <span class="meal-fat-total"><strong class="text-yellow-600">G:</strong> 0g</span>
+                            <span class="meal-fiber-total"><strong class="text-green-600">F:</strong> 0g</span>
+                            <span class="meal-kcal-total font-semibold text-gray-600">0 kcal</span>
+                        </div>
+                        <label class="flex items-center gap-1.5 cursor-pointer" title="Incluir no cálculo total">
+                            <input type="checkbox" checked class="meal-include-toggle cursor-pointer" onchange="updateMealCalc(this)">
+                        </label>
+                        <button onclick="saveMealTemplate(this)" title="Salvar refeição" class="text-gray-400 hover:text-amber-500 transition-colors"><i data-lucide="bookmark" class="w-3.5 h-3.5"></i></button>
+                        <button onclick="duplicateMeal(this)" title="Duplicar refeição" class="text-gray-400 hover:text-usfit-blue transition-colors"><i data-lucide="copy" class="w-3.5 h-3.5"></i></button>
+                        <button class="text-gray-400 hover:text-red-500" onclick="removeMeal(this)"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                    </div>
+                </div>
+                <div class="p-4 bg-white">
+                    <div class="ing-list space-y-0 mb-4 divide-y divide-gray-100"></div>
+                    <div class="flex justify-center">
+                        <button class="btn-outline border-dashed border-usfit-blue text-usfit-blue hover:bg-blue-50" onclick="openIngredientModal(this)">
+                            <i data-lucide="plus-circle" class="w-5 h-5"></i> Adicionar Ingrediente
+                        </button>
+                    </div>
+                </div>
+            </div>`;
+
+        function openMealTemplatesModal() {
+            const searchInput = document.getElementById('meal-template-search');
+            if (searchInput) searchInput.value = '';
+            _renderMealTemplatesList('');
+            document.getElementById('new-meal-modal').classList.remove('hidden');
+        }
+
+        function closeNewMealModal() {
+            document.getElementById('new-meal-modal').classList.add('hidden');
+        }
+
+        function createBlankMeal() {
+            const container = document.getElementById('meals-container');
+            container.insertAdjacentHTML('beforeend', MEAL_CARD_HTML());
+            lucide.createIcons();
+            closeNewMealModal();
+            const nameInput = container.lastElementChild.querySelector('input[type=text]');
+            if (nameInput) setTimeout(() => { nameInput.focus(); nameInput.select(); }, 50);
+        }
+
+        function _renderMealTemplatesList(query = '') {
+            const templates = JSON.parse(localStorage.getItem('usfit_meal_templates') || '[]');
+            const list = document.getElementById('meal-templates-list');
+            const q = query.toLowerCase().trim();
+            const filtered = templates
+                .map((t, i) => ({ ...t, _origIdx: i }))
+                .filter(t => !q || t.name.toLowerCase().includes(q));
+            if (templates.length === 0) {
+                list.innerHTML = '<p class="text-xs text-gray-400 text-center py-3">Nenhuma refeição salva.</p>';
+                return;
+            }
+            if (filtered.length === 0) {
+                list.innerHTML = '<p class="text-xs text-gray-400 text-center py-3">Nenhum resultado para "<strong>' + q + '</strong>".</p>';
+                return;
+            }
+            list.innerHTML = filtered.map(t => `
+                <button onclick="loadMealTemplate(${t._origIdx})" class="w-full p-3 bg-gray-50 hover:bg-blue-50 rounded-xl text-left border border-gray-200 hover:border-blue-200 transition-colors">
+                    <p class="font-medium text-gray-800 text-sm">${t.name}</p>
+                    <p class="text-xs text-gray-400">${t.ingredients.length} ingrediente${t.ingredients.length !== 1 ? 's' : ''}</p>
+                </button>`).join('');
+        }
+
+        function loadMealTemplate(idx) {
+            const templates = JSON.parse(localStorage.getItem('usfit_meal_templates') || '[]');
+            const template = templates[idx];
+            if (!template) return;
+            const container = document.getElementById('meals-container');
+            container.insertAdjacentHTML('beforeend', MEAL_CARD_HTML(template.name));
+            const card = container.lastElementChild;
+            const ingContainer = card.querySelector('.ing-list');
+            template.ingredients.forEach(ing => {
+                const portionG = ing.portionG || 100;
+                const unit = ing.unit || 'usual';
+                const unitLabel = ing.unitLabel || 'g';
+                const rowHTML = `
+                    <div class="group"
+                        data-ing-name="${ing.name}" data-ing-prot="${ing.prot}" data-ing-fat="${ing.fat}"
+                        data-ing-carbs="${ing.carbs}" data-ing-fiber="${ing.fiber}" data-ing-kcal="${ing.kcal}"
+                        data-portion-g="${portionG}">
+                        <div class="flex items-center gap-2 py-1.5">
+                            <i data-lucide="grip-vertical" class="w-4 h-4 text-gray-300 cursor-move flex-shrink-0"></i>
+                            <div class="flex-1 min-w-0 mr-1">
+                                <p class="text-sm font-medium text-gray-800 truncate">${ing.name}</p>
+                                <p class="text-xs text-gray-400 truncate">${ing.measure || ''}</p>
+                            </div>
+                            <span data-meal-prot="${ing.displayProt}"   class="w-14 text-right text-xs flex-shrink-0 tabular-nums"><strong class="text-blue-600">P:</strong> ${ing.displayProt}g</span>
+                            <span data-meal-carb="${ing.displayCarbs}"  class="w-14 text-right text-xs flex-shrink-0 tabular-nums"><strong class="text-orange-600">C:</strong> ${ing.displayCarbs}g</span>
+                            <span data-meal-fat="${ing.displayFat}"     class="w-12 text-right text-xs flex-shrink-0 tabular-nums"><strong class="text-yellow-600">G:</strong> ${ing.displayFat}g</span>
+                            <span data-meal-fiber="${ing.displayFiber}" class="w-12 text-right text-xs flex-shrink-0 tabular-nums"><strong class="text-green-600">F:</strong> ${ing.displayFiber}g</span>
+                            <span data-meal-kcal="${ing.displayKcal}"   class="w-[72px] text-right text-xs font-bold text-gray-700 flex-shrink-0 tabular-nums">${ing.displayKcal} kcal</span>
+                            <input type="number" value="${ing.qty}" min="0" step="0.5" class="w-11 text-center border border-gray-200 rounded text-xs py-1 flex-shrink-0" oninput="recalcIngredient(this)">
+                            <select class="unit-select text-xs text-gray-500 border border-gray-200 rounded px-1 py-0.5 bg-white flex-shrink-0 w-20" onchange="recalcIngredient(this)">
+                                <option value="usual" ${unit==='usual'?'selected':''}>${unitLabel}</option>
+                                <option value="g" ${unit==='g'?'selected':''}>g</option>
+                            </select>
+                            <button class="sub-add-btn text-xs font-bold text-gray-400 hover:text-usfit-blue hover:bg-gray-50 px-2 py-1 rounded flex items-center gap-1 transition-colors border border-dashed border-gray-300 flex-shrink-0 w-[136px] justify-center" onclick="_toggleSubPanel(this)">
+                                <i data-lucide="plus" class="w-3 h-3"></i> Substituições
+                            </button>
+                            <button class="text-gray-400 hover:text-red-500 flex-shrink-0" onclick="_removeIngredient(this)">
+                                <i data-lucide="x" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                        <div class="substitution-panel bg-gray-50 mt-2 rounded-lg border border-dashed border-gray-300 hidden">
+                            <div class="p-3 space-y-2">
+                                <p class="text-[10px] uppercase font-bold text-gray-400 mb-2">Opções Equivalentes</p>
+                                <button class="w-full mt-2 py-2 border border-dashed border-gray-300 rounded text-xs text-gray-500 font-medium hover:text-usfit-blue hover:border-usfit-blue hover:bg-white transition-all flex items-center justify-center gap-1" onclick="openSubstitutionModal(this)">
+                                    <i data-lucide="plus" class="w-3 h-3"></i> Adicionar opção de substituição
+                                </button>
+                            </div>
+                        </div>
+                    </div>`;
+                ingContainer.insertAdjacentHTML('beforeend', rowHTML);
+            });
+            lucide.createIcons();
+            if (typeof sumMealStats === 'function') sumMealStats();
+            _notify('Refeição carregada');
+            closeNewMealModal();
+        }
+
+        function saveMealTemplate(btn) {
+            const card = btn.closest('.meal-card');
+            const suggestedName = card.querySelector('input[type=text]').value.trim() || 'Refeição';
+            const ingredients = [];
+            card.querySelectorAll('.ing-list .group').forEach(g => {
+                const qtyInput = g.querySelector('input[type=number]');
+                const unitSel  = g.querySelector('select.unit-select');
+                const pSpan    = g.querySelector('[data-meal-prot]');
+                const cSpan    = g.querySelector('[data-meal-carb]');
+                const fSpan    = g.querySelector('[data-meal-fat]');
+                const fbSpan   = g.querySelector('[data-meal-fiber]');
+                const kSpan    = g.querySelector('[data-meal-kcal]');
+                ingredients.push({
+                    name:         g.dataset.ingName  || g.querySelector('.text-sm.font-medium')?.textContent || '',
+                    prot:         g.dataset.ingProt  || '0',
+                    fat:          g.dataset.ingFat   || '0',
+                    carbs:        g.dataset.ingCarbs || '0',
+                    fiber:        g.dataset.ingFiber || '0',
+                    kcal:         g.dataset.ingKcal  || '0',
+                    portionG:     g.dataset.portionG || '100',
+                    measure:      g.querySelector('.text-xs.text-gray-400')?.textContent || '',
+                    qty:          qtyInput?.value || '1',
+                    unit:         unitSel?.value || 'usual',
+                    unitLabel:    unitSel?.options[unitSel.selectedIndex]?.text || 'g',
+                    displayProt:  pSpan?.dataset.mealProt   || '0',
+                    displayCarbs: cSpan?.dataset.mealCarb   || '0',
+                    displayFat:   fSpan?.dataset.mealFat    || '0',
+                    displayFiber: fbSpan?.dataset.mealFiber || '0',
+                    displayKcal:  kSpan?.dataset.mealKcal   || '0',
+                });
+            });
+            _openSaveNameModal('Salvar Refeição', suggestedName, (name) => {
+                const templates = JSON.parse(localStorage.getItem('usfit_meal_templates') || '[]');
+                templates.push({ name, ingredients });
+                localStorage.setItem('usfit_meal_templates', JSON.stringify(templates));
+                const icon = btn.querySelector('i');
+                if (icon) { icon.setAttribute('data-lucide', 'bookmark-check'); lucide.createIcons(); }
+                btn.classList.add('text-amber-500');
+                btn.classList.remove('text-gray-400');
+                setTimeout(() => {
+                    btn.classList.remove('text-amber-500');
+                    btn.classList.add('text-gray-400');
+                    if (icon) { icon.setAttribute('data-lucide', 'bookmark'); lucide.createIcons(); }
+                }, 2000);
+                _notify('Refeição salva');
+            });
+        }
+
+        function removeMeal(btn) {
+            const card = btn.closest('.meal-card');
+            const name = card.querySelector('input[type=text]')?.value.trim() || 'esta refeição';
+            _confirmModal(
+                `Excluir "${name}"?`,
+                'Todos os ingredientes e substituições serão removidos. Esta ação não pode ser desfeita.',
+                () => {
+                    card.remove();
+                    if (typeof sumMealStats === 'function') sumMealStats();
+                    _notify('Refeição removida', 'error');
+                }
+            );
+        }
+
+        function duplicateMeal(btn) {
+            const card = btn.closest('.meal-card');
+            const clone = card.cloneNode(true);
+            // Reset include checkbox state
+            const cb = clone.querySelector('.meal-include-toggle');
+            if (cb && !cb.checked) {
+                clone.classList.remove('excluded-from-calc');
+                cb.checked = true;
+            }
+            card.insertAdjacentElement('afterend', clone);
+            lucide.createIcons();
+            if (typeof sumMealStats === 'function') sumMealStats();
+            _notify('Refeição duplicada');
+        }
+
+        function updateMealCalc(cb) {
+            const card = cb.closest('.meal-card');
+            if (cb.checked) {
+                card.classList.remove('excluded-from-calc');
+            } else {
+                card.classList.add('excluded-from-calc');
+            }
+            if (typeof sumMealStats === 'function') sumMealStats();
+        }
+
+        function swapWithMain(btn) {
+            const subItem = btn.closest('.sub-item');
+            const group   = btn.closest('.group');
+            // Sub data
+            const subName    = subItem.dataset.subName    || '';
+            const subProt    = subItem.dataset.subProt    || '0';
+            const subFat     = subItem.dataset.subFat     || '0';
+            const subCarbs   = subItem.dataset.subCarbs   || '0';
+            const subFiber   = subItem.dataset.subFiber   || '0';
+            const subKcal    = subItem.dataset.subKcal    || '0';
+            const subMeasure = subItem.dataset.subMeasure || '';
+            // Main data
+            const mainName    = group.dataset.ingName  || '';
+            const mainProt    = group.dataset.ingProt  || '0';
+            const mainFat     = group.dataset.ingFat   || '0';
+            const mainCarbs   = group.dataset.ingCarbs || '0';
+            const mainFiber   = group.dataset.ingFiber || '0';
+            const mainKcal    = group.querySelector('[data-meal-kcal]')?.dataset.mealKcal || '0';
+            const mainMeasure = group.querySelector('.text-xs.text-gray-400')?.textContent || '';
+            const mainQty     = group.querySelector('input[type=number]')?.value || '1';
+            const mainUnit    = group.querySelector('select.unit-select')?.value || 'usual';
+            const mainUnitLbl = group.querySelector('.unit-select option:checked')?.text || 'g';
+            // Update main group
+            group.dataset.ingName  = subName;
+            group.dataset.ingProt  = subProt;
+            group.dataset.ingFat   = subFat;
+            group.dataset.ingCarbs = subCarbs;
+            group.dataset.ingFiber = subFiber;
+            group.dataset.ingKcal  = subKcal;
+            const nameEl = group.querySelector('.text-sm.font-medium.text-gray-800');
+            if (nameEl) nameEl.textContent = subName;
+            const measEl = group.querySelector('.text-xs.text-gray-400');
+            if (measEl) measEl.textContent = subMeasure;
+            const ps  = group.querySelector('[data-meal-prot]');  if (ps)  { ps.dataset.mealProt  = subProt;  ps.innerHTML  = `<strong class="text-blue-600">P:</strong> ${subProt}g`; }
+            const cs  = group.querySelector('[data-meal-carb]');  if (cs)  { cs.dataset.mealCarb  = subCarbs; cs.innerHTML  = `<strong class="text-orange-600">C:</strong> ${subCarbs}g`; }
+            const fts = group.querySelector('[data-meal-fat]');   if (fts) { fts.dataset.mealFat  = subFat;   fts.innerHTML = `<strong class="text-yellow-600">G:</strong> ${subFat}g`; }
+            const fbs = group.querySelector('[data-meal-fiber]'); if (fbs) { fbs.dataset.mealFiber= subFiber; fbs.innerHTML = `<strong class="text-green-600">F:</strong> ${subFiber}g`; }
+            const ks  = group.querySelector('[data-meal-kcal]');  if (ks)  { ks.dataset.mealKcal  = subKcal;  ks.textContent = `${subKcal} kcal`; }
+            // Insert old main as new sub-item
+            const panel  = group.querySelector('.substitution-panel');
+            const spacer = panel.querySelector('.space-y-2');
+            const addBtnPanel = spacer.querySelector(':scope > button');
+            const newSubHTML = `
+                <div class="sub-item flex items-center justify-between bg-white p-2 rounded border border-gray-100 gap-3"
+                    data-sub-name="${mainName}" data-sub-prot="${mainProt}" data-sub-fat="${mainFat}"
+                    data-sub-carbs="${mainCarbs}" data-sub-fiber="${mainFiber}" data-sub-kcal="${mainKcal}"
+                    data-sub-measure="${mainMeasure}">
+                    <div class="flex items-center gap-2 flex-shrink-0">
+                        <div class="w-1 h-8 bg-cyan-400 rounded-full"></div>
+                        <div>
+                            <p class="text-xs font-bold text-gray-700">${mainName}</p>
+                            <p class="text-[10px] text-gray-400">${mainMeasure}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs">
+                        <span><strong class="text-blue-600">P:</strong> ${mainProt}g</span>
+                        <span><strong class="text-orange-600">C:</strong> ${mainCarbs}g</span>
+                        <span><strong class="text-yellow-600">G:</strong> ${mainFat}g</span>
+                        <span><strong class="text-green-600">F:</strong> ${mainFiber}g</span>
+                        <span class="font-bold text-gray-700">${mainKcal} kcal</span>
+                        <input type="number" value="${mainQty}" class="w-12 text-center border border-gray-200 rounded text-xs py-0.5">
+                        <select class="unit-select text-xs text-gray-500 border border-gray-200 rounded px-1 py-0.5 bg-white flex-shrink-0 w-20">
+                            <option value="usual">${mainUnitLbl}</option>
+                            <option value="g">g</option>
+                        </select>
+                        <button onclick="swapWithMain(this)" title="Tornar ingrediente principal" class="text-gray-300 hover:text-blue-500 flex-shrink-0 transition-colors">
+                            <i data-lucide="arrow-left-right" class="w-3 h-3"></i>
+                        </button>
+                        <button onclick="_removeSubItem(this)" class="text-gray-300 hover:text-red-500 flex-shrink-0 transition-colors">
+                            <i data-lucide="trash-2" class="w-3 h-3"></i>
+                        </button>
+                    </div>
+                </div>`;
+            if (addBtnPanel) addBtnPanel.insertAdjacentHTML('beforebegin', newSubHTML);
+            else spacer.insertAdjacentHTML('beforeend', newSubHTML);
+            subItem.remove();
+            lucide.createIcons();
+            if (typeof sumMealStats === 'function') sumMealStats();
+            _notify('Ingrediente principal alterado');
+        }
+
+        function saveSubstitution(btn) {
+            const subItem = btn.closest('.sub-item');
+            const group   = btn.closest('.group');
+            const ingName = group.dataset.ingName || '';
+            const subName = subItem.dataset.subName || subItem.querySelector('p.text-xs.font-bold')?.textContent || '';
+            const subData = {
+                ingName, subName,
+                subProt:  subItem.dataset.subProt  || '0',
+                subFat:   subItem.dataset.subFat   || '0',
+                subCarbs: subItem.dataset.subCarbs || '0',
+                subFiber: subItem.dataset.subFiber || '0',
+                subKcal:  subItem.dataset.subKcal  || '0',
+            };
+            const saved = JSON.parse(localStorage.getItem('usfit_saved_subs') || '[]');
+            const exists = saved.some(s => s.ingName === ingName && s.subName === subName);
+            if (!exists) {
+                saved.push(subData);
+                localStorage.setItem('usfit_saved_subs', JSON.stringify(saved));
+            }
+            const icon = btn.querySelector('i');
+            if (icon) { icon.setAttribute('data-lucide', 'bookmark-check'); lucide.createIcons(); }
+            btn.classList.remove('text-gray-300');
+            btn.classList.add('text-amber-500');
+        }
+
+        // --- SUBSTITUIÇÕES: FONTE (do zero / lista salva) ---
+        let _activeSubSourceBtn = null;
+
+        function openSubSourceModal(btn) {
+            _activeSubSourceBtn = btn;
+            const si = document.getElementById('sub-group-search');
+            if (si) si.value = '';
+            _renderSubGroupsList('');
+            document.getElementById('sub-source-modal').classList.remove('hidden');
+        }
+
+        function closeSubSourceModal() {
+            document.getElementById('sub-source-modal').classList.add('hidden');
+        }
+
+        function _renderSubGroupsList(query = '') {
+            const groups = JSON.parse(localStorage.getItem('usfit_sub_groups') || '[]');
+            const list = document.getElementById('sub-groups-list');
+            const q = query.toLowerCase().trim();
+            const filtered = groups.map((g, i) => ({...g, _i: i})).filter(g => !q || g.name.toLowerCase().includes(q));
+            if (!filtered.length) {
+                list.innerHTML = '<p class="text-xs text-gray-400 text-center py-2">Nenhuma lista encontrada</p>';
+                return;
+            }
+            list.innerHTML = filtered.map(g => `
+                <button onclick="loadSubGroup(${g._i})" class="w-full p-2.5 bg-gray-50 hover:bg-cyan-50 rounded-xl text-left border border-gray-200 hover:border-usfit-cyan transition-colors">
+                    <p class="font-medium text-gray-800 text-xs">${g.name}</p>
+                    <p class="text-[10px] text-gray-400">${g.items.length} substituiç${g.items.length !== 1 ? 'ões' : 'ão'}</p>
+                </button>
+            `).join('');
+        }
+
+        function loadSubGroup(idx) {
+            const groups = JSON.parse(localStorage.getItem('usfit_sub_groups') || '[]');
+            const gdata  = groups[idx];
+            if (!gdata || !_activeSubSourceBtn) return;
+            closeSubSourceModal();
+            const group  = _activeSubSourceBtn.closest('.group');
+            const panel  = group.querySelector('.substitution-panel');
+            const spacer = panel.querySelector('.space-y-2');
+            const addBtn = spacer.querySelector(':scope > button');
+            gdata.items.forEach(item => {
+                const unitLbl = _abbrevUnit(_extractUnit(item.subMeasure || ''));
+                const subHTML = `
+                    <div class="sub-item flex items-center justify-between bg-white p-2 rounded border border-gray-100 gap-3"
+                        data-sub-name="${item.subName}" data-sub-prot="${item.subProt}" data-sub-fat="${item.subFat}"
+                        data-sub-carbs="${item.subCarbs}" data-sub-fiber="${item.subFiber}" data-sub-kcal="${item.subKcal}"
+                        data-sub-measure="${item.subMeasure || ''}">
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <div class="w-1 h-8 bg-cyan-400 rounded-full"></div>
+                            <div>
+                                <p class="text-xs font-bold text-gray-700">${item.subName}</p>
+                                <p class="text-[10px] text-gray-400">${item.subMeasure || ''}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs">
+                            <span><strong class="text-blue-600">P:</strong> ${item.subProt}g</span>
+                            <span><strong class="text-orange-600">C:</strong> ${item.subCarbs}g</span>
+                            <span><strong class="text-yellow-600">G:</strong> ${item.subFat}g</span>
+                            <span><strong class="text-green-600">F:</strong> ${item.subFiber}g</span>
+                            <span class="font-bold text-gray-700">${item.subKcal} kcal</span>
+                            <input type="number" value="1" class="w-12 text-center border border-gray-200 rounded text-xs py-0.5">
+                            <select class="unit-select text-xs text-gray-500 border border-gray-200 rounded px-1 py-0.5 bg-white flex-shrink-0 w-20">
+                                <option value="usual">${unitLbl}</option>
+                                <option value="g">g</option>
+                            </select>
+                            <button onclick="swapWithMain(this)" title="Tornar ingrediente principal" class="text-gray-300 hover:text-blue-500 flex-shrink-0 transition-colors">
+                                <i data-lucide="arrow-left-right" class="w-3 h-3"></i>
+                            </button>
+                            <button onclick="_removeSubItem(this)" class="text-gray-300 hover:text-red-500 flex-shrink-0 transition-colors">
+                                <i data-lucide="trash-2" class="w-3 h-3"></i>
+                            </button>
+                        </div>
+                    </div>`;
+                if (addBtn) addBtn.insertAdjacentHTML('beforebegin', subHTML);
+                else spacer.insertAdjacentHTML('beforeend', subHTML);
+            });
+            panel.classList.remove('hidden');
+            _updateSubToggleBtn(group);
+            lucide.createIcons();
+            if (typeof sumMealStats === 'function') sumMealStats();
+            _notify('Lista de substituições carregada');
+        }
+
+        function saveSubstitutionSet(btn) {
+            const panel   = btn.closest('.substitution-panel');
+            const group   = btn.closest('.group');
+            const ingName = group.dataset.ingName || 'Ingrediente';
+            const items   = Array.from(panel.querySelectorAll('.sub-item')).map(si => ({
+                subName:    si.dataset.subName    || '',
+                subProt:    si.dataset.subProt    || '0',
+                subFat:     si.dataset.subFat     || '0',
+                subCarbs:   si.dataset.subCarbs   || '0',
+                subFiber:   si.dataset.subFiber   || '0',
+                subKcal:    si.dataset.subKcal    || '0',
+                subMeasure: si.dataset.subMeasure || '',
+            }));
+            if (!items.length) { _notify('Adicione substituições antes de salvar', 'error'); return; }
+            _openSaveNameModal('Salvar Substituições', `Substituições de ${ingName}`, (name) => {
+                const groups = JSON.parse(localStorage.getItem('usfit_sub_groups') || '[]');
+                const eIdx   = groups.findIndex(g => g.name === name);
+                if (eIdx >= 0) groups[eIdx] = { name, items };
+                else groups.push({ name, items });
+                localStorage.setItem('usfit_sub_groups', JSON.stringify(groups));
+                const icon = btn.querySelector('i');
+                if (icon) { icon.setAttribute('data-lucide', 'bookmark-check'); lucide.createIcons(); }
+                btn.classList.remove('text-gray-300');
+                btn.classList.add('text-amber-500');
+                _notify('Substituições salvas');
+            });
+        }
+
+        function clearSubstitutionSet(btn) {
+            const panel  = btn.closest('.substitution-panel');
+            const group  = btn.closest('.group');
+            panel.querySelectorAll('.sub-item').forEach(si => si.remove());
+            panel.classList.add('hidden');
+            panel.style.maxHeight = '';
+            _updateSubToggleBtn(group);
+            if (typeof sumMealStats === 'function') sumMealStats();
+            _notify('Substituições removidas', 'error');
+        }
+
+        // --- MODAL DE CONFIRMAÇÃO ---
+        let _confirmCallback = null;
+
+        function _confirmModal(title, body, onConfirm) {
+            document.getElementById('confirm-modal-title').textContent = title;
+            document.getElementById('confirm-modal-body').textContent = body;
+            _confirmCallback = onConfirm;
+            document.getElementById('confirm-modal').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function _confirmModalResolve(confirmed) {
+            document.getElementById('confirm-modal').classList.add('hidden');
+            if (confirmed && typeof _confirmCallback === 'function') _confirmCallback();
+            _confirmCallback = null;
+        }
+
+        document.getElementById('confirm-modal').addEventListener('click', function(e) {
+            if (e.target === this) _confirmModalResolve(false);
+        });
+
+        // --- MODAL SALVAR COM NOME ---
+        let _saveNameCallback = null;
+
+        function _openSaveNameModal(title, suggestedName, onSave) {
+            document.getElementById('save-name-modal-title').innerHTML =
+                `<i data-lucide="bookmark" class="w-4 h-4 text-usfit-cyan"></i> ${title}`;
+            const input = document.getElementById('save-name-input');
+            input.value = suggestedName;
+            _saveNameCallback = onSave;
+            document.getElementById('save-name-modal').classList.remove('hidden');
+            lucide.createIcons();
+            setTimeout(() => { input.select(); input.focus(); }, 50);
+        }
+
+        function _closeSaveNameModal() {
+            document.getElementById('save-name-modal').classList.add('hidden');
+            _saveNameCallback = null;
+        }
+
+        function _confirmSaveName() {
+            const name = document.getElementById('save-name-input').value.trim();
+            if (!name) return;
+            _closeSaveNameModal();
+            if (typeof _saveNameCallback === 'function') _saveNameCallback(name);
+        }
+
+        document.getElementById('save-name-modal').addEventListener('click', function(e) {
+            if (e.target === this) _closeSaveNameModal();
+        });
+
+        // --- NOTIFICAÇÕES ---
+        function _notify(text, type = 'success') {
+            const bg = type === 'success' ? 'linear-gradient(135deg,#0ea5e9,#06b6d4)'
+                     : type === 'error'   ? 'linear-gradient(135deg,#ef4444,#dc2626)'
+                     :                     'linear-gradient(135deg,#64748b,#475569)';
+            Toastify({ text, duration: 2500, gravity: 'top', position: 'right',
+                offset: { x: 88, y: 88 },
+                style: { background: bg, borderRadius: '0.75rem', fontSize: '0.8rem', padding: '10px 16px' },
+                stopOnFocus: true }).showToast();
+        }
+
+        function _removeIngredient(btn) {
+            btn.closest('.group').remove();
+            if (typeof sumMealStats === 'function') sumMealStats();
+            _notify('Ingrediente removido', 'error');
+        }
+
+        function _removeSubItem(btn) {
+            const g = btn.closest('.group');
+            btn.closest('.sub-item').remove();
+            _updateSubToggleBtn(g);
+            if (typeof sumMealStats === 'function') sumMealStats();
+            _notify('Substituição removida', 'error');
+        }
+
+        function moveMealUp(btn) {
+            const card = btn.closest('.meal-card');
+            const prev = card.previousElementSibling;
+            if (prev && prev.classList.contains('meal-card')) {
+                card.parentNode.insertBefore(card, prev);
+            }
+        }
+
+        function moveMealDown(btn) {
+            const card = btn.closest('.meal-card');
+            const next = card.nextElementSibling;
+            if (next && next.classList.contains('meal-card')) {
+                card.parentNode.insertBefore(next, card);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof sumMealStats === 'function') sumMealStats();
+        });
+    </script>
 </body>
 </html>
+

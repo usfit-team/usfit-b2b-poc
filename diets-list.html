@@ -49,10 +49,10 @@
                 <i data-lucide="dumbbell" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
                 <span class="font-medium">Treinos</span>
             </a>
-            <a href="contracts-dashboard.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+            <!-- <a href="contracts-dashboard.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
                 <i data-lucide="file-text" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
                 <span class="font-medium">Contratos</span>
-            </a>
+            </a> -->
         
 
             <a href="team-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
@@ -136,6 +136,7 @@
                         <tr>
                             <th class="px-6 py-4 font-semibold text-gray-500 uppercase text-xs tracking-wider">Nome da Dieta</th>
                             <th class="px-6 py-4 font-semibold text-gray-500 uppercase text-xs tracking-wider">Aluno</th>
+                            <th class="px-6 py-4 font-semibold text-gray-500 uppercase text-xs tracking-wider">Profissional</th>
                             <th class="px-6 py-4 font-semibold text-gray-500 uppercase text-xs tracking-wider">Status</th>
                             <th class="px-6 py-4 font-semibold text-gray-500 uppercase text-xs tracking-wider">Calorias (Meta)</th>
                             <th class="px-6 py-4 font-semibold text-gray-500 uppercase text-xs tracking-wider">Última Edição</th>
@@ -162,14 +163,31 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-7 h-7 rounded-full bg-usfit-cyan/10 flex items-center justify-center text-xs font-bold text-usfit-blue flex-shrink-0">DS</div>
+                                    <span class="text-sm font-medium text-gray-700">Dr. Silva</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
                                 <span class="status-badge bg-emerald-50 text-emerald-600 border border-emerald-100">Ativa</span>
                             </td>
                             <td class="px-6 py-4 text-gray-700 font-medium">2.200 kcal</td>
-                            <td class="px-6 py-4 text-gray-500">Ontem</td>
-                            <td class="px-6 py-4 text-right">
-                                <button class="p-2 text-gray-400 hover:text-usfit-cyan hover:bg-cyan-50 rounded-full transition-colors">
-                                    <i data-lucide="edit-3" class="w-4 h-4"></i>
-                                </button>
+                            <td class="px-6 py-4">
+                                <div class="text-gray-500">Ontem</div>
+                                <div class="text-xs text-gray-400 mt-0.5">por Dr. Silva</div>
+                            </td>
+                            <td class="px-6 py-4 text-right" onclick="event.stopPropagation()">
+                                <div class="flex items-center justify-end gap-2">
+                                    <button onclick="printDiet(this)" class="inline-flex items-center justify-center p-2 text-gray-400 hover:text-violet-600 hover:bg-violet-50 rounded-full transition-colors no-print" title="Imprimir PDF">
+                                        <i data-lucide="printer" class="w-4 h-4"></i>
+                                    </button>
+                                    <a href="diet-template-assign.html" class="text-usfit-blue hover:text-blue-700 text-xs font-bold border border-usfit-blue hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1 no-underline">
+                                        <i data-lucide="copy" class="w-3 h-3"></i> Duplicar
+                                    </a>
+                                    <a href="diet-create.html" class="inline-flex items-center justify-center p-2 text-gray-400 hover:text-usfit-cyan hover:bg-cyan-50 rounded-full transition-colors" title="Editar Modelo">
+                                        <i data-lucide="edit-3" class="w-4 h-4"></i>
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                         <tr class="hover:bg-gray-50/80 transition-colors group cursor-pointer" onclick="window.location.href='diet-create.html'">
@@ -191,14 +209,31 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-7 h-7 rounded-full bg-purple-100 flex items-center justify-center text-xs font-bold text-purple-600 flex-shrink-0">MC</div>
+                                    <span class="text-sm font-medium text-gray-700">Dra. Costa</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
                                 <span class="status-badge bg-yellow-50 text-yellow-600 border border-yellow-100">Rascunho</span>
                             </td>
                             <td class="px-6 py-4 text-gray-700 font-medium">1.500 kcal</td>
-                            <td class="px-6 py-4 text-gray-500">Hoje, 10:00</td>
-                            <td class="px-6 py-4 text-right">
-                                <button class="p-2 text-gray-400 hover:text-usfit-cyan hover:bg-cyan-50 rounded-full transition-colors">
-                                    <i data-lucide="edit-3" class="w-4 h-4"></i>
-                                </button>
+                            <td class="px-6 py-4">
+                                <div class="text-gray-500">Hoje, 10:00</div>
+                                <div class="text-xs text-gray-400 mt-0.5">por Dra. Costa</div>
+                            </td>
+                            <td class="px-6 py-4 text-right" onclick="event.stopPropagation()">
+                                <div class="flex items-center justify-end gap-2">
+                                    <button onclick="printDiet(this)" class="inline-flex items-center justify-center p-2 text-gray-400 hover:text-violet-600 hover:bg-violet-50 rounded-full transition-colors no-print" title="Imprimir PDF">
+                                        <i data-lucide="printer" class="w-4 h-4"></i>
+                                    </button>
+                                    <a href="diet-template-assign.html" class="text-usfit-blue hover:text-blue-700 text-xs font-bold border border-usfit-blue hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1 no-underline">
+                                        <i data-lucide="copy" class="w-3 h-3"></i> Duplicar
+                                    </a>
+                                    <a href="diet-create.html" class="inline-flex items-center justify-center p-2 text-gray-400 hover:text-usfit-cyan hover:bg-cyan-50 rounded-full transition-colors" title="Editar Modelo">
+                                        <i data-lucide="edit-3" class="w-4 h-4"></i>
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
@@ -217,5 +252,16 @@
     </div>
 
     <script src="assets/js/functions.js"></script>
+    <script>
+        lucide.createIcons();
+
+        function printDiet(btn) {
+            const row = btn.closest('tr');
+            // Highlight row for visual context, then print
+            row.classList.add('print-target');
+            window.print();
+            row.classList.remove('print-target');
+        }
+    </script>
 </body>
 </html>

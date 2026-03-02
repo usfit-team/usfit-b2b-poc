@@ -44,10 +44,10 @@
                 <i data-lucide="dumbbell" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
                 <span class="font-medium">Treinos</span>
             </a>
-            <a href="contracts-dashboard.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+            <!-- <a href="contracts-dashboard.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
                 <i data-lucide="file-text" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
                 <span class="font-medium">Contratos</span>
-            </a>
+            </a> -->
         
 
             <a href="team-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
@@ -93,114 +93,141 @@
         </header>
 
         <main class="flex-1 overflow-y-auto p-8">
-            <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
-                
-                <div class="space-y-6">
-                    <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-                        <div class="flex items-center gap-2 mb-4">
-                            <div class="w-1 h-6 bg-usfit-gradient rounded-full"></div>
-                            <h2 class="text-lg font-bold text-gray-800">Identificação</h2>
-                        </div>
-                        
-                        <div class="space-y-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-600 mb-1.5">Nome do Alimento *</label>
-                                <input type="text" placeholder="Ex: Whey Protein Concentrado" class="usfit-input">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-600 mb-1.5">Marca / Fabricante (Opcional)</label>
-                                <input type="text" placeholder="Ex: Growth Supplements" class="usfit-input">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-600 mb-1.5">Categoria</label>
-                                <select class="usfit-input bg-white">
-                                    <option>Proteínas</option>
-                                    <option>Carboidratos</option>
-                                    <option>Gorduras</option>
-                                    <option>Vegetais</option>
-                                    <option selected>Suplementos</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+            <div class="max-w-5xl mx-auto space-y-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
-                    <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-                        <div class="flex items-center gap-2 mb-4">
-                            <div class="w-1 h-6 bg-usfit-gradient rounded-full"></div>
-                            <h2 class="text-lg font-bold text-gray-800">Medidas Caseiras</h2>
-                        </div>
-                        
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-600 mb-1.5">Tamanho da Porção</label>
-                                <div class="relative">
-                                    <input type="number" placeholder="30" class="usfit-input pr-10">
-                                    <span class="absolute right-3 top-2.5 text-xs text-gray-400 font-bold">g / ml</span>
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-600 mb-1.5">Nome da Medida</label>
-                                <input type="text" placeholder="Ex: 1 Scoop, 1 Colher..." class="usfit-input">
-                            </div>
-                        </div>
-                        <p class="text-xs text-gray-400 mt-2">Isso ajuda o aluno a saber quanto consumir sem pesar.</p>
-                    </div>
-                </div>
-
-                <div class="space-y-6">
-                    <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center gap-2">
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                            <div class="flex items-center gap-2 mb-4">
                                 <div class="w-1 h-6 bg-usfit-gradient rounded-full"></div>
-                                <h2 class="text-lg font-bold text-gray-800">Tabela Nutricional</h2>
+                                <h2 class="text-lg font-bold text-gray-800">Identificação</h2>
                             </div>
-                            <div class="text-xs bg-gray-100 px-2 py-1 rounded text-gray-500">
-                                Base: <strong>Porção (30g)</strong>
+                            
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600 mb-1.5">Nome do Alimento *</label>
+                                    <input type="text" placeholder="Ex: Whey Protein Concentrado" class="usfit-input">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600 mb-1.5">Observações (Opcional)</label>
+                                    <input type="text" placeholder="Ex: Growth Supplements" class="usfit-input">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600 mb-1.5">Categoria Principal</label>
+                                    <select class="usfit-input bg-white">
+                                        <option value="" selected>Selecione a categoria</option>
+                                        <option value="cereais_derivados">Cereais e Derivados</option>
+                                        <option value="leguminosas">Leguminosas</option>
+                                        <option value="tuberculos_raizes">Tubérculos e Raízes</option>
+                                        <option value="verduras_legumes">Verduras e Legumes</option>
+                                        <option value="frutas">Frutas</option>
+                                        <option value="carnes_proteinas_animais">Carnes e Proteínas Animais</option>
+                                        <option value="ovos">Ovos</option>
+                                        <option value="laticinios">Laticínios</option>
+                                        <option value="oleaginosas_sementes">Oleaginosas e Sementes</option>
+                                        <option value="oleos_gorduras">Óleos e Gorduras</option>
+                                        <option value="acucares_doces">Açúcares e Doces</option>
+                                        <option value="bebidas">Bebidas</option>
+                                        <option value="industrializados_processados">Industrializados / Processados</option>
+                                        <option value="suplementos">Suplementos</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="space-y-4">
-                            <div class="p-4 bg-gray-50 rounded-xl border border-gray-100">
-                                <label class="block text-sm font-bold text-gray-800 mb-1.5">Valor Energético (Kcal)</label>
-                                <div class="relative">
-                                    <i data-lucide="flame" class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
-                                    <input type="number" placeholder="120" class="usfit-input pl-10">
+                        <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                            <div class="flex items-center gap-2 mb-4">
+                                <div class="w-1 h-6 bg-usfit-gradient rounded-full"></div>
+                                <h2 class="text-lg font-bold text-gray-800">Medida</h2>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600 mb-1.5">Porção</label>
+                                    <div class="relative">
+                                        <input type="number" placeholder="30" class="usfit-input pr-10">
+                                        <span class="absolute right-3 top-2.5 text-xs text-gray-400 font-bold">g / ml</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600 mb-1.5">Unidade de Medida</label>
+                                    <select class="usfit-input bg-white">
+                                        <option selected>g</option>
+                                        <option>Kg</option>
+                                        <option>ml</option>
+                                        <option>L</option>
+                                        <option>un.</option>
+                                        <option>fatia</option>
+                                        <option>col. sopa</option>
+                                        <option>col. cha</option>
+                                        <option>xíc.</option>
+                                        <option>scoop.</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-2">Isso ajuda o aluno a saber quanto consumir sem pesar.</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-1 h-6 bg-usfit-gradient rounded-full"></div>
+                                    <h2 class="text-lg font-bold text-gray-800">Tabela Nutricional</h2>
+                                </div>
+                                <div class="text-xs bg-gray-100 px-2 py-1 rounded text-gray-500">
+                                    Base: <strong>Porção (30g)</strong>
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-3 gap-4">
-                                <div>
-                                    <label class="block text-xs font-bold text-green-600 uppercase mb-1.5">Carboidratos</label>
-                                    <input type="number" placeholder="4g" class="usfit-input border-green-100 focus:border-green-400 focus:ring-green-100">
+                            <div class="space-y-4">
+                                <div class="p-4 bg-gray-50 rounded-xl border border-gray-100">
+                                    <label class="block text-sm font-bold text-gray-800 mb-1.5">Valor Energético (Kcal)</label>
+                                    <div class="relative">
+                                        <i data-lucide="flame" class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
+                                        <input type="number" placeholder="120" class="usfit-input pl-10">
+                                    </div>
                                 </div>
-                                <div>
-                                    <label class="block text-xs font-bold text-blue-600 uppercase mb-1.5">Proteínas</label>
-                                    <input type="number" placeholder="23g" class="usfit-input border-blue-100 focus:border-blue-400 focus:ring-blue-100">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-bold text-orange-600 uppercase mb-1.5">Gorduras</label>
-                                    <input type="number" placeholder="1.5g" class="usfit-input border-orange-100 focus:border-orange-400 focus:ring-orange-100">
-                                </div>
-                            </div>
 
-                            <div class="grid grid-cols-2 gap-4 pt-4 border-t border-gray-100">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-600 mb-1.5">Fibras (g)</label>
-                                    <input type="number" placeholder="0" class="usfit-input">
+                                <div class="grid grid-cols-3 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-bold text-green-600 uppercase mb-1.5">Carboidratos</label>
+                                        <input type="number" placeholder="4g" class="usfit-input border-green-100 focus:border-green-400 focus:ring-green-100">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-blue-600 uppercase mb-1.5">Proteínas</label>
+                                        <input type="number" placeholder="23g" class="usfit-input border-blue-100 focus:border-blue-400 focus:ring-blue-100">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-orange-600 uppercase mb-1.5">Gorduras</label>
+                                        <input type="number" placeholder="1.5g" class="usfit-input border-orange-100 focus:border-orange-400 focus:ring-orange-100">
+                                    </div>
                                 </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-600 mb-1.5">Sódio (mg)</label>
-                                    <input type="number" placeholder="50" class="usfit-input">
+
+                                <div class="grid grid-cols-2 gap-4 pt-4 border-t border-gray-100">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-600 mb-1.5">Fibras (g)</label>
+                                        <input type="number" placeholder="0" class="usfit-input">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-600 mb-1.5">Sódio (mg)</label>
+                                        <input type="number" placeholder="50" class="usfit-input">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-            </div>
+                </div><!-- end 2-col grid -->
+
+            </div><!-- end space-y-8 -->
         </main>
     </div>
 
     <script src="assets/js/functions.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>

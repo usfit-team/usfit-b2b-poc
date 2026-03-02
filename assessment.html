@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USFITB2B - Nova Avaliação</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="assets/js/tailwind-config.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body class="bg-usfit-gray text-usfit-text h-screen flex overflow-hidden">
+
+    <aside class="w-64 bg-usfit-dark text-white flex flex-col hidden md:flex flex-shrink-0 relative">
+        <div class="h-20 flex items-center justify-center border-b border-gray-800 bg-[#0f1523]">
+            <a href="dashboard.html" class="flex items-center gap-2">
+                <div class="w-8 h-8"><img src="assets/images/logo.png"></div>
+                <span class="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-usfit-gradient">USFITB2B</span>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-6 space-y-2 overflow-y-auto">
+            <a href="dashboard.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="layout-dashboard" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i><span class="font-medium">Visão Geral</span>
+            </a>
+            <a href="students-list.html" class="flex items-center px-4 py-3 text-white bg-gray-800 rounded-xl shadow-lg shadow-cyan-900/20">
+                <div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-usfit-gradient rounded-r-full"></div>
+                <i data-lucide="users" class="w-5 h-5 mr-3 text-usfit-cyan"></i><span class="font-medium">Alunos</span>
+            </a>
+            <a href="diets-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="utensils" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i><span class="font-medium">Nutrição</span>
+            </a>
+            <a href="workouts-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="dumbbell" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i><span class="font-medium">Treinos</span>
+            </a>
+          <!--  <a href="contracts-dashboard.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="file-text" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i><span class="font-medium">Contratos</span>
+            </a> -->
+            <a href="team-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+                <i data-lucide="briefcase" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i><span class="font-medium">Profissionais</span>
+            </a>
+        </nav>
+        <div class="mt-auto pt-6 px-4 pb-4">
+            <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-4 relative border border-gray-700 overflow-hidden group cursor-pointer hover:border-usfit-cyan transition-colors" onclick="toggleChat()">
+                <div class="absolute top-0 right-0 -mr-4 -mt-4 w-20 h-20 bg-usfit-cyan blur-3xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                
+                <div class="relative z-10 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 mb-3 relative">
+                        <img src="assets/images/avatar.png" alt="Mascote USFIT" class="w-full h-full object-contain drop-shadow-lg transform group-hover:scale-110 transition-transform duration-300">
+                        <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-gray-800 rounded-full"></span>
+                    </div>
+                    
+                    <h4 class="text-white font-bold text-sm mb-1">Precisa de algo?</h4>
+                    <p class="text-xs text-gray-400 mb-3">Peça ao <span class="text-usfit-cyan font-bold">FitBot</span> agora!</p>
+                    
+                    <button class="w-full py-1.5 bg-usfit-cyan text-usfit-dark rounded-lg text-xs font-bold hover:bg-white transition-colors shadow-lg shadow-cyan-900/50">
+                        Iniciar Chat
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="p-4 bg-[#0f1523] border-t border-gray-800">
+             <div class="flex items-center justify-between">
+                 <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center border-2 border-gray-600">
+                        <span class="font-bold text-sm">DS</span>
+                    </div>
+                    <div class="text-sm">
+                        <p class="font-semibold text-white">Dr. Silva</p>
+                        <p class="text-xs text-usfit-cyan">Plano PRO</p>
+                    </div>
+                </div>
+                <a href="login.html" class="p-2 text-gray-400 hover:text-white hover:bg-red-500/20 rounded-lg transition-colors"><i data-lucide="log-out" class="w-5 h-5"></i></a>
+            </div>
+        </div>
+    </aside>
+
+    <div class="flex-1 flex flex-col h-full min-w-0 bg-usfit-gray relative">
+        
+        <header class="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-8 flex-shrink-0 z-20 shadow-sm">
+            <div class="flex items-center gap-4">
+                <a href="students-list.html" class="text-gray-400 hover:text-usfit-blue transition-colors">
+                    <i data-lucide="arrow-left" class="w-6 h-6"></i>
+                </a>
+                <div>
+                    <h1 class="text-xl font-bold text-gray-800">Nova Avaliação</h1>
+
+                </div>
+            </div>
+            <div class="hidden md:flex flex-1 justify-center w-1/3">
+                <div class="flex items-center px-4 py-2 bg-gray-50 rounded-full border border-gray-100 shadow-sm">
+                    <div class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-3">
+                        <i data-lucide="user" class="w-3 h-3"></i>
+                    </div>
+                    <div class="flex flex-col md:flex-row md:items-center md:gap-2">
+                        <span class="text-xs text-gray-400 font-medium uppercase tracking-wide">Aluno</span>
+                        <span class="text-sm font-bold text-gray-800">Carlos Eduardo</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <p class="text-xs text-gray-500 ml-2">Data: <strong>08/01/2026</strong></p>
+                <button class="btn-outline">
+                    <i data-lucide="save" class="w-4 h-4"></i> Salvar Rascunho
+                </button>
+                <button class="btn-primary">
+                    <i data-lucide="send" class="w-4 h-4"></i> Publicar Avaliação
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1 overflow-y-auto p-8 pb-32">
+            <div class="max-w-6xl mx-auto space-y-6">
+
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="font-bold text-gray-800 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-full bg-blue-100 text-usfit-blue flex items-center justify-center text-xs">1</span>
+                            Dados Biométricos
+                        </h2>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-500 mb-1">Peso (kg)</label>
+                            <input type="number" id="inputWeight" value="78.0" class="form-input font-bold" oninput="calculateBodyComp()">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-500 mb-1">Altura (cm)</label>
+                            <input type="number" id="inputHeight" value="178" class="form-input" oninput="calculateBodyComp()">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-500 mb-1">% Gordura Atual</label>
+                            <div class="relative">
+                                <input type="number" id="inputBF" placeholder="0.0" class="form-input font-bold text-gray-900" oninput="calculateBodyComp()">
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs font-bold">%</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-500 mb-1">Idade</label>
+                            <input type="number" id="inputAge" value="28" class="form-input bg-gray-50" oninput="calculateBodyComp()">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-500 mb-1">Sexo Biológico</label>
+                            <select id="inputGender" class="form-input bg-gray-50" onchange="calculateBodyComp()">
+                                <option value="male" selected>Masculino</option>
+                                <option value="female">Feminino</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                    <div class="flex items-center justify-between mb-4 cursor-pointer" onclick="toggleSection('dobras')">
+                        <h3 class="text-sm font-bold text-gray-800 flex items-center gap-2">
+                            <i data-lucide="scale" class="w-4 h-4 text-usfit-cyan"></i> Dobras Cutâneas (Opcional)
+                        </h3>
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="chevron-right" id="icon-dobras" class="w-4 h-4 text-gray-400 transition-transform"></i>
+                        </div>
+                    </div>
+
+                    <div id="body-dobras" class="hidden">
+
+                        <!-- Select oculto para compatibilidade com JS existente -->
+                        <select id="selectProtocol" class="sr-only" onchange="updateProtocolInputs()">
+                            <option value="manual" selected>Manual (% Direto)</option>
+                            <option value="pollock3">Pollock 3 Dobras</option>
+                            <option value="pollock7">Pollock 7 Dobras</option>
+                        </select>
+
+                        <!-- Método de Cálculo -->
+                        <div class="mb-5">
+                            <label class="block text-xs font-semibold text-gray-500 mb-2">Método de Cálculo</label>
+                            <div class="flex flex-wrap gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="protocol" value="manual" class="peer hidden" checked onchange="document.getElementById('selectProtocol').value='manual'; updateProtocolInputs();">
+                                    <div class="px-4 py-2 rounded-lg border border-gray-200 text-sm text-gray-500 peer-checked:border-usfit-cyan peer-checked:bg-cyan-50 peer-checked:text-usfit-cyan font-medium transition-all">Manual</div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="protocol" value="pollock3" class="peer hidden" onchange="document.getElementById('selectProtocol').value='pollock3'; updateProtocolInputs();">
+                                    <div class="px-4 py-2 rounded-lg border border-gray-200 text-sm text-gray-500 peer-checked:border-usfit-cyan peer-checked:bg-cyan-50 peer-checked:text-usfit-cyan font-medium transition-all">Pollock 3</div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="protocol" value="pollock7" class="peer hidden" onchange="document.getElementById('selectProtocol').value='pollock7'; updateProtocolInputs();">
+                                    <div class="px-4 py-2 rounded-lg border border-gray-200 text-sm text-gray-500 peer-checked:border-usfit-cyan peer-checked:bg-cyan-50 peer-checked:text-usfit-cyan font-medium transition-all">Pollock 7</div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Campos de dobras com overlay de bloqueio -->
+                        <div class="relative">
+                            <div id="manualOverlay" class="hidden absolute inset-0 bg-white/80 backdrop-blur-[1px] z-50 flex items-center justify-center rounded-xl">
+                                <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-100 text-center">
+                                    <i data-lucide="lock" class="w-6 h-6 text-gray-400 mx-auto mb-2"></i>
+                                    <p class="text-sm font-bold text-gray-600">Inserção Manual Ativa</p>
+                                    <p class="text-xs text-gray-400">Edite o % de gordura na seção acima.</p>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                <div><label class="block text-xs font-semibold text-gray-500 mb-1">Tríceps</label><input type="number" id="fold_triceps" class="form-input input-disabled" disabled oninput="calculateBodyComp()"></div>
+                                <div><label class="block text-xs font-semibold text-gray-500 mb-1">Subescapular</label><input type="number" id="fold_subscapular" class="form-input input-disabled" disabled oninput="calculateBodyComp()"></div>
+                                <div><label class="block text-xs font-semibold text-gray-500 mb-1">Bíceps</label><input type="number" id="fold_biceps" class="form-input input-disabled" disabled oninput="calculateBodyComp()"></div>
+                                <div><label class="block text-xs font-semibold text-gray-500 mb-1">Axilar Média</label><input type="number" id="fold_axillary" class="form-input input-disabled" disabled oninput="calculateBodyComp()"></div>
+                                <div><label class="block text-xs font-semibold text-gray-500 mb-1">Peitoral</label><input type="number" id="fold_chest" class="form-input input-disabled" disabled oninput="calculateBodyComp()"></div>
+                                <div><label class="block text-xs font-semibold text-gray-500 mb-1">Supra-ilíaca</label><input type="number" id="fold_suprailiac" class="form-input input-disabled" disabled oninput="calculateBodyComp()"></div>
+                                <div><label class="block text-xs font-semibold text-gray-500 mb-1">Abdominal</label><input type="number" id="fold_abdominal" class="form-input input-disabled" disabled oninput="calculateBodyComp()"></div>
+                                <div><label class="block text-xs font-semibold text-gray-500 mb-1">Coxa</label><input type="number" id="fold_thigh" class="form-input input-disabled" disabled oninput="calculateBodyComp()"></div>
+                                <div><label class="block text-xs font-semibold text-gray-500 mb-1">Panturrilha</label><input type="number" id="fold_calf" class="form-input input-disabled" disabled oninput="calculateBodyComp()"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                    <div class="flex items-center justify-between mb-4 cursor-pointer" onclick="toggleSection('perimetria')">
+                        <h3 class="text-sm font-bold text-gray-800 flex items-center gap-2">
+                            <i data-lucide="ruler" class="w-4 h-4 text-usfit-cyan"></i> Perimetria (Opcional)
+                        </h3>
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="chevron-right" id="icon-perimetria" class="w-4 h-4 text-gray-400 transition-transform"></i>
+                        </div>
+                    </div>
+                    <div id="body-perimetria" class="hidden">
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                        <div><label class="block text-xs font-semibold text-gray-500 mb-1">Ombros</label><input type="number" id="peri_shoulders" placeholder="0" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-gray-500 mb-1">Tórax</label><input type="number" id="peri_chest" placeholder="0" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-gray-500 mb-1">Cintura</label><input type="number" id="peri_waist" placeholder="0" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-gray-500 mb-1">Abdômen</label><input type="number" id="peri_abdomen" placeholder="0" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-gray-500 mb-1">Quadril</label><input type="number" id="peri_hip" placeholder="0" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-gray-500 mb-1">Braço Esq.</label><input type="number" id="peri_arm_l" placeholder="0" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-gray-500 mb-1">Braço Dir.</label><input type="number" id="peri_arm_r" placeholder="0" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-gray-500 mb-1">Coxa Esq.</label><input type="number" id="peri_thigh_l" placeholder="0" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-gray-500 mb-1">Coxa Dir.</label><input type="number" id="peri_thigh_r" placeholder="0" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-gray-500 mb-1">Panturrilha Esq.</label><input type="number" id="peri_calf_l" placeholder="0" class="form-input"></div>
+                        <div><label class="block text-xs font-semibold text-gray-500 mb-1">Panturrilha Dir.</label><input type="number" id="peri_calf_r" placeholder="0" class="form-input"></div>
+                    </div>
+                    </div>
+                </div>
+
+                </div><!-- /grid Dobras + Perimetria -->
+
+                <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                    <div class="flex items-center gap-2 mb-4">
+                        <h2 class="font-bold text-gray-800 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-full bg-blue-100 text-usfit-blue flex items-center justify-center text-xs">2</span>
+                            Planejamento e Restrições
+                        </h2>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-500 mb-1">Objetivo Principal *</label>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="objective" value="hypertrophy" class="peer hidden" checked>
+                                    <div class="text-center px-3 py-2 rounded-lg border border-gray-200 text-sm text-gray-500 peer-checked:border-usfit-cyan peer-checked:bg-cyan-50 peer-checked:text-usfit-cyan font-medium transition-all">
+                                        Hipertrofia
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="objective" value="weight_loss" class="peer hidden">
+                                    <div class="text-center px-3 py-2 rounded-lg border border-gray-200 text-sm text-gray-500 peer-checked:border-usfit-cyan peer-checked:bg-cyan-50 peer-checked:text-usfit-cyan font-medium transition-all">
+                                        Emagrecimento
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="objective" value="conditioning" class="peer hidden">
+                                    <div class="text-center px-3 py-2 rounded-lg border border-gray-200 text-sm text-gray-500 peer-checked:border-usfit-cyan peer-checked:bg-cyan-50 peer-checked:text-usfit-cyan font-medium transition-all">
+                                        Condicionamento
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="objective" value="rehab" class="peer hidden">
+                                    <div class="text-center px-3 py-2 rounded-lg border border-gray-200 text-sm text-gray-500 peer-checked:border-usfit-cyan peer-checked:bg-cyan-50 peer-checked:text-usfit-cyan font-medium transition-all">
+                                        Reabilitação
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Lesões -->
+                        <div class="border border-gray-100 rounded-xl overflow-hidden">
+                            <div class="flex items-center justify-between px-3 py-2.5 bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors" onclick="toggleSection('lesoes')">
+                                <label class="text-xs font-semibold text-gray-500 cursor-pointer">Lesões ou Restrições (Opcional)</label>
+                                <i data-lucide="chevron-right" id="icon-lesoes" class="w-3.5 h-3.5 text-gray-400 transition-transform flex-shrink-0"></i>
+                            </div>
+                            <div id="body-lesoes" class="hidden px-3 pb-3 pt-2">
+                                <textarea rows="3" class="usfit-input" placeholder="Ex: Condromalácia patelar grau 1 no joelho direito. Evitar impacto..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Alergias -->
+                        <div class="border border-gray-100 rounded-xl overflow-hidden">
+                            <div class="flex items-center justify-between px-3 py-2.5 bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors" onclick="toggleSection('alergias')">
+                                <label class="text-xs font-semibold text-gray-500 cursor-pointer">Alergias ou Intolerâncias (Opcional)</label>
+                                <i data-lucide="chevron-right" id="icon-alergias" class="w-3.5 h-3.5 text-gray-400 transition-transform flex-shrink-0"></i>
+                            </div>
+                            <div id="body-alergias" class="hidden px-3 pb-3 pt-2">
+                                <textarea rows="2" class="usfit-input" placeholder="Ex: Intolerância a lactose, alergia a amendoim..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Doenças ou Comorbidades (novo) -->
+                        <div class="border border-gray-100 rounded-xl overflow-hidden">
+                            <div class="flex items-center justify-between px-3 py-2.5 bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors" onclick="toggleSection('doencas')">
+                                <label class="text-xs font-semibold text-gray-500 cursor-pointer">Doenças ou Comorbidades (Opcional)</label>
+                                <i data-lucide="chevron-right" id="icon-doencas" class="w-3.5 h-3.5 text-gray-400 transition-transform flex-shrink-0"></i>
+                            </div>
+                            <div id="body-doencas" class="hidden px-3 pb-3 pt-2">
+                                <textarea rows="2" class="usfit-input" placeholder="Ex: Diabetes tipo 2, Hipertensão, Dislipidemia..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Preferências -->
+                        <div class="border border-gray-100 rounded-xl overflow-hidden">
+                            <div class="flex items-center justify-between px-3 py-2.5 bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors" onclick="toggleSection('preferencias')">
+                                <label class="text-xs font-semibold text-gray-500 cursor-pointer">Preferências Alimentares (Opcional)</label>
+                                <i data-lucide="chevron-right" id="icon-preferencias" class="w-3.5 h-3.5 text-gray-400 transition-transform flex-shrink-0"></i>
+                            </div>
+                            <div id="body-preferencias" class="hidden px-3 pb-3 pt-2">
+                                <textarea rows="2" class="usfit-input" placeholder="Ex: Não gosta de peixe, prefere frutas cítricas..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Observações Gerais -->
+                        <div class="border border-gray-100 rounded-xl overflow-hidden">
+                            <div class="flex items-center justify-between px-3 py-2.5 bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors" onclick="toggleSection('obs-gerais')">
+                                <label class="text-xs font-semibold text-gray-500 cursor-pointer">Observações Gerais (Opcional)</label>
+                                <i data-lucide="chevron-right" id="icon-obs-gerais" class="w-3.5 h-3.5 text-gray-400 transition-transform flex-shrink-0"></i>
+                            </div>
+                            <div id="body-obs-gerais" class="hidden px-3 pb-3 pt-2">
+                                <textarea rows="2" class="usfit-input" placeholder="Ex: Disponibilidade de 4 dias por semana..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mb-20">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="font-bold text-gray-800 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-full bg-blue-100 text-usfit-blue flex items-center justify-center text-xs">3</span>
+                            Fotos do Físico (Opcional)
+                        </h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                        <div class="aspect-[3/4] bg-gray-50 rounded-xl border-2 border-dashed border-gray-300 flex flex-col items-center justify-center hover:bg-gray-100 transition-colors cursor-pointer group">
+                            <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center mb-2 shadow-sm group-hover:scale-110 transition-transform"><i data-lucide="camera" class="w-6 h-6 text-usfit-blue"></i></div><span class="text-sm font-bold text-gray-500">Frente</span>
+                        </div>
+                        <div class="aspect-[3/4] bg-gray-50 rounded-xl border-2 border-dashed border-gray-300 flex flex-col items-center justify-center hover:bg-gray-100 transition-colors cursor-pointer group">
+                             <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center mb-2 shadow-sm group-hover:scale-110 transition-transform"><i data-lucide="camera" class="w-6 h-6 text-usfit-blue"></i></div><span class="text-sm font-bold text-gray-500">Costas</span>
+                        </div>
+                        <div class="aspect-[3/4] bg-gray-50 rounded-xl border-2 border-dashed border-gray-300 flex flex-col items-center justify-center hover:bg-gray-100 transition-colors cursor-pointer group">
+                             <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center mb-2 shadow-sm group-hover:scale-110 transition-transform"><i data-lucide="camera" class="w-6 h-6 text-usfit-blue"></i></div><span class="text-sm font-bold text-gray-500">Perfil Esquerdo</span>
+                        </div>
+                        <div class="aspect-[3/4] bg-gray-50 rounded-xl border-2 border-dashed border-gray-300 flex flex-col items-center justify-center hover:bg-gray-100 transition-colors cursor-pointer group">
+                             <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center mb-2 shadow-sm group-hover:scale-110 transition-transform"><i data-lucide="camera" class="w-6 h-6 text-usfit-blue"></i></div><span class="text-sm font-bold text-gray-500">Perfil Direito</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Rodapé fixo — Composição Corporal -->
+        <div class="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 macro-footer z-30">
+            <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+
+                <div class="flex items-center gap-2">
+                    <i data-lucide="pie-chart" class="w-4 h-4 text-usfit-cyan"></i>
+                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wide">Composição Corporal</span>
+                </div>
+
+                <div class="flex gap-8">
+                    <div class="text-center">
+                        <span class="block text-xs text-gray-400 uppercase font-bold mb-0.5">Massa Magra</span>
+                        <div class="flex items-center gap-1.5 justify-center">
+                            <div class="w-2.5 h-2.5 bg-blue-500 rounded-full"></div>
+                            <span id="resultLBM" class="font-bold text-gray-900">0.0 kg</span>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <span class="block text-xs text-gray-400 uppercase font-bold mb-0.5">Massa Gorda</span>
+                        <div class="flex items-center gap-1.5 justify-center">
+                            <div class="w-2.5 h-2.5 bg-orange-400 rounded-full"></div>
+                            <span id="resultFatMass" class="font-bold text-gray-900">0.0 kg</span>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <span class="block text-xs text-gray-400 uppercase font-bold mb-0.5">Massa Residual</span>
+                        <div class="flex items-center gap-1.5 justify-center">
+                            <div class="w-2.5 h-2.5 bg-gray-400 rounded-full"></div>
+                            <span id="resultResidual" class="font-bold text-gray-900">18.7 kg</span>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <span class="block text-xs text-gray-400 uppercase font-bold mb-0.5">Classificação</span>
+                        <div id="bfClassification"><span class="font-bold text-green-600">Excelente</span></div>
+                    </div>
+                </div>
+
+                <button class="btn-primary py-2 px-6 shadow-lg shadow-cyan-500/30">
+                    Finalizar Avaliação
+                </button>
+
+            </div>
+        </div>
+
+    </div>
+    <script src="assets/js/functions.js"></script>
+    <script>
+        lucide.createIcons();
+
+        function toggleSection(id) {
+            const body = document.getElementById('body-' + id);
+            const icon = document.getElementById('icon-' + id);
+            if (!body) return;
+            const isHidden = body.classList.contains('hidden');
+            body.classList.toggle('hidden', !isHidden);
+            if (icon) icon.style.transform = isHidden ? 'rotate(90deg)' : 'rotate(0deg)';
+        }
+
+        const protocols = {
+            pollock3: {
+                male: ['fold_chest', 'fold_abdominal', 'fold_thigh'],
+                female: ['fold_triceps', 'fold_suprailiac', 'fold_thigh']
+            },
+            pollock7: {
+                all: ['fold_chest', 'fold_axillary', 'fold_triceps', 'fold_subscapular', 'fold_abdominal', 'fold_suprailiac', 'fold_thigh']
+            }
+        };
+
+        // Init
+        window.onload = updateProtocolInputs;
+    </script>
+</body>
+</html>
