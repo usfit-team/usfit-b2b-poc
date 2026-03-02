@@ -363,8 +363,8 @@ function toggleSubs(btn) {
         }, 300); // Tempo igual ao transition do CSS
 
         const count = parseInt(btn.dataset.subCount || '0');
-        const label = count === 1 ? 'substituição' : 'substituições';
-        btn.innerHTML = `<i data-lucide="refresh-cw" class="w-3 h-3"></i> ${count} ${label}`;
+        const label = count === 1 ? 'Substituição' : 'Substituições';
+        btn.innerHTML = `<i data-lucide="list" class="w-3 h-3"></i> ${count} ${label}`;
         btn.classList.remove('bg-blue-100');
     }
     lucide.createIcons();
