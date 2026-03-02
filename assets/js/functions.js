@@ -1,4 +1,4 @@
-/* ===================================
+﻿/* ===================================
    USFIT B2B - Funções JavaScript
    =================================== */
 
@@ -25,7 +25,7 @@ function copyAnamnesisLink() {
     });
 }
 
-// ===================================
+        // ===================================
 // AVALIAÇÃO FÍSICA
 // ===================================
 
@@ -48,9 +48,6 @@ function updateProtocolInputs() {
     });
 
     if (protocol === 'manual') {
-        // MODO MANUAL:
-        desc.innerText = "Modo Manual: Digite o percentual de gordura calculado externamente.";
-        
         // Habilitar campo BF
         inputBF.disabled = false;
         inputBF.classList.remove('input-disabled', 'input-result');
@@ -74,10 +71,8 @@ function updateProtocolInputs() {
         let activeFields = [];
         if (protocol === 'pollock3') {
             activeFields = gender === 'male' ? protocols.pollock3.male : protocols.pollock3.female;
-            desc.innerText = gender === 'male' ? "Medir: Peitoral, Abdomen, Coxa." : "Medir: Tríceps, Supra-ilíaca, Coxa.";
         } else if (protocol === 'pollock7') {
             activeFields = protocols.pollock7.all;
-            desc.innerText = "Protocolo completo (7 Dobras). Maior precisão científica.";
         }
 
         activeFields.forEach(id => {
@@ -141,7 +136,30 @@ function calculateBodyComp() {
 
     // Limites e Atualizações
     if(bf < 0) bf = 0;
-    if(bf > 60) bf = 60;
+    else if(bf > 60) bf = 60;
+    else {
+        let classLabel = '';
+        let classColor = '';
+
+        if ((gender === 'male' && bf <= 12) || (gender !== 'male' && bf <= 19)) {
+            classLabel = 'Excelente';
+            classColor = 'text-green-600';
+        } else if ((gender === 'male' && bf <= 15) || (gender !== 'male' && bf <= 24)) {
+            classLabel = 'Muito Bom';
+            classColor = 'text-blue-500';
+        } else if ((gender === 'male' && bf <= 19) || (gender !== 'male' && bf <= 29)) {
+            classLabel = 'Saud\u00e1vel';
+            classColor = 'text-yellow-500';
+        } else if ((gender === 'male' && bf <= 24) || (gender !== 'male' && bf <= 34)) {
+            classLabel = 'Aten\u00e7\u00e3o';
+            classColor = 'text-orange-500';
+        } else {
+            classLabel = 'Alto Risco';
+            classColor = 'text-red-600';
+        }
+
+        document.getElementById('bfClassification').innerHTML = '<p class="text-sm font-bold ' + classColor + ' mt-1">' + classLabel + '</p>';
+    }
     
     // Massa Gorda e Magra
     const fatMass = weight * (bf / 100);
@@ -167,9 +185,6 @@ function calculateMetabolism() {
     const bf = parseFloat(document.getElementById('inputBF').value) || 0;
     const formula = document.getElementById('selectFormula').value;
     const activity = parseFloat(document.getElementById('selectActivity').value);
-    const goal = document.getElementById('selectGoal').value;
-    const gap = parseFloat(document.getElementById('inputGap').value) || 0;
-
     // 2. Calcular Massa Magra (LBM)
     const lbm = weight * (1 - (bf / 100));
     document.getElementById('displayLBM').innerText = lbm.toFixed(1) + ' kg';
@@ -191,40 +206,11 @@ function calculateMetabolism() {
     const get = tmb * activity;
     document.getElementById('resultGET').innerText = Math.round(get) + ' kcal';
 
-    // 5. Calcular Meta Final
-    let finalVet = get;
-    const inputGapEl = document.getElementById('inputGap');
-    const gapSign = document.getElementById('gapSign');
-    
-    if (goal === 'deficit') {
-        finalVet = get - gap;
-        inputGapEl.classList.remove('text-green-600');
-        inputGapEl.classList.add('text-red-600');
-        gapSign.innerText = "-";
-        gapSign.classList.remove('text-green-600');
-        gapSign.classList.add('text-red-600');
-    } else if (goal === 'surplus') {
-        finalVet = get + gap;
-        inputGapEl.classList.remove('text-red-600');
-        inputGapEl.classList.add('text-green-600');
-        gapSign.innerText = "+";
-        gapSign.classList.remove('text-red-600');
-        gapSign.classList.add('text-green-600');
-    } else {
-        inputGapEl.value = 0; 
-        gapSign.innerText = "";
-    }
-
-    const roundedVET = Math.round(finalVet);
-    document.getElementById('resultFinalVET').value = roundedVET;
-    document.getElementById('displayFinalVET').innerText = roundedVET;
-    
     updateMacros();
 }
 
 function updateMacros() {
     const weight = parseFloat(document.getElementById('inputWeight').value) || 0;
-    const targetVET = parseFloat(document.getElementById('resultFinalVET').value) || 0;
 
     // Sliders
     const gProt = parseFloat(document.getElementById('rangeProt').value);
@@ -246,6 +232,10 @@ function updateMacros() {
     const kcalFat = totalFat * 9;
     const totalKcal = kcalProt + kcalCarb + kcalFat;
 
+    // finalVET é determinado pela distribuição de macronutrientes
+    document.getElementById('resultFinalVET').value = totalKcal;
+    document.getElementById('displayFinalVET').innerText = totalKcal + ' kcal';
+
     // Updates Visuais Seção 1
     document.getElementById('totalProtG').innerText = totalProt + 'g';
     document.getElementById('totalProtKcal').innerText = kcalProt;
@@ -254,25 +244,93 @@ function updateMacros() {
     document.getElementById('totalFatG').innerText = totalFat + 'g';
     document.getElementById('totalFatKcal').innerText = kcalFat;
 
-    // Updates Footer (Sticky)
-    document.getElementById('footerProt').innerText = totalProt + 'g';
-    document.getElementById('footerCarb').innerText = totalCarb + 'g';
-    document.getElementById('footerFat').innerText = totalFat + 'g';
+    sumMealStats();
+}
 
-    const percentage = Math.min((totalKcal / targetVET) * 100, 100);
+function sumMealStats() {
+    // Escopo apenas nos ingredientes dentro dos containers, excluindo cabeçalhos de refeição
+    // e excluindo meal-cards marcados como excluded-from-calc
+    let totalKcal = 0, totalProt = 0, totalCarb = 0, totalFat = 0, totalFiber = 0;
+
+    document.querySelectorAll('.meal-card:not(.excluded-from-calc) .ing-list [data-meal-kcal]').forEach(el => {
+        totalKcal += parseFloat(el.dataset.mealKcal) || 0;
+    });
+    document.querySelectorAll('.meal-card:not(.excluded-from-calc) .ing-list [data-meal-prot]').forEach(el => {
+        totalProt += parseFloat(el.dataset.mealProt) || 0;
+    });
+    document.querySelectorAll('.meal-card:not(.excluded-from-calc) .ing-list [data-meal-carb]').forEach(el => {
+        totalCarb += parseFloat(el.dataset.mealCarb) || 0;
+    });
+    document.querySelectorAll('.meal-card:not(.excluded-from-calc) .ing-list [data-meal-fat]').forEach(el => {
+        totalFat += parseFloat(el.dataset.mealFat) || 0;
+    });
+    document.querySelectorAll('.meal-card:not(.excluded-from-calc) .ing-list [data-meal-fiber]').forEach(el => {
+        totalFiber += parseFloat(el.dataset.mealFiber) || 0;
+    });
+
+    const targetVET = parseFloat(document.getElementById('resultFinalVET').value) || 0;
+    const targetProt = parseFloat((document.getElementById('totalProtG')?.innerText || '').replace('g', '')) || 0;
+    const targetCarb = parseFloat((document.getElementById('totalCarbG')?.innerText || '').replace('g', '')) || 0;
+    const targetFat = parseFloat((document.getElementById('totalFatG')?.innerText || '').replace('g', '')) || 0;
+    const percentage = targetVET > 0 ? Math.min((totalKcal / targetVET) * 100, 100) : 0;
+
     document.getElementById('vetProgressBar').style.width = percentage + "%";
     document.getElementById('vetProgressText').innerText = `${totalKcal} / ${targetVET} kcal`;
-    
-    // Cor da barra de progresso baseada na proximidade
+    document.getElementById('footerProt').innerText = `${parseFloat(totalProt.toFixed(1))} / ${parseFloat(targetProt.toFixed(1))}g`;
+    document.getElementById('footerCarb').innerText = `${parseFloat(totalCarb.toFixed(1))} / ${parseFloat(targetCarb.toFixed(1))}g`;
+    document.getElementById('footerFat').innerText  = `${parseFloat(totalFat.toFixed(1))} / ${parseFloat(targetFat.toFixed(1))}g`;
+    const fiberEl = document.getElementById('footerFiber');
+    if (fiberEl) fiberEl.innerText = `${parseFloat(totalFiber.toFixed(1))}g`;
+
     const diff = Math.abs(totalKcal - targetVET);
     const bar = document.getElementById('vetProgressBar');
-    if(diff < 50) {
+    if (diff < 50 && targetVET > 0) {
         bar.className = "bg-green-500 h-2 rounded-full transition-all duration-300";
     } else if (totalKcal > targetVET) {
         bar.className = "bg-red-500 h-2 rounded-full transition-all duration-300";
     } else {
         bar.className = "bg-usfit-gradient h-2 rounded-full transition-all duration-300";
     }
+
+    const updateMacroStatus = (elementId, current, target, baseClass) => {
+        const element = document.getElementById(elementId);
+        if (!element) return;
+
+        const macroDiff = Math.abs(current - target);
+        const tolerance = 5;
+
+        if (macroDiff < tolerance && target > 0) {
+            element.className = "font-bold text-blue-600";
+        } else if (current > target) {
+            element.className = "font-bold text-red-600";
+        } else {
+            element.className = `font-bold ${baseClass}`;
+        }
+    };
+
+    updateMacroStatus('footerProt', totalProt, targetProt, 'text-blue-600');
+    updateMacroStatus('footerCarb', totalCarb, targetCarb, 'text-orange-600');
+    updateMacroStatus('footerFat', totalFat, targetFat, 'text-yellow-600');
+
+    // Per-meal totals
+    document.querySelectorAll('.meal-card').forEach(card => {
+        let mProt = 0, mCarb = 0, mFat = 0, mFiber = 0, mKcal = 0;
+        card.querySelectorAll('.ing-list [data-meal-prot]').forEach(el  => { mProt  += parseFloat(el.dataset.mealProt)  || 0; });
+        card.querySelectorAll('.ing-list [data-meal-carb]').forEach(el  => { mCarb  += parseFloat(el.dataset.mealCarb)  || 0; });
+        card.querySelectorAll('.ing-list [data-meal-fat]').forEach(el   => { mFat   += parseFloat(el.dataset.mealFat)   || 0; });
+        card.querySelectorAll('.ing-list [data-meal-fiber]').forEach(el => { mFiber += parseFloat(el.dataset.mealFiber) || 0; });
+        card.querySelectorAll('.ing-list [data-meal-kcal]').forEach(el  => { mKcal  += parseFloat(el.dataset.mealKcal)  || 0; });
+        const pEl  = card.querySelector('.meal-prot-total');
+        const cEl  = card.querySelector('.meal-carb-total');
+        const fEl  = card.querySelector('.meal-fat-total');
+        const fbEl = card.querySelector('.meal-fiber-total');
+        const kEl  = card.querySelector('.meal-kcal-total');
+        if (pEl)  pEl.innerHTML   = `<strong class="text-blue-600">P:</strong> ${parseFloat(mProt.toFixed(1))}g`;
+        if (cEl)  cEl.innerHTML   = `<strong class="text-orange-600">C:</strong> ${parseFloat(mCarb.toFixed(1))}g`;
+        if (fEl)  fEl.innerHTML   = `<strong class="text-yellow-600">G:</strong> ${parseFloat(mFat.toFixed(1))}g`;
+        if (fbEl) fbEl.innerHTML  = `<strong class="text-green-600">F:</strong> ${parseFloat(mFiber.toFixed(1))}g`;
+        if (kEl)  kEl.textContent = `${parseFloat(mKcal.toFixed(1))} kcal`;
+    });
 }
 
 // --- LÓGICA DE SUBSTITUIÇÃO (TOGGLE) ---
@@ -304,7 +362,9 @@ function toggleSubs(btn) {
             panel.classList.add('hidden');
         }, 300); // Tempo igual ao transition do CSS
 
-        btn.innerHTML = `<i data-lucide="refresh-cw" class="w-3 h-3"></i> 2 substituições`;
+        const count = parseInt(btn.dataset.subCount || '0');
+        const label = count === 1 ? 'substituição' : 'substituições';
+        btn.innerHTML = `<i data-lucide="refresh-cw" class="w-3 h-3"></i> ${count} ${label}`;
         btn.classList.remove('bg-blue-100');
     }
     lucide.createIcons();
@@ -312,41 +372,22 @@ function toggleSubs(btn) {
 
 // --- LÓGICA DE SUPLEMENTAÇÃO ---
 function addSupplement() {
-    const name = document.getElementById('suppName').value;
-    const dose = document.getElementById('suppDose').value;
-    const freq = document.getElementById('suppFreq').value;
     const container = document.getElementById('supplements-container');
-
-    if (!name) return alert("Digite o nome do suplemento!");
-
-    const itemHTML = `
-        <div class="flex items-center justify-between bg-white border border-gray-200 p-3 rounded-lg group hover:border-usfit-cyan transition-colors">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-full bg-blue-50 text-usfit-blue flex items-center justify-center">
-                    <i data-lucide="pill" class="w-4 h-4"></i>
-                </div>
-                <div>
-                    <p class="text-sm font-bold text-gray-800">${name}</p>
-                    <p class="text-xs text-gray-500">${dose} • ${freq}</p>
-                </div>
-            </div>
-            <button onclick="this.parentElement.remove()" class="text-gray-300 hover:text-red-500 transition-colors p-2">
+    const rowHTML = `
+        <div class="supp-item grid grid-cols-[1fr_7rem_1fr_2rem] items-center gap-2">
+            <input type="text" placeholder="Ex: Creatina" class="form-input">
+            <input type="text" placeholder="Ex: 5g" class="form-input">
+            <input type="text" placeholder="Ex: Pós-treino" class="form-input">
+            <button onclick="this.closest('.supp-item').remove()" class="text-gray-300 hover:text-red-500 transition-colors p-1 flex-shrink-0">
                 <i data-lucide="trash-2" class="w-4 h-4"></i>
             </button>
         </div>
     `;
-
-    container.insertAdjacentHTML('beforeend', itemHTML);
-    
-    // Clear inputs
-    document.getElementById('suppName').value = '';
-    document.getElementById('suppDose').value = '';
-    document.getElementById('suppFreq').value = '';
-    
-    // Re-init icons for the new element
+    container.insertAdjacentHTML('beforeend', rowHTML);
+    const newRow = container.lastElementChild;
+    newRow.querySelector('input').focus();
     lucide.createIcons();
 }
-
 
 // ===================================
 // WIDGET DE CHAT (usado no dashboard)

@@ -291,3 +291,17 @@ input[type=number]::-webkit-outer-spin-button {
 
 /* Highlight para o campo de resultado automático */
 .input-result { background-color: #ecfeff; color: #0e7490; font-weight: 700; border-color: #22d3ee; }
+
+/* ===================================
+   IMPRESSÃO / PDF
+   =================================== */
+@media print {
+    aside, .macro-footer, .no-print, header, nav { display: none !important; }
+    body { overflow: visible !important; background: white !important; }
+    .flex-1 { overflow: visible !important; height: auto !important; }
+    main { overflow: visible !important; height: auto !important; padding: 0 !important; }
+    .print-target { background-color: #f0f9ff !important; }
+    tr:not(.print-target) { display: none !important; }
+    thead { display: table-header-group !important; }
+    .excluded-from-calc { opacity: 0.4; }
+}
