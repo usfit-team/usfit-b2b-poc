@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Read(//c/Users/leo_l/.claude/plans/**)"
+      "Read(//c/Users/leo_l/.claude/plans/**)",
+      "Bash(ls -la /c/Users/leo_l/Projects/usfit-b2b-poc/*.html)"
     ],
     "additionalDirectories": [
       "c:\\Users\\leo_l\\.claude\\plans"
