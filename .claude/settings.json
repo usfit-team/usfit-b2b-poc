@@ -5,7 +5,8 @@
       "Bash(ls -la /c/Users/leo_l/Projects/usfit-b2b-poc/*.html)"
     ],
     "additionalDirectories": [
-      "c:\\Users\\leo_l\\.claude\\plans"
+      "c:\\Users\\leo_l\\.claude\\plans",
+      "C:\\Users\\leo_l\\OneDrive\\Desktop\\USFit"
     ]
   },
   "enabledPlugins": {
