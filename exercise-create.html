@@ -49,10 +49,10 @@
                     <a href="exercises-list.html" class="block text-sm text-gray-400 hover:text-white py-1">Banco de Exercícios</a>
                 </div>
             </div>
-            <a href="contracts-dashboard.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+            <!-- <a href="contracts-dashboard.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
                 <i data-lucide="file-text" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
                 <span class="font-medium">Contratos</span>
-            </a>
+            </a> -->
         
 
             <a href="team-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
@@ -133,15 +133,41 @@
                         </div>
                         
                         <div class="space-y-5">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-600 mb-1.5 ml-1">Nome do Exercício *</label>
-                                <input type="text" placeholder="Ex: Agachamento Livre" class="usfit-input">
-                            </div>
 
+                            <!-- Linha 1: Nome + Tipo -->
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-600 mb-1.5 ml-1">Grupo Muscular *</label>
-                                    <select class="usfit-input bg-white">
+                                    <label class="block text-sm font-medium text-gray-600 mb-1.5 ml-1">Nome do Exercício *</label>
+                                    <input type="text" placeholder="Ex: Agachamento Livre" class="usfit-input">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600 mb-2 ml-1">Tipo de Exercício *</label>
+                                    <div class="flex gap-3">
+                                        <label class="flex-1 flex items-center gap-2.5 px-4 py-2.5 rounded-xl border-2 border-gray-200 cursor-pointer hover:border-usfit-blue/50 transition-colors has-[:checked]:border-usfit-blue has-[:checked]:bg-blue-50">
+                                            <input type="radio" name="exercise-type" value="musculacao" checked class="sr-only">
+                                            <span class="w-4 h-4 rounded-full border-2 border-gray-300 flex items-center justify-center flex-shrink-0 transition-colors [label:has(:checked)_&]:border-usfit-blue">
+                                                <span class="w-2 h-2 rounded-full bg-usfit-blue scale-0 transition-transform [label:has(:checked)_&]:scale-100"></span>
+                                            </span>
+                                            <i data-lucide="dumbbell" class="w-4 h-4 text-gray-400 flex-shrink-0 [label:has(:checked)_&]:text-usfit-blue transition-colors"></i>
+                                            <span class="text-sm font-medium text-gray-600 [label:has(:checked)_&]:text-usfit-blue transition-colors">Musculação</span>
+                                        </label>
+                                        <label class="flex-1 flex items-center gap-2.5 px-4 py-2.5 rounded-xl border-2 border-gray-200 cursor-pointer hover:border-usfit-cyan/50 transition-colors has-[:checked]:border-usfit-cyan has-[:checked]:bg-cyan-50">
+                                            <input type="radio" name="exercise-type" value="cardio" class="sr-only">
+                                            <span class="w-4 h-4 rounded-full border-2 border-gray-300 flex items-center justify-center flex-shrink-0 [label:has(:checked)_&]:border-usfit-cyan transition-colors">
+                                                <span class="w-2 h-2 rounded-full bg-usfit-cyan scale-0 transition-transform [label:has(:checked)_&]:scale-100"></span>
+                                            </span>
+                                            <i data-lucide="activity" class="w-4 h-4 text-gray-400 flex-shrink-0 [label:has(:checked)_&]:text-usfit-cyan transition-colors"></i>
+                                            <span class="text-sm font-medium text-gray-600 [label:has(:checked)_&]:text-usfit-cyan transition-colors">Cárdio</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Linha 2: Grupo Principal + Grupos Secundários -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600 mb-1.5 ml-1">Grupo Muscular Principal *</label>
+                                    <select id="primary-muscle-select" onchange="_syncPrimaryMuscle()" class="usfit-input bg-white">
                                         <option value="" disabled selected>Selecione...</option>
                                         <option>Peitoral</option>
                                         <option>Costas</option>
@@ -151,25 +177,67 @@
                                         <option>Bíceps</option>
                                         <option>Tríceps</option>
                                         <option>Abdômen</option>
+                                        <option>Cardiorrespiratório</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-600 mb-1.5 ml-1">Equipamento</label>
-                                    <select class="usfit-input bg-white">
-                                        <option value="" disabled selected>Selecione...</option>
-                                        <option>Barra</option>
-                                        <option>Halteres</option>
-                                        <option>Máquina</option>
-                                        <option>Polia (Cabo)</option>
-                                        <option>Peso do Corpo</option>
-                                        <option>Elástico</option>
-                                    </select>
+                                    <label class="block text-sm font-medium text-gray-600 mb-1.5 ml-1">Grupos Musculares Secundários <span class="font-normal text-gray-400">(máx. 2)</span></label>
+                                    <div class="relative" id="sec-muscle-wrap">
+                                        <button type="button" onclick="_toggleSecMuscles()" class="usfit-input w-full text-left flex items-center justify-between bg-white">
+                                            <span id="sec-muscles-label" class="text-sm text-gray-400">Selecione...</span>
+                                            <i data-lucide="chevron-down" id="sec-muscles-chevron" class="w-4 h-4 text-gray-400 flex-shrink-0 transition-transform duration-200"></i>
+                                        </button>
+                                        <div id="sec-muscles-dropdown" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-gray-100 rounded-xl shadow-lg z-20 py-1.5 max-h-52 overflow-y-auto">
+                                            <label class="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 cursor-pointer transition-colors">
+                                                <input type="checkbox" value="Peitoral" onchange="_updateSecMusclesTags()" class="w-4 h-4 rounded accent-usfit-blue cursor-pointer">
+                                                <span class="text-sm text-gray-700">Peitoral</span>
+                                            </label>
+                                            <label class="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 cursor-pointer transition-colors">
+                                                <input type="checkbox" value="Costas" onchange="_updateSecMusclesTags()" class="w-4 h-4 rounded accent-usfit-blue cursor-pointer">
+                                                <span class="text-sm text-gray-700">Costas</span>
+                                            </label>
+                                            <label class="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 cursor-pointer transition-colors">
+                                                <input type="checkbox" value="Pernas (Quadríceps)" onchange="_updateSecMusclesTags()" class="w-4 h-4 rounded accent-usfit-blue cursor-pointer">
+                                                <span class="text-sm text-gray-700">Pernas (Quadríceps)</span>
+                                            </label>
+                                            <label class="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 cursor-pointer transition-colors">
+                                                <input type="checkbox" value="Pernas (Posterior)" onchange="_updateSecMusclesTags()" class="w-4 h-4 rounded accent-usfit-blue cursor-pointer">
+                                                <span class="text-sm text-gray-700">Pernas (Posterior)</span>
+                                            </label>
+                                            <label class="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 cursor-pointer transition-colors">
+                                                <input type="checkbox" value="Ombros" onchange="_updateSecMusclesTags()" class="w-4 h-4 rounded accent-usfit-blue cursor-pointer">
+                                                <span class="text-sm text-gray-700">Ombros</span>
+                                            </label>
+                                            <label class="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 cursor-pointer transition-colors">
+                                                <input type="checkbox" value="Bíceps" onchange="_updateSecMusclesTags()" class="w-4 h-4 rounded accent-usfit-blue cursor-pointer">
+                                                <span class="text-sm text-gray-700">Bíceps</span>
+                                            </label>
+                                            <label class="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 cursor-pointer transition-colors">
+                                                <input type="checkbox" value="Tríceps" onchange="_updateSecMusclesTags()" class="w-4 h-4 rounded accent-usfit-blue cursor-pointer">
+                                                <span class="text-sm text-gray-700">Tríceps</span>
+                                            </label>
+                                            <label class="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 cursor-pointer transition-colors">
+                                                <input type="checkbox" value="Abdômen" onchange="_updateSecMusclesTags()" class="w-4 h-4 rounded accent-usfit-blue cursor-pointer">
+                                                <span class="text-sm text-gray-700">Abdômen</span>
+                                            </label>
+                                            <label class="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 cursor-pointer transition-colors">
+                                                <input type="checkbox" value="Glúteos" onchange="_updateSecMusclesTags()" class="w-4 h-4 rounded accent-usfit-blue cursor-pointer">
+                                                <span class="text-sm text-gray-700">Glúteos</span>
+                                            </label>
+                                            <label class="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 cursor-pointer transition-colors">
+                                                <input type="checkbox" value="Lombares" onchange="_updateSecMusclesTags()" class="w-4 h-4 rounded accent-usfit-blue cursor-pointer">
+                                                <span class="text-sm text-gray-700">Lombares</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div id="sec-muscles-tags" class="flex flex-wrap gap-1.5 mt-2"></div>
                                 </div>
                             </div>
 
+                            <!-- Linha 3: Instruções -->
                             <div>
                                 <label class="block text-sm font-medium text-gray-600 mb-1.5 ml-1">Instruções de Execução (Opcional)</label>
-                                <textarea rows="4" class="usfit-input" placeholder="Descreva os pontos de atenção para a execução correta..."></textarea>
+                                <textarea rows="5" class="usfit-input" placeholder="Descreva os pontos de atenção para a execução correta..."></textarea>
                             </div>
                         </div>
                     </div>
@@ -220,5 +288,81 @@
     </div>
 
     <script src="assets/js/functions.js"></script>
+    <script>
+        function _syncPrimaryMuscle() {
+            const primary = document.getElementById('primary-muscle-select').value;
+            document.querySelectorAll('#sec-muscles-dropdown label').forEach(lbl => {
+                const cb = lbl.querySelector('input[type="checkbox"]');
+                const isPrimary = cb.value === primary;
+                lbl.style.display = isPrimary ? 'none' : '';
+                if (isPrimary && cb.checked) {
+                    cb.checked = false;
+                    _updateSecMusclesTags();
+                }
+            });
+        }
+
+        function _toggleSecMuscles() {
+            const dropdown = document.getElementById('sec-muscles-dropdown');
+            const chevron  = document.getElementById('sec-muscles-chevron');
+            const isHidden = dropdown.classList.toggle('hidden');
+            chevron.style.transform = isHidden ? '' : 'rotate(180deg)';
+        }
+
+        function _updateSecMusclesTags() {
+            const allCheckboxes = [...document.querySelectorAll('#sec-muscles-dropdown input[type="checkbox"]')];
+            const checked = allCheckboxes.filter(cb => cb.checked).map(cb => cb.value);
+            const label = document.getElementById('sec-muscles-label');
+            const tags  = document.getElementById('sec-muscles-tags');
+
+            // Limite de 2: desabilita os não marcados quando o limite é atingido
+            const atLimit = checked.length >= 2;
+            allCheckboxes.forEach(cb => {
+                if (!cb.checked) {
+                    cb.disabled = atLimit;
+                    cb.closest('label').classList.toggle('opacity-40', atLimit);
+                    cb.closest('label').classList.toggle('cursor-not-allowed', atLimit);
+                    cb.closest('label').classList.toggle('cursor-pointer', !atLimit);
+                }
+            });
+
+            if (checked.length) {
+                label.textContent = `${checked.length} de 2 grupo${checked.length > 1 ? 's' : ''} selecionado${checked.length > 1 ? 's' : ''}`;
+                label.classList.replace('text-gray-400', 'text-gray-700');
+            } else {
+                label.textContent = 'Selecione...';
+                label.classList.replace('text-gray-700', 'text-gray-400');
+            }
+
+            tags.innerHTML = checked.map(m =>
+                `<span class="inline-flex items-center gap-1 px-2.5 py-1 bg-blue-50 text-usfit-blue text-xs font-medium rounded-lg border border-blue-100">
+                    ${m}
+                    <button type="button" onclick="_removeSecMuscle('${m}')" class="hover:text-red-500 transition-colors ml-0.5" title="Remover">
+                        <i data-lucide="x" class="w-3 h-3"></i>
+                    </button>
+                </span>`
+            ).join('');
+            lucide.createIcons();
+        }
+
+        function _removeSecMuscle(muscle) {
+            const cb = document.querySelector(`#sec-muscles-dropdown input[value="${muscle}"]`);
+            if (cb) cb.checked = false;
+            _updateSecMusclesTags();
+        }
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('#sec-muscle-wrap')) {
+                const dropdown = document.getElementById('sec-muscles-dropdown');
+                const chevron  = document.getElementById('sec-muscles-chevron');
+                if (!dropdown.classList.contains('hidden')) {
+                    dropdown.classList.add('hidden');
+                    chevron.style.transform = '';
+                }
+            }
+        });
+
+        lucide.createIcons();
+    </script>
 </body>
 </html>

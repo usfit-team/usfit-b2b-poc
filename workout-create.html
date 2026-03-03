@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </head>
 <body class="bg-usfit-gray text-usfit-text h-screen flex overflow-hidden">
 
@@ -49,10 +51,10 @@
                     <a href="exercises-list.html" class="block text-sm text-gray-400 hover:text-white py-1">Banco de Exercícios</a>
                 </div>
             </div>
-            <a href="contracts-dashboard.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
+            <!-- <a href="contracts-dashboard.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
                 <i data-lucide="file-text" class="w-5 h-5 mr-3 group-hover:text-usfit-cyan"></i>
                 <span class="font-medium">Contratos</span>
-            </a>
+            </a> -->
         
 
             <a href="team-list.html" class="flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors group">
@@ -98,7 +100,7 @@
         </div>
     </aside>
 
-    <div class="flex-1 flex flex-col h-full min-w-0 bg-usfit-gray">
+    <div class="flex-1 flex flex-col h-full min-w-0 bg-usfit-gray relative">
         
         <header class="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-8 flex-shrink-0 z-20 shadow-sm">
             <div class="flex items-center gap-4">
@@ -108,6 +110,18 @@
                         Nova Ficha de Treino
                         <span class="px-2 py-0.5 rounded-full bg-cyan-50 text-cyan-700 text-xs font-bold uppercase tracking-wide border border-cyan-100">Rascunho</span>
                     </h1>
+                </div>
+            </div>
+
+            <div class="hidden md:flex flex-1 justify-center w-1/3">
+                <div class="flex items-center px-4 py-2 bg-gray-50 rounded-full border border-gray-100 shadow-sm">
+                    <div class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-3">
+                        <i data-lucide="user" class="w-3 h-3"></i>
+                    </div>
+                    <div class="flex flex-col md:flex-row md:items-center md:gap-2">
+                        <span class="text-xs text-gray-400 font-medium uppercase tracking-wide">Aluno</span>
+                        <span class="text-sm font-bold text-gray-800">Ana Beatriz Silva</span>
+                    </div>
                 </div>
             </div>
             
@@ -124,236 +138,1371 @@
             </div>
         </header>
 
-        <main class="flex-1 overflow-y-auto p-8">
+        <main class="flex-1 overflow-y-auto p-8 pb-24">
             <div class="max-w-7xl mx-auto space-y-6">
-                
-                <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-                    <div class="flex items-center gap-2 mb-4">
-                        <div class="w-1 h-6 bg-usfit-gradient rounded-full"></div>
-                        <h2 class="text-lg font-bold text-gray-800">Informações Básicas</h2>
+
+                <div id="workout-list" class="bg-gray-100 rounded-2xl p-3 flex items-center gap-3">
+                    <button id="tabs-scroll-left" onclick="_scrollTabs(-1)" class="hidden flex-shrink-0 w-7 h-7 flex items-center justify-center rounded-full bg-white border border-gray-200 text-gray-400 hover:text-cyan-600 hover:border-cyan-200 transition-all">
+                        <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                    </button>
+                    <div id="workout-tabs-bar" class="flex items-center gap-2 flex-1 min-w-0 overflow-x-auto" style="scrollbar-width:none;" onscroll="_updateTabsScrollBtns()">
+                        <button class="px-6 py-2.5 bg-usfit-blue text-white rounded-full font-medium text-sm shadow-md shadow-cyan-500/30 flex-shrink-0 transition-transform hover:scale-105" data-tab-id="1" onclick="switchWorkoutTab(this)">
+                            Treino A
+                        </button>
+                        <button class="px-6 py-2.5 bg-white text-gray-500 border border-gray-200 rounded-full font-medium text-sm hover:bg-gray-50 hover:border-cyan-200 hover:text-cyan-600 flex-shrink-0 transition-all" data-tab-id="2" onclick="switchWorkoutTab(this)">
+                            Treino B
+                        </button>
+                        <button class="px-6 py-2.5 bg-white text-gray-500 border border-gray-200 rounded-full font-medium text-sm hover:bg-gray-50 hover:border-cyan-200 hover:text-cyan-600 flex-shrink-0 transition-all" data-tab-id="3" onclick="switchWorkoutTab(this)">
+                            Treino C
+                        </button>
                     </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="md:col-span-1">
-                            <label class="block text-sm font-medium text-gray-600 mb-1.5 ml-1">Nome da Ficha</label>
-                            <input type="text" value="Hipertrofia Intermediário" class="usfit-input" placeholder="Ex: Treino de Força A">
-                        </div>
-                        <div class="md:col-span-1">
-                            <label class="block text-sm font-medium text-gray-600 mb-1.5 ml-1">Objetivo</label>
-                            <select class="usfit-input bg-white">
-                                <option>Hipertrofia</option>
-                                <option>Emagrecimento</option>
-                                <option>Condicionamento</option>
-                            </select>
-                        </div>
-                        <div class="md:col-span-1">
-                            <label class="block text-sm font-medium text-gray-600 mb-1.5 ml-1">Duração (Semanas)</label>
-                            <input type="number" value="8" class="usfit-input">
-                        </div>
+                    <button id="tabs-scroll-right" onclick="_scrollTabs(1)" class="hidden flex-shrink-0 w-7 h-7 flex items-center justify-center rounded-full bg-white border border-gray-200 text-gray-400 hover:text-cyan-600 hover:border-cyan-200 transition-all">
+                        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </button>
+                    <div class="w-px h-6 bg-gray-300 flex-shrink-0"></div>
+                    <div class="flex items-center gap-2 flex-shrink-0">
+                        <button onclick="createBlankWorkout()" class="px-5 py-2 bg-usfit-blue text-white rounded-full font-medium text-sm shadow-md shadow-cyan-500/30 flex-shrink-0 transition-transform hover:scale-105 flex items-center gap-1.5"><i data-lucide="plus" class="w-3.5 h-3.5"></i> Treino do zero</button>
+                        <button onclick="openWorkoutTemplatesModal()" class="px-5 py-2 bg-white border border-cyan-200 text-cyan-500 rounded-full font-medium text-sm flex-shrink-0 hover:bg-cyan-50 transition-colors flex items-center gap-1.5"><i data-lucide="bookmark" class="w-3.5 h-3.5"></i> Treino pronto</button>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    
-                    <div class="lg:col-span-2 space-y-4">
-                        
-                        <div class="flex items-center gap-2 overflow-x-auto pb-1">
-                            <button class="px-6 py-2.5 bg-usfit-gradient text-white rounded-full font-medium text-sm shadow-md shadow-cyan-500/30 flex-shrink-0 transition-transform hover:scale-105">
-                                Treino A (Peito/Tríceps)
-                            </button>
-                            <button class="px-6 py-2.5 bg-white text-gray-500 border border-gray-200 rounded-full font-medium text-sm hover:bg-gray-50 hover:border-cyan-200 hover:text-cyan-600 flex-shrink-0 transition-all">
-                                Treino B (Costas/Bíceps)
-                            </button>
-                            <button class="px-6 py-2.5 bg-white text-gray-500 border border-gray-200 rounded-full font-medium text-sm hover:bg-gray-50 flex-shrink-0 transition-all">
-                                Treino C (Pernas)
-                            </button>
-                            <button class="w-10 h-10 flex items-center justify-center rounded-full bg-white border border-gray-200 text-gray-400 hover:text-usfit-cyan hover:border-usfit-cyan transition-all shadow-sm ml-2">
-                                <i data-lucide="plus" class="w-5 h-5"></i>
-                            </button>
-                        </div>
-
-                        <div class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden">
-                            <div class="absolute left-0 top-0 bottom-0 w-1 bg-gray-200 group-hover:bg-usfit-gradient transition-colors"></div>
-                            
-                            <div class="absolute right-4 top-4 cursor-grab text-gray-300 hover:text-gray-500">
-                                <i data-lucide="grip-horizontal" class="w-5 h-5"></i>
-                            </div>
-
-                            <div class="p-5 pl-7">
-                                <div class="flex items-start justify-between mb-4 pr-8">
-                                    <div class="flex items-center gap-4">
-                                        <div class="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center text-gray-400 border border-gray-100">
-                                            <i data-lucide="image" class="w-6 h-6"></i>
+                    <div class="lg:col-span-2 space-y-4" id="exercise-list">
+                        <div id="tab-panels" class="space-y-4">
+                            <!-- Panel 1: Treino A -->
+                            <div class="tab-panel" id="panel-1" data-tab-id="1">
+                                <div class="border border-gray-200 rounded-2xl overflow-hidden">
+                                    <div class="bg-gray-50 px-5 py-3 border-b border-gray-200">
+                                        <div class="flex items-center gap-3">
+                                            <input type="text" value="Treino A" placeholder="Nome do treino..."
+                                                   class="flex-1 font-bold text-base text-gray-700 bg-transparent outline-none placeholder-gray-300 min-w-0 workout-name-input"
+                                                   onfocus="this.dataset.prev=this.value" oninput="_syncTabName(this)" onblur="_notifyNameChange(this)" onkeydown="if(event.key==='Enter')this.blur()">
+                                            <div class="flex gap-1 flex-shrink-0">
+                                                <button onclick="saveWorkoutTemplate(this)" title="Salvar treino" class="p-1.5 text-gray-400 hover:text-amber-500 transition-colors"><i data-lucide="bookmark" class="w-4 h-4"></i></button>
+                                                <button onclick="removeWorkoutTab(this)" title="Remover treino" class="p-1.5 text-gray-400 hover:text-red-500 transition-colors"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <h3 class="font-bold text-gray-800 text-base">Supino Reto com Barra</h3>
-                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-cyan-50 text-cyan-700 mt-1">
-                                                Peitoral Maior
-                                            </span>
+                                        <div class="mt-2 pt-2 border-t border-gray-100">
+                                            <label class="flex items-center gap-1.5 text-xs font-medium text-gray-400 mb-1.5">
+                                                <i data-lucide="message-square" class="w-3 h-3 flex-shrink-0"></i>
+                                                Observações <span class="font-normal text-gray-300 ml-0.5">(Opcional)</span>
+                                            </label>
+                                            <textarea rows="2" placeholder="Observações sobre o treino..." class="usfit-input w-full resize-none text-xs"></textarea>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="grid grid-cols-4 gap-4 mb-4">
-                                    <div>
-                                        <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1 text-center">Séries</label>
-                                        <input type="number" value="4" class="usfit-input text-center font-semibold focus:bg-white">
-                                    </div>
-                                    <div>
-                                        <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1 text-center">Reps</label>
-                                        <input type="text" value="8-12" class="usfit-input text-center font-semibold focus:bg-white">
-                                    </div>
-                                    <div>
-                                        <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1 text-center">Carga (kg)</label>
-                                        <input type="number" placeholder="-" class="usfit-input text-center focus:bg-white">
-                                    </div>
-                                    <div>
-                                        <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1 text-center">Descanso</label>
-                                        <div class="relative">
-                                            <input type="number" value="60" class="usfit-input text-center focus:bg-white">
-                                            <span class="absolute right-2 top-2 text-[10px] text-gray-400 font-bold">s</span>
+                                    <div class="p-4 bg-white space-y-4">
+                                        <div class="flex gap-2 justify-center workout-btns-row">
+                                            <button class="px-5 py-2.5 bg-usfit-blue text-white rounded-full font-medium text-sm shadow-md shadow-cyan-500/30 flex-shrink-0 transition-transform hover:scale-105 flex items-center gap-1.5" onclick="addExercise(this)"><i data-lucide="plus" class="w-3 h-3"></i> Novo Exercício</button>
+                                            <button class="px-6 py-2.5 bg-white border border-cyan-200 text-cyan-500 rounded-full font-medium text-sm flex-shrink-0 hover:bg-cyan-50 transition-colors flex items-center gap-1.5" onclick="addCardio(this)"><i data-lucide="activity" class="w-3.5 h-3.5"></i> Novo Cárdio</button>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="flex items-center gap-3">
-                                    <div class="flex-1 relative">
-                                        <i data-lucide="message-square" class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
-                                        <input type="text" placeholder="Observações para o aluno..." class="usfit-input pl-9 text-xs">
-                                    </div>
-                                    <button class="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors" title="Remover">
-                                        <i data-lucide="trash-2" class="w-4 h-4"></i>
-                                    </button>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden">
-                            <div class="absolute left-0 top-0 bottom-0 w-1 bg-gray-200 group-hover:bg-usfit-gradient transition-colors"></div>
-                            
-                            <div class="absolute right-4 top-4 cursor-grab text-gray-300 hover:text-gray-500">
-                                <i data-lucide="grip-horizontal" class="w-5 h-5"></i>
+                            <!-- Panel 2: Treino B -->
+                            <div class="tab-panel hidden" id="panel-2" data-tab-id="2">
+                                <div class="border border-gray-200 rounded-2xl overflow-hidden">
+                                    <div class="bg-gray-50 px-5 py-3 border-b border-gray-200">
+                                        <div class="flex items-center gap-3">
+                                            <input type="text" value="Treino B" placeholder="Nome do treino..."
+                                                   class="flex-1 font-bold text-base text-gray-700 bg-transparent outline-none placeholder-gray-300 min-w-0 workout-name-input"
+                                                   onfocus="this.dataset.prev=this.value" oninput="_syncTabName(this)" onblur="_notifyNameChange(this)" onkeydown="if(event.key==='Enter')this.blur()">
+                                            <div class="flex gap-1 flex-shrink-0">
+                                                <button onclick="saveWorkoutTemplate(this)" title="Salvar treino" class="p-1.5 text-gray-400 hover:text-amber-500 transition-colors"><i data-lucide="bookmark" class="w-4 h-4"></i></button>
+                                                <button onclick="removeWorkoutTab(this)" title="Remover treino" class="p-1.5 text-gray-400 hover:text-red-500 transition-colors"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="mt-2 pt-2 border-t border-gray-100">
+                                            <label class="flex items-center gap-1.5 text-xs font-medium text-gray-400 mb-1.5">
+                                                <i data-lucide="message-square" class="w-3 h-3 flex-shrink-0"></i>
+                                                Observações <span class="font-normal text-gray-300 ml-0.5">(Opcional)</span>
+                                            </label>
+                                            <textarea rows="2" placeholder="Observações sobre o treino..." class="usfit-input w-full resize-none text-xs"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="p-4 bg-white space-y-4">
+                                        <div class="flex gap-2 justify-center workout-btns-row">
+                                            <button class="px-5 py-2.5 bg-usfit-blue text-white rounded-full font-medium text-sm shadow-md shadow-cyan-500/30 flex-shrink-0 transition-transform hover:scale-105 flex items-center gap-1.5" onclick="addExercise(this)"><i data-lucide="plus" class="w-3 h-3"></i> Novo Exercício</button>
+                                            <button class="px-6 py-2.5 bg-white border border-cyan-200 text-cyan-500 rounded-full font-medium text-sm flex-shrink-0 hover:bg-cyan-50 transition-colors flex items-center gap-1.5" onclick="addCardio(this)"><i data-lucide="activity" class="w-3.5 h-3.5"></i> Novo Cárdio</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="p-5 pl-7">
-                                <div class="flex items-start justify-between mb-4 pr-8">
-                                    <div class="flex items-center gap-4">
-                                        <div class="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center text-gray-400 border border-gray-100">
-                                            <i data-lucide="image" class="w-6 h-6"></i>
+                            <!-- Panel 3: Treino C -->
+                            <div class="tab-panel hidden" id="panel-3" data-tab-id="3">
+                                <div class="border border-gray-200 rounded-2xl overflow-hidden">
+                                    <div class="bg-gray-50 px-5 py-3 border-b border-gray-200">
+                                        <div class="flex items-center gap-3">
+                                            <input type="text" value="Treino C" placeholder="Nome do treino..."
+                                                   class="flex-1 font-bold text-base text-gray-700 bg-transparent outline-none placeholder-gray-300 min-w-0 workout-name-input"
+                                                   onfocus="this.dataset.prev=this.value" oninput="_syncTabName(this)" onblur="_notifyNameChange(this)" onkeydown="if(event.key==='Enter')this.blur()">
+                                            <div class="flex gap-1 flex-shrink-0">
+                                                <button onclick="saveWorkoutTemplate(this)" title="Salvar treino" class="p-1.5 text-gray-400 hover:text-amber-500 transition-colors"><i data-lucide="bookmark" class="w-4 h-4"></i></button>
+                                                <button onclick="removeWorkoutTab(this)" title="Remover treino" class="p-1.5 text-gray-400 hover:text-red-500 transition-colors"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <h3 class="font-bold text-gray-800 text-base">Crucifixo Inclinado</h3>
-                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-cyan-50 text-cyan-700 mt-1">
-                                                Peitoral
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="grid grid-cols-4 gap-4 mb-4">
-                                    <div>
-                                        <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1 text-center">Séries</label>
-                                        <input type="number" value="3" class="usfit-input text-center font-semibold focus:bg-white">
-                                    </div>
-                                    <div>
-                                        <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1 text-center">Reps</label>
-                                        <input type="text" value="12-15" class="usfit-input text-center font-semibold focus:bg-white">
-                                    </div>
-                                    <div>
-                                        <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1 text-center">Carga</label>
-                                        <input type="number" placeholder="-" class="usfit-input text-center focus:bg-white">
-                                    </div>
-                                    <div>
-                                        <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1 text-center">Descanso</label>
-                                        <div class="relative">
-                                            <input type="number" value="45" class="usfit-input text-center focus:bg-white">
-                                            <span class="absolute right-2 top-2 text-[10px] text-gray-400 font-bold">s</span>
+                                        <div class="mt-2 pt-2 border-t border-gray-100">
+                                            <label class="flex items-center gap-1.5 text-xs font-medium text-gray-400 mb-1.5">
+                                                <i data-lucide="message-square" class="w-3 h-3 flex-shrink-0"></i>
+                                                Observações <span class="font-normal text-gray-300 ml-0.5">(Opcional)</span>
+                                            </label>
+                                            <textarea rows="2" placeholder="Observações sobre o treino..." class="usfit-input w-full resize-none text-xs"></textarea>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="flex items-center gap-3">
-                                    <div class="flex-1 relative">
-                                        <i data-lucide="message-square" class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
-                                        <input type="text" placeholder="Observações..." class="usfit-input pl-9 text-xs">
+                                    <div class="p-4 bg-white space-y-4">
+                                        <div class="flex gap-2 justify-center workout-btns-row">
+                                            <button class="px-5 py-2.5 bg-usfit-blue text-white rounded-full font-medium text-sm shadow-md shadow-cyan-500/30 flex-shrink-0 transition-transform hover:scale-105 flex items-center gap-1.5" onclick="addExercise(this)"><i data-lucide="plus" class="w-3 h-3"></i> Novo Exercício</button>
+                                            <button class="px-6 py-2.5 bg-white border border-cyan-200 text-cyan-500 rounded-full font-medium text-sm flex-shrink-0 hover:bg-cyan-50 transition-colors flex items-center gap-1.5" onclick="addCardio(this)"><i data-lucide="activity" class="w-3.5 h-3.5"></i> Novo Cárdio</button>
+                                        </div>
                                     </div>
-                                    <button class="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors">
-                                        <i data-lucide="trash-2" class="w-4 h-4"></i>
-                                    </button>
                                 </div>
                             </div>
                         </div>
-
-                        <button class="w-full py-5 border-2 border-dashed border-gray-300 rounded-2xl flex flex-col items-center justify-center gap-2 text-gray-500 hover:border-usfit-cyan hover:text-usfit-cyan hover:bg-cyan-50/30 transition-all group">
-                            <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-cyan-100 transition-colors">
-                                <i data-lucide="plus" class="w-6 h-6"></i>
-                            </div>
-                            <span class="font-medium">Adicionar Exercício</span>
-                        </button>
 
                     </div>
 
                     <div class="lg:col-span-1">
                         <div class="sticky top-6 space-y-6">
-                            
                             <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-lg shadow-gray-200/50">
                                 <div class="flex items-center justify-between mb-4">
-                                    <h3 class="font-bold text-gray-800">Resumo: Treino A</h3>
+                                    <h3 id="sidebar-workout-name" class="font-bold text-gray-800">Resumo: Treino A (Peito/Tríceps)</h3>
                                     <i data-lucide="bar-chart-2" class="w-5 h-5 text-usfit-cyan"></i>
                                 </div>
-                                
                                 <div class="space-y-4">
-                                    <div>
-                                        <div class="flex justify-between text-xs mb-1.5 font-medium">
-                                            <span class="text-gray-500">Intensidade Estimada</span>
-                                            <span class="text-usfit-cyan">Alta</span>
-                                        </div>
-                                        <div class="w-full bg-gray-100 rounded-full h-2">
-                                            <div class="bg-usfit-gradient h-2 rounded-full" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-
                                     <div class="pt-4 border-t border-gray-50 space-y-3">
                                         <div class="flex justify-between text-sm">
                                             <span class="text-gray-500">Exercícios</span>
-                                            <span class="font-bold text-gray-800">6</span>
+                                            <span id="sidebar-exercises" class="font-bold text-gray-800">0</span>
                                         </div>
                                         <div class="flex justify-between text-sm">
-                                            <span class="text-gray-500">Volume (Séries)</span>
-                                            <span class="font-bold text-gray-800">22</span>
+                                            <span class="text-gray-500">Séries válidas</span>
+                                            <span id="sidebar-valid-sets" class="font-bold text-gray-800">0</span>
                                         </div>
                                         <div class="flex justify-between text-sm">
-                                            <span class="text-gray-500">Tempo Estimado</span>
-                                            <span class="font-bold text-gray-800 flex items-center gap-1">
-                                                55 min
-                                            </span>
+                                            <span class="text-gray-500">Volume total</span>
+                                            <span id="sidebar-tonnage" class="font-bold text-gray-800">0 kg</span>
+                                        </div>
+                                        <div class="flex justify-between text-sm">
+                                            <span class="text-gray-500">Tempo médio</span>
+                                            <span id="sidebar-duration" class="font-bold text-gray-800">— min</span>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="mt-6">
                                     <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Foco Muscular</p>
-                                    <div class="flex flex-wrap gap-2">
-                                        <span class="px-3 py-1.5 bg-gray-50 text-gray-600 text-xs font-medium rounded-lg border border-gray-200">Peito</span>
-                                        <span class="px-3 py-1.5 bg-gray-50 text-gray-600 text-xs font-medium rounded-lg border border-gray-200">Tríceps</span>
-                                        <span class="px-3 py-1.5 bg-gray-50 text-gray-600 text-xs font-medium rounded-lg border border-gray-200">Ombros</span>
+                                    <div id="sidebar-muscles" class="flex flex-wrap gap-2">
+                                        <span class="text-xs text-gray-400">Nenhuma série válida</span>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="space-y-3">
-                                <a href="#" class="btn-secondary w-full justify-center flex items-center">
-                                    <i data-lucide="printer" class="w-4 h-4 mr-2"></i> Imprimir Ficha de Treino
-                                </a>
-                            </div>
-
                         </div>
                     </div>
-
                 </div>
+
             </div>
         </main>
+
+        <!-- BARRA FIXA DE TOTAIS DO TREINO -->
+        <div id="workout-footer" class="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-100 shadow-lg z-30 px-6 py-3">
+            <div class="max-w-7xl mx-auto flex items-center gap-6">
+
+                <!-- Stats fixas -->
+                <div class="flex items-center gap-5 flex-shrink-0">
+                    <div class="text-center min-w-[60px]">
+                        <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider">Séries válidas</span>
+                        <span id="footer-valid-sets" class="font-bold text-usfit-blue text-xl leading-tight">0</span>
+                    </div>
+                    <div class="w-px h-8 bg-gray-100"></div>
+                    <div class="text-center min-w-[80px]">
+                        <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider">Volume Total</span>
+                        <span id="footer-tonnage" class="font-bold text-gray-800 text-xl leading-tight">0 kg</span>
+                    </div>
+                    <div class="w-px h-8 bg-gray-100"></div>
+                    <div class="text-center min-w-[80px]">
+                        <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider">Tempo Médio</span>
+                        <span id="footer-duration" class="font-bold text-cyan-400 text-xl leading-tight">— min</span>
+                    </div>
+                    <div class="w-px h-8 bg-gray-100"></div>
+                </div>
+
+                <!-- Foco Muscular scrollável -->
+                <div class="flex-1 min-w-0">
+                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5">Foco Muscular</p>
+                    <div id="footer-muscles" class="flex gap-1.5 overflow-x-auto" style="scrollbar-width:none;-webkit-overflow-scrolling:touch;">
+                        <span class="text-xs text-gray-400 whitespace-nowrap">Nenhuma série válida</span>
+                    </div>
+                </div>
+
+                <!-- CTA -->
+                <div class="flex-shrink-0">
+                    <button class="btn-primary px-6 py-2.5 bg-usfit-gradient text-white rounded-full font-medium text-sm shadow-md shadow-cyan-500/30 flex items-center gap-2">
+                        <i data-lucide="save" class="w-4 h-4"></i> Salvar Ficha
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal: Confirmação de Exclusão -->
+    <div id="confirm-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm mx-4 p-6">
+            <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="trash-2" class="w-5 h-5 text-red-500"></i>
+                </div>
+                <h3 id="confirm-modal-title" class="font-bold text-gray-800 text-sm leading-snug"></h3>
+            </div>
+            <p id="confirm-modal-body" class="text-xs text-gray-400 mb-5 pl-13"></p>
+            <div class="flex gap-2">
+                <button onclick="_confirmModalResolve(false)" class="flex-1 py-2 text-sm text-gray-500 bg-gray-100 hover:bg-gray-200 rounded-xl font-medium transition-colors">Cancelar</button>
+                <button onclick="_confirmModalResolve(true)" class="flex-1 py-2 text-sm text-white bg-red-500 hover:bg-red-600 rounded-xl font-medium transition-colors">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Buscar Exercício -->
+    <div id="exercise-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 overflow-hidden">
+            <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+                <h3 id="exercise-modal-title" class="font-bold text-gray-800 flex items-center gap-2">
+                    <i data-lucide="dumbbell" class="w-4 h-4 text-usfit-cyan"></i> Buscar Exercício
+                </h3>
+                <button onclick="closeExerciseModal()" class="p-1.5 text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+            <div class="px-6 pt-4 pb-2">
+                <div class="relative">
+                    <i data-lucide="search" class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
+                    <input id="exercise-search-input" type="text" placeholder="Buscar exercício..."
+                        class="usfit-input pl-9" oninput="filterExercises(this.value)">
+                </div>
+            </div>
+            <ul id="exercise-results" class="px-6 pb-6 mt-2 space-y-1 max-h-64 overflow-y-auto"></ul>
+        </div>
+    </div>
+
+    <!-- Modal: Treinos Prontos -->
+    <div id="workout-template-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm mx-4 p-6">
+            <h3 class="font-bold text-gray-800 mb-4 flex items-center gap-2">
+                <i data-lucide="bookmark" class="w-4 h-4 text-usfit-cyan"></i> Treinos Prontos
+            </h3>
+            <div class="relative mb-3">
+                <i data-lucide="search" class="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400 pointer-events-none"></i>
+                <input id="workout-template-search" type="text" placeholder="Buscar treino salvo..."
+                       class="usfit-input pl-8 text-sm w-full"
+                       oninput="_renderWorkoutTemplatesList(this.value)">
+            </div>
+            <div id="workout-templates-list" class="space-y-2 max-h-60 overflow-y-auto"></div>
+            <button onclick="closeWorkoutTemplatesModal()" class="mt-4 w-full text-xs text-gray-400 hover:text-gray-600 py-1">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- Modal: Salvar com nome -->
+    <div id="save-name-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm mx-4 p-6">
+            <h3 id="save-name-modal-title" class="font-bold text-gray-800 mb-4 flex items-center gap-2">
+                <i data-lucide="bookmark" class="w-4 h-4 text-usfit-cyan"></i> Salvar
+            </h3>
+            <div class="mb-4">
+                <label class="text-xs font-medium text-gray-500 mb-1.5 block">Nome</label>
+                <input id="save-name-input" type="text" class="usfit-input w-full text-sm" placeholder="Digite um nome..."
+                       onkeydown="if(event.key==='Enter') _confirmSaveName()">
+            </div>
+            <div class="flex gap-2">
+                <button onclick="_closeSaveNameModal()" class="flex-1 py-2 text-sm text-gray-500 bg-gray-100 hover:bg-gray-200 rounded-xl font-medium transition-colors">Cancelar</button>
+                <button onclick="_confirmSaveName()" class="flex-1 py-2 text-sm text-white rounded-xl font-medium transition-colors" style="background:linear-gradient(135deg,#0ea5e9,#06b6d4)">Salvar</button>
+            </div>
+        </div>
     </div>
 
     <script src="assets/js/functions.js"></script>
+    <script>
+        const EXERCISES = [
+            { name: 'Supino Inclinado com Halteres', muscle: 'Peitoral',    secondaryMuscles: ['Ombros', 'Tríceps'] },
+            { name: 'Agachamento Livre',             muscle: 'Quadríceps',  secondaryMuscles: ['Glúteos', 'Isquiotibiais'] },
+            { name: 'Rosca Direta',                  muscle: 'Bíceps',      secondaryMuscles: [] },
+            { name: 'Tríceps Corda',                 muscle: 'Tríceps',     secondaryMuscles: [] },
+            { name: 'Remada Curvada',                muscle: 'Costas',      secondaryMuscles: ['Bíceps', 'Lombares'] },
+        ];
+        let _activeExerciseBtn = null;
+        let _exerciseListCache = [];
+
+        const CARDIO_EXERCISES = [
+            { name: 'Corrida na Esteira',    type: 'Corrida'   },
+            { name: 'Caminhada',             type: 'Corrida'   },
+            { name: 'Bicicleta Ergométrica', type: 'Ciclismo'  },
+            { name: 'Bicicleta ao ar livre', type: 'Ciclismo'  },
+            { name: 'Elíptico',              type: 'Elíptico'  },
+            { name: 'Pular Corda',           type: 'Funcional' },
+            { name: 'Remo Ergométrico',      type: 'Remo'      },
+            { name: 'Natação',               type: 'Natação'   },
+            { name: 'HIIT',                  type: 'Funcional' },
+        ];
+        let _activeCardioBtn = null;
+        let _cardioListCache = [];
+
+        const TAB_ACTIVE_CLS   = 'px-6 py-2.5 bg-usfit-blue text-white rounded-full font-medium text-sm shadow-md shadow-cyan-500/30 flex-shrink-0 transition-transform hover:scale-105';
+        const TAB_INACTIVE_CLS = 'px-6 py-2.5 bg-white text-gray-500 border border-gray-200 rounded-full font-medium text-sm hover:bg-gray-50 hover:border-cyan-200 hover:text-cyan-600 flex-shrink-0 transition-all';
+        const TAB_LETTERS = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T'];
+        let _tabCounter      = 3;
+        let _activeTabId     = '1';
+        let _saveNameCallback = null;
+
+        const SET_ROW_HTML = `
+            <div class="set-row group/set flex items-center gap-2">
+                <div class="cursor-grab text-gray-300 hover:text-gray-400 flex-shrink-0"><i data-lucide="grip-vertical" class="w-3.5 h-3.5"></i></div>
+                <input type="text" placeholder="—" class="usfit-input text-center text-xs w-16 flex-shrink-0">
+                <div class="relative w-16 flex-shrink-0">
+                    <input type="number" placeholder="—" class="usfit-input text-center text-xs w-full pr-7">
+                    <span class="absolute right-2 top-2 text-[10px] text-gray-400 font-bold">kg</span>
+                </div>
+                <div class="relative w-16 flex-shrink-0">
+                    <input type="number" placeholder="—" class="usfit-input text-center text-xs w-full pr-5">
+                    <span class="absolute right-2 top-2 text-[10px] text-gray-400 font-bold">s</span>
+                </div>
+                <div class="relative flex-1 min-w-0">
+                    <i data-lucide="message-square" class="absolute left-2.5 top-2 w-3.5 h-3.5 text-gray-300"></i>
+                    <input type="text" placeholder="Obs. da série..." class="usfit-input pl-7 text-xs w-full">
+                </div>
+                <label class="flex items-center gap-1.5 cursor-pointer select-none flex-shrink-0">
+                    <span class="relative w-5 h-5 flex-shrink-0">
+                        <input type="checkbox" checked onchange="_updateSidebar();_updateFooter()" class="absolute inset-0 opacity-0 w-full h-full cursor-pointer peer z-10">
+                        <span class="absolute inset-0 rounded border border-gray-200 bg-gray-100 pointer-events-none peer-checked:border-gray-300 transition-colors"></span>
+                        <svg class="absolute inset-0 m-auto w-3 h-3 text-usfit-blue hidden peer-checked:block pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                    </span>
+                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wide">Válido</span>
+                </label>
+                <button onclick="removeSet(this)" class="p-1 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all flex-shrink-0" title="Remover série"><i data-lucide="x" class="w-3.5 h-3.5"></i></button>
+            </div>`;
+
+        const CARDIO_ROW_HTML = `
+            <div class="cardio-row flex items-center gap-2">
+                <div class="cursor-grab text-gray-300 hover:text-gray-400 flex-shrink-0"><i data-lucide="grip-vertical" class="w-3.5 h-3.5"></i></div>
+                <input type="text" placeholder="30min" class="duration-input usfit-input text-center text-xs w-32 flex-shrink-0">
+                <div class="relative flex-1 min-w-0">
+                    <i data-lucide="message-square" class="absolute left-2.5 top-2 w-3.5 h-3.5 text-gray-300"></i>
+                    <input type="text" placeholder="Obs. da série..." class="usfit-input pl-7 text-xs w-full">
+                </div>
+                <button onclick="removeCardioSet(this)" class="p-1 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all flex-shrink-0" title="Remover série"><i data-lucide="x" class="w-3.5 h-3.5"></i></button>
+            </div>`;
+
+        function addSet(btn) {
+            const container = btn.parentElement.previousElementSibling; // .sets-container
+            const prevRow = container.lastElementChild;
+            container.insertAdjacentHTML('beforeend', SET_ROW_HTML);
+            const newRow = container.lastElementChild;
+            // Copia Reps, Carga e Descanso da série anterior
+            if (prevRow) {
+                const fromReps = prevRow.querySelector('input[type="text"]:not([placeholder="Obs. da série..."])');
+                const fromNums = prevRow.querySelectorAll('input[type="number"]');
+                const toReps   = newRow.querySelector('input[type="text"]:not([placeholder="Obs. da série..."])');
+                const toNums   = newRow.querySelectorAll('input[type="number"]');
+                if (fromReps && toReps && !fromReps.classList.contains('hidden')) toReps.value = fromReps.value;
+                fromNums.forEach((n, i) => { if (toNums[i]) toNums[i].value = n.value; });
+            }
+            const modeLabel = btn.closest('[data-exercise]').querySelector('.reps-mode-label');
+            if (modeLabel) _applyRepsMode(newRow, modeLabel.textContent.trim().toLowerCase());
+            lucide.createIcons();
+            _updateSidebar();
+            _updateFooter();
+        }
+
+        function removeSet(btn) {
+            _confirmModal('Remover esta série?', 'Esta ação não poderá ser desfeita.', () => {
+                btn.closest('.set-row').remove();
+                _notify('Série removida', 'error');
+                _updateSidebar();
+                _updateFooter();
+            });
+        }
+
+        function addExercise(btn) {
+            const cardHTML = `
+            <div class="flex items-center gap-2" data-exercise>
+                <div class="cursor-grab text-gray-300 hover:text-gray-500 pt-5 flex-shrink-0">
+                    <i data-lucide="grip-horizontal" class="w-5 h-5"></i>
+                </div>
+                <div class="group flex-1 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute left-0 top-0 bottom-0 w-1 bg-gray-200 group-hover:bg-usfit-gradient transition-colors"></div>
+                    <div class="absolute right-4 top-4 flex items-center gap-2">
+                        <button onclick="duplicateExercise(this)" class="p-1.5 text-gray-400 hover:text-usfit-blue hover:bg-blue-50 rounded-lg transition-colors" title="Duplicar exercício">
+                            <i data-lucide="copy" class="w-4 h-4"></i>
+                        </button>
+                        <button onclick="removeExercise(this)" class="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors" title="Remover">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                    <div class="p-5 pl-7">
+                        <div class="flex items-start mb-4 pr-32">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center text-gray-400 border border-gray-100">
+                                    <i data-lucide="image" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <button onclick="openExerciseModal(this)" class="font-bold text-usfit-blue text-base text-left hover:text-usfit-cyan transition-colors flex items-center gap-1.5">
+                                        <span class="exercise-name">Selecione o Exercício</span>
+                                        <i data-lucide="chevron-down" class="w-3 h-3 flex-shrink-0"></i>
+                                    </button>
+                                    <span class="exercise-muscle inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-gray-100 text-gray-500 mt-1">—</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 mb-1.5 pl-5 text-[9px] font-bold text-gray-400 uppercase tracking-wider">
+                            <div class="relative w-16 flex-shrink-0 text-center">
+                                        <button data-reps-toggle onclick="_toggleRepsDropdown(this)" class="flex items-center justify-center gap-0.5 w-full hover:text-usfit-blue transition-colors">
+                                            <span class="reps-mode-label uppercase">Reps</span><i data-lucide="chevron-down" class="w-2.5 h-2.5 flex-shrink-0"></i>
+                                        </button>
+                                        <div class="reps-dropdown hidden absolute top-full left-1/2 -translate-x-1/2 mt-1 bg-white border border-gray-100 rounded-xl shadow-lg z-20 py-1 w-[90px]">
+                                            <button onclick="_setRepsMode(this,'reps')" class="w-full text-left px-3 py-1.5 text-[10px] font-bold text-gray-500 hover:bg-gray-50 hover:text-usfit-blue transition-colors flex items-center gap-1.5"><i data-lucide="hash" class="w-3 h-3"></i> Reps</button>
+                                            <button onclick="_setRepsMode(this,'tempo')" class="w-full text-left px-3 py-1.5 text-[10px] font-bold text-gray-500 hover:bg-gray-50 hover:text-usfit-blue transition-colors flex items-center gap-1.5"><i data-lucide="timer" class="w-3 h-3"></i> Tempo</button>
+                                            <button onclick="_setRepsMode(this,'falha')" class="w-full text-left px-3 py-1.5 text-[10px] font-bold text-gray-500 hover:bg-gray-50 hover:text-usfit-blue transition-colors flex items-center gap-1.5"><i data-lucide="zap" class="w-3 h-3"></i> Falha</button>
+                                        </div>
+                                    </div>
+                            <span class="w-16 text-center flex-shrink-0">Carga</span>
+                            <span class="w-16 text-center flex-shrink-0">Desc.</span>
+                            <span class="flex-1">Observações da Série</span>
+                        </div>
+                        <div class="sets-container space-y-1.5 mb-3">${SET_ROW_HTML.repeat(3)}</div>
+                        <div class="items-center flex justify-center">
+                            <button onclick="addSet(this)" class="px-3 py-2 items-center border border-dashed border-gray-200 rounded-xl flex items-center justify-center gap-1.5 text-gray-400 hover:border-usfit-cyan hover:text-usfit-cyan hover:bg-cyan-50/20 transition-all text-xs font-medium">
+                                <i data-lucide="plus" class="w-3.5 h-3.5"></i> Adicionar Série
+                            </button>
+                        </div>
+                        <div class="mt-3 pt-3 border-t border-gray-50">
+                            <button onclick="_toggleObs(this)" class="flex items-center gap-1.5 text-xs font-medium text-gray-400 hover:text-gray-600 transition-colors select-none">
+                                <i data-lucide="message-square" class="w-3 h-3"></i>
+                                Obs. do Exercício <span class="font-normal text-gray-300 ml-0.5">(Opcional)</span>
+                                <i data-lucide="chevron-down" data-chevron class="w-3 h-3 ml-1 transition-transform duration-200"></i>
+                            </button>
+                            <div class="hidden mt-1.5">
+                                <textarea rows="3" placeholder="Observações para este exercício..." class="usfit-input w-full resize-none text-xs"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+            btn.parentElement.insertAdjacentHTML('beforebegin', cardHTML);
+            lucide.createIcons();
+        }
+
+        function removeExercise(btn) {
+            _confirmModal('Remover este exercício?', 'Todas as séries configuradas serão perdidas.', () => {
+                btn.closest('[data-exercise]').remove();
+                _notify('Exercício removido', 'error');
+                _updateSidebar();
+                _updateFooter();
+            });
+        }
+
+        function duplicateExercise(btn) {
+            const original = btn.closest('[data-exercise]');
+            const clone = original.cloneNode(true);
+            // Copia valores atuais dos inputs (cloneNode não copia estado do DOM)
+            const origInputs = original.querySelectorAll('input');
+            const cloneInputs = clone.querySelectorAll('input');
+            origInputs.forEach((input, i) => {
+                if (input.type === 'checkbox') {
+                    cloneInputs[i].checked = input.checked;
+                } else {
+                    cloneInputs[i].value = input.value;
+                }
+            });
+            original.insertAdjacentElement('afterend', clone);
+            lucide.createIcons();
+            _notify('Exercício duplicado', 'info');
+        }
+
+        function addCardio(btn) {
+            const cardHTML = `
+            <div class="flex items-center gap-2" data-exercise>
+                <div class="cursor-grab text-gray-300 hover:text-gray-500 pt-5 flex-shrink-0">
+                    <i data-lucide="grip-horizontal" class="w-5 h-5"></i>
+                </div>
+                <div class="group flex-1 bg-white rounded-2xl border border-cyan-100 shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute left-0 top-0 bottom-0 w-1 bg-cyan-300 group-hover:bg-cyan-400 transition-colors"></div>
+                    <div class="absolute right-4 top-4 flex items-center gap-2">
+                        <button onclick="removeExercise(this)" class="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors" title="Remover">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                    <div class="p-5 pl-7">
+                        <div class="flex items-start mb-4 pr-16">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center text-gray-400 border border-gray-100">
+                                    <i data-lucide="activity" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <button onclick="openCardioModal(this)" class="font-bold text-cyan-500 text-base text-left hover:text-usfit-cyan transition-colors flex items-center gap-1.5">
+                                        <span class="cardio-name">Selecione o Cárdio</span>
+                                        <i data-lucide="chevron-down" class="w-3 h-3 flex-shrink-0"></i>
+                                    </button>
+                                    <span class="cardio-type inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-gray-100 text-gray-500 mt-1">—</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 mb-1.5 pl-5 text-[9px] font-bold text-gray-400 uppercase tracking-wider">
+                            <div class="relative w-32 flex-shrink-0 text-center">
+                                <button data-duration-toggle onclick="_toggleDurationDropdown(this)" class="flex items-center justify-center gap-0.5 w-full hover:text-cyan-500 transition-colors">
+                                    <span class="duration-mode-label">Tempo</span><i data-lucide="chevron-down" class="w-2.5 h-2.5 flex-shrink-0"></i>
+                                </button>
+                                <div class="duration-dropdown hidden absolute top-full left-1/2 -translate-x-1/2 mt-1 bg-white border border-gray-100 rounded-xl shadow-lg z-20 py-1 w-[110px]">
+                                    <button onclick="_setDurationMode(this,'tempo')" class="w-full text-left px-3 py-1.5 text-[10px] font-bold text-gray-500 hover:bg-gray-50 hover:text-cyan-500 transition-colors flex items-center gap-1.5"><i data-lucide="timer" class="w-3 h-3"></i> Tempo</button>
+                                    <button onclick="_setDurationMode(this,'distancia')" class="w-full text-left px-3 py-1.5 text-[10px] font-bold text-gray-500 hover:bg-gray-50 hover:text-cyan-500 transition-colors flex items-center gap-1.5"><i data-lucide="map-pin" class="w-3 h-3"></i> Distância</button>
+                                </div>
+                            </div>
+                            <span class="flex-1">Observações da Série</span>
+                        </div>
+                        <div class="cardio-sets-container space-y-1.5 mb-3">${CARDIO_ROW_HTML}</div>
+                        <div class="items-center flex justify-center">
+                            <button onclick="addCardioSet(this)" class="px-3 py-2 items-center border border-dashed border-gray-200 rounded-xl flex items-center justify-center gap-1.5 text-gray-400 hover:border-usfit-cyan hover:text-usfit-cyan hover:bg-cyan-50/20 transition-all text-xs font-medium">
+                                <i data-lucide="plus" class="w-3.5 h-3.5"></i> Adicionar Série
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+            btn.parentElement.insertAdjacentHTML('beforebegin', cardHTML);
+            lucide.createIcons();
+            _updateSidebar();
+            _updateFooter();
+        }
+
+        function addCardioSet(btn) {
+            const container = btn.parentElement.previousElementSibling; // .cardio-sets-container
+            const prevRow = container.lastElementChild;
+            container.insertAdjacentHTML('beforeend', CARDIO_ROW_HTML);
+            const newRow = container.lastElementChild;
+            if (prevRow) {
+                const fromDuration = prevRow.querySelector('.duration-input');
+                const toDuration = newRow.querySelector('.duration-input');
+                if (fromDuration && toDuration) toDuration.value = fromDuration.value;
+            }
+            const modeLabel = btn.closest('[data-exercise]').querySelector('.duration-mode-label');
+            if (modeLabel) {
+                const mode = modeLabel.textContent.trim().toLowerCase() === 'distância' ? 'distancia' : 'tempo';
+                newRow.querySelector('.duration-input').placeholder = _durationModes[mode].placeholder;
+            }
+            lucide.createIcons();
+        }
+
+        function removeCardioSet(btn) {
+            _confirmModal('Remover esta série?', 'Esta ação não poderá ser desfeita.', () => {
+                btn.closest('.cardio-row').remove();
+                _notify('Série removida', 'error');
+            });
+        }
+
+        function openExerciseModal(triggerBtn) {
+            _activeExerciseBtn = triggerBtn;
+            document.getElementById('exercise-modal-title').innerHTML = '<i data-lucide="dumbbell" class="w-4 h-4 text-usfit-cyan"></i> Buscar Exercício';
+            document.getElementById('exercise-search-input').value = '';
+            document.getElementById('exercise-search-input').placeholder = 'Buscar exercício...';
+            renderExerciseList(EXERCISES);
+            document.getElementById('exercise-modal').classList.remove('hidden');
+            lucide.createIcons({ nodes: [document.getElementById('exercise-modal-title')] });
+        }
+
+        function closeExerciseModal() {
+            document.getElementById('exercise-modal').classList.add('hidden');
+            _activeExerciseBtn = null;
+            _activeCardioBtn = null;
+        }
+
+        function filterExercises(query) {
+            const q = query.toLowerCase();
+            if (_activeCardioBtn) {
+                renderCardioList(CARDIO_EXERCISES.filter(e =>
+                    e.name.toLowerCase().includes(q) || e.type.toLowerCase().includes(q)
+                ));
+            } else {
+                renderExerciseList(EXERCISES.filter(e =>
+                    e.name.toLowerCase().includes(q) || e.muscle.toLowerCase().includes(q)
+                ));
+            }
+        }
+
+        function renderExerciseList(list) {
+            _exerciseListCache = list;
+            const ul = document.getElementById('exercise-results');
+            ul.innerHTML = list.length
+                ? list.map((e, i) => `
+                    <li>
+                        <button onclick="selectExercise(${i})"
+                            class="w-full text-left px-4 py-3 rounded-xl hover:bg-cyan-50 transition-colors flex items-center justify-between group/item border border-transparent hover:border-cyan-100">
+                            <div>
+                                <p class="font-semibold text-gray-800 text-sm group-hover/item:text-usfit-cyan transition-colors">${e.name}</p>
+                                <p class="text-xs text-gray-400">${e.muscle}${e.secondaryMuscles?.length ? ' <span class="text-gray-300">·</span> ' + e.secondaryMuscles.join(', ') : ''}</p>
+                            </div>
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-gray-300 group-hover/item:text-usfit-cyan transition-colors flex-shrink-0"></i>
+                        </button>
+                    </li>`).join('')
+                : '<li class="text-sm text-gray-400 text-center py-6">Nenhum exercício encontrado.</li>';
+            lucide.createIcons();
+        }
+
+        function selectExercise(index) {
+            if (!_activeExerciseBtn) return;
+            const e = _exerciseListCache[index];
+            if (!e) return;
+            const card = _activeExerciseBtn.closest('.group.bg-white');
+            card.querySelector('.exercise-name').textContent = e.name;
+            _activeExerciseBtn.classList.remove('text-usfit-blue');
+            _activeExerciseBtn.classList.add('text-gray-800');
+            // Remove badges secundários antigos
+            card.querySelectorAll('.exercise-secondary-muscle').forEach(el => el.remove());
+            // Atualiza badge primário
+            const badge = card.querySelector('.exercise-muscle');
+            badge.textContent = e.muscle;
+            badge.className = 'exercise-muscle inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-cyan-50 text-cyan-700 mt-1';
+            // Adiciona badges de músculos secundários
+            (e.secondaryMuscles || []).forEach(m => {
+                const span = document.createElement('span');
+                span.className = 'exercise-secondary-muscle inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-400 mt-1 ml-1';
+                span.textContent = m;
+                badge.parentElement.appendChild(span);
+            });
+            closeExerciseModal();
+            _updateSidebar();
+            _updateFooter();
+        }
+
+        function openCardioModal(btn) {
+            _activeCardioBtn = btn;
+            document.getElementById('exercise-modal-title').innerHTML = '<i data-lucide="activity" class="w-4 h-4 text-usfit-cyan"></i> Buscar Cárdio';
+            document.getElementById('exercise-search-input').value = '';
+            document.getElementById('exercise-search-input').placeholder = 'Buscar cárdio...';
+            renderCardioList(CARDIO_EXERCISES);
+            document.getElementById('exercise-modal').classList.remove('hidden');
+            lucide.createIcons({ nodes: [document.getElementById('exercise-modal-title')] });
+        }
+
+        function renderCardioList(list) {
+            _cardioListCache = list;
+            const ul = document.getElementById('exercise-results');
+            ul.innerHTML = list.length
+                ? list.map((e, i) => `
+                    <li>
+                        <button onclick="selectCardio(${i})"
+                            class="w-full text-left px-4 py-3 rounded-xl hover:bg-cyan-50 transition-colors flex items-center justify-between group/item border border-transparent hover:border-cyan-100">
+                            <div>
+                                <p class="font-semibold text-gray-800 text-sm group-hover/item:text-usfit-cyan transition-colors">${e.name}</p>
+                                <p class="text-xs text-gray-400">${e.type}</p>
+                            </div>
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-gray-300 group-hover/item:text-usfit-cyan transition-colors flex-shrink-0"></i>
+                        </button>
+                    </li>`).join('')
+                : '<li class="text-sm text-gray-400 text-center py-6">Nenhum cárdio encontrado.</li>';
+            lucide.createIcons();
+        }
+
+        function selectCardio(index) {
+            if (!_activeCardioBtn) return;
+            const e = _cardioListCache[index];
+            if (!e) return;
+            const card = _activeCardioBtn.closest('[data-exercise]');
+            card.querySelector('.cardio-name').textContent = e.name;
+            const typeBadge = card.querySelector('.cardio-type');
+            typeBadge.textContent = e.type;
+            typeBadge.className = 'cardio-type inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-cyan-50 text-cyan-700 mt-1';
+            closeExerciseModal();
+        }
+
+        document.getElementById('exercise-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeExerciseModal();
+        });
+
+        lucide.createIcons();
+        _activeTabId = '1';
+        // Adiciona exercício padrão em cada painel vazio
+        document.querySelectorAll('.tab-panel').forEach(panel => {
+            const btnsRow = panel.querySelector('.workout-btns-row');
+            if (btnsRow) addExercise(btnsRow.querySelector('button'));
+        });
+        _updateSidebar();
+        _updateFooter();
+        _updateTabsScrollBtns();
+
+        // Backdrop click listeners para novos modais
+        document.getElementById('workout-template-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeWorkoutTemplatesModal();
+        });
+        document.getElementById('save-name-modal').addEventListener('click', function(e) {
+            if (e.target === this) _closeSaveNameModal();
+        });
+
+        // --- SIDEBAR ---
+        function _updateSidebar() {
+            const activePanel = document.querySelector('.tab-panel:not(.hidden)');
+            const exercises = activePanel ? activePanel.querySelectorAll('[data-exercise]') : [];
+            // Atualiza título do sidebar
+            const nameEl = document.getElementById('sidebar-workout-name');
+            const nameInput = activePanel?.querySelector('.workout-name-input');
+            if (nameEl) nameEl.textContent = 'Resumo: ' + (nameInput?.value?.trim() || '');
+            const exEl = document.getElementById('sidebar-exercises');
+            if (exEl) exEl.textContent = exercises.length;
+
+            const muscleCounts = {};
+            let totalValid = 0, tonnageKg = 0, totalTimeS = 0;
+            exercises.forEach(ex => {
+                const primaryMuscle = ex.querySelector('.exercise-muscle')?.textContent.trim();
+                const secondaryMuscles = [...ex.querySelectorAll('.exercise-secondary-muscle')].map(el => el.textContent.trim());
+                ex.querySelectorAll('.set-row').forEach(row => {
+                    const cb = row.querySelector('input[type="checkbox"]');
+                    if (cb && cb.checked) {
+                        totalValid++;
+                        totalTimeS += 40;
+                        const numInputs = row.querySelectorAll('input[type="number"]');
+                        const cargaVal  = parseFloat(numInputs[0]?.value) || 0;
+                        const descanso  = parseFloat(numInputs[1]?.value) || 60;
+                        totalTimeS += descanso;
+                        const repsInput = row.querySelector('input[type="text"]:not([placeholder="Obs. da série..."])');
+                        const repsText  = repsInput?.classList.contains('hidden') ? '' : (repsInput?.value || '');
+                        const repsNum   = parseFloat(repsText.match(/\d+(\.\d+)?/)?.[0]) || 0;
+                        if (repsNum > 0 && cargaVal > 0) tonnageKg += repsNum * cargaVal;
+                        if (primaryMuscle && primaryMuscle !== '—') {
+                            muscleCounts[primaryMuscle] = (muscleCounts[primaryMuscle] || 0) + 1;
+                        }
+                        secondaryMuscles.forEach(m => {
+                            if (m) muscleCounts[m] = (muscleCounts[m] || 0) + 0.5;
+                        });
+                    }
+                });
+            });
+
+            const fmt = n => Number.isInteger(n) ? String(n) : n.toFixed(1);
+            const volEl = document.getElementById('sidebar-valid-sets');
+            if (volEl) volEl.textContent = totalValid;
+
+            const tEl = document.getElementById('sidebar-tonnage');
+            if (tEl) {
+                tEl.textContent = tonnageKg >= 1000
+                    ? (tonnageKg / 1000).toFixed(2).replace(/\.?0+$/, '') + ' t'
+                    : (tonnageKg > 0 ? tonnageKg.toFixed(1).replace(/\.0$/, '') + ' kg' : '0 kg');
+            }
+            const dEl = document.getElementById('sidebar-duration');
+            if (dEl) dEl.textContent = totalValid ? `~${Math.round(totalTimeS / 60)} min` : '— min';
+
+            const muscleContainer = document.getElementById('sidebar-muscles');
+            if (muscleContainer) {
+                const entries = Object.entries(muscleCounts).sort((a, b) => b[1] - a[1]);
+                muscleContainer.innerHTML = entries.length
+                    ? entries.map(([m, c], i) => {
+                        const cls = i === 0
+                            ? 'bg-blue-50 text-usfit-blue border-usfit-blue/20 font-semibold'
+                            : i === 1
+                            ? 'bg-cyan-50 text-usfit-cyan border-usfit-cyan/20 font-semibold'
+                            : 'bg-gray-50 text-gray-600 border-gray-200';
+                        return `<span class="px-3 py-1.5 text-xs rounded-lg border ${cls}">${m} <span class="font-bold">(${fmt(c)})</span></span>`;
+                    }).join('')
+                    : '<span class="text-xs text-gray-400">Nenhuma série válida</span>';
+            }
+        }
+
+        // --- BARRA FIXA DE TOTAIS ---
+        function _updateFooter() {
+            const exercises = document.querySelectorAll('[data-exercise]');
+            let totalValid = 0, tonnageKg = 0, totalTimeS = 0;
+            const muscleCounts = {};
+
+            exercises.forEach(ex => {
+                const primaryMuscle = ex.querySelector('.exercise-muscle')?.textContent.trim();
+                const secondaryMuscles = [...ex.querySelectorAll('.exercise-secondary-muscle')]
+                    .map(el => el.textContent.trim());
+
+                ex.querySelectorAll('.set-row').forEach(row => {
+                    const cb = row.querySelector('input[type="checkbox"]');
+                    if (!cb?.checked) return;
+                    totalValid++;
+                    totalTimeS += 40; // ~40s de execução estimada por série
+
+                    const numInputs = row.querySelectorAll('input[type="number"]');
+                    const cargaVal  = parseFloat(numInputs[0]?.value) || 0;
+                    const descanso  = parseFloat(numInputs[1]?.value) || 60;
+                    totalTimeS += descanso;
+
+                    const repsInput = row.querySelector('input[type="text"]:not([placeholder="Obs. da série..."])');
+                    const repsText  = repsInput?.classList.contains('hidden') ? '' : (repsInput?.value || '');
+                    const repsNum   = parseFloat(repsText.match(/\d+(\.\d+)?/)?.[0]) || 0;
+                    if (repsNum > 0 && cargaVal > 0) tonnageKg += repsNum * cargaVal;
+
+                    if (primaryMuscle && primaryMuscle !== '—')
+                        muscleCounts[primaryMuscle] = (muscleCounts[primaryMuscle] || 0) + 1;
+                    secondaryMuscles.forEach(m => {
+                        if (m) muscleCounts[m] = (muscleCounts[m] || 0) + 0.5;
+                    });
+                });
+            });
+
+            const fvsEl = document.getElementById('footer-valid-sets');
+            if (fvsEl) fvsEl.textContent = totalValid;
+
+            const tEl = document.getElementById('footer-tonnage');
+            if (tEl) {
+                tEl.textContent = tonnageKg >= 1000
+                    ? (tonnageKg / 1000).toFixed(2).replace(/\.?0+$/, '') + ' t'
+                    : (tonnageKg > 0 ? tonnageKg.toFixed(1).replace(/\.0$/, '') + ' kg' : '0 kg');
+            }
+
+            const dEl = document.getElementById('footer-duration');
+            if (dEl) dEl.textContent = totalValid ? `~${Math.round(totalTimeS / 60)} min` : '— min';
+
+            const fmt = n => Number.isInteger(n) ? String(n) : n.toFixed(1);
+            const mEl = document.getElementById('footer-muscles');
+            if (mEl) {
+                const entries = Object.entries(muscleCounts).sort((a, b) => b[1] - a[1]);
+                const MAX_SHOWN = 6;
+                const visible = entries.slice(0, MAX_SHOWN);
+                const hidden  = entries.length - MAX_SHOWN;
+                let html = visible.map(([m, c], i) => {
+                        const cls = i === 0
+                            ? 'bg-blue-50 text-usfit-blue border-usfit-blue/20 font-semibold'
+                            : i === 1
+                            ? 'bg-cyan-50 text-usfit-cyan border-usfit-cyan/20 font-semibold'
+                            : 'bg-gray-50 text-gray-600 border-gray-200';
+                        return `<span class="whitespace-nowrap flex-shrink-0 px-2.5 py-1 text-xs rounded-lg border ${cls}">${m} <span class="font-bold">(${fmt(c)})</span></span>`;
+                    }).join('');
+                if (hidden > 0) {
+                    html += `<span class="whitespace-nowrap flex-shrink-0 px-2.5 py-1 text-xs rounded-lg border bg-gray-50 text-gray-400 border-gray-200">E outros ${hidden} grupo${hidden > 1 ? 's' : ''}</span>`;
+                }
+                mEl.innerHTML = html || '<span class="text-xs text-gray-400 whitespace-nowrap">Nenhuma série válida</span>';
+            }
+
+            lucide.createIcons({ nodes: [document.getElementById('workout-footer')] });
+        }
+
+        // --- ABAS DE TREINO ---
+        function _createTabPanelHTML(tabId, name) {
+            return `
+                <div class="border border-gray-200 rounded-2xl overflow-hidden">
+                    <div class="bg-gray-50 px-5 py-3 border-b border-gray-200">
+                        <div class="flex items-center gap-3">
+                            <input type="text" value="${name}" placeholder="Nome do treino..."
+                                   class="flex-1 font-bold text-base text-gray-700 bg-transparent outline-none placeholder-gray-300 min-w-0 workout-name-input"
+                                   onfocus="this.dataset.prev=this.value" oninput="_syncTabName(this)" onblur="_notifyNameChange(this)" onkeydown="if(event.key==='Enter')this.blur()">
+                            <div class="flex gap-1 flex-shrink-0">
+                                <button onclick="saveWorkoutTemplate(this)" title="Salvar treino" class="p-1.5 text-gray-400 hover:text-amber-500 transition-colors"><i data-lucide="bookmark" class="w-4 h-4"></i></button>
+                                <button onclick="removeWorkoutTab(this)" title="Remover treino" class="p-1.5 text-gray-400 hover:text-red-500 transition-colors"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                            </div>
+                        </div>
+                        <div class="mt-2 pt-2 border-t border-gray-100">
+                            <label class="flex items-center gap-1.5 text-xs font-medium text-gray-400 mb-1.5">
+                                <i data-lucide="message-square" class="w-3 h-3 flex-shrink-0"></i>
+                                Observações <span class="font-normal text-gray-300 ml-0.5">(Opcional)</span>
+                            </label>
+                            <textarea rows="2" placeholder="Observações sobre o treino..." class="usfit-input w-full resize-none text-xs"></textarea>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-white space-y-4">
+                        <div class="flex gap-2 justify-center workout-btns-row">
+                            <button class="px-5 py-2.5 bg-usfit-blue text-white rounded-full font-medium text-sm shadow-md shadow-cyan-500/30 flex-shrink-0 transition-transform hover:scale-105 flex items-center gap-1.5" onclick="addExercise(this)"><i data-lucide="plus" class="w-3 h-3"></i> Novo Exercício</button>
+                            <button class="px-6 py-2.5 bg-white border border-cyan-200 text-cyan-500 rounded-full font-medium text-sm flex-shrink-0 hover:bg-cyan-50 transition-colors flex items-center gap-1.5" onclick="addCardio(this)"><i data-lucide="activity" class="w-3.5 h-3.5"></i> Novo Cárdio</button>
+                        </div>
+                    </div>
+                </div>`;
+        }
+
+        function _scrollTabs(direction) {
+            const bar = document.getElementById('workout-tabs-bar');
+            bar.scrollBy({ left: direction * 200, behavior: 'smooth' });
+            setTimeout(_updateTabsScrollBtns, 300);
+        }
+
+        function _updateTabsScrollBtns() {
+            const bar = document.getElementById('workout-tabs-bar');
+            const leftBtn = document.getElementById('tabs-scroll-left');
+            const rightBtn = document.getElementById('tabs-scroll-right');
+            if (!bar) return;
+            const atStart = bar.scrollLeft <= 0;
+            const atEnd = bar.scrollLeft + bar.clientWidth >= bar.scrollWidth - 1;
+            if (leftBtn) leftBtn.classList.toggle('hidden', atStart);
+            if (rightBtn) rightBtn.classList.toggle('hidden', atEnd);
+        }
+
+        function switchWorkoutTab(btn) {
+            _activeTabId = btn.dataset.tabId;
+            document.querySelectorAll('#workout-tabs-bar [data-tab-id]').forEach(b => {
+                b.className = b.dataset.tabId === _activeTabId ? TAB_ACTIVE_CLS : TAB_INACTIVE_CLS;
+            });
+            document.querySelectorAll('.tab-panel').forEach(p => {
+                p.classList.toggle('hidden', p.dataset.tabId !== _activeTabId);
+            });
+            _updateSidebar();
+            _updateTabsScrollBtns();
+        }
+
+        function createBlankWorkout() {
+            _tabCounter++;
+            const tabId = String(_tabCounter);
+            const name = 'Treino ' + (TAB_LETTERS[_tabCounter - 1] || _tabCounter);
+            // Inserir botão de aba no final da área scrollável
+            document.getElementById('workout-tabs-bar').insertAdjacentHTML('beforeend',
+                `<button class="${TAB_INACTIVE_CLS}" data-tab-id="${tabId}" onclick="switchWorkoutTab(this)">${name}</button>`);
+            // Inserir painel
+            document.getElementById('tab-panels').insertAdjacentHTML('beforeend',
+                `<div class="tab-panel hidden" id="panel-${tabId}" data-tab-id="${tabId}">${_createTabPanelHTML(tabId, name)}</div>`);
+            lucide.createIcons();
+            // Adiciona exercício padrão no novo painel
+            const newPanel = document.getElementById('panel-' + tabId);
+            const newBtnsRow = newPanel.querySelector('.workout-btns-row');
+            if (newBtnsRow) addExercise(newBtnsRow.querySelector('button'));
+            switchWorkoutTab(document.querySelector(`#workout-tabs-bar [data-tab-id="${tabId}"]`));
+            // Rola para mostrar a nova aba
+            const bar = document.getElementById('workout-tabs-bar');
+            bar.scrollLeft = bar.scrollWidth;
+            setTimeout(_updateTabsScrollBtns, 50);
+            _notify('Treino adicionado');
+        }
+
+        function openWorkoutTemplatesModal() {
+            const searchInput = document.getElementById('workout-template-search');
+            if (searchInput) searchInput.value = '';
+            _renderWorkoutTemplatesList('');
+            document.getElementById('workout-template-modal').classList.remove('hidden');
+        }
+
+        function closeWorkoutTemplatesModal() {
+            document.getElementById('workout-template-modal').classList.add('hidden');
+        }
+
+        const BUILTIN_WORKOUT_TEMPLATES = [
+            {
+                name: 'Treino A (Peito, Tríceps e Ombros)',
+                exercises: [
+                    { type: 'exercise', name: 'Supino Reto com Halteres', muscle: 'Peitoral', secondaryMuscles: ['Tríceps', 'Ombros'], repsMode: 'reps',
+                      sets: [{ reps: '12', carga: '20', descanso: '60', obs: '', valid: true }, { reps: '10', carga: '22', descanso: '60', obs: '', valid: true }, { reps: '8', carga: '24', descanso: '60', obs: '', valid: true }] },
+                    { type: 'exercise', name: 'Tríceps Pulley', muscle: 'Tríceps', secondaryMuscles: [], repsMode: 'reps',
+                      sets: [{ reps: '15', carga: '25', descanso: '45', obs: '', valid: true }, { reps: '12', carga: '27', descanso: '45', obs: '', valid: true }, { reps: '10', carga: '30', descanso: '45', obs: '', valid: true }] },
+                    { type: 'exercise', name: 'Desenvolvimento com Halteres', muscle: 'Ombros', secondaryMuscles: ['Tríceps'], repsMode: 'reps',
+                      sets: [{ reps: '12', carga: '14', descanso: '60', obs: '', valid: true }, { reps: '10', carga: '16', descanso: '60', obs: '', valid: true }, { reps: '8', carga: '18', descanso: '60', obs: '', valid: true }] }
+                ]
+            },
+            {
+                name: 'Treino B (Costas, Bíceps e Trapézio)',
+                exercises: [
+                    { type: 'exercise', name: 'Remada Curvada com Barra', muscle: 'Costas', secondaryMuscles: ['Bíceps', 'Lombares'], repsMode: 'reps',
+                      sets: [{ reps: '10', carga: '50', descanso: '90', obs: '', valid: true }, { reps: '8', carga: '55', descanso: '90', obs: '', valid: true }, { reps: '8', carga: '60', descanso: '90', obs: '', valid: true }] },
+                    { type: 'exercise', name: 'Rosca Direta com Halteres', muscle: 'Bíceps', secondaryMuscles: [], repsMode: 'reps',
+                      sets: [{ reps: '12', carga: '12', descanso: '45', obs: '', valid: true }, { reps: '10', carga: '14', descanso: '45', obs: '', valid: true }, { reps: '8', carga: '16', descanso: '45', obs: '', valid: true }] },
+                    { type: 'exercise', name: 'Encolhimento de Ombros com Halteres', muscle: 'Trapézio', secondaryMuscles: [], repsMode: 'reps',
+                      sets: [{ reps: '15', carga: '24', descanso: '45', obs: '', valid: true }, { reps: '12', carga: '26', descanso: '45', obs: '', valid: true }, { reps: '12', carga: '28', descanso: '45', obs: '', valid: true }] }
+                ]
+            },
+            {
+                name: 'Treino C (Pernas Completo)',
+                exercises: [
+                    { type: 'exercise', name: 'Agachamento Livre', muscle: 'Quadríceps', secondaryMuscles: ['Glúteos', 'Isquiotibiais'], repsMode: 'reps',
+                      sets: [{ reps: '10', carga: '60', descanso: '120', obs: '', valid: true }, { reps: '8', carga: '70', descanso: '120', obs: '', valid: true }, { reps: '8', carga: '75', descanso: '120', obs: '', valid: true }] },
+                    { type: 'exercise', name: 'Stiff com Halteres', muscle: 'Isquiotibiais', secondaryMuscles: ['Glúteos', 'Lombares'], repsMode: 'reps',
+                      sets: [{ reps: '12', carga: '20', descanso: '60', obs: '', valid: true }, { reps: '10', carga: '22', descanso: '60', obs: '', valid: true }, { reps: '10', carga: '24', descanso: '60', obs: '', valid: true }] },
+                    { type: 'exercise', name: 'Panturrilha na Máquina', muscle: 'Panturrilha', secondaryMuscles: [], repsMode: 'reps',
+                      sets: [{ reps: '20', carga: '40', descanso: '30', obs: '', valid: true }, { reps: '20', carga: '45', descanso: '30', obs: '', valid: true }, { reps: '15', carga: '50', descanso: '30', obs: '', valid: true }] }
+                ]
+            }
+        ];
+        let _workoutTemplatesCache = [];
+
+        function _renderWorkoutTemplatesList(query) {
+            const userTemplates = JSON.parse(localStorage.getItem('usfit_workout_templates') || '[]');
+            _workoutTemplatesCache = [...BUILTIN_WORKOUT_TEMPLATES, ...userTemplates];
+            const list = document.getElementById('workout-templates-list');
+            const q = query.toLowerCase().trim();
+            const filtered = _workoutTemplatesCache.map((t, i) => ({ ...t, _idx: i })).filter(t => !q || t.name.toLowerCase().includes(q));
+            if (filtered.length === 0) {
+                list.innerHTML = `<p class="text-xs text-gray-400 text-center py-3">Nenhum resultado para "<strong>${q}</strong>".</p>`;
+                return;
+            }
+            list.innerHTML = filtered.map(t => `
+                <button onclick="loadWorkoutTemplate(${t._idx})" class="w-full p-3 bg-gray-50 hover:bg-blue-50 rounded-xl text-left border border-gray-200 hover:border-blue-200 transition-colors">
+                    <p class="font-medium text-gray-800 text-sm">${t.name}</p>
+                    <p class="text-xs text-gray-400">${t.exercises.length} exercício${t.exercises.length !== 1 ? 's' : ''}</p>
+                </button>`).join('');
+        }
+
+        function loadWorkoutTemplate(idx) {
+            const template = _workoutTemplatesCache[idx];
+            if (!template) return;
+            _tabCounter++;
+            const tabId = String(_tabCounter);
+            const name = template.name;
+            document.getElementById('workout-tabs-bar').insertAdjacentHTML('beforeend',
+                `<button class="${TAB_INACTIVE_CLS}" data-tab-id="${tabId}" onclick="switchWorkoutTab(this)">${name}</button>`);
+            document.getElementById('tab-panels').insertAdjacentHTML('beforeend',
+                `<div class="tab-panel hidden" id="panel-${tabId}" data-tab-id="${tabId}">${_createTabPanelHTML(tabId, name)}</div>`);
+            lucide.createIcons();
+            const panel = document.getElementById('panel-' + tabId);
+            const btnsRow = panel.querySelector('.workout-btns-row');
+            template.exercises.forEach(ex => {
+                if (ex.type === 'cardio') {
+                    // Criar card cárdio
+                    const setsHTML = (ex.sets || []).map(s =>
+                        `<div class="cardio-row flex items-center gap-2">
+                            <div class="cursor-grab text-gray-300 hover:text-gray-400 flex-shrink-0"><i data-lucide="grip-vertical" class="w-3.5 h-3.5"></i></div>
+                            <input type="text" value="${s.duration || ''}" placeholder="30min" class="duration-input usfit-input text-center text-xs w-32 flex-shrink-0">
+                            <div class="relative flex-1 min-w-0">
+                                <i data-lucide="message-square" class="absolute left-2.5 top-2 w-3.5 h-3.5 text-gray-300"></i>
+                                <input type="text" value="${s.obs || ''}" placeholder="Obs. da série..." class="usfit-input pl-7 text-xs w-full">
+                            </div>
+                            <button onclick="removeCardioSet(this)" class="p-1 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all flex-shrink-0"><i data-lucide="x" class="w-3.5 h-3.5"></i></button>
+                        </div>`).join('') || CARDIO_ROW_HTML;
+                    const cardioTypeClass = ex.cardioType && ex.cardioType !== '—'
+                        ? 'bg-cyan-50 text-cyan-700' : 'bg-gray-100 text-gray-500';
+                    const cardHTML = `
+                    <div class="flex items-center gap-2" data-exercise>
+                        <div class="cursor-grab text-gray-300 hover:text-gray-500 pt-5 flex-shrink-0"><i data-lucide="grip-horizontal" class="w-5 h-5"></i></div>
+                        <div class="group flex-1 bg-white rounded-2xl border border-cyan-100 shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden">
+                            <div class="absolute left-0 top-0 bottom-0 w-1 bg-cyan-300 group-hover:bg-cyan-400 transition-colors"></div>
+                            <div class="absolute right-4 top-4 flex items-center gap-2">
+                                <button onclick="removeExercise(this)" class="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                            </div>
+                            <div class="p-5 pl-7">
+                                <div class="flex items-start mb-4 pr-16">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-12 h-12 bg-cyan-50 rounded-xl flex items-center justify-center text-cyan-400 border border-cyan-100"><i data-lucide="activity" class="w-6 h-6"></i></div>
+                                        <div>
+                                            <button onclick="openCardioModal(this)" class="font-bold text-cyan-500 text-base text-left hover:text-usfit-cyan transition-colors flex items-center gap-1.5">
+                                                <span class="cardio-name">${ex.name || 'Selecione o Cárdio'}</span>
+                                                <i data-lucide="chevron-down" class="w-3 h-3 flex-shrink-0"></i>
+                                            </button>
+                                            <span class="cardio-type inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${cardioTypeClass} mt-1">${ex.cardioType || '—'}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cardio-sets-container space-y-1.5 mb-3">${setsHTML}</div>
+                                <div class="items-center flex justify-center">
+                                    <button onclick="addCardioSet(this)" class="px-3 py-2 items-center border border-dashed border-gray-200 rounded-xl flex items-center justify-center gap-1.5 text-gray-400 hover:border-usfit-cyan hover:text-usfit-cyan hover:bg-cyan-50/20 transition-all text-xs font-medium">
+                                        <i data-lucide="plus" class="w-3.5 h-3.5"></i> Adicionar Série
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                    btnsRow.insertAdjacentHTML('beforebegin', cardHTML);
+                } else {
+                    // Criar card exercício
+                    const repsMode = (ex.repsMode || 'reps').toLowerCase();
+                    const setsHTML = (ex.sets || []).map(s => {
+                        const repsVal = s.reps || '';
+                        const cargaVal = s.carga || '';
+                        const descVal = s.descanso || '';
+                        const obsVal = s.obs || '';
+                        const isValid = s.valid !== false;
+                        return `<div class="set-row group/set flex items-center gap-2">
+                            <div class="cursor-grab text-gray-300 hover:text-gray-400 flex-shrink-0"><i data-lucide="grip-vertical" class="w-3.5 h-3.5"></i></div>
+                            <input type="text" value="${repsVal}" placeholder="—" class="usfit-input text-center text-xs w-16 flex-shrink-0">
+                            <div class="relative w-16 flex-shrink-0">
+                                <input type="number" value="${cargaVal}" placeholder="—" class="usfit-input text-center text-xs w-full pr-7">
+                                <span class="absolute right-2 top-2 text-[10px] text-gray-400 font-bold">kg</span>
+                            </div>
+                            <div class="relative w-16 flex-shrink-0">
+                                <input type="number" value="${descVal}" placeholder="—" class="usfit-input text-center text-xs w-full pr-5">
+                                <span class="absolute right-2 top-2 text-[10px] text-gray-400 font-bold">s</span>
+                            </div>
+                            <div class="relative flex-1 min-w-0">
+                                <i data-lucide="message-square" class="absolute left-2.5 top-2 w-3.5 h-3.5 text-gray-300"></i>
+                                <input type="text" value="${obsVal}" placeholder="Obs. da série..." class="usfit-input pl-7 text-xs w-full">
+                            </div>
+                            <label class="flex items-center gap-1.5 cursor-pointer select-none flex-shrink-0">
+                                <span class="relative w-5 h-5 flex-shrink-0">
+                                    <input type="checkbox" ${isValid ? 'checked' : ''} onchange="_updateSidebar();_updateFooter()" class="absolute inset-0 opacity-0 w-full h-full cursor-pointer peer z-10">
+                                    <span class="absolute inset-0 rounded border border-gray-200 bg-gray-100 pointer-events-none peer-checked:border-gray-300 transition-colors"></span>
+                                    <svg class="absolute inset-0 m-auto w-3 h-3 text-usfit-blue hidden peer-checked:block pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                </span>
+                                <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wide">Válido</span>
+                            </label>
+                            <button onclick="removeSet(this)" class="p-1 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all flex-shrink-0"><i data-lucide="x" class="w-3.5 h-3.5"></i></button>
+                        </div>`;
+                    }).join('') || SET_ROW_HTML;
+                    const muscleClass = ex.muscle && ex.muscle !== '—' ? 'bg-cyan-50 text-cyan-700' : 'bg-gray-100 text-gray-500';
+                    const secBadges = (ex.secondaryMuscles || []).map(m =>
+                        `<span class="exercise-secondary-muscle inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-400 mt-1 ml-1">${m}</span>`).join('');
+                    const isNamed = ex.name && ex.name !== 'Selecione o Exercício';
+                    const cardHTML = `
+                    <div class="flex items-center gap-2" data-exercise>
+                        <div class="cursor-grab text-gray-300 hover:text-gray-500 pt-5 flex-shrink-0"><i data-lucide="grip-horizontal" class="w-5 h-5"></i></div>
+                        <div class="group flex-1 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden">
+                            <div class="absolute left-0 top-0 bottom-0 w-1 bg-gray-200 group-hover:bg-usfit-gradient transition-colors"></div>
+                            <div class="absolute right-4 top-4 flex items-center gap-2">
+                                <button onclick="duplicateExercise(this)" class="p-1.5 text-gray-400 hover:text-usfit-blue hover:bg-blue-50 rounded-lg transition-colors"><i data-lucide="copy" class="w-4 h-4"></i></button>
+                                <button onclick="removeExercise(this)" class="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                            </div>
+                            <div class="p-5 pl-7">
+                                <div class="flex items-start mb-4 pr-32">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center text-gray-400 border border-gray-100"><i data-lucide="image" class="w-6 h-6"></i></div>
+                                        <div>
+                                            <button onclick="openExerciseModal(this)" class="font-bold ${isNamed ? 'text-gray-800' : 'text-usfit-blue'} text-base text-left hover:text-usfit-cyan transition-colors flex items-center gap-1.5">
+                                                <span class="exercise-name">${ex.name || 'Selecione o Exercício'}</span>
+                                                <i data-lucide="chevron-down" class="w-3 h-3 flex-shrink-0"></i>
+                                            </button>
+                                            <span class="exercise-muscle inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${muscleClass} mt-1">${ex.muscle || '—'}</span>
+                                            ${secBadges}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2 mb-1.5 pl-5 text-[9px] font-bold text-gray-400 uppercase tracking-wider">
+                                    <span class="w-16 text-center flex-shrink-0 reps-mode-label">${repsMode === 'reps' ? 'Reps' : repsMode === 'tempo' ? 'Tempo' : 'Falha'}</span>
+                                    <span class="w-16 text-center flex-shrink-0">Carga</span>
+                                    <span class="w-16 text-center flex-shrink-0">Desc.</span>
+                                    <span class="flex-1">Observações da Série</span>
+                                </div>
+                                <div class="sets-container space-y-1.5 mb-3">${setsHTML}</div>
+                                <div class="items-center flex justify-center">
+                                    <button onclick="addSet(this)" class="px-3 py-2 items-center border border-dashed border-gray-200 rounded-xl flex items-center justify-center gap-1.5 text-gray-400 hover:border-usfit-cyan hover:text-usfit-cyan hover:bg-cyan-50/20 transition-all text-xs font-medium">
+                                        <i data-lucide="plus" class="w-3.5 h-3.5"></i> Adicionar Série
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                    btnsRow.insertAdjacentHTML('beforebegin', cardHTML);
+                }
+            });
+            lucide.createIcons();
+            switchWorkoutTab(document.querySelector(`#workout-tabs-bar [data-tab-id="${tabId}"]`));
+            const bar = document.getElementById('workout-tabs-bar');
+            bar.scrollLeft = bar.scrollWidth;
+            setTimeout(_updateTabsScrollBtns, 50);
+            closeWorkoutTemplatesModal();
+            _notify('Treino carregado');
+        }
+
+        function saveWorkoutTemplate(btn) {
+            const panel = btn.closest('.tab-panel');
+            const nameInput = panel.querySelector('.workout-name-input');
+            const suggestedName = nameInput?.value?.trim() || 'Treino';
+            const exercises = [];
+            panel.querySelectorAll('[data-exercise]').forEach(ex => {
+                const isCardio = !!ex.querySelector('.cardio-name');
+                if (isCardio) {
+                    const sets = [...ex.querySelectorAll('.cardio-row')].map(row => ({
+                        duration: row.querySelector('.duration-input')?.value || '',
+                        obs: row.querySelector('input[placeholder="Obs. da série..."]')?.value || ''
+                    }));
+                    exercises.push({
+                        type: 'cardio',
+                        name: ex.querySelector('.cardio-name')?.textContent.trim() || '',
+                        cardioType: ex.querySelector('.cardio-type')?.textContent.trim() || '',
+                        sets
+                    });
+                } else {
+                    const repsMode = ex.querySelector('.reps-mode-label')?.textContent.trim() || 'Reps';
+                    const sets = [...ex.querySelectorAll('.set-row')].map(row => {
+                        const numInputs = row.querySelectorAll('input[type="number"]');
+                        const repsInput = row.querySelector('input[type="text"]:not([placeholder="Obs. da série..."])');
+                        return {
+                            reps: repsInput?.value || '',
+                            carga: numInputs[0]?.value || '',
+                            descanso: numInputs[1]?.value || '',
+                            obs: row.querySelector('input[placeholder="Obs. da série..."]')?.value || '',
+                            valid: row.querySelector('input[type="checkbox"]')?.checked ?? true
+                        };
+                    });
+                    exercises.push({
+                        type: 'exercise',
+                        name: ex.querySelector('.exercise-name')?.textContent.trim() || '',
+                        muscle: ex.querySelector('.exercise-muscle')?.textContent.trim() || '—',
+                        secondaryMuscles: [...ex.querySelectorAll('.exercise-secondary-muscle')].map(el => el.textContent.trim()),
+                        repsMode: repsMode.toLowerCase(),
+                        sets
+                    });
+                }
+            });
+            _openSaveNameModal('Salvar Treino', suggestedName, (name) => {
+                const templates = JSON.parse(localStorage.getItem('usfit_workout_templates') || '[]');
+                templates.push({ name, exercises });
+                localStorage.setItem('usfit_workout_templates', JSON.stringify(templates));
+                const icon = btn.querySelector('i');
+                if (icon) { icon.setAttribute('data-lucide', 'bookmark-check'); lucide.createIcons(); }
+                btn.classList.add('text-amber-500');
+                setTimeout(() => {
+                    btn.classList.remove('text-amber-500');
+                    if (icon) { icon.setAttribute('data-lucide', 'bookmark'); lucide.createIcons(); }
+                }, 2000);
+                _notify('Treino salvo');
+            });
+        }
+
+        function removeWorkoutTab(btn) {
+            const allTabs = document.querySelectorAll('#workout-tabs-bar [data-tab-id]');
+            if (allTabs.length <= 1) { _notify('Não é possível remover o único treino', 'warning'); return; }
+            const panel = btn.closest('.tab-panel');
+            const tabId = panel.dataset.tabId;
+            const tabBtn = document.querySelector(`#workout-tabs-bar [data-tab-id="${tabId}"]`);
+            const name = tabBtn?.textContent.trim() || 'este treino';
+            _confirmModal(`Excluir "${name}"?`, 'Todos os exercícios serão removidos. Esta ação não pode ser desfeita.', () => {
+                const wasActive = tabId === _activeTabId;
+                tabBtn?.remove();
+                panel.remove();
+                if (wasActive) {
+                    const firstTabBtn = document.querySelector('#workout-tabs-bar [data-tab-id]');
+                    if (firstTabBtn) switchWorkoutTab(firstTabBtn);
+                }
+                _notify('Treino removido', 'error');
+                _updateSidebar();
+                _updateFooter();
+                _updateTabsScrollBtns();
+            });
+        }
+
+        // --- MODAL SALVAR COM NOME ---
+        function _openSaveNameModal(title, suggestedName, onSave) {
+            document.getElementById('save-name-modal-title').innerHTML =
+                `<i data-lucide="bookmark" class="w-4 h-4 text-usfit-cyan"></i> ${title}`;
+            const input = document.getElementById('save-name-input');
+            input.value = suggestedName;
+            _saveNameCallback = onSave;
+            document.getElementById('save-name-modal').classList.remove('hidden');
+            lucide.createIcons();
+            setTimeout(() => { input.select(); input.focus(); }, 50);
+        }
+
+        function _closeSaveNameModal() {
+            document.getElementById('save-name-modal').classList.add('hidden');
+            _saveNameCallback = null;
+        }
+
+        function _confirmSaveName() {
+            const name = document.getElementById('save-name-input').value.trim();
+            if (!name) return;
+            _closeSaveNameModal();
+            if (typeof _saveNameCallback === 'function') _saveNameCallback(name);
+        }
+
+        function _syncTabName(input) {
+            const panel = input.closest('.tab-panel');
+            if (!panel) return;
+            const tabBtn = document.querySelector(`#workout-tabs-bar [data-tab-id="${panel.dataset.tabId}"]`);
+            if (tabBtn) tabBtn.textContent = input.value.trim() || 'Treino';
+            _updateSidebar();
+        }
+
+        function _notifyNameChange(input) {
+            const prev = (input.dataset.prev ?? '').trim();
+            const curr = input.value.trim();
+            if (curr && curr !== prev) _notify('Nome alterado para "' + curr + '"');
+            input.dataset.prev = input.value;
+        }
+
+        // --- TOGGLE OBSERVAÇÕES ---
+        function _toggleObs(btn) {
+            const panel = btn.nextElementSibling;
+            const isHidden = panel.classList.toggle('hidden');
+            const chevron = btn.querySelector('[data-chevron]');
+            if (chevron) chevron.style.transform = isHidden ? '' : 'rotate(180deg)';
+        }
+
+        // --- DROPDOWN MODO REPS ---
+        const _repsModes = {
+            reps:  { label: 'Reps',  placeholder: '8-12' },
+            tempo: { label: 'Tempo', placeholder: '30s'  },
+            falha: { label: 'Falha', placeholder: '—'    },
+        };
+
+        function _toggleRepsDropdown(btn) {
+            const dropdown = btn.nextElementSibling;
+            document.querySelectorAll('.reps-dropdown').forEach(d => {
+                if (d !== dropdown) d.classList.add('hidden');
+            });
+            dropdown.classList.toggle('hidden');
+        }
+
+        function _applyRepsMode(row, mode) {
+            const m = _repsModes[mode] || _repsModes.reps;
+            const repsInput = row.querySelector('input[type="text"]:not([placeholder="Obs. da série..."])');
+            if (!repsInput) return;
+            // Remove any existing falha indicator
+            repsInput.nextElementSibling?.classList.contains('falha-indicator') && repsInput.nextElementSibling.remove();
+            if (mode === 'falha') {
+                repsInput.classList.add('hidden');
+                const indicator = document.createElement('div');
+                indicator.className = 'falha-indicator usfit-input w-16 flex-shrink-0 flex items-center justify-center pointer-events-none';
+                indicator.innerHTML = '<i data-lucide="x" class="w-4 h-4 text-gray-400"></i>';
+                repsInput.insertAdjacentElement('afterend', indicator);
+                lucide.createIcons();
+            } else {
+                repsInput.classList.remove('hidden');
+                repsInput.value = '';
+                repsInput.placeholder = m.placeholder;
+            }
+        }
+
+        function _setRepsMode(btn, mode) {
+            const m = _repsModes[mode] || _repsModes.reps;
+            const card = btn.closest('[data-exercise]');
+            card.querySelector('.reps-mode-label').textContent = m.label;
+            card.querySelectorAll('.set-row').forEach(row => _applyRepsMode(row, mode));
+            btn.closest('.reps-dropdown').classList.add('hidden');
+        }
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('[data-reps-toggle]') && !e.target.closest('.reps-dropdown')) {
+                document.querySelectorAll('.reps-dropdown').forEach(d => d.classList.add('hidden'));
+            }
+            if (!e.target.closest('[data-duration-toggle]') && !e.target.closest('.duration-dropdown')) {
+                document.querySelectorAll('.duration-dropdown').forEach(d => d.classList.add('hidden'));
+            }
+        });
+
+        // --- DROPDOWN MODO DURAÇÃO (CÁRDIO) ---
+        const _durationModes = {
+            tempo:    { label: 'Tempo',    placeholder: '30min' },
+            distancia: { label: 'Distância', placeholder: '5km'  },
+        };
+
+        function _toggleDurationDropdown(btn) {
+            const dropdown = btn.nextElementSibling;
+            document.querySelectorAll('.duration-dropdown').forEach(d => {
+                if (d !== dropdown) d.classList.add('hidden');
+            });
+            dropdown.classList.toggle('hidden');
+        }
+
+        function _setDurationMode(btn, mode) {
+            const m = _durationModes[mode] || _durationModes.tempo;
+            const card = btn.closest('[data-exercise]');
+            card.querySelector('.duration-mode-label').textContent = m.label;
+            card.querySelectorAll('.duration-input').forEach(inp => inp.placeholder = m.placeholder);
+            btn.closest('.duration-dropdown').classList.add('hidden');
+        }
+
+        // --- NOTIFICAÇÕES ---
+        function _notify(text, type = 'success') {
+            const styles = {
+                success: { background: '#d1e7dd', color: '#0f5132', borderLeft: '4px solid #198754' },
+                error:   { background: '#f8d7da', color: '#842029', borderLeft: '4px solid #dc3545' },
+                warning: { background: '#fff3cd', color: '#664d03', borderLeft: '4px solid #ffc107' },
+                info:    { background: '#cff4fc', color: '#055160', borderLeft: '4px solid #0dcaf0' },
+            };
+            const s = styles[type] || styles.success;
+            Toastify({ text, duration: 2500, gravity: 'top', position: 'right',
+                offset: { x: 88, y: 88 },
+                style: { ...s, borderRadius: '0.5rem', fontSize: '0.8rem', padding: '10px 16px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' },
+                stopOnFocus: true }).showToast();
+        }
+
+        // --- MODAL DE CONFIRMAÇÃO ---
+        let _confirmCallback = null;
+
+        function _confirmModal(title, body, onConfirm) {
+            document.getElementById('confirm-modal-title').textContent = title;
+            document.getElementById('confirm-modal-body').textContent = body;
+            _confirmCallback = onConfirm;
+            document.getElementById('confirm-modal').classList.remove('hidden');
+        }
+
+        function _confirmModalResolve(confirmed) {
+            document.getElementById('confirm-modal').classList.add('hidden');
+            if (confirmed && typeof _confirmCallback === 'function') _confirmCallback();
+            _confirmCallback = null;
+        }
+
+        document.getElementById('confirm-modal').addEventListener('click', function(e) {
+            if (e.target === this) _confirmModalResolve(false);
+        });
+    </script>
+
 </body>
 </html>
