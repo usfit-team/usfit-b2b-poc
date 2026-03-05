@@ -1,0 +1,10 @@
+{
+  "workspace_name": "USFIT B2B POC",
+  "company": "USFIT",
+  "claude_account": {
+    "email": "leonardo.lazarini@usfitapp.com",
+    "label": "USFIT - Leonardo Lazarini",
+    "description": "Conta Claude da USFIT"
+  },
+  "notes": "Ao abrir este projeto, use a conta: leonardo.lazarini@usfitapp.com"
+}

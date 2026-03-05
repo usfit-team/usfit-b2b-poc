@@ -1,9 +1,14 @@
 {
   "permissions": {
     "allow": [
-      "Bash(grep:*)",
-      "Bash(python3:*)",
-      "Bash(pwsh -Command \"Get-Command node, python, python3 -ErrorAction SilentlyContinue | Select-Object Name, Source\")"
+      "Read(//c/Users/leo_l/.claude/plans/**)",
+      "Bash(ls -la /c/Users/leo_l/Projects/usfit-b2b-poc/*.html)",
+      "Bash(\"C:/Users/leo_l/OneDrive/Desktop/USFit/epics.csv\":*)",
+      "Read(//c/Users/leo_l/Projects/usfit-b2b-poc/**)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\leo_l\\.claude\\plans",
+      "C:\\Users\\leo_l\\OneDrive\\Desktop\\USFit"
     ]
   }
 }
