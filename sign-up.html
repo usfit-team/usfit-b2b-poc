@@ -14,10 +14,10 @@
 
     <div class="hidden md:flex md:w-1/2 lg:w-5/12 bg-[#0f1523] relative flex-col justify-between p-12 overflow-hidden h-full">
         <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-usfit-blue rounded-full mix-blend-multiply filter blur-[120px] opacity-20 -translate-y-1/2 translate-x-1/2 animate-pulse"></div>
-        
+
         <div class="relative z-10 flex items-center gap-3">
-             <div class="w-10 h-10 rounded-full bg-usfit-gradient flex items-center justify-center font-bold text-white italic text-lg shadow-lg shadow-cyan-500/30">US</div>
-             <span class="text-2xl font-bold tracking-tight text-white">USFITB2B</span>
+            <div class="w-8 h-8"><img src="assets/images/logo.png"></div>
+            <span class="font-semibold tracking-tight bg-clip-text text-transparent bg-usfit-gradient"><b class="text-white text-xl font-bold">USFIT</b>B2B</span>
         </div>
 
         <div class="relative z-10 max-w-md">
@@ -38,8 +38,10 @@
             </ul>
         </div>
 
-        <div class="relative z-10 text-sm text-gray-500">
-            © 2025 USFIT Tecnologia.
+        <div class="relative z-10 flex items-center gap-2">
+            <div class="h-1 w-8 bg-usfit-cyan rounded-full"></div>
+            <div class="h-1 w-8 bg-gray-600 rounded-full"></div>
+            <span class="text-xs text-gray-500 ml-2">Passo 1 de 2</span>
         </div>
     </div>
 
@@ -48,14 +50,14 @@
             <div class="w-full max-w-md space-y-6">
                 
                 <div class="text-center md:text-left">
-                    <h1 class="text-3xl font-bold text-gray-900 tracking-tight">Crie sua conta</h1>
-                    <p class="text-gray-500 mt-2">Escolha seu perfil e preencha seus dados.</p>
+                    <h1 class="text-3xl font-bold text-gray-900 tracking-tight">Cadastre sua empresa</h1>
+                    <p class="text-gray-500 mt-2">Escolha o tipo de operação e preencha os dados da empresa.</p>
                 </div>
 
                 <form action="#" class="space-y-5">
-                    
+
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2 ml-1">Como você atua?</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2 ml-1">Como você opera?</label>
                         <div class="grid grid-cols-2 gap-4">
                             <label class="cursor-pointer group">
                                 <input type="radio" name="account_type" value="professional" class="radio-card-input hidden" checked>
@@ -64,7 +66,7 @@
                                         <i data-lucide="user" class="w-5 h-5"></i>
                                     </div>
                                     <span class="block font-semibold text-gray-900">Profissional</span>
-                                    <span class="text-xs text-gray-500">Para Personal ou Nutri que atua sozinho.</span>
+                                    <span class="text-xs text-gray-500">Personal ou Nutri autônomo (MEI).</span>
                                 </div>
                             </label>
 
@@ -82,18 +84,49 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1.5 ml-1">Nome Completo</label>
-                        <input type="text" placeholder="Seu nome" class="usfit-input" required>
+                        <label class="block text-sm font-medium text-gray-700 mb-1.5 ml-1">Nome da Empresa</label>
+                        <input type="text" placeholder="Nome Fantasia ou Razão Social" class="usfit-input" required>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1.5 ml-1">E-mail Profissional</label>
-                        <input type="email" placeholder="seu@email.com" class="usfit-input" required>
+                        <label class="block text-sm font-medium text-gray-700 mb-1.5 ml-1">CNPJ</label>
+                        <input type="text" placeholder="00.000.000/0001-00" class="usfit-input" required>
                     </div>
 
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1.5 ml-1">Senha</label>
-                        <input type="password" placeholder="Mínimo 8 caracteres" class="usfit-input" required>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1.5 ml-1">E-mail Comercial</label>
+                            <input type="email" placeholder="contato@empresa.com" class="usfit-input">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1.5 ml-1">Telefone Comercial</label>
+                            <input type="tel" placeholder="(11) 99999-9999" class="usfit-input">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1.5 ml-1">Estado</label>
+                            <select id="select-estado" class="usfit-input">
+                                <option value="">Selecione</option>
+                                <option value="SP">SP — São Paulo</option>
+                                <option value="RJ">RJ — Rio de Janeiro</option>
+                                <option value="MG">MG — Minas Gerais</option>
+                                <option value="RS">RS — Rio Grande do Sul</option>
+                                <option value="PR">PR — Paraná</option>
+                                <option value="SC">SC — Santa Catarina</option>
+                                <option value="BA">BA — Bahia</option>
+                                <option value="GO">GO — Goiás</option>
+                                <option value="DF">DF — Distrito Federal</option>
+                                <option value="PE">PE — Pernambuco</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1.5 ml-1">Cidade</label>
+                            <select id="select-cidade" class="usfit-input" disabled>
+                                <option value="">Selecione o Estado primeiro</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="flex items-center gap-2 ml-1">
@@ -101,8 +134,8 @@
                         <label for="terms" class="text-sm text-gray-500">Li e aceito os <a href="#" class="text-usfit-blue hover:underline">Termos de Uso</a>.</label>
                     </div>
 
-                    <a href="setup-profile.html" type="button" class="btn-primary">
-                        Continuar para Setup <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                    <a id="btn-continuar" href="sign-up-professional.html" class="btn-primary">
+                        Continuar <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
                     </a>
                 </form>
 
@@ -116,5 +149,49 @@
     </div>
 
     <script src="assets/js/functions.js"></script>
+    <script>
+        const cidadesPorEstado = {
+            SP: ['Campinas', 'Ribeirão Preto', 'Santos', 'São Paulo'],
+            RJ: ['Niterói', 'Petrópolis', 'Rio de Janeiro', 'Volta Redonda'],
+            MG: ['Belo Horizonte', 'Juiz de Fora', 'Uberlândia'],
+            RS: ['Caxias do Sul', 'Pelotas', 'Porto Alegre'],
+            PR: ['Curitiba', 'Londrina', 'Maringá'],
+            SC: ['Blumenau', 'Florianópolis', 'Joinville'],
+            BA: ['Feira de Santana', 'Salvador'],
+            GO: ['Anápolis', 'Goiânia'],
+            DF: ['Brasília'],
+            PE: ['Caruaru', 'Olinda', 'Recife'],
+        };
+
+        const selectEstado = document.getElementById('select-estado');
+        const selectCidade = document.getElementById('select-cidade');
+
+        selectEstado.addEventListener('change', () => {
+            const uf = selectEstado.value;
+            selectCidade.innerHTML = '';
+            if (uf && cidadesPorEstado[uf]) {
+                selectCidade.disabled = false;
+                selectCidade.innerHTML = '<option value="">Selecione a cidade</option>';
+                cidadesPorEstado[uf].forEach(cidade => {
+                    const opt = document.createElement('option');
+                    opt.value = cidade;
+                    opt.textContent = cidade;
+                    selectCidade.appendChild(opt);
+                });
+            } else {
+                selectCidade.disabled = true;
+                selectCidade.innerHTML = '<option value="">Selecione o Estado primeiro</option>';
+            }
+        });
+
+        document.querySelectorAll('[name="account_type"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                document.getElementById('btn-continuar').href =
+                    radio.value === 'professional'
+                        ? 'sign-up-professional.html'
+                        : 'sign-up-business.html';
+            });
+        });
+    </script>
 </body>
 </html>

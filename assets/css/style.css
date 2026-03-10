@@ -8,6 +8,20 @@ body {
 }
 
 /* ===================================
+   RADIO CARDS
+   =================================== */
+
+.radio-card-input:checked + .radio-card {
+    border-color: #22d3ee;
+    background-color: #f0fdff;
+}
+
+.radio-card-input:checked + .radio-card .icon-wrapper {
+    border-color: #22d3ee;
+    color: #22d3ee;
+}
+
+/* ===================================
    INPUTS
    =================================== */
 
