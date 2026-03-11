@@ -1,3 +1,8 @@
 usfit-b2b-poc.code-workspace
+.claude/.claude-workspace.json
 .claude/settings.local.json
-.claude/claude-workspace.json
+.claude/skills/frontend-design/LICENSE.txt
+.claude/skills/frontend-design/SKILL.md
+.claude/skills/ui-design-system/SKILL.md
+.claude/skills/ui-design-system/scripts/design_token_generator.py
+.vscode/tasks.json
